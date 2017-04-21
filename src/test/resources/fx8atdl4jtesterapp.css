@@ -1,0 +1,31 @@
+.hbox {
+    -fx-background-color: #2f4f4f;
+    -fx-padding: 15;
+    -fx-spacing: 10;
+}
+
+.pane {
+    -fx-background-color: #8fbc8f;
+}
+
+#hbox-custom {
+    -fx-background-radius: 5.0;
+    -fx-padding: 8;
+}
+
+/*.titled-pane > .title {*/
+    /*-fx-pref-height: 15.0;*/
+/*}*/
+
+/*.titled-pane {*/
+    /*-fx-text-fill: #006FD8;*/
+/*}*/
+
+/*.titled-pane > .title > .arrow-button .arrow {*/
+    /*-fx-background-color: blue;*/
+
+/*}*/
+
+/*.label {*/
+    /*-fx-text-fill: #f00*/
+/*}*/
