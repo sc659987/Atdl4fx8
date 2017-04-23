@@ -15,7 +15,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.util.StringConverter;
 
 import java.util.Collections;
 import java.util.List;
@@ -82,18 +81,27 @@ public class FxFixSliderUiElement implements IFixSliderUiElement<Pane, String> {
     }
 
     @Override
-    public void setValue(String s) {
-
+    public void setValue(String value) {
+        this.slider.setValue(this.converter.fromString(value));
+        setFieldValueToParameter(parameterT
+                .getEnumPair()
+                .stream()
+                .filter(enumPairT -> enumPairT.getEnumID()
+                        .equals(getValue()))
+                .map(EnumPairT::getWireValue)
+                .findFirst()
+                .orElse("1"), parameterT);
+        controlIdEmitter.setValue(sliderT.getID() + ":" + getValue());
     }
 
     @Override
     public void makeVisible(boolean visible) {
-
+        this.gridPane.setVisible(visible);
     }
 
     @Override
     public void makeEnable(boolean enable) {
-
+        this.gridPane.setDisable(!enable);
     }
 
     @Override
