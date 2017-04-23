@@ -9,6 +9,7 @@ import com.three360.ui.fx8.FxUtils;
 import com.three360.ui.fx8.utils.ListStringConverter;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
@@ -24,7 +25,7 @@ public class FxFixSliderUiElement implements IFixSliderUiElement<Pane, String> {
 
     private SliderT sliderT;
     private Slider slider;
-    private StringConverter<Double> converter;
+    private ListStringConverter converter;
     private GridPane gridPane;
     private Label label;
     private ParameterT parameterT;
@@ -43,28 +44,30 @@ public class FxFixSliderUiElement implements IFixSliderUiElement<Pane, String> {
         this.converter = new ListStringConverter(this.sliderT.getListItem().stream().map(ListItemT::getUiRep).collect(Collectors.toList()));
 
         this.slider = new Slider(0, this.sliderT.getListItem().size() - 1,
-                this.converter.fromString(this.sliderT.getInitValue()));
-
-        this.slider.setMajorTickUnit(1.0);
+                0);
 
         this.slider.setOnDragDone(event -> {
             setFieldValueToParameter(parameterT.getEnumPair().stream().filter(enumPairT -> enumPairT.getEnumID().equals(getValue())).map(EnumPairT::getWireValue).findFirst().orElse("1"), parameterT);
             controlIdEmitter.setValue(sliderT.getID() + ":" + getValue());
         });
 
+        this.gridPane.setPadding(new Insets(0, 30, 0, 30));
+
         this.slider.setLabelFormatter(this.converter);
         this.slider.setShowTickLabels(true);
         this.slider.setShowTickMarks(true);
         this.slider.setMajorTickUnit(1.0);
 
+        this.slider.setMinWidth(converter.length());
+
         this.slider.setMinorTickCount(0);
+        this.slider.setSnapToTicks(true);
+
         this.slider.setSnapToTicks(true);
 
         this.slider.setOrientation(Orientation.HORIZONTAL);
 
-        this.slider.setMaxWidth(Double.MAX_VALUE);
-
-        this.gridPane.add(this.slider, 0, 1);
+        this.gridPane.add(this.slider, 0, 1, 5, 1);
         return this.gridPane;
     }
 
