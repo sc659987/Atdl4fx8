@@ -96,7 +96,7 @@ public class RepeatingGroupT {
 	 * <p>
 	 * 
 	 * <pre>
-	 * getParameter().registerControlFlow(newItem);
+	 * getParameters().registerControlFlow(newItem);
 	 * </pre>
 	 * <p>
 	 * <p>

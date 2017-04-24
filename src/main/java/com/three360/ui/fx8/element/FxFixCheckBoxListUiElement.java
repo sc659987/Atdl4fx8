@@ -107,7 +107,7 @@ public class FxFixCheckBoxListUiElement implements IFixCheckBoxListUiElement<Pan
     }
 
     @Override
-    public List<ParameterT> getParameter() {
+    public List<ParameterT> getParameters() {
         List<ParameterT> parameterTS = Collections.emptyList();
         parameterTS.add(this.parameterT);
         return parameterTS;
@@ -137,6 +137,7 @@ public class FxFixCheckBoxListUiElement implements IFixCheckBoxListUiElement<Pan
 
     @Override
     public void makeVisible(boolean visible) {
+        // TODO think to use gridPane to visible/invisible
         checkBoxes.forEach(checkBox -> {
             checkBox.setVisible(visible);
         });
@@ -144,6 +145,7 @@ public class FxFixCheckBoxListUiElement implements IFixCheckBoxListUiElement<Pan
 
     @Override
     public void makeEnable(boolean enable) {
+        // TODO think to use gridPane to enable/disable
         checkBoxes.forEach(checkBox -> {
             checkBox.setDisable(!enable);
         });

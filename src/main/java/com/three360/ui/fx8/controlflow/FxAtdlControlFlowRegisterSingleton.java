@@ -54,7 +54,7 @@ public class FxAtdlControlFlowRegisterSingleton implements IAtdlControlFlowRegis
             controlIdUiElementMap.put(controlId, iFixUiElements);
         }));
         // listen to all
-        //TODO change redundant split of string extend SingleObjectProperty
+        //TODO change redundant split of string extend SingleObjectProperty and change it's behavior
         iFixUiElement.listenChange().addListener((observable, oldValue, newValue) -> executeControlFLowByControlId(newValue.split(":")[0]));
     }
 
@@ -62,8 +62,7 @@ public class FxAtdlControlFlowRegisterSingleton implements IAtdlControlFlowRegis
         controlIdUiElementMap.getOrDefault(controlId, new HashSet<>()).forEach(effectedIFixElement ->
                 effectedIFixElement.getControl().getStateRule().forEach(stateRuleT -> iAtdlStateRuleEvaluator
                         .getResult(stateRuleT).forEach(atdlStateRuleResultTypeComparablePair ->
-                                fxAtdlStateRuleResultActor.doAct(atdlStateRuleResultTypeComparablePair, effectedIFixElement))
-                ));
+                                fxAtdlStateRuleResultActor.doAct(atdlStateRuleResultTypeComparablePair, effectedIFixElement))));
     }
 
     @Override

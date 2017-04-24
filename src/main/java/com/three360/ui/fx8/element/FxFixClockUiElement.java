@@ -66,7 +66,7 @@ public class FxFixClockUiElement implements IFixClockUiElement<Pane, String> {
 	}
 
 	@Override
-	public List<ParameterT> getParameter() {
+	public List<ParameterT> getParameters() {
 		List<ParameterT> parameterTS = Collections.emptyList();
 		parameterTS.add(this.parameterT);
 		return parameterTS;

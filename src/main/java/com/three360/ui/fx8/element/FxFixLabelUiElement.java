@@ -38,7 +38,7 @@ public class FxFixLabelUiElement implements IFixLabelUiElement<Label, String> {
 	}
 
 	@Override
-	public List<ParameterT> getParameter() {
+	public List<ParameterT> getParameters() {
 		List<ParameterT> parameterTS = Collections.emptyList();
 		parameterTS.add(this.parameterT);
 		return parameterTS;

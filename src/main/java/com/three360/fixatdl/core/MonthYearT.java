@@ -37,7 +37,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "MonthYear_t")
-public class MonthYearT
+public class  MonthYearT
 		extends ParameterT {
 
 	@XmlAttribute

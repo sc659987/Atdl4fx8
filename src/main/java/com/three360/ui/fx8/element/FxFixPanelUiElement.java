@@ -162,7 +162,7 @@ public class FxFixPanelUiElement implements IFixPanelUiElement<Node, String> {
     }
 
     @Override
-    public List<ParameterT> getParameter() {
+    public List<ParameterT> getParameters() {
         return this.parameterTList;
     }
 

@@ -21,7 +21,7 @@
                    localMktTz="America/Toronto"/>
 
         <lay:StrategyLayout>
-            <lay:StrategyPanel border="Line" orientation="VERTICAL" collapsed="false" title="Parameters">
+            <lay:StrategyPanel border="Line" orientation="VERTICAL" collapsed="false" title="Parameters" collapsible="false">
               <lay:StrategyPanel title="Parameters" collapsed="false" orientation="VERTICAL" border="Line">
                   <lay:Control xsi:type="lay:TextField_t" ID="Limit Price" parameterRef="Limit Price"
                                label="Limit Price"/>

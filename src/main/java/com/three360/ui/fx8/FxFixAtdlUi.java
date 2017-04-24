@@ -97,6 +97,7 @@ public class FxFixAtdlUi extends AbstractFixAtdlUi<Pane> {
                     iStrategyEditValidator.validateStrategyEditRuleAndGetErrorMessage().stream(),
                     iParameterValidator.validateParameter().stream()).filter(Utils::isNonEmpty).collect(Collectors.toList());
 
+            this.errorMessageAndValidateButtonBox.getChildren().clear();
             if (errorMessage != null && errorMessage.size() > 0) {
                 this.errorMessageAndValidateButtonBox.getChildren().addAll(errorMessage.stream().map(str -> {
                     Label lb = new Label(str);
@@ -104,10 +105,8 @@ public class FxFixAtdlUi extends AbstractFixAtdlUi<Pane> {
                     return lb;
                 }).collect(Collectors.toList()));
             } else {
-                this.errorMessageAndValidateButtonBox.getChildren().clear();
                 // generate the wire value and put that in text box
                 textField.setText(wireValueManipulator.generateWireValue(super.strategiesT, super.selectedStrategyT));
-
             }
         });
         HBox.setHgrow(textField, Priority.ALWAYS);

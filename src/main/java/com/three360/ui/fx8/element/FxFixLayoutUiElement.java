@@ -56,7 +56,7 @@ public class FxFixLayoutUiElement implements IFixLayoutUiElement<Node, String> {
     }
 
     @Override
-    public List<ParameterT> getParameter() {
+    public List<ParameterT> getParameters() {
         return this.allParameterTList;
     }
 

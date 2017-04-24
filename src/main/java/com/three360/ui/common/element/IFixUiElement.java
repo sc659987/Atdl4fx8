@@ -7,6 +7,7 @@ import javafx.beans.property.ObjectProperty;
 import javax.xml.datatype.DatatypeConstants;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
+import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.text.ParseException;
@@ -68,7 +69,7 @@ public interface IFixUiElement<T, K extends Comparable<?>> {
      *
      * @return
      */
-    List<ParameterT> getParameter();
+    List<ParameterT> getParameters();
 
     /***
      *
@@ -83,7 +84,7 @@ public interface IFixUiElement<T, K extends Comparable<?>> {
      * @return
      */
     default List<ParameterT> findParameterByName(String... names) {
-        return this.getParameter() != null ? this.getParameter()
+        return this.getParameters() != null ? this.getParameters()
                 .stream()
                 .filter(parameterT -> {
                     boolean matched = false;
@@ -92,6 +93,19 @@ public interface IFixUiElement<T, K extends Comparable<?>> {
                         matched |= parameterT.getName().equals(names[i]);
                     return matched;
                 }).collect(Collectors.toList()) : null;
+    }
+
+
+    default void voidSetNullInConstant(ParameterT parameterT) {
+
+        try {
+            Field field = parameterT.getClass().getDeclaredField("constValue");
+            field.setAccessible(true);
+            field.set(parameterT, null);
+        } catch (Exception e) {
+        }
+
+
     }
 
     /****
@@ -103,15 +117,17 @@ public interface IFixUiElement<T, K extends Comparable<?>> {
     default void setFieldValueToParameter(Object object, ParameterT parameterT) {
         if (parameterT == null)
             return;
+        if (object == null) {
+            voidSetNullInConstant(parameterT);
+            return;
+        }
 
         if (parameterT instanceof LanguageT) {
             if (object instanceof String)
                 ((LanguageT) parameterT).setConstValue((String) object);
-
         } else if (parameterT instanceof CountryT) {
-            if (object instanceof String) {
+            if (object instanceof String)
                 ((CountryT) parameterT).setConstValue((String) object);
-            }
         } else if (parameterT instanceof LengthT) {
             if (object instanceof String) {
                 try {
@@ -184,12 +200,14 @@ public interface IFixUiElement<T, K extends Comparable<?>> {
                 }
             }
         } else if (parameterT instanceof IntT) {
+            IntT intT = (IntT) parameterT;
             if (object instanceof String) {
-                IntT intT = (IntT) parameterT;
                 try {
                     intT.setConstValue(Integer.parseInt((String) object));
                 } catch (Exception e) {
                 }
+            } else if (object instanceof Double) {
+                intT.setConstValue(((Double) object).intValue());
             }
         } else if (parameterT instanceof MultipleStringValueT) {
             if (object instanceof String) {

@@ -24,7 +24,7 @@ public class FxFixDropDownListUiElement implements IFixDropDownListUiElement<Pan
 	private int nextColumn = 0;
 	private ParameterT parameterT;
 
-	private ObjectProperty<String> checkedProperty = new SimpleObjectProperty<>();
+	private ObjectProperty<String> controlIdEmitter = new SimpleObjectProperty<>();
 
 	@Override
 	public void setDropDownList(DropDownListT downList) {
@@ -51,7 +51,7 @@ public class FxFixDropDownListUiElement implements IFixDropDownListUiElement<Pan
 
 			this.comboBox.setOnAction(event -> {
 				setFieldValueToParameter(comboBox.getValue(), this.parameterT);
-				checkedProperty.setValue(dropDownListT.getID() + ":" + comboBox.getValue());
+				this.controlIdEmitter.setValue(dropDownListT.getID() + ":" + comboBox.getValue());
 			});
 
 			this.gridPane.add(this.comboBox, this.nextColumn, 0);
@@ -68,7 +68,7 @@ public class FxFixDropDownListUiElement implements IFixDropDownListUiElement<Pan
 	}
 
 	@Override
-	public List<ParameterT> getParameter() {
+	public List<ParameterT> getParameters() {
 		List<ParameterT> parameterTS = Collections.emptyList();
 		parameterTS.add(this.parameterT);
 		return parameterTS;
@@ -76,7 +76,7 @@ public class FxFixDropDownListUiElement implements IFixDropDownListUiElement<Pan
 
 	@Override
 	public ObjectProperty<String> listenChange() {
-		return this.checkedProperty;
+		return this.controlIdEmitter;
 	}
 
 	@Override

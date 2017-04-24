@@ -27,7 +27,7 @@ public class FxFixDoubleSpinnerUiElement implements IFixDoubleSpinnerUiElement<P
 	}
 
 	@Override
-	public List<ParameterT> getParameter() {
+	public List<ParameterT> getParameters() {
 		return null;
 	}
 

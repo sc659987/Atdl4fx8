@@ -36,7 +36,13 @@ public class FxFixTextFieldUiElement implements IFixTextFieldUiElement<Pane, Str
                 this.gridPane.add(new Label(this.textFieldT.getLabel()), this.nextColumn++, 0);
             }
             this.textField = new TextField(this.textFieldT.getInitValue());
-            this.textField.textProperty().addListener((observable, oldValue, newValue) -> setValue(getValue()));
+
+            textField.setOnKeyReleased(event -> {
+                setFieldValueToParameter(getValue(), parameterT);
+                controlIdEmitter.setValue(textFieldT.getID() + ":" + getValue());
+            });
+
+
             if (Utils.isNonEmpty(this.textFieldT.getInitValue()))
                 setValue(this.textFieldT.getInitValue());
             this.gridPane.add(this.textField, this.nextColumn, 0);
@@ -57,7 +63,7 @@ public class FxFixTextFieldUiElement implements IFixTextFieldUiElement<Pane, Str
     }
 
     @Override
-    public List<ParameterT> getParameter() {
+    public List<ParameterT> getParameters() {
         List<ParameterT> parameterTS = Collections.emptyList();
         parameterTS.add(this.parameterT);
         return parameterTS;
@@ -75,7 +81,8 @@ public class FxFixTextFieldUiElement implements IFixTextFieldUiElement<Pane, Str
 
     @Override
     public String getValue() {
-        return this.textField.getCharacters().toString();
+        String str = this.textField.getCharacters().toString();
+        return Utils.isEmpty(str) ? null : str;
     }
 
     @Override

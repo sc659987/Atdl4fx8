@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Strategies xmlns="http://www.fixprotocol.org/FIXatdl-1-1/Core" 
-	xmlns:flow="http://www.fixprotocol.org/FIXatdl-1-1/Flow" 
-	xmlns:lay="http://www.fixprotocol.org/FIXatdl-1-1/Layout" 
-	xmlns:val="http://www.fixprotocol.org/FIXatdl-1-1/Validation" 
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xsi:schemaLocation="http://www.fixprotocol.org/FIXatdl-1-1/Core fixatdl-core-1-1.xsd" 
-	strategyIdentifierTag="7620" 
-	versionIdentifierTag="7621">
+<Strategies xmlns="http://www.fixprotocol.org/FIXatdl-1-1/Core"
+            xmlns:lay="http://www.fixprotocol.org/FIXatdl-1-1/Layout"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://www.fixprotocol.org/FIXatdl-1-1/Core fixatdl-core-1-1.xsd"
+            strategyIdentifierTag="7620"
+            versionIdentifierTag="7621">
 	 <Strategy name="Tazer1" uiRep="Tazer" wireValue="Tazer" version="1" fixMsgType="D" providerID="ABC">
 	 	<Parameter name="StartTime" xsi:type="UTCTimestamp_t" fixTag="7602" use="required" />
 

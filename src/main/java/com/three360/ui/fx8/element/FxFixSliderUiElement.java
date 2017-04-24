@@ -43,12 +43,24 @@ public class FxFixSliderUiElement implements IFixSliderUiElement<Pane, String> {
         this.converter = new ListStringConverter(this.sliderT.getListItem().stream().map(ListItemT::getUiRep).collect(Collectors.toList()));
 
         this.slider = new Slider(0, this.sliderT.getListItem().size() - 1,
-                0);
+                this.converter.fromString(this.sliderT.getInitValue()));
 
-        this.slider.setOnDragDone(event -> {
-            setFieldValueToParameter(parameterT.getEnumPair().stream().filter(enumPairT -> enumPairT.getEnumID().equals(getValue())).map(EnumPairT::getWireValue).findFirst().orElse("1"), parameterT);
-            controlIdEmitter.setValue(sliderT.getID() + ":" + getValue());
+        this.slider.setOnMouseClicked(event -> {
+            setFieldValueToParameter(this.parameterT.getEnumPair().stream()
+                            .filter(enumPairT -> enumPairT.getEnumID().equals(getValue()))
+                            .map(EnumPairT::getWireValue).findFirst().orElse("0"),
+                    this.parameterT);
+            this.controlIdEmitter.setValue(this.sliderT.getID() + ":" + getValue());
+            // TODO check it when dragged faster value change is not recognized and this is not called back
+//            System.out.println("Slider Value : " + getValue());
+//            System.out.println("Slider Enum value : "+this.parameterT.getEnumPair().stream()
+//                    .filter(enumPairT -> enumPairT.getEnumID().equals(getValue()))
+//                    .map(EnumPairT::getWireValue).findFirst().orElse("0"));
         });
+
+
+        //Init of parameter
+        setValue(getValue());
 
         this.gridPane.setPadding(new Insets(0, 30, 0, 30));
 
@@ -57,7 +69,7 @@ public class FxFixSliderUiElement implements IFixSliderUiElement<Pane, String> {
         this.slider.setShowTickMarks(true);
         this.slider.setMajorTickUnit(1.0);
 
-        this.slider.setMinWidth(converter.length());
+        this.slider.setMinWidth(this.converter.length());
 
         this.slider.setMinorTickCount(0);
         this.slider.setSnapToTicks(true);
@@ -82,16 +94,17 @@ public class FxFixSliderUiElement implements IFixSliderUiElement<Pane, String> {
 
     @Override
     public void setValue(String value) {
-        this.slider.setValue(this.converter.fromString(value));
+        double valueD = this.converter.fromString(value);
+        this.slider.setValue(valueD);
         setFieldValueToParameter(parameterT
                 .getEnumPair()
                 .stream()
                 .filter(enumPairT -> enumPairT.getEnumID()
-                        .equals(getValue()))
+                        .equals(valueD))
                 .map(EnumPairT::getWireValue)
                 .findFirst()
                 .orElse("1"), parameterT);
-        controlIdEmitter.setValue(sliderT.getID() + ":" + getValue());
+        controlIdEmitter.setValue(sliderT.getID() + ":" + valueD);
     }
 
     @Override
@@ -121,7 +134,7 @@ public class FxFixSliderUiElement implements IFixSliderUiElement<Pane, String> {
     }
 
     @Override
-    public List<ParameterT> getParameter() {
+    public List<ParameterT> getParameters() {
         List<ParameterT> parameterTS = Collections.emptyList();
         parameterTS.add(this.parameterT);
         return parameterTS;

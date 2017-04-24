@@ -66,7 +66,7 @@ public class FxFixRadioButtonUiElement implements IFixRadioButtonUiElement<Radio
     }
 
     @Override
-    public List<ParameterT> getParameter() {
+    public List<ParameterT> getParameters() {
         return Collections.singletonList(this.parameterT);
     }
 

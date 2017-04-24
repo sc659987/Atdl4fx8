@@ -5,6 +5,11 @@ import javafx.util.Pair;
 
 public interface AtdlStateRuleResultActor {
 
+	/***
+	 *
+	 * @param stateRuleResultComparablePair
+	 * @param iFixUiElement
+	 */
 	void doAct(Pair<AtdlStateRuleResultType, Comparable> stateRuleResultComparablePair, IFixUiElement iFixUiElement);
 
 }

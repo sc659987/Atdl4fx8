@@ -1,14 +1,17 @@
 package com.three360.ui.fx8.validator;
 
 import com.three360.fixatdl.validation.EditT;
-import com.three360.ui.validator.AtdlEditEvaluator;
+import com.three360.ui.validator.IAtdlEditEvaluator;
 import com.three360.ui.validator.FieldToComparableMapperCache;
 
-public class RecursiveAtdlEditEvaluatorImpl implements AtdlEditEvaluator {
+/***
+ *
+ */
+public class RecursiveAtdlEditEvaluator implements IAtdlEditEvaluator {
 
     private FieldToComparableMapperCache fieldToComparableMapperCache;
 
-    public RecursiveAtdlEditEvaluatorImpl(FieldToComparableMapperCache fieldToComparableMapperCache) {
+    public RecursiveAtdlEditEvaluator(FieldToComparableMapperCache fieldToComparableMapperCache) {
         this.fieldToComparableMapperCache = fieldToComparableMapperCache;
     }
 
@@ -31,23 +34,25 @@ public class RecursiveAtdlEditEvaluatorImpl implements AtdlEditEvaluator {
             Comparable comparable1, comparable2;
             comparable1 = fieldToComparableMapperCache.get(editT.getField());
             comparable2 = fieldToComparableMapperCache.get(editT.getField2());
+
             if (comparable2 == null)
                 comparable2 = tryToConvert(comparable1, editT.getValue());
+
             switch (editT.getOperator()) {
                 case EQ:
-                    return comparable1.compareTo(comparable2) == 0;
+                    return comparable1 != null && comparable1.compareTo(comparable2) == 0;
                 case EX:
                     return comparable1 != null;
                 case GE:
-                    return comparable1.compareTo(comparable2) >= 0;
+                    return comparable1 != null && comparable1.compareTo(comparable2) >= 0;
                 case GT:
-                    return comparable1.compareTo(comparable2) > 0;
+                    return comparable1 != null && comparable1.compareTo(comparable2) > 0;
                 case LE:
-                    return comparable1.compareTo(comparable2) <= 0;
+                    return comparable1 != null && comparable1.compareTo(comparable2) <= 0;
                 case LT:
-                    return comparable1.compareTo(comparable2) < 0;
+                    return comparable1 != null && comparable1.compareTo(comparable2) < 0;
                 case NE:
-                    return comparable1.compareTo(comparable2) != 0;
+                    return comparable1 != null && comparable1.compareTo(comparable2) != 0;
                 case NX:
                     return comparable1 == null;
                 default:
