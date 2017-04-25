@@ -64,7 +64,7 @@ public class FxUiElementFactory implements UiElementAbstractFactory {
     }
 
     @Override
-    public IFixCheckBoxUiElement<CheckBox, String> instantiateNewCheckBox() {
+    public IFixCheckBoxUiElement<CheckBox, Boolean> instantiateNewCheckBox() {
         return new FxFixCheckBoxUiElement();
     }
 

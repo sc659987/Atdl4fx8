@@ -11,7 +11,6 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
 import java.util.List;
@@ -22,8 +21,6 @@ public class FxFixPanelUiElement implements IFixPanelUiElement<Node, String> {
     private UiElementAbstractFactory factory = FxUiElementFactory.getInstance();
 
     private StrategyPanelT strategyPanelT;
-
-    private List<Region> regionList;
 
     private List<ParameterT> parameterTList;
 
@@ -57,7 +54,7 @@ public class FxFixPanelUiElement implements IFixPanelUiElement<Node, String> {
                             return element.create();
                         }).collect(Collectors.toList()));
             } else if (this.strategyPanelT.getControl() != null) {
-                this.regionList = this.strategyPanelT.getControl().stream().map(controlT -> {
+                parent.getChildren().addAll(this.strategyPanelT.getControl().stream().map(controlT -> {
                     if (controlT instanceof CheckBoxListT) {
                         IFixCheckBoxListUiElement<Pane, String> element = factory.instantiateNewCheckBoxList();
                         element.setCheckBoxListT((CheckBoxListT) controlT);
@@ -142,8 +139,7 @@ public class FxFixPanelUiElement implements IFixPanelUiElement<Node, String> {
 
                     }
                     throw new RuntimeException("control is not recognized");
-                }).collect(Collectors.toList());
-                parent.getChildren().setAll(regionList);
+                }).collect(Collectors.toList()));
             }
             titledPane.setContent(parent);
             return titledPane;

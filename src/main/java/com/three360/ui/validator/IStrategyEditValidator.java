@@ -6,8 +6,8 @@ import java.util.List;
 
 public interface IStrategyEditValidator {
 
-	List<String> validateStrategyEditRuleAndGetErrorMessage();
+    List<String> validateStrategyEditRuleAndGetErrorMessage();
 
-	void setStrategyEditTS(List<StrategyEditT> editTS);
+    void setStrategyEditTS(List<StrategyEditT> editTS);
 
 }

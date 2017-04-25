@@ -18,7 +18,7 @@ import javax.xml.bind.annotation.XmlType;
  * The following schema fragment specifies the expected content contained within this class.
  * <p>
  * <p>
- * 
+ * <p>
  * <pre>
  * &lt;simpleType>
  *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
@@ -80,63 +80,63 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum TheAmericas {
 
-	AI,
-	AG,
-	AR,
-	AW,
-	BS,
-	BB,
-	BZ,
-	BM,
-	BO,
-	BR,
-	CA,
-	KY,
-	CL,
-	CO,
-	CR,
-	CU,
-	DM,
-	DO,
-	EC,
-	SV,
-	FK,
-	GD,
-	GP,
-	GT,
-	GY,
-	HT,
-	HN,
-	JM,
-	MQ,
-	MX,
-	MS,
-	AN,
-	NI,
-	PA,
-	PY,
-	PE,
-	PR,
-	BL,
-	KN,
-	LC,
-	MF,
-	PM,
-	VC,
-	TT,
-	TC,
-	US,
-	UY,
-	VG,
-	VI,
-	VE;
+    AI,
+    AG,
+    AR,
+    AW,
+    BS,
+    BB,
+    BZ,
+    BM,
+    BO,
+    BR,
+    CA,
+    KY,
+    CL,
+    CO,
+    CR,
+    CU,
+    DM,
+    DO,
+    EC,
+    SV,
+    FK,
+    GD,
+    GP,
+    GT,
+    GY,
+    HT,
+    HN,
+    JM,
+    MQ,
+    MX,
+    MS,
+    AN,
+    NI,
+    PA,
+    PY,
+    PE,
+    PR,
+    BL,
+    KN,
+    LC,
+    MF,
+    PM,
+    VC,
+    TT,
+    TC,
+    US,
+    UY,
+    VG,
+    VI,
+    VE;
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
-	public static TheAmericas fromValue(String v) {
-		return valueOf(v);
-	}
+    public static TheAmericas fromValue(String v) {
+        return valueOf(v);
+    }
 
 }

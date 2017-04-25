@@ -7,10 +7,10 @@ import com.three360.fixatdl.layout.SliderT;
  */
 public interface IFixSliderUiElement<T, K extends Comparable<?>> extends IFixUiElement<T, K> {
 
-	/***
-	 *
-	 * @param slider
-	 */
-	void setSlider(SliderT slider);
+    /***
+     *
+     * @param slider
+     */
+    void setSlider(SliderT slider);
 
 }

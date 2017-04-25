@@ -4,6 +4,6 @@ import com.three360.fixatdl.layout.StrategyLayoutT;
 
 public interface IFixLayoutUiElement<T, K extends Comparable<?>> extends IFixUiElement<T, K> {
 
-	void setStrategyLayout(StrategyLayoutT strategyLayoutT);
+    void setStrategyLayout(StrategyLayoutT strategyLayoutT);
 
 }

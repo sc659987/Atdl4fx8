@@ -19,7 +19,7 @@ import java.util.List;
  * The following schema fragment specifies the expected content contained within this class.
  * <p>
  * <p>
- * 
+ * <p>
  * <pre>
  * &lt;complexType name="Region_t">
  *   &lt;complexContent>
@@ -59,165 +59,161 @@ import java.util.List;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Region_t", propOrder = {
-		"country"
+        "country"
 })
 public class RegionT {
 
-	@XmlElement(name = "Country")
-	protected List<Country> country;
-	@XmlAttribute(required = true)
-	protected String name;
-	@XmlAttribute(required = true)
-	protected InclusionT inclusion;
+    @XmlElement(name = "Country")
+    protected List<Country> country;
+    @XmlAttribute(required = true)
+    protected String name;
+    @XmlAttribute(required = true)
+    protected InclusionT inclusion;
 
-	/**
-	 * Gets the value of the country property.
-	 * <p>
-	 * <p>
-	 * This accessor method returns a reference to the live list,
-	 * not a snapshot. Therefore any modification you make to the
-	 * returned list will be present inside the JAXB object.
-	 * This is why there is not a <CODE>set</CODE> method for the country property.
-	 * <p>
-	 * <p>
-	 * For example, to registerControlFlow a new item, do as follows:
-	 * <p>
-	 * 
-	 * <pre>
-	 * getCountry().registerControlFlow(newItem);
-	 * </pre>
-	 * <p>
-	 * <p>
-	 * <p>
-	 * Objects of the following type(s) are allowed in the list
-	 * {@link RegionT.Country }
-	 */
-	public List<Country> getCountry() {
-		if (country == null) {
-			country = new ArrayList<Country>();
-		}
-		return this.country;
-	}
+    /**
+     * Gets the value of the country property.
+     * <p>
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the country property.
+     * <p>
+     * <p>
+     * For example, to registerControlFlow a new item, do as follows:
+     * <p>
+     * <p>
+     * <pre>
+     * getCountry().registerControlFlow(newItem);
+     * </pre>
+     * <p>
+     * <p>
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link RegionT.Country }
+     */
+    public List<Country> getCountry() {
+        if (country == null) {
+            country = new ArrayList<Country>();
+        }
+        return this.country;
+    }
 
-	/**
-	 * Gets the value of the name property.
-	 *
-	 * @return possible object is
-	 *         {@link String }
-	 */
-	public String getName() {
-		return name;
-	}
+    /**
+     * Gets the value of the name property.
+     *
+     * @return possible object is
+     * {@link String }
+     */
+    public String getName() {
+        return name;
+    }
 
-	/**
-	 * Sets the value of the name property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link String }
-	 */
-	public void setName(String value) {
-		this.name = value;
-	}
+    /**
+     * Sets the value of the name property.
+     *
+     * @param value allowed object is
+     *              {@link String }
+     */
+    public void setName(String value) {
+        this.name = value;
+    }
 
-	/**
-	 * Gets the value of the inclusion property.
-	 *
-	 * @return possible object is
-	 *         {@link InclusionT }
-	 */
-	public InclusionT getInclusion() {
-		return inclusion;
-	}
+    /**
+     * Gets the value of the inclusion property.
+     *
+     * @return possible object is
+     * {@link InclusionT }
+     */
+    public InclusionT getInclusion() {
+        return inclusion;
+    }
 
-	/**
-	 * Sets the value of the inclusion property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link InclusionT }
-	 */
-	public void setInclusion(InclusionT value) {
-		this.inclusion = value;
-	}
+    /**
+     * Sets the value of the inclusion property.
+     *
+     * @param value allowed object is
+     *              {@link InclusionT }
+     */
+    public void setInclusion(InclusionT value) {
+        this.inclusion = value;
+    }
 
-	/**
-	 * <p>
-	 * Java class for anonymous complex type.
-	 * <p>
-	 * <p>
-	 * The following schema fragment specifies the expected content contained within this class.
-	 * <p>
-	 * <p>
-	 * 
-	 * <pre>
-	 * &lt;complexType>
-	 *   &lt;complexContent>
-	 *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
-	 *       &lt;attribute name="CountryCode" use="required">
-	 *         &lt;simpleType>
-	 *           &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
-	 *             &lt;pattern value="[A-Z0-9]{2}"/>
-	 *           &lt;/restriction>
-	 *         &lt;/simpleType>
-	 *       &lt;/attribute>
-	 *       &lt;attribute name="inclusion" use="required" type="{http://www.fixprotocol.org/FIXatdl-1-1/Core}Inclusion_t" />
-	 *     &lt;/restriction>
-	 *   &lt;/complexContent>
-	 * &lt;/complexType>
-	 * </pre>
-	 */
-	@XmlAccessorType(XmlAccessType.FIELD)
-	@XmlType(name = "")
-	public static class Country {
+    /**
+     * <p>
+     * Java class for anonymous complex type.
+     * <p>
+     * <p>
+     * The following schema fragment specifies the expected content contained within this class.
+     * <p>
+     * <p>
+     * <p>
+     * <pre>
+     * &lt;complexType>
+     *   &lt;complexContent>
+     *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+     *       &lt;attribute name="CountryCode" use="required">
+     *         &lt;simpleType>
+     *           &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
+     *             &lt;pattern value="[A-Z0-9]{2}"/>
+     *           &lt;/restriction>
+     *         &lt;/simpleType>
+     *       &lt;/attribute>
+     *       &lt;attribute name="inclusion" use="required" type="{http://www.fixprotocol.org/FIXatdl-1-1/Core}Inclusion_t" />
+     *     &lt;/restriction>
+     *   &lt;/complexContent>
+     * &lt;/complexType>
+     * </pre>
+     */
+    @XmlAccessorType(XmlAccessType.FIELD)
+    @XmlType(name = "")
+    public static class Country {
 
-		@XmlAttribute(name = "CountryCode", required = true)
-		protected String countryCode;
-		@XmlAttribute(required = true)
-		protected InclusionT inclusion;
+        @XmlAttribute(name = "CountryCode", required = true)
+        protected String countryCode;
+        @XmlAttribute(required = true)
+        protected InclusionT inclusion;
 
-		/**
-		 * Gets the value of the countryCode property.
-		 *
-		 * @return possible object is
-		 *         {@link String }
-		 */
-		public String getCountryCode() {
-			return countryCode;
-		}
+        /**
+         * Gets the value of the countryCode property.
+         *
+         * @return possible object is
+         * {@link String }
+         */
+        public String getCountryCode() {
+            return countryCode;
+        }
 
-		/**
-		 * Sets the value of the countryCode property.
-		 *
-		 * @param value
-		 *            allowed object is
-		 *            {@link String }
-		 */
-		public void setCountryCode(String value) {
-			this.countryCode = value;
-		}
+        /**
+         * Sets the value of the countryCode property.
+         *
+         * @param value allowed object is
+         *              {@link String }
+         */
+        public void setCountryCode(String value) {
+            this.countryCode = value;
+        }
 
-		/**
-		 * Gets the value of the inclusion property.
-		 *
-		 * @return possible object is
-		 *         {@link InclusionT }
-		 */
-		public InclusionT getInclusion() {
-			return inclusion;
-		}
+        /**
+         * Gets the value of the inclusion property.
+         *
+         * @return possible object is
+         * {@link InclusionT }
+         */
+        public InclusionT getInclusion() {
+            return inclusion;
+        }
 
-		/**
-		 * Sets the value of the inclusion property.
-		 *
-		 * @param value
-		 *            allowed object is
-		 *            {@link InclusionT }
-		 */
-		public void setInclusion(InclusionT value) {
-			this.inclusion = value;
-		}
+        /**
+         * Sets the value of the inclusion property.
+         *
+         * @param value allowed object is
+         *              {@link InclusionT }
+         */
+        public void setInclusion(InclusionT value) {
+            this.inclusion = value;
+        }
 
-	}
+    }
 
 }

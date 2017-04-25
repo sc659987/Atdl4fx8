@@ -31,6 +31,8 @@ public class FxFixSingleSpinnerUiElement implements IFixSingleSpinnerUiElement<P
 
     private ObjectProperty<String> controlIdEmitter = new SimpleObjectProperty<>();
 
+    private Pair<Double, Double> limit = extractRangeFromParameter();
+
     @Override
     public Pane create() {
         if (this.singleSpinnerT != null) {
@@ -41,7 +43,7 @@ public class FxFixSingleSpinnerUiElement implements IFixSingleSpinnerUiElement<P
                         this.nextColumn++, 0);
             }
 
-            Pair<Double, Double> limit = extractRangeFromParameter();
+            this.limit = extractRangeFromParameter();
             this.singleSpinner = new Spinner<>(limit.getKey(),
                     limit.getValue(),
                     singleSpinnerT.getInitValue() == null ? 0 : limit.getKey(),
@@ -106,6 +108,8 @@ public class FxFixSingleSpinnerUiElement implements IFixSingleSpinnerUiElement<P
 
     @Override
     public void setValue(Double s) {
+        if (s == null)
+            s = limit.getKey();
         this.singleSpinner.getValueFactory().setValue(s);
         setFieldValueToParameter(singleSpinner.getValue(), parameterT);
     }

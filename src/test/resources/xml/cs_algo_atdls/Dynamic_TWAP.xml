@@ -273,7 +273,7 @@
 
                 </lay:StrategyPanel>
 
-                <lay:StrategyPanel collapsible="false" collapsed="true" orientation="VERTICAL" title="Advanced">
+                <lay:StrategyPanel collapsible="true" collapsed="false" orientation="VERTICAL" title="Advanced">
 
                     <lay:Control xsi:type="lay:TextField_t" ID="NoWorseThan" parameterRef="NoWorseThan" label="No Worse Than Level">
                     </lay:Control>

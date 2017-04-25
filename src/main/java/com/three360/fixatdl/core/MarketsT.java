@@ -24,7 +24,7 @@ import java.util.List;
  * The following schema fragment specifies the expected content contained within this class.
  * <p>
  * <p>
- * 
+ * <p>
  * <pre>
  * &lt;complexType name="Markets_t">
  *   &lt;complexContent>
@@ -39,40 +39,40 @@ import java.util.List;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Markets_t", propOrder = {
-		"market"
+        "market"
 })
 public class MarketsT {
 
-	@XmlElement(name = "Market", required = true)
-	protected List<MarketT> market;
+    @XmlElement(name = "Market", required = true)
+    protected List<MarketT> market;
 
-	/**
-	 * Gets the value of the market property.
-	 * <p>
-	 * <p>
-	 * This accessor method returns a reference to the live list,
-	 * not a snapshot. Therefore any modification you make to the
-	 * returned list will be present inside the JAXB object.
-	 * This is why there is not a <CODE>set</CODE> method for the market property.
-	 * <p>
-	 * <p>
-	 * For example, to registerControlFlow a new item, do as follows:
-	 * <p>
-	 * 
-	 * <pre>
-	 * getMarket().registerControlFlow(newItem);
-	 * </pre>
-	 * <p>
-	 * <p>
-	 * <p>
-	 * Objects of the following type(s) are allowed in the list
-	 * {@link MarketT }
-	 */
-	public List<MarketT> getMarket() {
-		if (market == null) {
-			market = new ArrayList<MarketT>();
-		}
-		return this.market;
-	}
+    /**
+     * Gets the value of the market property.
+     * <p>
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the market property.
+     * <p>
+     * <p>
+     * For example, to registerControlFlow a new item, do as follows:
+     * <p>
+     * <p>
+     * <pre>
+     * getMarket().registerControlFlow(newItem);
+     * </pre>
+     * <p>
+     * <p>
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link MarketT }
+     */
+    public List<MarketT> getMarket() {
+        if (market == null) {
+            market = new ArrayList<MarketT>();
+        }
+        return this.market;
+    }
 
 }

@@ -20,7 +20,7 @@ import javax.xml.bind.annotation.XmlType;
  * The following schema fragment specifies the expected content contained within this class.
  * <p>
  * <p>
- * 
+ * <p>
  * <pre>
  * &lt;complexType name="SingleSpinner_t">
  *   &lt;complexContent>
@@ -43,76 +43,73 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "SingleSpinner_t")
 public class SingleSpinnerT
-		extends ControlT {
+        extends ControlT {
 
-	@XmlAttribute
-	protected Double initValue;
-	@XmlAttribute
-	protected Double increment;
-	@XmlAttribute
-	protected String incrementPolicy;
+    @XmlAttribute
+    protected Double initValue;
+    @XmlAttribute
+    protected Double increment;
+    @XmlAttribute
+    protected String incrementPolicy;
 
-	/**
-	 * Gets the value of the initValue property.
-	 *
-	 * @return possible object is
-	 *         {@link Double }
-	 */
-	public Double getInitValue() {
-		return initValue;
-	}
+    /**
+     * Gets the value of the initValue property.
+     *
+     * @return possible object is
+     * {@link Double }
+     */
+    public Double getInitValue() {
+        return initValue;
+    }
 
-	/**
-	 * Sets the value of the initValue property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link Double }
-	 */
-	public void setInitValue(Double value) {
-		this.initValue = value;
-	}
+    /**
+     * Sets the value of the initValue property.
+     *
+     * @param value allowed object is
+     *              {@link Double }
+     */
+    public void setInitValue(Double value) {
+        this.initValue = value;
+    }
 
-	/**
-	 * Gets the value of the increment property.
-	 *
-	 * @return possible object is
-	 *         {@link Double }
-	 */
-	public Double getIncrement() {
-		return increment;
-	}
+    /**
+     * Gets the value of the increment property.
+     *
+     * @return possible object is
+     * {@link Double }
+     */
+    public Double getIncrement() {
+        return increment;
+    }
 
-	/**
-	 * Sets the value of the increment property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link Double }
-	 */
-	public void setIncrement(Double value) {
-		this.increment = value;
-	}
+    /**
+     * Sets the value of the increment property.
+     *
+     * @param value allowed object is
+     *              {@link Double }
+     */
+    public void setIncrement(Double value) {
+        this.increment = value;
+    }
 
-	/**
-	 * Gets the value of the incrementPolicy property.
-	 *
-	 * @return possible object is
-	 *         {@link String }
-	 */
-	public String getIncrementPolicy() {
-		return incrementPolicy;
-	}
+    /**
+     * Gets the value of the incrementPolicy property.
+     *
+     * @return possible object is
+     * {@link String }
+     */
+    public String getIncrementPolicy() {
+        return incrementPolicy;
+    }
 
-	/**
-	 * Sets the value of the incrementPolicy property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link String }
-	 */
-	public void setIncrementPolicy(String value) {
-		this.incrementPolicy = value;
-	}
+    /**
+     * Sets the value of the incrementPolicy property.
+     *
+     * @param value allowed object is
+     *              {@link String }
+     */
+    public void setIncrementPolicy(String value) {
+        this.incrementPolicy = value;
+    }
 
 }

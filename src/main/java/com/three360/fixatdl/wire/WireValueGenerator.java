@@ -8,6 +8,6 @@ import com.three360.fixatdl.core.StrategyT;
  */
 public interface WireValueGenerator {
 
-	String generateWireValue(StrategiesT strategies, StrategyT selectedStrategy);
+    String generateWireValue(StrategiesT strategies, StrategyT selectedStrategy);
 
 }

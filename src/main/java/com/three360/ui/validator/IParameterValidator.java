@@ -4,5 +4,5 @@ import java.util.List;
 
 public interface IParameterValidator {
 
-	List<String> validateParameter();
+    List<String> validateParameter();
 }

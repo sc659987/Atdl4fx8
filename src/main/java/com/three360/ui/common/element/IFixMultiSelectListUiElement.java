@@ -7,6 +7,6 @@ import com.three360.fixatdl.layout.MultiSelectListT;
  */
 public interface IFixMultiSelectListUiElement<T, K extends Comparable<?>> extends IFixUiElement<T, K> {
 
-	void setMultiSelectList(MultiSelectListT multiSelectListT);
+    void setMultiSelectList(MultiSelectListT multiSelectListT);
 
 }

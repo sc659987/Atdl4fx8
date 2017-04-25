@@ -20,7 +20,7 @@ import javax.xml.bind.annotation.XmlType;
  * The following schema fragment specifies the expected content contained within this class.
  * <p>
  * <p>
- * 
+ * <p>
  * <pre>
  * &lt;complexType name="Market_t">
  *   &lt;complexContent>
@@ -42,51 +42,49 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "Market_t")
 public class MarketT {
 
-	@XmlAttribute(name = "MICCode", required = true)
-	protected String micCode;
-	@XmlAttribute(required = true)
-	protected InclusionT inclusion;
+    @XmlAttribute(name = "MICCode", required = true)
+    protected String micCode;
+    @XmlAttribute(required = true)
+    protected InclusionT inclusion;
 
-	/**
-	 * Gets the value of the micCode property.
-	 *
-	 * @return possible object is
-	 *         {@link String }
-	 */
-	public String getMICCode() {
-		return micCode;
-	}
+    /**
+     * Gets the value of the micCode property.
+     *
+     * @return possible object is
+     * {@link String }
+     */
+    public String getMICCode() {
+        return micCode;
+    }
 
-	/**
-	 * Sets the value of the micCode property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link String }
-	 */
-	public void setMICCode(String value) {
-		this.micCode = value;
-	}
+    /**
+     * Sets the value of the micCode property.
+     *
+     * @param value allowed object is
+     *              {@link String }
+     */
+    public void setMICCode(String value) {
+        this.micCode = value;
+    }
 
-	/**
-	 * Gets the value of the inclusion property.
-	 *
-	 * @return possible object is
-	 *         {@link InclusionT }
-	 */
-	public InclusionT getInclusion() {
-		return inclusion;
-	}
+    /**
+     * Gets the value of the inclusion property.
+     *
+     * @return possible object is
+     * {@link InclusionT }
+     */
+    public InclusionT getInclusion() {
+        return inclusion;
+    }
 
-	/**
-	 * Sets the value of the inclusion property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link InclusionT }
-	 */
-	public void setInclusion(InclusionT value) {
-		this.inclusion = value;
-	}
+    /**
+     * Sets the value of the inclusion property.
+     *
+     * @param value allowed object is
+     *              {@link InclusionT }
+     */
+    public void setInclusion(InclusionT value) {
+        this.inclusion = value;
+    }
 
 }

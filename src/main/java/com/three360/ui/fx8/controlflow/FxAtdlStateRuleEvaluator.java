@@ -5,8 +5,8 @@ import com.three360.ui.common.element.IFixUiElement;
 import com.three360.ui.controlflow.AtdlStateRuleResultType;
 import com.three360.ui.controlflow.IAtdlStateRuleEvaluator;
 import com.three360.ui.fx8.validator.RecursiveAtdlEditEvaluator;
-import com.three360.ui.validator.IAtdlEditEvaluator;
 import com.three360.ui.validator.FieldToComparableMapperCache;
+import com.three360.ui.validator.IAtdlEditEvaluator;
 import javafx.util.Pair;
 
 import java.util.ArrayList;
@@ -34,7 +34,7 @@ public class FxAtdlStateRuleEvaluator implements IAtdlStateRuleEvaluator {
             pairList.add(new Pair<>(AtdlStateRuleResultType.ENABLE, validationResult ? stateRuleT.isEnabled() : !stateRuleT.isEnabled()));
         if (stateRuleT.isVisible() != null)
             pairList.add(new Pair<>(AtdlStateRuleResultType.VISIBLE, validationResult ? stateRuleT.isVisible() : !stateRuleT.isVisible()));
-        if (stateRuleT.getValue() != null)
+        if (stateRuleT.getValue() != null && validationResult)
             pairList.add(new Pair<>(AtdlStateRuleResultType.VALUE, stateRuleT.getValue()));
         return pairList;
     }

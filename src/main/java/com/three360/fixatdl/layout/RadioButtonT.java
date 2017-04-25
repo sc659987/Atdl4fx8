@@ -20,7 +20,7 @@ import javax.xml.bind.annotation.XmlType;
  * The following schema fragment specifies the expected content contained within this class.
  * <p>
  * <p>
- * 
+ * <p>
  * <pre>
  * &lt;complexType name="RadioButton_t">
  *   &lt;complexContent>
@@ -37,99 +37,95 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "RadioButton_t")
 public class RadioButtonT
-		extends ControlT {
+        extends ControlT {
 
-	@XmlAttribute
-	protected String radioGroup;
-	@XmlAttribute
-	protected Boolean initValue;
-	@XmlAttribute
-	protected String checkedEnumRef;
-	@XmlAttribute
-	protected String uncheckedEnumRef;
+    @XmlAttribute
+    protected String radioGroup;
+    @XmlAttribute
+    protected Boolean initValue;
+    @XmlAttribute
+    protected String checkedEnumRef;
+    @XmlAttribute
+    protected String uncheckedEnumRef;
 
-	/**
-	 * Gets the value of the radioGroup property.
-	 *
-	 * @return possible object is
-	 *         {@link String }
-	 */
-	public String getRadioGroup() {
-		return radioGroup;
-	}
+    /**
+     * Gets the value of the radioGroup property.
+     *
+     * @return possible object is
+     * {@link String }
+     */
+    public String getRadioGroup() {
+        return radioGroup;
+    }
 
-	/**
-	 * Sets the value of the radioGroup property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link String }
-	 */
-	public void setRadioGroup(String value) {
-		this.radioGroup = value;
-	}
+    /**
+     * Sets the value of the radioGroup property.
+     *
+     * @param value allowed object is
+     *              {@link String }
+     */
+    public void setRadioGroup(String value) {
+        this.radioGroup = value;
+    }
 
-	/**
-	 * Gets the value of the initValue property.
-	 *
-	 * @return possible object is
-	 *         {@link Boolean }
-	 */
-	public Boolean isInitValue() {
-		return initValue;
-	}
+    /**
+     * Gets the value of the initValue property.
+     *
+     * @return possible object is
+     * {@link Boolean }
+     */
+    public Boolean isInitValue() {
+        return initValue;
+    }
 
-	/**
-	 * Sets the value of the initValue property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link Boolean }
-	 */
-	public void setInitValue(Boolean value) {
-		this.initValue = value;
-	}
+    /**
+     * Sets the value of the initValue property.
+     *
+     * @param value allowed object is
+     *              {@link Boolean }
+     */
+    public void setInitValue(Boolean value) {
+        this.initValue = value;
+    }
 
-	/**
-	 * Gets the value of the checkedEnumRef property.
-	 *
-	 * @return possible object is
-	 *         {@link String }
-	 */
-	public String getCheckedEnumRef() {
-		return checkedEnumRef;
-	}
+    /**
+     * Gets the value of the checkedEnumRef property.
+     *
+     * @return possible object is
+     * {@link String }
+     */
+    public String getCheckedEnumRef() {
+        return checkedEnumRef;
+    }
 
-	/**
-	 * Sets the value of the checkedEnumRef property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link String }
-	 */
-	public void setCheckedEnumRef(String value) {
-		this.checkedEnumRef = value;
-	}
+    /**
+     * Sets the value of the checkedEnumRef property.
+     *
+     * @param value allowed object is
+     *              {@link String }
+     */
+    public void setCheckedEnumRef(String value) {
+        this.checkedEnumRef = value;
+    }
 
-	/**
-	 * Gets the value of the uncheckedEnumRef property.
-	 *
-	 * @return possible object is
-	 *         {@link String }
-	 */
-	public String getUncheckedEnumRef() {
-		return uncheckedEnumRef;
-	}
+    /**
+     * Gets the value of the uncheckedEnumRef property.
+     *
+     * @return possible object is
+     * {@link String }
+     */
+    public String getUncheckedEnumRef() {
+        return uncheckedEnumRef;
+    }
 
-	/**
-	 * Sets the value of the uncheckedEnumRef property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link String }
-	 */
-	public void setUncheckedEnumRef(String value) {
-		this.uncheckedEnumRef = value;
-	}
+    /**
+     * Sets the value of the uncheckedEnumRef property.
+     *
+     * @param value allowed object is
+     *              {@link String }
+     */
+    public void setUncheckedEnumRef(String value) {
+        this.uncheckedEnumRef = value;
+    }
 
 }

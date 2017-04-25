@@ -20,7 +20,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * The following schema fragment specifies the expected content contained within this class.
  * <p>
  * <p>
- * 
+ * <p>
  * <pre>
  * &lt;complexType name="Clock_t">
  *   &lt;complexContent>
@@ -43,81 +43,78 @@ import javax.xml.datatype.XMLGregorianCalendar;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Clock_t")
 public class ClockT
-		extends ControlT {
+        extends ControlT {
 
-	@XmlAttribute
-	@XmlSchemaType(name = "time")
-	protected XMLGregorianCalendar initValue;
-	@XmlAttribute
-	protected Integer initValueMode;
-	@XmlAttribute
-	protected Timezone localMktTz;
+    @XmlAttribute
+    @XmlSchemaType(name = "time")
+    protected XMLGregorianCalendar initValue;
+    @XmlAttribute
+    protected Integer initValueMode;
+    @XmlAttribute
+    protected Timezone localMktTz;
 
-	/**
-	 * Gets the value of the initValue property.
-	 *
-	 * @return possible object is
-	 *         {@link XMLGregorianCalendar }
-	 */
-	public XMLGregorianCalendar getInitValue() {
-		return initValue;
-	}
+    /**
+     * Gets the value of the initValue property.
+     *
+     * @return possible object is
+     * {@link XMLGregorianCalendar }
+     */
+    public XMLGregorianCalendar getInitValue() {
+        return initValue;
+    }
 
-	/**
-	 * Sets the value of the initValue property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link XMLGregorianCalendar }
-	 */
-	public void setInitValue(XMLGregorianCalendar value) {
-		this.initValue = value;
-	}
+    /**
+     * Sets the value of the initValue property.
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
+     */
+    public void setInitValue(XMLGregorianCalendar value) {
+        this.initValue = value;
+    }
 
-	/**
-	 * Gets the value of the initValueMode property.
-	 *
-	 * @return possible object is
-	 *         {@link Integer }
-	 */
-	public int getInitValueMode() {
-		if (initValueMode == null) {
-			return 0;
-		} else {
-			return initValueMode;
-		}
-	}
+    /**
+     * Gets the value of the initValueMode property.
+     *
+     * @return possible object is
+     * {@link Integer }
+     */
+    public int getInitValueMode() {
+        if (initValueMode == null) {
+            return 0;
+        } else {
+            return initValueMode;
+        }
+    }
 
-	/**
-	 * Sets the value of the initValueMode property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link Integer }
-	 */
-	public void setInitValueMode(Integer value) {
-		this.initValueMode = value;
-	}
+    /**
+     * Sets the value of the initValueMode property.
+     *
+     * @param value allowed object is
+     *              {@link Integer }
+     */
+    public void setInitValueMode(Integer value) {
+        this.initValueMode = value;
+    }
 
-	/**
-	 * Gets the value of the localMktTz property.
-	 *
-	 * @return possible object is
-	 *         {@link Timezone }
-	 */
-	public Timezone getLocalMktTz() {
-		return localMktTz;
-	}
+    /**
+     * Gets the value of the localMktTz property.
+     *
+     * @return possible object is
+     * {@link Timezone }
+     */
+    public Timezone getLocalMktTz() {
+        return localMktTz;
+    }
 
-	/**
-	 * Sets the value of the localMktTz property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link Timezone }
-	 */
-	public void setLocalMktTz(Timezone value) {
-		this.localMktTz = value;
-	}
+    /**
+     * Sets the value of the localMktTz property.
+     *
+     * @param value allowed object is
+     *              {@link Timezone }
+     */
+    public void setLocalMktTz(Timezone value) {
+        this.localMktTz = value;
+    }
 
 }

@@ -18,7 +18,7 @@ import javax.xml.bind.annotation.XmlType;
  * The following schema fragment specifies the expected content contained within this class.
  * <p>
  * <p>
- * 
+ * <p>
  * <pre>
  * &lt;simpleType>
  *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
@@ -89,72 +89,72 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum AsiaPacificJapan {
 
-	AF,
-	AS,
-	AU,
-	BD,
-	BT,
-	IO,
-	BN,
-	KH,
-	CN,
-	CX,
-	CC,
-	CK,
-	FJ,
-	PF,
-	GU,
-	HK,
-	IN,
-	ID,
-	JP,
-	KZ,
-	KI,
-	KP,
-	KR,
-	KG,
-	LA,
-	MO,
-	MY,
-	MV,
-	MH,
-	FM,
-	MN,
-	MM,
-	NR,
-	NP,
-	NC,
-	NZ,
-	NU,
-	NF,
-	MP,
-	PK,
-	PW,
-	PG,
-	PH,
-	WS,
-	SG,
-	SB,
-	TW,
-	TJ,
-	TH,
-	TL,
-	TK,
-	TO,
-	TM,
-	TV,
-	UM,
-	UZ,
-	VU,
-	VN,
-	WF;
+    AF,
+    AS,
+    AU,
+    BD,
+    BT,
+    IO,
+    BN,
+    KH,
+    CN,
+    CX,
+    CC,
+    CK,
+    FJ,
+    PF,
+    GU,
+    HK,
+    IN,
+    ID,
+    JP,
+    KZ,
+    KI,
+    KP,
+    KR,
+    KG,
+    LA,
+    MO,
+    MY,
+    MV,
+    MH,
+    FM,
+    MN,
+    MM,
+    NR,
+    NP,
+    NC,
+    NZ,
+    NU,
+    NF,
+    MP,
+    PK,
+    PW,
+    PG,
+    PH,
+    WS,
+    SG,
+    SB,
+    TW,
+    TJ,
+    TH,
+    TL,
+    TK,
+    TO,
+    TM,
+    TV,
+    UM,
+    UZ,
+    VU,
+    VN,
+    WF;
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
-	public static AsiaPacificJapan fromValue(String v) {
-		return valueOf(v);
-	}
+    public static AsiaPacificJapan fromValue(String v) {
+        return valueOf(v);
+    }
 
 }

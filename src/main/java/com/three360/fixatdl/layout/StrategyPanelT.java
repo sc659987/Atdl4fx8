@@ -19,7 +19,7 @@ import java.util.List;
  * The following schema fragment specifies the expected content contained within this class.
  * <p>
  * <p>
- * 
+ * <p>
  * <pre>
  * &lt;complexType name="StrategyPanel_t">
  *   &lt;complexContent>
@@ -41,218 +41,212 @@ import java.util.List;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "StrategyPanel_t", propOrder = {
-		"strategyPanel",
-		"control"
+        "strategyPanel",
+        "control"
 })
 public class StrategyPanelT {
 
-	@XmlElement(name = "StrategyPanel")
-	protected List<StrategyPanelT> strategyPanel;
-	@XmlElement(name = "Control")
-	protected List<ControlT> control;
-	@XmlAttribute
-	protected String title;
-	@XmlAttribute
-	protected Boolean collapsed;
-	@XmlAttribute
-	protected Boolean collapsible;
-	@XmlAttribute
-	protected String color;
-	@XmlAttribute
-	protected PanelOrientationT orientation;
-	@XmlAttribute
-	protected BorderT border;
+    @XmlElement(name = "StrategyPanel")
+    protected List<StrategyPanelT> strategyPanel;
+    @XmlElement(name = "Control")
+    protected List<ControlT> control;
+    @XmlAttribute
+    protected String title;
+    @XmlAttribute
+    protected Boolean collapsed;
+    @XmlAttribute
+    protected Boolean collapsible;
+    @XmlAttribute
+    protected String color;
+    @XmlAttribute
+    protected PanelOrientationT orientation;
+    @XmlAttribute
+    protected BorderT border;
 
-	/**
-	 * Gets the value of the strategyPanel property.
-	 * <p>
-	 * <p>
-	 * This accessor method returns a reference to the live list,
-	 * not a snapshot. Therefore any modification you make to the
-	 * returned list will be present inside the JAXB object.
-	 * This is why there is not a <CODE>set</CODE> method for the strategyPanel property.
-	 * <p>
-	 * <p>
-	 * For example, to registerControlFlow a new item, do as follows:
-	 * <p>
-	 * 
-	 * <pre>
-	 * getStrategyPanel().registerControlFlow(newItem);
-	 * </pre>
-	 * <p>
-	 * <p>
-	 * <p>
-	 * Objects of the following type(s) are allowed in the list
-	 * {@link StrategyPanelT }
-	 */
-	public List<StrategyPanelT> getStrategyPanel() {
-		if (strategyPanel == null) {
-			strategyPanel = new ArrayList<StrategyPanelT>();
-		}
-		return this.strategyPanel;
-	}
+    /**
+     * Gets the value of the strategyPanel property.
+     * <p>
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the strategyPanel property.
+     * <p>
+     * <p>
+     * For example, to registerControlFlow a new item, do as follows:
+     * <p>
+     * <p>
+     * <pre>
+     * getStrategyPanel().registerControlFlow(newItem);
+     * </pre>
+     * <p>
+     * <p>
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link StrategyPanelT }
+     */
+    public List<StrategyPanelT> getStrategyPanel() {
+        if (strategyPanel == null) {
+            strategyPanel = new ArrayList<StrategyPanelT>();
+        }
+        return this.strategyPanel;
+    }
 
-	/**
-	 * Gets the value of the control property.
-	 * <p>
-	 * <p>
-	 * This accessor method returns a reference to the live list,
-	 * not a snapshot. Therefore any modification you make to the
-	 * returned list will be present inside the JAXB object.
-	 * This is why there is not a <CODE>set</CODE> method for the control property.
-	 * <p>
-	 * <p>
-	 * For example, to registerControlFlow a new item, do as follows:
-	 * <p>
-	 * 
-	 * <pre>
-	 * getControl().registerControlFlow(newItem);
-	 * </pre>
-	 * <p>
-	 * <p>
-	 * <p>
-	 * Objects of the following type(s) are allowed in the list
-	 * {@link ControlT }
-	 */
-	public List<ControlT> getControl() {
-		if (control == null) {
-			control = new ArrayList<ControlT>();
-		}
-		return this.control;
-	}
+    /**
+     * Gets the value of the control property.
+     * <p>
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the control property.
+     * <p>
+     * <p>
+     * For example, to registerControlFlow a new item, do as follows:
+     * <p>
+     * <p>
+     * <pre>
+     * getControl().registerControlFlow(newItem);
+     * </pre>
+     * <p>
+     * <p>
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link ControlT }
+     */
+    public List<ControlT> getControl() {
+        if (control == null) {
+            control = new ArrayList<ControlT>();
+        }
+        return this.control;
+    }
 
-	/**
-	 * Gets the value of the title property.
-	 *
-	 * @return possible object is
-	 *         {@link String }
-	 */
-	public String getTitle() {
-		return title;
-	}
+    /**
+     * Gets the value of the title property.
+     *
+     * @return possible object is
+     * {@link String }
+     */
+    public String getTitle() {
+        return title;
+    }
 
-	/**
-	 * Sets the value of the title property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link String }
-	 */
-	public void setTitle(String value) {
-		this.title = value;
-	}
+    /**
+     * Sets the value of the title property.
+     *
+     * @param value allowed object is
+     *              {@link String }
+     */
+    public void setTitle(String value) {
+        this.title = value;
+    }
 
-	/**
-	 * Gets the value of the collapsed property.
-	 *
-	 * @return possible object is
-	 *         {@link Boolean }
-	 */
-	public boolean isCollapsed() {
-		if (collapsed == null) {
-			return false;
-		} else {
-			return collapsed;
-		}
-	}
+    /**
+     * Gets the value of the collapsed property.
+     *
+     * @return possible object is
+     * {@link Boolean }
+     */
+    public boolean isCollapsed() {
+        if (collapsed == null) {
+            return false;
+        } else {
+            return collapsed;
+        }
+    }
 
-	/**
-	 * Sets the value of the collapsed property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link Boolean }
-	 */
-	public void setCollapsed(Boolean value) {
-		this.collapsed = value;
-	}
+    /**
+     * Sets the value of the collapsed property.
+     *
+     * @param value allowed object is
+     *              {@link Boolean }
+     */
+    public void setCollapsed(Boolean value) {
+        this.collapsed = value;
+    }
 
-	/**
-	 * Gets the value of the collapsible property.
-	 *
-	 * @return possible object is
-	 *         {@link Boolean }
-	 */
-	public boolean isCollapsible() {
-		if (collapsible == null) {
-			return true;
-		} else {
-			return collapsible;
-		}
-	}
+    /**
+     * Gets the value of the collapsible property.
+     *
+     * @return possible object is
+     * {@link Boolean }
+     */
+    public boolean isCollapsible() {
+        if (collapsible == null) {
+            return true;
+        } else {
+            return collapsible;
+        }
+    }
 
-	/**
-	 * Sets the value of the collapsible property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link Boolean }
-	 */
-	public void setCollapsible(Boolean value) {
-		this.collapsible = value;
-	}
+    /**
+     * Sets the value of the collapsible property.
+     *
+     * @param value allowed object is
+     *              {@link Boolean }
+     */
+    public void setCollapsible(Boolean value) {
+        this.collapsible = value;
+    }
 
-	/**
-	 * Gets the value of the color property.
-	 *
-	 * @return possible object is
-	 *         {@link String }
-	 */
-	public String getColor() {
-		return color;
-	}
+    /**
+     * Gets the value of the color property.
+     *
+     * @return possible object is
+     * {@link String }
+     */
+    public String getColor() {
+        return color;
+    }
 
-	/**
-	 * Sets the value of the color property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link String }
-	 */
-	public void setColor(String value) {
-		this.color = value;
-	}
+    /**
+     * Sets the value of the color property.
+     *
+     * @param value allowed object is
+     *              {@link String }
+     */
+    public void setColor(String value) {
+        this.color = value;
+    }
 
-	/**
-	 * Gets the value of the orientation property.
-	 *
-	 * @return possible object is
-	 *         {@link PanelOrientationT }
-	 */
-	public PanelOrientationT getOrientation() {
-		return orientation;
-	}
+    /**
+     * Gets the value of the orientation property.
+     *
+     * @return possible object is
+     * {@link PanelOrientationT }
+     */
+    public PanelOrientationT getOrientation() {
+        return orientation;
+    }
 
-	/**
-	 * Sets the value of the orientation property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link PanelOrientationT }
-	 */
-	public void setOrientation(PanelOrientationT value) {
-		this.orientation = value;
-	}
+    /**
+     * Sets the value of the orientation property.
+     *
+     * @param value allowed object is
+     *              {@link PanelOrientationT }
+     */
+    public void setOrientation(PanelOrientationT value) {
+        this.orientation = value;
+    }
 
-	/**
-	 * Gets the value of the border property.
-	 *
-	 * @return possible object is
-	 *         {@link BorderT }
-	 */
-	public BorderT getBorder() {
-		return border;
-	}
+    /**
+     * Gets the value of the border property.
+     *
+     * @return possible object is
+     * {@link BorderT }
+     */
+    public BorderT getBorder() {
+        return border;
+    }
 
-	/**
-	 * Sets the value of the border property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link BorderT }
-	 */
-	public void setBorder(BorderT value) {
-		this.border = value;
-	}
+    /**
+     * Sets the value of the border property.
+     *
+     * @param value allowed object is
+     *              {@link BorderT }
+     */
+    public void setBorder(BorderT value) {
+        this.border = value;
+    }
 
 }

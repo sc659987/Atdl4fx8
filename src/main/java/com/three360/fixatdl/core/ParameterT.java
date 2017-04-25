@@ -21,7 +21,7 @@ import java.util.List;
  * <p>
  * <p>
  * <p>
- * 
+ * <p>
  * <pre>
  * &lt;complexType name="Parameter_t">
  *   &lt;complexContent>
@@ -49,246 +49,239 @@ import java.util.List;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Parameter_t", propOrder = {
-		"description",
-		"enumPair"
+        "description",
+        "enumPair"
 })
 @XmlSeeAlso({
-		LanguageT.class,
-		CountryT.class,
-		LengthT.class,
-		DataT.class,
-		StringT.class,
-		ExchangeT.class,
-		CharT.class,
-		CurrencyT.class,
-		UTCTimeOnlyT.class,
-		SeqNumT.class,
-		TagNumT.class,
-		TZTimestampT.class,
-		LocalMktDateT.class,
-		IntT.class,
-		MultipleStringValueT.class,
-		MonthYearT.class,
-		TenorT.class,
-		BooleanT.class,
-		TZTimeOnlyT.class,
-		UTCDateOnlyT.class,
-		MultipleCharValueT.class,
-		NumericT.class,
-		UTCTimestampT.class,
-		PriceOffsetT.class
+        LanguageT.class,
+        CountryT.class,
+        LengthT.class,
+        DataT.class,
+        StringT.class,
+        ExchangeT.class,
+        CharT.class,
+        CurrencyT.class,
+        UTCTimeOnlyT.class,
+        SeqNumT.class,
+        TagNumT.class,
+        TZTimestampT.class,
+        LocalMktDateT.class,
+        IntT.class,
+        MultipleStringValueT.class,
+        MonthYearT.class,
+        TenorT.class,
+        BooleanT.class,
+        TZTimeOnlyT.class,
+        UTCDateOnlyT.class,
+        MultipleCharValueT.class,
+        NumericT.class,
+        UTCTimestampT.class,
+        PriceOffsetT.class
 })
 public abstract class ParameterT {
 
-	@XmlElement(name = "Description")
-	protected String description;
-	@XmlElement(name = "EnumPair")
-	protected List<EnumPairT> enumPair;
-	@XmlAttribute(required = true)
-	protected String name;
-	@XmlAttribute
-	@XmlSchemaType(name = "positiveInteger")
-	protected BigInteger fixTag;
-	@XmlAttribute
-	protected UseT use;
-	@XmlAttribute
-	protected Boolean mutableOnCxlRpl;
-	@XmlAttribute
-	protected Boolean revertOnCxlRpl;
-	@XmlAttribute
-	protected Boolean definedByFIX;
+    @XmlElement(name = "Description")
+    protected String description;
+    @XmlElement(name = "EnumPair")
+    protected List<EnumPairT> enumPair;
+    @XmlAttribute(required = true)
+    protected String name;
+    @XmlAttribute
+    @XmlSchemaType(name = "positiveInteger")
+    protected BigInteger fixTag;
+    @XmlAttribute
+    protected UseT use;
+    @XmlAttribute
+    protected Boolean mutableOnCxlRpl;
+    @XmlAttribute
+    protected Boolean revertOnCxlRpl;
+    @XmlAttribute
+    protected Boolean definedByFIX;
 
-	/**
-	 * Description of the Parameter.
-	 *
-	 * @return possible object is
-	 *         {@link String }
-	 */
-	public String getDescription() {
-		return description;
-	}
+    /**
+     * Description of the Parameter.
+     *
+     * @return possible object is
+     * {@link String }
+     */
+    public String getDescription() {
+        return description;
+    }
 
-	/**
-	 * Sets the value of the description property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link String }
-	 */
-	public void setDescription(String value) {
-		this.description = value;
-	}
+    /**
+     * Sets the value of the description property.
+     *
+     * @param value allowed object is
+     *              {@link String }
+     */
+    public void setDescription(String value) {
+        this.description = value;
+    }
 
-	/**
-	 * Gets the value of the enumPair property.
-	 * <p>
-	 * <p>
-	 * This accessor method returns a reference to the live list,
-	 * not a snapshot. Therefore any modification you make to the
-	 * returned list will be present inside the JAXB object.
-	 * This is why there is not a <CODE>set</CODE> method for the enumPair property.
-	 * <p>
-	 * <p>
-	 * For example, to registerControlFlow a new item, do as follows:
-	 * <p>
-	 * <p>
-	 * 
-	 * <pre>
-	 * getEnumPair().registerControlFlow(newItem);
-	 * </pre>
-	 * <p>
-	 * <p>
-	 * <p>
-	 * Objects of the following type(s) are allowed in the list
-	 * {@link EnumPairT }
-	 */
-	public List<EnumPairT> getEnumPair() {
-		if (enumPair == null) {
-			enumPair = new ArrayList<EnumPairT>();
-		}
-		return this.enumPair;
-	}
+    /**
+     * Gets the value of the enumPair property.
+     * <p>
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the enumPair property.
+     * <p>
+     * <p>
+     * For example, to registerControlFlow a new item, do as follows:
+     * <p>
+     * <p>
+     * <p>
+     * <pre>
+     * getEnumPair().registerControlFlow(newItem);
+     * </pre>
+     * <p>
+     * <p>
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link EnumPairT }
+     */
+    public List<EnumPairT> getEnumPair() {
+        if (enumPair == null) {
+            enumPair = new ArrayList<EnumPairT>();
+        }
+        return this.enumPair;
+    }
 
-	/**
-	 * Gets the value of the name property.
-	 *
-	 * @return possible object is
-	 *         {@link String }
-	 */
-	public String getName() {
-		return name;
-	}
+    /**
+     * Gets the value of the name property.
+     *
+     * @return possible object is
+     * {@link String }
+     */
+    public String getName() {
+        return name;
+    }
 
-	/**
-	 * Sets the value of the name property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link String }
-	 */
-	public void setName(String value) {
-		this.name = value;
-	}
+    /**
+     * Sets the value of the name property.
+     *
+     * @param value allowed object is
+     *              {@link String }
+     */
+    public void setName(String value) {
+        this.name = value;
+    }
 
-	/**
-	 * Gets the value of the fixTag property.
-	 *
-	 * @return possible object is
-	 *         {@link BigInteger }
-	 */
-	public BigInteger getFixTag() {
-		return fixTag;
-	}
+    /**
+     * Gets the value of the fixTag property.
+     *
+     * @return possible object is
+     * {@link BigInteger }
+     */
+    public BigInteger getFixTag() {
+        return fixTag;
+    }
 
-	/**
-	 * Sets the value of the fixTag property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link BigInteger }
-	 */
-	public void setFixTag(BigInteger value) {
-		this.fixTag = value;
-	}
+    /**
+     * Sets the value of the fixTag property.
+     *
+     * @param value allowed object is
+     *              {@link BigInteger }
+     */
+    public void setFixTag(BigInteger value) {
+        this.fixTag = value;
+    }
 
-	/**
-	 * Gets the value of the use property.
-	 *
-	 * @return possible object is
-	 *         {@link UseT }
-	 */
-	public UseT getUse() {
-		if (use == null) {
-			return UseT.OPTIONAL;
-		} else {
-			return use;
-		}
-	}
+    /**
+     * Gets the value of the use property.
+     *
+     * @return possible object is
+     * {@link UseT }
+     */
+    public UseT getUse() {
+        if (use == null) {
+            return UseT.OPTIONAL;
+        } else {
+            return use;
+        }
+    }
 
-	/**
-	 * Sets the value of the use property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link UseT }
-	 */
-	public void setUse(UseT value) {
-		this.use = value;
-	}
+    /**
+     * Sets the value of the use property.
+     *
+     * @param value allowed object is
+     *              {@link UseT }
+     */
+    public void setUse(UseT value) {
+        this.use = value;
+    }
 
-	/**
-	 * Gets the value of the mutableOnCxlRpl property.
-	 *
-	 * @return possible object is
-	 *         {@link Boolean }
-	 */
-	public boolean isMutableOnCxlRpl() {
-		if (mutableOnCxlRpl == null) {
-			return true;
-		} else {
-			return mutableOnCxlRpl;
-		}
-	}
+    /**
+     * Gets the value of the mutableOnCxlRpl property.
+     *
+     * @return possible object is
+     * {@link Boolean }
+     */
+    public boolean isMutableOnCxlRpl() {
+        if (mutableOnCxlRpl == null) {
+            return true;
+        } else {
+            return mutableOnCxlRpl;
+        }
+    }
 
-	/**
-	 * Sets the value of the mutableOnCxlRpl property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link Boolean }
-	 */
-	public void setMutableOnCxlRpl(Boolean value) {
-		this.mutableOnCxlRpl = value;
-	}
+    /**
+     * Sets the value of the mutableOnCxlRpl property.
+     *
+     * @param value allowed object is
+     *              {@link Boolean }
+     */
+    public void setMutableOnCxlRpl(Boolean value) {
+        this.mutableOnCxlRpl = value;
+    }
 
-	/**
-	 * Gets the value of the revertOnCxlRpl property.
-	 *
-	 * @return possible object is
-	 *         {@link Boolean }
-	 */
-	public Boolean isRevertOnCxlRpl() {
-		return revertOnCxlRpl;
-	}
+    /**
+     * Gets the value of the revertOnCxlRpl property.
+     *
+     * @return possible object is
+     * {@link Boolean }
+     */
+    public Boolean isRevertOnCxlRpl() {
+        return revertOnCxlRpl;
+    }
 
-	/**
-	 * Sets the value of the revertOnCxlRpl property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link Boolean }
-	 */
-	public void setRevertOnCxlRpl(Boolean value) {
-		this.revertOnCxlRpl = value;
-	}
+    /**
+     * Sets the value of the revertOnCxlRpl property.
+     *
+     * @param value allowed object is
+     *              {@link Boolean }
+     */
+    public void setRevertOnCxlRpl(Boolean value) {
+        this.revertOnCxlRpl = value;
+    }
 
-	/**
-	 * Gets the value of the definedByFIX property.
-	 *
-	 * @return possible object is
-	 *         {@link Boolean }
-	 */
-	public boolean isDefinedByFIX() {
-		if (definedByFIX == null) {
-			return false;
-		} else {
-			return definedByFIX;
-		}
-	}
+    /**
+     * Gets the value of the definedByFIX property.
+     *
+     * @return possible object is
+     * {@link Boolean }
+     */
+    public boolean isDefinedByFIX() {
+        if (definedByFIX == null) {
+            return false;
+        } else {
+            return definedByFIX;
+        }
+    }
 
-	/**
-	 * Sets the value of the definedByFIX property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link Boolean }
-	 */
-	public void setDefinedByFIX(Boolean value) {
-		this.definedByFIX = value;
-	}
+    /**
+     * Sets the value of the definedByFIX property.
+     *
+     * @param value allowed object is
+     *              {@link Boolean }
+     */
+    public void setDefinedByFIX(Boolean value) {
+        this.definedByFIX = value;
+    }
 
-	public int getTag959() {
-		return 1;
-	}
+    public int getTag959() {
+        return 1;
+    }
 
 }

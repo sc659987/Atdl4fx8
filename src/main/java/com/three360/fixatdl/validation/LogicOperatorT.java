@@ -18,7 +18,7 @@ import javax.xml.bind.annotation.XmlType;
  * The following schema fragment specifies the expected content contained within this class.
  * <p>
  * <p>
- * 
+ * <p>
  * <pre>
  * &lt;simpleType name="logicOperator_t">
  *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
@@ -34,17 +34,17 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum LogicOperatorT {
 
-	AND,
-	OR,
-	XOR,
-	NOT;
+    AND,
+    OR,
+    XOR,
+    NOT;
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
-	public static LogicOperatorT fromValue(String v) {
-		return valueOf(v);
-	}
+    public static LogicOperatorT fromValue(String v) {
+        return valueOf(v);
+    }
 
 }

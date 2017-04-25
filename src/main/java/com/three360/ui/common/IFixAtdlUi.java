@@ -11,51 +11,51 @@ import java.io.File;
  */
 public interface IFixAtdlUi<T> {
 
-	/***
-	 *
-	 */
-	T createStrategySelectionPanel();
+    /***
+     *
+     */
+    T createStrategySelectionPanel();
 
-	/***
-	 *
-	 * @return
-	 */
-	T createUi();
+    /***
+     *
+     * @return
+     */
+    T createUi();
 
-	/***
-	 *
-	 * @param file
-	 */
-	void parseFixAtdlFile(File file);
+    /***
+     *
+     * @param file
+     */
+    void parseFixAtdlFile(File file);
 
-	/***
-	 * what to validate in a strategy
-	 *
-	 * @return
-	 */
-	void validate(StrategyT strategyT);
+    /***
+     * what to validate in a strategy
+     *
+     * @return
+     */
+    void validate(StrategyT strategyT);
 
-	/***
-	 *
-	 * @return
-	 */
-	StrategiesT getStrategies();
+    /***
+     *
+     * @return
+     */
+    StrategiesT getStrategies();
 
-	/***
-	 *
-	 */
-	void setSelectedStrategy(StrategyT strategyT);
+    /***
+     *
+     */
+    void setSelectedStrategy(StrategyT strategyT);
 
-	/***
-	 *
-	 * @return
-	 */
-	StrategyT getSelectedStrategy();
+    /***
+     *
+     * @return
+     */
+    StrategyT getSelectedStrategy();
 
-	/***
-	 *
-	 * @return
-	 */
-	Unmarshaller getUnmarshaller();
+    /***
+     *
+     * @return
+     */
+    Unmarshaller getUnmarshaller();
 
 }

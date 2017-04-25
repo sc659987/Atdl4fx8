@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlType;
  * The following schema fragment specifies the expected content contained within this class.
  * <p>
  * <p>
- * 
+ * <p>
  * <pre>
  * &lt;complexType name="Currency_t">
  *   &lt;complexContent>
@@ -36,35 +36,34 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Currency_t")
 public class CurrencyT
-		extends ParameterT {
+        extends ParameterT {
 
-	@XmlAttribute
-	protected String constValue;
+    @XmlAttribute
+    protected String constValue;
 
-	/**
-	 * Gets the value of the constValue property.
-	 *
-	 * @return possible object is
-	 *         {@link String }
-	 */
-	public String getConstValue() {
-		return constValue;
-	}
+    /**
+     * Gets the value of the constValue property.
+     *
+     * @return possible object is
+     * {@link String }
+     */
+    public String getConstValue() {
+        return constValue;
+    }
 
-	/**
-	 * Sets the value of the constValue property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link String }
-	 */
-	public void setConstValue(String value) {
-		this.constValue = value;
-	}
+    /**
+     * Sets the value of the constValue property.
+     *
+     * @param value allowed object is
+     *              {@link String }
+     */
+    public void setConstValue(String value) {
+        this.constValue = value;
+    }
 
-	@Override
-	public int getTag959() {
-		return 16;
-	}
+    @Override
+    public int getTag959() {
+        return 16;
+    }
 
 }

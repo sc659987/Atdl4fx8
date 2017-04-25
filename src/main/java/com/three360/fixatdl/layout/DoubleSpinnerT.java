@@ -20,7 +20,7 @@ import javax.xml.bind.annotation.XmlType;
  * The following schema fragment specifies the expected content contained within this class.
  * <p>
  * <p>
- * 
+ * <p>
  * <pre>
  * &lt;complexType name="DoubleSpinner_t">
  *   &lt;complexContent>
@@ -52,122 +52,117 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "DoubleSpinner_t")
 public class DoubleSpinnerT
-		extends ControlT {
+        extends ControlT {
 
-	@XmlAttribute
-	protected Double initValue;
-	@XmlAttribute
-	protected Double innerIncrement;
-	@XmlAttribute
-	protected String innerIncrementPolicy;
-	@XmlAttribute
-	protected Double outerIncrement;
-	@XmlAttribute
-	protected String outerIncrementPolicy;
+    @XmlAttribute
+    protected Double initValue;
+    @XmlAttribute
+    protected Double innerIncrement;
+    @XmlAttribute
+    protected String innerIncrementPolicy;
+    @XmlAttribute
+    protected Double outerIncrement;
+    @XmlAttribute
+    protected String outerIncrementPolicy;
 
-	/**
-	 * Gets the value of the initValue property.
-	 *
-	 * @return possible object is
-	 *         {@link Double }
-	 */
-	public Double getInitValue() {
-		return initValue;
-	}
+    /**
+     * Gets the value of the initValue property.
+     *
+     * @return possible object is
+     * {@link Double }
+     */
+    public Double getInitValue() {
+        return initValue;
+    }
 
-	/**
-	 * Sets the value of the initValue property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link Double }
-	 */
-	public void setInitValue(Double value) {
-		this.initValue = value;
-	}
+    /**
+     * Sets the value of the initValue property.
+     *
+     * @param value allowed object is
+     *              {@link Double }
+     */
+    public void setInitValue(Double value) {
+        this.initValue = value;
+    }
 
-	/**
-	 * Gets the value of the innerIncrement property.
-	 *
-	 * @return possible object is
-	 *         {@link Double }
-	 */
-	public Double getInnerIncrement() {
-		return innerIncrement;
-	}
+    /**
+     * Gets the value of the innerIncrement property.
+     *
+     * @return possible object is
+     * {@link Double }
+     */
+    public Double getInnerIncrement() {
+        return innerIncrement;
+    }
 
-	/**
-	 * Sets the value of the innerIncrement property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link Double }
-	 */
-	public void setInnerIncrement(Double value) {
-		this.innerIncrement = value;
-	}
+    /**
+     * Sets the value of the innerIncrement property.
+     *
+     * @param value allowed object is
+     *              {@link Double }
+     */
+    public void setInnerIncrement(Double value) {
+        this.innerIncrement = value;
+    }
 
-	/**
-	 * Gets the value of the innerIncrementPolicy property.
-	 *
-	 * @return possible object is
-	 *         {@link String }
-	 */
-	public String getInnerIncrementPolicy() {
-		return innerIncrementPolicy;
-	}
+    /**
+     * Gets the value of the innerIncrementPolicy property.
+     *
+     * @return possible object is
+     * {@link String }
+     */
+    public String getInnerIncrementPolicy() {
+        return innerIncrementPolicy;
+    }
 
-	/**
-	 * Sets the value of the innerIncrementPolicy property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link String }
-	 */
-	public void setInnerIncrementPolicy(String value) {
-		this.innerIncrementPolicy = value;
-	}
+    /**
+     * Sets the value of the innerIncrementPolicy property.
+     *
+     * @param value allowed object is
+     *              {@link String }
+     */
+    public void setInnerIncrementPolicy(String value) {
+        this.innerIncrementPolicy = value;
+    }
 
-	/**
-	 * Gets the value of the outerIncrement property.
-	 *
-	 * @return possible object is
-	 *         {@link Double }
-	 */
-	public Double getOuterIncrement() {
-		return outerIncrement;
-	}
+    /**
+     * Gets the value of the outerIncrement property.
+     *
+     * @return possible object is
+     * {@link Double }
+     */
+    public Double getOuterIncrement() {
+        return outerIncrement;
+    }
 
-	/**
-	 * Sets the value of the outerIncrement property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link Double }
-	 */
-	public void setOuterIncrement(Double value) {
-		this.outerIncrement = value;
-	}
+    /**
+     * Sets the value of the outerIncrement property.
+     *
+     * @param value allowed object is
+     *              {@link Double }
+     */
+    public void setOuterIncrement(Double value) {
+        this.outerIncrement = value;
+    }
 
-	/**
-	 * Gets the value of the outerIncrementPolicy property.
-	 *
-	 * @return possible object is
-	 *         {@link String }
-	 */
-	public String getOuterIncrementPolicy() {
-		return outerIncrementPolicy;
-	}
+    /**
+     * Gets the value of the outerIncrementPolicy property.
+     *
+     * @return possible object is
+     * {@link String }
+     */
+    public String getOuterIncrementPolicy() {
+        return outerIncrementPolicy;
+    }
 
-	/**
-	 * Sets the value of the outerIncrementPolicy property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link String }
-	 */
-	public void setOuterIncrementPolicy(String value) {
-		this.outerIncrementPolicy = value;
-	}
+    /**
+     * Sets the value of the outerIncrementPolicy property.
+     *
+     * @param value allowed object is
+     *              {@link String }
+     */
+    public void setOuterIncrementPolicy(String value) {
+        this.outerIncrementPolicy = value;
+    }
 
 }

@@ -8,36 +8,36 @@ import com.three360.fixatdl.core.StrategyT;
  */
 public interface IFixAtdlStrategyUi<T> {
 
-	/***
-	 *
-	 * @param strategy
-	 */
-	void setStrategy(StrategyT strategy);
+    /***
+     *
+     * @param strategy
+     */
+    void setStrategy(StrategyT strategy);
 
-	/***
-	 *
-	 * @return
-	 */
-	StrategyT getStrategy();
+    /***
+     *
+     * @return
+     */
+    StrategyT getStrategy();
 
-	/***
-	 *
-	 * @return
-	 */
-	T getLayout();
+    /***
+     *
+     * @return
+     */
+    T getLayout();
 
-	/***
-	 *
-	 * @param t
-	 * @return
-	 */
-	T getLayoutWithFlowControlRules(T t);
+    /***
+     *
+     * @param t
+     * @return
+     */
+    T getLayoutWithFlowControlRules(T t);
 
-	/***
-	 *
-	 * @param t
-	 * @return
-	 */
-	T getLayoutWithValidationRules(T t);
+    /***
+     *
+     * @param t
+     * @return
+     */
+    T getLayoutWithValidationRules(T t);
 
 }

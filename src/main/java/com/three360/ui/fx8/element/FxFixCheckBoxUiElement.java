@@ -11,7 +11,7 @@ import java.util.Collections;
 import java.util.List;
 
 // TODO check with checkbox group
-public class FxFixCheckBoxUiElement implements IFixCheckBoxUiElement<CheckBox, String> {
+public class FxFixCheckBoxUiElement implements IFixCheckBoxUiElement<CheckBox, Boolean> {
 
     private CheckBoxT checkBoxT;
     private CheckBox checkBox;
@@ -69,16 +69,16 @@ public class FxFixCheckBoxUiElement implements IFixCheckBoxUiElement<CheckBox, S
     }
 
     @Override
-    public String getValue() {
-        return checkBox.isSelected() ? this.checkBoxT.getCheckedEnumRef() : this.checkBoxT.getUncheckedEnumRef();
+    public Boolean getValue() {
+        return this.checkBox.isSelected();
     }
 
     @Override
-    public void setValue(String s) {
+    public void setValue(Boolean value) {
+        this.checkBox.setSelected(value);
         if (this.checkBoxT.getCheckedEnumRef() != null)
-            this.checkBox.setSelected(this.checkBoxT.getCheckedEnumRef().equals(s));
-        setFieldValueToParameter(this.checkBox.isSelected() ? this.checkBoxT.getCheckedEnumRef() : this.checkBoxT.getUncheckedEnumRef(),
-                this.parameterT);
+            setFieldValueToParameter(this.checkBox.isSelected() ? this.checkBoxT.getCheckedEnumRef() : this.checkBoxT.getUncheckedEnumRef(),
+                    this.parameterT);
 
     }
 

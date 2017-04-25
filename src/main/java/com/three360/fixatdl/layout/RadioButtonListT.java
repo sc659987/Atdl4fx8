@@ -19,7 +19,7 @@ import java.util.List;
  * The following schema fragment specifies the expected content contained within this class.
  * <p>
  * <p>
- * 
+ * <p>
  * <pre>
  * &lt;complexType name="RadioButtonList_t">
  *   &lt;complexContent>
@@ -36,87 +36,85 @@ import java.util.List;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "RadioButtonList_t", propOrder = {
-		"listItem"
+        "listItem"
 })
 public class RadioButtonListT
-		extends ControlT {
+        extends ControlT {
 
-	@XmlElement(name = "ListItem")
-	protected List<ListItemT> listItem;
-	@XmlAttribute
-	protected String initValue;
-	@XmlAttribute
-	protected PanelOrientationT orientation;
+    @XmlElement(name = "ListItem")
+    protected List<ListItemT> listItem;
+    @XmlAttribute
+    protected String initValue;
+    @XmlAttribute
+    protected PanelOrientationT orientation;
 
-	/**
-	 * Gets the value of the listItem property.
-	 * <p>
-	 * <p>
-	 * This accessor method returns a reference to the live list,
-	 * not a snapshot. Therefore any modification you make to the
-	 * returned list will be present inside the JAXB object.
-	 * This is why there is not a <CODE>set</CODE> method for the listItem property.
-	 * <p>
-	 * <p>
-	 * For example, to registerControlFlow a new item, do as follows:
-	 * <p>
-	 * 
-	 * <pre>
-	 * getListItem().registerControlFlow(newItem);
-	 * </pre>
-	 * <p>
-	 * <p>
-	 * <p>
-	 * Objects of the following type(s) are allowed in the list
-	 * {@link ListItemT }
-	 */
-	public List<ListItemT> getListItem() {
-		if (listItem == null) {
-			listItem = new ArrayList<ListItemT>();
-		}
-		return this.listItem;
-	}
+    /**
+     * Gets the value of the listItem property.
+     * <p>
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the listItem property.
+     * <p>
+     * <p>
+     * For example, to registerControlFlow a new item, do as follows:
+     * <p>
+     * <p>
+     * <pre>
+     * getListItem().registerControlFlow(newItem);
+     * </pre>
+     * <p>
+     * <p>
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link ListItemT }
+     */
+    public List<ListItemT> getListItem() {
+        if (listItem == null) {
+            listItem = new ArrayList<ListItemT>();
+        }
+        return this.listItem;
+    }
 
-	/**
-	 * Gets the value of the initValue property.
-	 *
-	 * @return possible object is
-	 *         {@link String }
-	 */
-	public String getInitValue() {
-		return initValue;
-	}
+    /**
+     * Gets the value of the initValue property.
+     *
+     * @return possible object is
+     * {@link String }
+     */
+    public String getInitValue() {
+        return initValue;
+    }
 
-	/**
-	 * Sets the value of the initValue property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link String }
-	 */
-	public void setInitValue(String value) {
-		this.initValue = value;
-	}
+    /**
+     * Sets the value of the initValue property.
+     *
+     * @param value allowed object is
+     *              {@link String }
+     */
+    public void setInitValue(String value) {
+        this.initValue = value;
+    }
 
-	/**
-	 * Gets the value of the orientation property.
-	 *
-	 * @return possible object is
-	 *         {@link PanelOrientationT }
-	 */
-	public PanelOrientationT getOrientation() {
-		return orientation;
-	}
+    /**
+     * Gets the value of the orientation property.
+     *
+     * @return possible object is
+     * {@link PanelOrientationT }
+     */
+    public PanelOrientationT getOrientation() {
+        return orientation;
+    }
 
-	/**
-	 * Sets the value of the orientation property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link PanelOrientationT }
-	 */
-	public void setOrientation(PanelOrientationT value) {
-		this.orientation = value;
-	}
+    /**
+     * Sets the value of the orientation property.
+     *
+     * @param value allowed object is
+     *              {@link PanelOrientationT }
+     */
+    public void setOrientation(PanelOrientationT value) {
+        this.orientation = value;
+    }
 
 }

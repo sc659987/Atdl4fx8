@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlType;
  * The following schema fragment specifies the expected content contained within this class.
  * <p>
  * <p>
- * 
+ * <p>
  * <pre>
  * &lt;complexType name="Int_t">
  *   &lt;complexContent>
@@ -38,81 +38,78 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Int_t")
 public class IntT
-		extends ParameterT {
+        extends ParameterT {
 
-	@XmlAttribute
-	protected Integer minValue;
-	@XmlAttribute
-	protected Integer maxValue;
-	@XmlAttribute
-	protected Integer constValue;
+    @XmlAttribute
+    protected Integer minValue;
+    @XmlAttribute
+    protected Integer maxValue;
+    @XmlAttribute
+    protected Integer constValue;
 
-	/**
-	 * Gets the value of the minValue property.
-	 *
-	 * @return possible object is
-	 *         {@link Integer }
-	 */
-	public Integer getMinValue() {
-		return minValue;
-	}
+    /**
+     * Gets the value of the minValue property.
+     *
+     * @return possible object is
+     * {@link Integer }
+     */
+    public Integer getMinValue() {
+        return minValue;
+    }
 
-	/**
-	 * Sets the value of the minValue property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link Integer }
-	 */
-	public void setMinValue(Integer value) {
-		this.minValue = value;
-	}
+    /**
+     * Sets the value of the minValue property.
+     *
+     * @param value allowed object is
+     *              {@link Integer }
+     */
+    public void setMinValue(Integer value) {
+        this.minValue = value;
+    }
 
-	/**
-	 * Gets the value of the maxValue property.
-	 *
-	 * @return possible object is
-	 *         {@link Integer }
-	 */
-	public Integer getMaxValue() {
-		return maxValue;
-	}
+    /**
+     * Gets the value of the maxValue property.
+     *
+     * @return possible object is
+     * {@link Integer }
+     */
+    public Integer getMaxValue() {
+        return maxValue;
+    }
 
-	/**
-	 * Sets the value of the maxValue property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link Integer }
-	 */
-	public void setMaxValue(Integer value) {
-		this.maxValue = value;
-	}
+    /**
+     * Sets the value of the maxValue property.
+     *
+     * @param value allowed object is
+     *              {@link Integer }
+     */
+    public void setMaxValue(Integer value) {
+        this.maxValue = value;
+    }
 
-	/**
-	 * Gets the value of the constValue property.
-	 *
-	 * @return possible object is
-	 *         {@link Integer }
-	 */
-	public Integer getConstValue() {
-		return constValue;
-	}
+    /**
+     * Gets the value of the constValue property.
+     *
+     * @return possible object is
+     * {@link Integer }
+     */
+    public Integer getConstValue() {
+        return constValue;
+    }
 
-	/**
-	 * Sets the value of the constValue property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link Integer }
-	 */
-	public void setConstValue(Integer value) {
-		this.constValue = value;
-	}
+    /**
+     * Sets the value of the constValue property.
+     *
+     * @param value allowed object is
+     *              {@link Integer }
+     */
+    public void setConstValue(Integer value) {
+        this.constValue = value;
+    }
 
-	@Override
-	public int getTag959() {
-		return 1;
-	}
+    @Override
+    public int getTag959() {
+        return 1;
+    }
 
 }

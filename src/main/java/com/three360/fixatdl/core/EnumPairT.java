@@ -18,7 +18,7 @@ import java.math.BigInteger;
  * The following schema fragment specifies the expected content contained within this class.
  * <p>
  * <p>
- * 
+ * <p>
  * <pre>
  * &lt;complexType name="EnumPair_t">
  *   &lt;complexContent>
@@ -42,102 +42,98 @@ import java.math.BigInteger;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "EnumPair_t", propOrder = {
-		"description"
+        "description"
 })
 public class EnumPairT {
 
-	@XmlElement(name = "Description")
-	protected String description;
-	@XmlAttribute(required = true)
-	protected String enumID;
-	@XmlAttribute(required = true)
-	protected String wireValue;
-	@XmlAttribute
-	@XmlSchemaType(name = "nonNegativeInteger")
-	protected BigInteger index;
+    @XmlElement(name = "Description")
+    protected String description;
+    @XmlAttribute(required = true)
+    protected String enumID;
+    @XmlAttribute(required = true)
+    protected String wireValue;
+    @XmlAttribute
+    @XmlSchemaType(name = "nonNegativeInteger")
+    protected BigInteger index;
 
-	/**
-	 * Description of the EnumPair in a given collection of EnumPairs.
-	 *
-	 * @return possible object is
-	 *         {@link String }
-	 */
-	public String getDescription() {
-		return description;
-	}
+    /**
+     * Description of the EnumPair in a given collection of EnumPairs.
+     *
+     * @return possible object is
+     * {@link String }
+     */
+    public String getDescription() {
+        return description;
+    }
 
-	/**
-	 * Sets the value of the description property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link String }
-	 */
-	public void setDescription(String value) {
-		this.description = value;
-	}
+    /**
+     * Sets the value of the description property.
+     *
+     * @param value allowed object is
+     *              {@link String }
+     */
+    public void setDescription(String value) {
+        this.description = value;
+    }
 
-	/**
-	 * Gets the value of the enumID property.
-	 *
-	 * @return possible object is
-	 *         {@link String }
-	 */
-	public String getEnumID() {
-		return enumID;
-	}
+    /**
+     * Gets the value of the enumID property.
+     *
+     * @return possible object is
+     * {@link String }
+     */
+    public String getEnumID() {
+        return enumID;
+    }
 
-	/**
-	 * Sets the value of the enumID property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link String }
-	 */
-	public void setEnumID(String value) {
-		this.enumID = value;
-	}
+    /**
+     * Sets the value of the enumID property.
+     *
+     * @param value allowed object is
+     *              {@link String }
+     */
+    public void setEnumID(String value) {
+        this.enumID = value;
+    }
 
-	/**
-	 * Gets the value of the wireValue property.
-	 *
-	 * @return possible object is
-	 *         {@link String }
-	 */
-	public String getWireValue() {
-		return wireValue;
-	}
+    /**
+     * Gets the value of the wireValue property.
+     *
+     * @return possible object is
+     * {@link String }
+     */
+    public String getWireValue() {
+        return wireValue;
+    }
 
-	/**
-	 * Sets the value of the wireValue property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link String }
-	 */
-	public void setWireValue(String value) {
-		this.wireValue = value;
-	}
+    /**
+     * Sets the value of the wireValue property.
+     *
+     * @param value allowed object is
+     *              {@link String }
+     */
+    public void setWireValue(String value) {
+        this.wireValue = value;
+    }
 
-	/**
-	 * Gets the value of the index property.
-	 *
-	 * @return possible object is
-	 *         {@link BigInteger }
-	 */
-	public BigInteger getIndex() {
-		return index;
-	}
+    /**
+     * Gets the value of the index property.
+     *
+     * @return possible object is
+     * {@link BigInteger }
+     */
+    public BigInteger getIndex() {
+        return index;
+    }
 
-	/**
-	 * Sets the value of the index property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link BigInteger }
-	 */
-	public void setIndex(BigInteger value) {
-		this.index = value;
-	}
+    /**
+     * Sets the value of the index property.
+     *
+     * @param value allowed object is
+     *              {@link BigInteger }
+     */
+    public void setIndex(BigInteger value) {
+        this.index = value;
+    }
 
 }

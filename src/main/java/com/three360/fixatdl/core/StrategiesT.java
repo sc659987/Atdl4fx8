@@ -25,7 +25,7 @@ import java.util.List;
  * The following schema fragment specifies the expected content contained within this class.
  * <p>
  * <p>
- * 
+ * <p>
  * <pre>
  * &lt;complexType name="Strategies_t">
  *   &lt;complexContent>
@@ -48,242 +48,235 @@ import java.util.List;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Strategies_t", propOrder = {
-		"description",
-		"edit",
-		"strategy"
+        "description",
+        "edit",
+        "strategy"
 })
 public class StrategiesT {
 
-	@XmlElement(name = "Description")
-	protected String description;
-	@XmlElement(name = "Edit", namespace = "http://www.fixprotocol.org/FIXatdl-1-1/Validation")
-	protected List<EditT> edit;
-	@XmlElement(name = "Strategy", required = true)
-	protected List<StrategyT> strategy;
-	@XmlAttribute(required = true)
-	@XmlSchemaType(name = "positiveInteger")
-	protected BigInteger strategyIdentifierTag;
-	@XmlAttribute
-	@XmlSchemaType(name = "positiveInteger")
-	protected BigInteger versionIdentifierTag;
-	@XmlAttribute
-	@XmlSchemaType(name = "positiveInteger")
-	protected BigInteger draftFlagIdentifierTag;
-	@XmlAttribute
-	protected Boolean changeStrategyOnCxlRpl;
-	@XmlAttribute
-	protected String imageLocation;
-	@XmlAttribute
-	protected Boolean tag957Support;
+    @XmlElement(name = "Description")
+    protected String description;
+    @XmlElement(name = "Edit", namespace = "http://www.fixprotocol.org/FIXatdl-1-1/Validation")
+    protected List<EditT> edit;
+    @XmlElement(name = "Strategy", required = true)
+    protected List<StrategyT> strategy;
+    @XmlAttribute(required = true)
+    @XmlSchemaType(name = "positiveInteger")
+    protected BigInteger strategyIdentifierTag;
+    @XmlAttribute
+    @XmlSchemaType(name = "positiveInteger")
+    protected BigInteger versionIdentifierTag;
+    @XmlAttribute
+    @XmlSchemaType(name = "positiveInteger")
+    protected BigInteger draftFlagIdentifierTag;
+    @XmlAttribute
+    protected Boolean changeStrategyOnCxlRpl;
+    @XmlAttribute
+    protected String imageLocation;
+    @XmlAttribute
+    protected Boolean tag957Support;
 
-	/**
-	 * Description of the set of strategies or a description of the firm providing them.
-	 *
-	 * @return possible object is
-	 *         {@link String }
-	 */
-	public String getDescription() {
-		return description;
-	}
+    /**
+     * Description of the set of strategies or a description of the firm providing them.
+     *
+     * @return possible object is
+     * {@link String }
+     */
+    public String getDescription() {
+        return description;
+    }
 
-	/**
-	 * Sets the value of the description property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link String }
-	 */
-	public void setDescription(String value) {
-		this.description = value;
-	}
+    /**
+     * Sets the value of the description property.
+     *
+     * @param value allowed object is
+     *              {@link String }
+     */
+    public void setDescription(String value) {
+        this.description = value;
+    }
 
-	/**
-	 * Global rule definition. When used in this capacity Edit.id is a required attribute. Individual strategies may incorporate these rules by a reference to
-	 * their 'id' attributes.Gets the value of the edit property.
-	 * <p>
-	 * <p>
-	 * This accessor method returns a reference to the live list,
-	 * not a snapshot. Therefore any modification you make to the
-	 * returned list will be present inside the JAXB object.
-	 * This is why there is not a <CODE>set</CODE> method for the edit property.
-	 * <p>
-	 * <p>
-	 * For example, to registerControlFlow a new item, do as follows:
-	 * <p>
-	 * 
-	 * <pre>
-	 * getEdit().registerControlFlow(newItem);
-	 * </pre>
-	 * <p>
-	 * <p>
-	 * <p>
-	 * Objects of the following type(s) are allowed in the list
-	 * {@link EditT }
-	 */
-	public List<EditT> getEdit() {
-		if (edit == null) {
-			edit = new ArrayList<EditT>();
-		}
-		return this.edit;
-	}
+    /**
+     * Global rule definition. When used in this capacity Edit.id is a required attribute. Individual strategies may incorporate these rules by a reference to
+     * their 'id' attributes.Gets the value of the edit property.
+     * <p>
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the edit property.
+     * <p>
+     * <p>
+     * For example, to registerControlFlow a new item, do as follows:
+     * <p>
+     * <p>
+     * <pre>
+     * getEdit().registerControlFlow(newItem);
+     * </pre>
+     * <p>
+     * <p>
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link EditT }
+     */
+    public List<EditT> getEdit() {
+        if (edit == null) {
+            edit = new ArrayList<EditT>();
+        }
+        return this.edit;
+    }
 
-	/**
-	 * Gets the value of the strategy property.
-	 * <p>
-	 * <p>
-	 * This accessor method returns a reference to the live list,
-	 * not a snapshot. Therefore any modification you make to the
-	 * returned list will be present inside the JAXB object.
-	 * This is why there is not a <CODE>set</CODE> method for the strategy property.
-	 * <p>
-	 * <p>
-	 * For example, to registerControlFlow a new item, do as follows:
-	 * <p>
-	 * 
-	 * <pre>
-	 * getStrategy().registerControlFlow(newItem);
-	 * </pre>
-	 * <p>
-	 * <p>
-	 * <p>
-	 * Objects of the following type(s) are allowed in the list
-	 * {@link StrategyT }
-	 */
-	public List<StrategyT> getStrategy() {
-		if (strategy == null) {
-			strategy = new ArrayList<StrategyT>();
-		}
-		return this.strategy;
-	}
+    /**
+     * Gets the value of the strategy property.
+     * <p>
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the strategy property.
+     * <p>
+     * <p>
+     * For example, to registerControlFlow a new item, do as follows:
+     * <p>
+     * <p>
+     * <pre>
+     * getStrategy().registerControlFlow(newItem);
+     * </pre>
+     * <p>
+     * <p>
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link StrategyT }
+     */
+    public List<StrategyT> getStrategy() {
+        if (strategy == null) {
+            strategy = new ArrayList<StrategyT>();
+        }
+        return this.strategy;
+    }
 
-	/**
-	 * Gets the value of the strategyIdentifierTag property.
-	 *
-	 * @return possible object is
-	 *         {@link BigInteger }
-	 */
-	public BigInteger getStrategyIdentifierTag() {
-		return strategyIdentifierTag;
-	}
+    /**
+     * Gets the value of the strategyIdentifierTag property.
+     *
+     * @return possible object is
+     * {@link BigInteger }
+     */
+    public BigInteger getStrategyIdentifierTag() {
+        return strategyIdentifierTag;
+    }
 
-	/**
-	 * Sets the value of the strategyIdentifierTag property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link BigInteger }
-	 */
-	public void setStrategyIdentifierTag(BigInteger value) {
-		this.strategyIdentifierTag = value;
-	}
+    /**
+     * Sets the value of the strategyIdentifierTag property.
+     *
+     * @param value allowed object is
+     *              {@link BigInteger }
+     */
+    public void setStrategyIdentifierTag(BigInteger value) {
+        this.strategyIdentifierTag = value;
+    }
 
-	/**
-	 * Gets the value of the versionIdentifierTag property.
-	 *
-	 * @return possible object is
-	 *         {@link BigInteger }
-	 */
-	public BigInteger getVersionIdentifierTag() {
-		return versionIdentifierTag;
-	}
+    /**
+     * Gets the value of the versionIdentifierTag property.
+     *
+     * @return possible object is
+     * {@link BigInteger }
+     */
+    public BigInteger getVersionIdentifierTag() {
+        return versionIdentifierTag;
+    }
 
-	/**
-	 * Sets the value of the versionIdentifierTag property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link BigInteger }
-	 */
-	public void setVersionIdentifierTag(BigInteger value) {
-		this.versionIdentifierTag = value;
-	}
+    /**
+     * Sets the value of the versionIdentifierTag property.
+     *
+     * @param value allowed object is
+     *              {@link BigInteger }
+     */
+    public void setVersionIdentifierTag(BigInteger value) {
+        this.versionIdentifierTag = value;
+    }
 
-	/**
-	 * Gets the value of the draftFlagIdentifierTag property.
-	 *
-	 * @return possible object is
-	 *         {@link BigInteger }
-	 */
-	public BigInteger getDraftFlagIdentifierTag() {
-		return draftFlagIdentifierTag;
-	}
+    /**
+     * Gets the value of the draftFlagIdentifierTag property.
+     *
+     * @return possible object is
+     * {@link BigInteger }
+     */
+    public BigInteger getDraftFlagIdentifierTag() {
+        return draftFlagIdentifierTag;
+    }
 
-	/**
-	 * Sets the value of the draftFlagIdentifierTag property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link BigInteger }
-	 */
-	public void setDraftFlagIdentifierTag(BigInteger value) {
-		this.draftFlagIdentifierTag = value;
-	}
+    /**
+     * Sets the value of the draftFlagIdentifierTag property.
+     *
+     * @param value allowed object is
+     *              {@link BigInteger }
+     */
+    public void setDraftFlagIdentifierTag(BigInteger value) {
+        this.draftFlagIdentifierTag = value;
+    }
 
-	/**
-	 * Gets the value of the changeStrategyOnCxlRpl property.
-	 *
-	 * @return possible object is
-	 *         {@link Boolean }
-	 */
-	public Boolean isChangeStrategyOnCxlRpl() {
-		return changeStrategyOnCxlRpl;
-	}
+    /**
+     * Gets the value of the changeStrategyOnCxlRpl property.
+     *
+     * @return possible object is
+     * {@link Boolean }
+     */
+    public Boolean isChangeStrategyOnCxlRpl() {
+        return changeStrategyOnCxlRpl;
+    }
 
-	/**
-	 * Sets the value of the changeStrategyOnCxlRpl property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link Boolean }
-	 */
-	public void setChangeStrategyOnCxlRpl(Boolean value) {
-		this.changeStrategyOnCxlRpl = value;
-	}
+    /**
+     * Sets the value of the changeStrategyOnCxlRpl property.
+     *
+     * @param value allowed object is
+     *              {@link Boolean }
+     */
+    public void setChangeStrategyOnCxlRpl(Boolean value) {
+        this.changeStrategyOnCxlRpl = value;
+    }
 
-	/**
-	 * Gets the value of the imageLocation property.
-	 *
-	 * @return possible object is
-	 *         {@link String }
-	 */
-	public String getImageLocation() {
-		return imageLocation;
-	}
+    /**
+     * Gets the value of the imageLocation property.
+     *
+     * @return possible object is
+     * {@link String }
+     */
+    public String getImageLocation() {
+        return imageLocation;
+    }
 
-	/**
-	 * Sets the value of the imageLocation property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link String }
-	 */
-	public void setImageLocation(String value) {
-		this.imageLocation = value;
-	}
+    /**
+     * Sets the value of the imageLocation property.
+     *
+     * @param value allowed object is
+     *              {@link String }
+     */
+    public void setImageLocation(String value) {
+        this.imageLocation = value;
+    }
 
-	/**
-	 * Gets the value of the tag957Support property.
-	 *
-	 * @return possible object is
-	 *         {@link Boolean }
-	 */
-	public boolean isTag957Support() {
-		if (tag957Support == null) {
-			return false;
-		} else {
-			return tag957Support;
-		}
-	}
+    /**
+     * Gets the value of the tag957Support property.
+     *
+     * @return possible object is
+     * {@link Boolean }
+     */
+    public boolean isTag957Support() {
+        if (tag957Support == null) {
+            return false;
+        } else {
+            return tag957Support;
+        }
+    }
 
-	/**
-	 * Sets the value of the tag957Support property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link Boolean }
-	 */
-	public void setTag957Support(Boolean value) {
-		this.tag957Support = value;
-	}
+    /**
+     * Sets the value of the tag957Support property.
+     *
+     * @param value allowed object is
+     *              {@link Boolean }
+     */
+    public void setTag957Support(Boolean value) {
+        this.tag957Support = value;
+    }
 
 }

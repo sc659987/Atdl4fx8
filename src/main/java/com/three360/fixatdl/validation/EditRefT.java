@@ -20,7 +20,7 @@ import javax.xml.bind.annotation.XmlType;
  * The following schema fragment specifies the expected content contained within this class.
  * <p>
  * <p>
- * 
+ * <p>
  * <pre>
  * &lt;complexType name="EditRef_t">
  *   &lt;complexContent>
@@ -35,28 +35,27 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "EditRef_t")
 public class EditRefT {
 
-	@XmlAttribute(required = true)
-	protected String id;
+    @XmlAttribute(required = true)
+    protected String id;
 
-	/**
-	 * Gets the value of the id property.
-	 *
-	 * @return possible object is
-	 *         {@link String }
-	 */
-	public String getId() {
-		return id;
-	}
+    /**
+     * Gets the value of the id property.
+     *
+     * @return possible object is
+     * {@link String }
+     */
+    public String getId() {
+        return id;
+    }
 
-	/**
-	 * Sets the value of the id property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link String }
-	 */
-	public void setId(String value) {
-		this.id = value;
-	}
+    /**
+     * Sets the value of the id property.
+     *
+     * @param value allowed object is
+     *              {@link String }
+     */
+    public void setId(String value) {
+        this.id = value;
+    }
 
 }

@@ -7,14 +7,14 @@ import java.util.Map;
 
 public class FieldToComparableMapperControlCache implements FieldToComparableMapperCache {
 
-	private Map<String, IFixUiElement> allIFixUiElements;
+    private Map<String, IFixUiElement> allIFixUiElements;
 
-	public FieldToComparableMapperControlCache(Map<String, IFixUiElement> allIFixUiElements) {
-		this.allIFixUiElements = allIFixUiElements;
-	}
+    public FieldToComparableMapperControlCache(Map<String, IFixUiElement> allIFixUiElements) {
+        this.allIFixUiElements = allIFixUiElements;
+    }
 
-	@Override
-	public Comparable get(String controlId) {
-		return controlId != null ? allIFixUiElements.get(controlId).getValue() : null;
-	}
+    @Override
+    public Comparable get(String controlId) {
+        return controlId != null ? allIFixUiElements.get(controlId).getValue() : null;
+    }
 }

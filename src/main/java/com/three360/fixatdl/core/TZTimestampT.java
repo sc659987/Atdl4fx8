@@ -20,7 +20,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * The following schema fragment specifies the expected content contained within this class.
  * <p>
  * <p>
- * 
+ * <p>
  * <pre>
  * &lt;complexType name="TZTimestamp_t">
  *   &lt;complexContent>
@@ -36,84 +36,81 @@ import javax.xml.datatype.XMLGregorianCalendar;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "TZTimestamp_t")
 public class TZTimestampT
-		extends ParameterT {
+        extends ParameterT {
 
-	@XmlAttribute
-	@XmlSchemaType(name = "time")
-	protected XMLGregorianCalendar minValue;
-	@XmlAttribute
-	@XmlSchemaType(name = "time")
-	protected XMLGregorianCalendar maxValue;
-	@XmlAttribute
-	@XmlSchemaType(name = "time")
-	protected XMLGregorianCalendar constValue;
+    @XmlAttribute
+    @XmlSchemaType(name = "time")
+    protected XMLGregorianCalendar minValue;
+    @XmlAttribute
+    @XmlSchemaType(name = "time")
+    protected XMLGregorianCalendar maxValue;
+    @XmlAttribute
+    @XmlSchemaType(name = "time")
+    protected XMLGregorianCalendar constValue;
 
-	/**
-	 * Gets the value of the minValue property.
-	 *
-	 * @return possible object is
-	 *         {@link XMLGregorianCalendar }
-	 */
-	public XMLGregorianCalendar getMinValue() {
-		return minValue;
-	}
+    /**
+     * Gets the value of the minValue property.
+     *
+     * @return possible object is
+     * {@link XMLGregorianCalendar }
+     */
+    public XMLGregorianCalendar getMinValue() {
+        return minValue;
+    }
 
-	/**
-	 * Sets the value of the minValue property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link XMLGregorianCalendar }
-	 */
-	public void setMinValue(XMLGregorianCalendar value) {
-		this.minValue = value;
-	}
+    /**
+     * Sets the value of the minValue property.
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
+     */
+    public void setMinValue(XMLGregorianCalendar value) {
+        this.minValue = value;
+    }
 
-	/**
-	 * Gets the value of the maxValue property.
-	 *
-	 * @return possible object is
-	 *         {@link XMLGregorianCalendar }
-	 */
-	public XMLGregorianCalendar getMaxValue() {
-		return maxValue;
-	}
+    /**
+     * Gets the value of the maxValue property.
+     *
+     * @return possible object is
+     * {@link XMLGregorianCalendar }
+     */
+    public XMLGregorianCalendar getMaxValue() {
+        return maxValue;
+    }
 
-	/**
-	 * Sets the value of the maxValue property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link XMLGregorianCalendar }
-	 */
-	public void setMaxValue(XMLGregorianCalendar value) {
-		this.maxValue = value;
-	}
+    /**
+     * Sets the value of the maxValue property.
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
+     */
+    public void setMaxValue(XMLGregorianCalendar value) {
+        this.maxValue = value;
+    }
 
-	/**
-	 * Gets the value of the constValue property.
-	 *
-	 * @return possible object is
-	 *         {@link XMLGregorianCalendar }
-	 */
-	public XMLGregorianCalendar getConstValue() {
-		return constValue;
-	}
+    /**
+     * Gets the value of the constValue property.
+     *
+     * @return possible object is
+     * {@link XMLGregorianCalendar }
+     */
+    public XMLGregorianCalendar getConstValue() {
+        return constValue;
+    }
 
-	/**
-	 * Sets the value of the constValue property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link XMLGregorianCalendar }
-	 */
-	public void setConstValue(XMLGregorianCalendar value) {
-		this.constValue = value;
-	}
+    /**
+     * Sets the value of the constValue property.
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
+     */
+    public void setConstValue(XMLGregorianCalendar value) {
+        this.constValue = value;
+    }
 
-	@Override
-	public int getTag959() {
-		return 28;
-	}
+    @Override
+    public int getTag959() {
+        return 28;
+    }
 
 }

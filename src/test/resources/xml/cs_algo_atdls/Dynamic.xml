@@ -51,21 +51,16 @@ The filling strategy to be used on the order:&lt;br/&gt;
 
         <!--Description and Layout of GUI controls-->
         <lay:StrategyLayout>
-
             <lay:StrategyPanel collapsible="false" orientation="VERTICAL" title="">
-
                 <lay:StrategyPanel collapsible="false" orientation="VERTICAL">
-
                     <lay:Control xsi:type="lay:TextField_t" ID="NoWorseThan" label="No Worse Than Level" parameterRef="NoWorseThan"/>
-
                 </lay:StrategyPanel>
-
                 <lay:StrategyPanel collapsible="false" orientation="VERTICAL" title="Start Time (Default is NOW)">
                     <lay:StrategyPanel collapsible="false" orientation="HORIZONTAL">
-            				    <lay:StrategyPanel collapsible="false" orientation="VERTICAL" border="None">
+				        <lay:StrategyPanel collapsible="false" orientation="VERTICAL" border="None">
                             <lay:Control tooltip="Start at the selected time" ID="EnableStartTime" xsi:type="lay:CheckBox_t" initValue="false" label="At:"/>
                         </lay:StrategyPanel>
-            				    <lay:StrategyPanel collapsible="false" orientation="VERTICAL" border="None">
+    				    <lay:StrategyPanel collapsible="false" orientation="VERTICAL" border="None">
                           <lay:Control ID="StartTimeClock" xsi:type="lay:Clock_t" label="" parameterRef="AlgoStartTime">
                               <flow:StateRule enabled="false" value="{NULL}">
                                   <val:Edit field="EnableStartTime" operator="EQ" value="false"/>
@@ -74,14 +69,12 @@ The filling strategy to be used on the order:&lt;br/&gt;
                       </lay:StrategyPanel>
                     </lay:StrategyPanel>
                 </lay:StrategyPanel>
-
                 <lay:StrategyPanel collapsible="false" orientation="VERTICAL" title="Execution Style">
                     <lay:Control ID="execstyle" xsi:type="lay:Slider_t" label="" parameterRef="ExecutionStyle" initValue="Hybrid">
                         <lay:ListItem enumID="Hybrid" uiRep="Hybrid"/>
                         <lay:ListItem enumID="Aggressive" uiRep="Aggressive"/>
                         <lay:ListItem enumID="Iceberg" uiRep="Iceberg"/>
                     </lay:Control>
-
                     <lay:Control xsi:type="lay:DropDownList_t" ID="DisplayAmount" label="Display Amount" parameterRef="DisplayAmount">
                         <flow:StateRule enabled="false" value="{NULL}">
                             <val:Edit field="execstyle" operator="NE" value="Iceberg"/>
@@ -93,16 +86,12 @@ The filling strategy to be used on the order:&lt;br/&gt;
                         <lay:ListItem enumID="A5m" uiRep="5,000,000"/>
                     </lay:Control>
                 </lay:StrategyPanel>
-
                 <lay:StrategyPanel collapsible="false" orientation="VERTICAL" title="Good Until">
                     <lay:Control ID="GoodUntil" xsi:type="lay:RadioButtonList_t" parameterRef="TimeInForce" initValue="Day" orientation="VERTICAL">
                         <lay:ListItem uiRep="Day" enumID="Day"/>
                     </lay:Control>
-
                 </lay:StrategyPanel>
-
             </lay:StrategyPanel>
-
         </lay:StrategyLayout>
     </Strategy>
 </Strategies>

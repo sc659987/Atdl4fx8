@@ -4,10 +4,10 @@ import com.three360.fixatdl.layout.SingleSelectListT;
 
 public interface IFixSingleSelectListUiElement<T, K extends Comparable<?>> extends IFixUiElement<T, K> {
 
-	/****
-	 *
-	 * @param singleSelectListT
-	 */
-	void setSingleSelectList(SingleSelectListT singleSelectListT);
+    /****
+     *
+     * @param singleSelectListT
+     */
+    void setSingleSelectList(SingleSelectListT singleSelectListT);
 
 }

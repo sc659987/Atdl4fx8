@@ -29,27 +29,27 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
-	private final static QName _StateRule_QNAME = new QName("http://www.fixprotocol.org/FIXatdl-1-1/Flow", "StateRule");
+    private final static QName _StateRule_QNAME = new QName("http://www.fixprotocol.org/FIXatdl-1-1/Flow", "StateRule");
 
-	/**
-	 * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: org.atdl4j.fixatdl.flow
-	 */
-	public ObjectFactory() {
-	}
+    /**
+     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: org.atdl4j.fixatdl.flow
+     */
+    public ObjectFactory() {
+    }
 
-	/**
-	 * Create an instance of {@link StateRuleT }
-	 */
-	public StateRuleT createStateRuleT() {
-		return new StateRuleT();
-	}
+    /**
+     * Create an instance of {@link StateRuleT }
+     */
+    public StateRuleT createStateRuleT() {
+        return new StateRuleT();
+    }
 
-	/**
-	 * Create an instance of {@link JAXBElement }{@code <}{@link StateRuleT }{@code >}}
-	 */
-	@XmlElementDecl(namespace = "http://www.fixprotocol.org/FIXatdl-1-1/Flow", name = "StateRule")
-	public JAXBElement<StateRuleT> createStateRule(StateRuleT value) {
-		return new JAXBElement<StateRuleT>(_StateRule_QNAME, StateRuleT.class, null, value);
-	}
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link StateRuleT }{@code >}}
+     */
+    @XmlElementDecl(namespace = "http://www.fixprotocol.org/FIXatdl-1-1/Flow", name = "StateRule")
+    public JAXBElement<StateRuleT> createStateRule(StateRuleT value) {
+        return new JAXBElement<StateRuleT>(_StateRule_QNAME, StateRuleT.class, null, value);
+    }
 
 }

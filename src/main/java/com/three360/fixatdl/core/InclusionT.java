@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.XmlType;
  * The following schema fragment specifies the expected content contained within this class.
  * <p>
  * <p>
- * 
+ * <p>
  * <pre>
  * &lt;simpleType name="Inclusion_t">
  *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
@@ -33,25 +33,25 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum InclusionT {
 
-	@XmlEnumValue("Include") INCLUDE("Include"),
-	@XmlEnumValue("Exclude") EXCLUDE("Exclude");
-	private final String value;
+    @XmlEnumValue("Include")INCLUDE("Include"),
+    @XmlEnumValue("Exclude")EXCLUDE("Exclude");
+    private final String value;
 
-	InclusionT(String v) {
-		value = v;
-	}
+    InclusionT(String v) {
+        value = v;
+    }
 
-	public String value() {
-		return value;
-	}
+    public String value() {
+        return value;
+    }
 
-	public static InclusionT fromValue(String v) {
-		for (InclusionT c : InclusionT.values()) {
-			if (c.value.equals(v)) {
-				return c;
-			}
-		}
-		throw new IllegalArgumentException(v);
-	}
+    public static InclusionT fromValue(String v) {
+        for (InclusionT c : InclusionT.values()) {
+            if (c.value.equals(v)) {
+                return c;
+            }
+        }
+        throw new IllegalArgumentException(v);
+    }
 
 }

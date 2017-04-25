@@ -36,13 +36,10 @@ public class FxFixTextFieldUiElement implements IFixTextFieldUiElement<Pane, Str
                 this.gridPane.add(new Label(this.textFieldT.getLabel()), this.nextColumn++, 0);
             }
             this.textField = new TextField(this.textFieldT.getInitValue());
-
-            textField.setOnKeyReleased(event -> {
-                setFieldValueToParameter(getValue(), parameterT);
-                controlIdEmitter.setValue(textFieldT.getID() + ":" + getValue());
+            this.textField.setOnKeyReleased(event -> {
+                setFieldValueToParameter(getValue(), this.parameterT);
+                this.controlIdEmitter.setValue(textFieldT.getID() + ":" + getValue());
             });
-
-
             if (Utils.isNonEmpty(this.textFieldT.getInitValue()))
                 setValue(this.textFieldT.getInitValue());
             this.gridPane.add(this.textField, this.nextColumn, 0);

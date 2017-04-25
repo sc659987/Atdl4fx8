@@ -7,9 +7,9 @@ import com.three360.fixatdl.layout.StrategyPanelT;
  */
 public interface IFixPanelUiElement<T, K extends Comparable<?>> extends IFixUiElement<T, K> {
 
-	/***
-	 *
-	 */
-	void setStrategyPanelT(StrategyPanelT strategyPanelT);
+    /***
+     *
+     */
+    void setStrategyPanelT(StrategyPanelT strategyPanelT);
 
 }

@@ -24,7 +24,7 @@ import java.util.List;
  * The following schema fragment specifies the expected content contained within this class.
  * <p>
  * <p>
- * 
+ * <p>
  * <pre>
  * &lt;complexType name="Strategy_t">
  *   &lt;complexContent>
@@ -68,600 +68,579 @@ import java.util.List;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Strategy_t", propOrder = {
-		"description",
-		"regions",
-		"markets",
-		"securityTypes",
-		"parameter",
-		"edit",
-		"strategyLayout",
-		"repeatingGroup",
-		"strategyEdit"
+        "description",
+        "regions",
+        "markets",
+        "securityTypes",
+        "parameter",
+        "edit",
+        "strategyLayout",
+        "repeatingGroup",
+        "strategyEdit"
 })
 public class StrategyT {
 
-	@XmlElement(name = "Description")
-	protected String description;
-	@XmlElement(name = "Regions")
-	protected RegionsT regions;
-	@XmlElement(name = "Markets")
-	protected MarketsT markets;
-	@XmlElement(name = "SecurityTypes")
-	protected SecurityTypesT securityTypes;
-	@XmlElement(name = "Parameter")
-	protected List<ParameterT> parameter;
-	@XmlElement(name = "Edit", namespace = "http://www.fixprotocol.org/FIXatdl-1-1/Validation")
-	protected List<EditT> edit;
-	@XmlElement(name = "StrategyLayout", namespace = "http://www.fixprotocol.org/FIXatdl-1-1/Layout")
-	protected StrategyLayoutT strategyLayout;
-	@XmlElement(name = "RepeatingGroup")
-	protected RepeatingGroupT repeatingGroup;
-	@XmlElement(name = "StrategyEdit", namespace = "http://www.fixprotocol.org/FIXatdl-1-1/Validation")
-	protected List<StrategyEditT> strategyEdit;
-	@XmlAttribute(required = true)
-	protected String name;
-	@XmlAttribute
-	protected String uiRep;
-	@XmlAttribute(required = true)
-	protected String wireValue;
-	@XmlAttribute(required = true)
-	protected String version;
-	@XmlAttribute
-	protected String fixMsgType;
-	@XmlAttribute
-	@XmlSchemaType(name = "anyURI")
-	protected String disclosureDoc;
-	@XmlAttribute
-	@XmlSchemaType(name = "anyURI")
-	protected String sentOrderLink;
-	@XmlAttribute
-	protected String providerID;
-	@XmlAttribute
-	protected String providerSubID;
-	@XmlAttribute
-	protected String imageLocation;
-	@XmlAttribute
-	@XmlSchemaType(name = "nonNegativeInteger")
-	protected BigInteger totalLegs;
-	@XmlAttribute
-	@XmlSchemaType(name = "nonNegativeInteger")
-	protected BigInteger totalOrders;
-	@XmlAttribute
-	@XmlSchemaType(name = "nonNegativeInteger")
-	protected BigInteger commonIDTag;
-	@XmlAttribute
-	@XmlSchemaType(name = "nonNegativeInteger")
-	protected BigInteger totalOrdersTag;
-	@XmlAttribute
-	@XmlSchemaType(name = "nonNegativeInteger")
-	protected BigInteger orderSequenceTag;
+    @XmlElement(name = "Description")
+    protected String description;
+    @XmlElement(name = "Regions")
+    protected RegionsT regions;
+    @XmlElement(name = "Markets")
+    protected MarketsT markets;
+    @XmlElement(name = "SecurityTypes")
+    protected SecurityTypesT securityTypes;
+    @XmlElement(name = "Parameter")
+    protected List<ParameterT> parameter;
+    @XmlElement(name = "Edit", namespace = "http://www.fixprotocol.org/FIXatdl-1-1/Validation")
+    protected List<EditT> edit;
+    @XmlElement(name = "StrategyLayout", namespace = "http://www.fixprotocol.org/FIXatdl-1-1/Layout")
+    protected StrategyLayoutT strategyLayout;
+    @XmlElement(name = "RepeatingGroup")
+    protected RepeatingGroupT repeatingGroup;
+    @XmlElement(name = "StrategyEdit", namespace = "http://www.fixprotocol.org/FIXatdl-1-1/Validation")
+    protected List<StrategyEditT> strategyEdit;
+    @XmlAttribute(required = true)
+    protected String name;
+    @XmlAttribute
+    protected String uiRep;
+    @XmlAttribute(required = true)
+    protected String wireValue;
+    @XmlAttribute(required = true)
+    protected String version;
+    @XmlAttribute
+    protected String fixMsgType;
+    @XmlAttribute
+    @XmlSchemaType(name = "anyURI")
+    protected String disclosureDoc;
+    @XmlAttribute
+    @XmlSchemaType(name = "anyURI")
+    protected String sentOrderLink;
+    @XmlAttribute
+    protected String providerID;
+    @XmlAttribute
+    protected String providerSubID;
+    @XmlAttribute
+    protected String imageLocation;
+    @XmlAttribute
+    @XmlSchemaType(name = "nonNegativeInteger")
+    protected BigInteger totalLegs;
+    @XmlAttribute
+    @XmlSchemaType(name = "nonNegativeInteger")
+    protected BigInteger totalOrders;
+    @XmlAttribute
+    @XmlSchemaType(name = "nonNegativeInteger")
+    protected BigInteger commonIDTag;
+    @XmlAttribute
+    @XmlSchemaType(name = "nonNegativeInteger")
+    protected BigInteger totalOrdersTag;
+    @XmlAttribute
+    @XmlSchemaType(name = "nonNegativeInteger")
+    protected BigInteger orderSequenceTag;
 
-	/**
-	 * Description of the Strategy.
-	 *
-	 * @return possible object is
-	 *         {@link String }
-	 */
-	public String getDescription() {
-		return description;
-	}
+    /**
+     * Description of the Strategy.
+     *
+     * @return possible object is
+     * {@link String }
+     */
+    public String getDescription() {
+        return description;
+    }
 
-	/**
-	 * Sets the value of the description property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link String }
-	 */
-	public void setDescription(String value) {
-		this.description = value;
-	}
+    /**
+     * Sets the value of the description property.
+     *
+     * @param value allowed object is
+     *              {@link String }
+     */
+    public void setDescription(String value) {
+        this.description = value;
+    }
 
-	/**
-	 * Gets the value of the regions property.
-	 *
-	 * @return possible object is
-	 *         {@link RegionsT }
-	 */
-	public RegionsT getRegions() {
-		return regions;
-	}
+    /**
+     * Gets the value of the regions property.
+     *
+     * @return possible object is
+     * {@link RegionsT }
+     */
+    public RegionsT getRegions() {
+        return regions;
+    }
 
-	/**
-	 * Sets the value of the regions property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link RegionsT }
-	 */
-	public void setRegions(RegionsT value) {
-		this.regions = value;
-	}
+    /**
+     * Sets the value of the regions property.
+     *
+     * @param value allowed object is
+     *              {@link RegionsT }
+     */
+    public void setRegions(RegionsT value) {
+        this.regions = value;
+    }
 
-	/**
-	 * Gets the value of the markets property.
-	 *
-	 * @return possible object is
-	 *         {@link MarketsT }
-	 */
-	public MarketsT getMarkets() {
-		return markets;
-	}
+    /**
+     * Gets the value of the markets property.
+     *
+     * @return possible object is
+     * {@link MarketsT }
+     */
+    public MarketsT getMarkets() {
+        return markets;
+    }
 
-	/**
-	 * Sets the value of the markets property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link MarketsT }
-	 */
-	public void setMarkets(MarketsT value) {
-		this.markets = value;
-	}
+    /**
+     * Sets the value of the markets property.
+     *
+     * @param value allowed object is
+     *              {@link MarketsT }
+     */
+    public void setMarkets(MarketsT value) {
+        this.markets = value;
+    }
 
-	/**
-	 * Gets the value of the securityTypes property.
-	 *
-	 * @return possible object is
-	 *         {@link SecurityTypesT }
-	 */
-	public SecurityTypesT getSecurityTypes() {
-		return securityTypes;
-	}
+    /**
+     * Gets the value of the securityTypes property.
+     *
+     * @return possible object is
+     * {@link SecurityTypesT }
+     */
+    public SecurityTypesT getSecurityTypes() {
+        return securityTypes;
+    }
 
-	/**
-	 * Sets the value of the securityTypes property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link SecurityTypesT }
-	 */
-	public void setSecurityTypes(SecurityTypesT value) {
-		this.securityTypes = value;
-	}
+    /**
+     * Sets the value of the securityTypes property.
+     *
+     * @param value allowed object is
+     *              {@link SecurityTypesT }
+     */
+    public void setSecurityTypes(SecurityTypesT value) {
+        this.securityTypes = value;
+    }
 
-	/**
-	 * Gets the value of the parameter property.
-	 * <p>
-	 * <p>
-	 * This accessor method returns a reference to the live list,
-	 * not a snapshot. Therefore any modification you make to the
-	 * returned list will be present inside the JAXB object.
-	 * This is why there is not a <CODE>set</CODE> method for the parameter property.
-	 * <p>
-	 * <p>
-	 * For example, to registerControlFlow a new item, do as follows:
-	 * <p>
-	 * 
-	 * <pre>
-	 * getParameters().registerControlFlow(newItem);
-	 * </pre>
-	 * <p>
-	 * <p>
-	 * <p>
-	 * Objects of the following type(s) are allowed in the list
-	 * {@link ParameterT }
-	 */
-	public List<ParameterT> getParameter() {
-		if (parameter == null) {
-			parameter = new ArrayList<ParameterT>();
-		}
-		return this.parameter;
-	}
+    /**
+     * Gets the value of the parameter property.
+     * <p>
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the parameter property.
+     * <p>
+     * <p>
+     * For example, to registerControlFlow a new item, do as follows:
+     * <p>
+     * <p>
+     * <pre>
+     * getParameters().registerControlFlow(newItem);
+     * </pre>
+     * <p>
+     * <p>
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link ParameterT }
+     */
+    public List<ParameterT> getParameter() {
+        if (parameter == null) {
+            parameter = new ArrayList<ParameterT>();
+        }
+        return this.parameter;
+    }
 
-	/**
-	 * Gets the value of the edit property.
-	 * <p>
-	 * <p>
-	 * This accessor method returns a reference to the live list,
-	 * not a snapshot. Therefore any modification you make to the
-	 * returned list will be present inside the JAXB object.
-	 * This is why there is not a <CODE>set</CODE> method for the edit property.
-	 * <p>
-	 * <p>
-	 * For example, to registerControlFlow a new item, do as follows:
-	 * <p>
-	 * 
-	 * <pre>
-	 * getEdit().registerControlFlow(newItem);
-	 * </pre>
-	 * <p>
-	 * <p>
-	 * <p>
-	 * Objects of the following type(s) are allowed in the list
-	 * {@link EditT }
-	 */
-	public List<EditT> getEdit() {
-		if (edit == null) {
-			edit = new ArrayList<EditT>();
-		}
-		return this.edit;
-	}
+    /**
+     * Gets the value of the edit property.
+     * <p>
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the edit property.
+     * <p>
+     * <p>
+     * For example, to registerControlFlow a new item, do as follows:
+     * <p>
+     * <p>
+     * <pre>
+     * getEdit().registerControlFlow(newItem);
+     * </pre>
+     * <p>
+     * <p>
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link EditT }
+     */
+    public List<EditT> getEdit() {
+        if (edit == null) {
+            edit = new ArrayList<EditT>();
+        }
+        return this.edit;
+    }
 
-	/**
-	 * Gets the value of the strategyLayout property.
-	 *
-	 * @return possible object is
-	 *         {@link StrategyLayoutT }
-	 */
-	public StrategyLayoutT getStrategyLayout() {
-		return strategyLayout;
-	}
+    /**
+     * Gets the value of the strategyLayout property.
+     *
+     * @return possible object is
+     * {@link StrategyLayoutT }
+     */
+    public StrategyLayoutT getStrategyLayout() {
+        return strategyLayout;
+    }
 
-	/**
-	 * Sets the value of the strategyLayout property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link StrategyLayoutT }
-	 */
-	public void setStrategyLayout(StrategyLayoutT value) {
-		this.strategyLayout = value;
-	}
+    /**
+     * Sets the value of the strategyLayout property.
+     *
+     * @param value allowed object is
+     *              {@link StrategyLayoutT }
+     */
+    public void setStrategyLayout(StrategyLayoutT value) {
+        this.strategyLayout = value;
+    }
 
-	/**
-	 * Gets the value of the repeatingGroup property.
-	 *
-	 * @return possible object is
-	 *         {@link RepeatingGroupT }
-	 */
-	public RepeatingGroupT getRepeatingGroup() {
-		return repeatingGroup;
-	}
+    /**
+     * Gets the value of the repeatingGroup property.
+     *
+     * @return possible object is
+     * {@link RepeatingGroupT }
+     */
+    public RepeatingGroupT getRepeatingGroup() {
+        return repeatingGroup;
+    }
 
-	/**
-	 * Sets the value of the repeatingGroup property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link RepeatingGroupT }
-	 */
-	public void setRepeatingGroup(RepeatingGroupT value) {
-		this.repeatingGroup = value;
-	}
+    /**
+     * Sets the value of the repeatingGroup property.
+     *
+     * @param value allowed object is
+     *              {@link RepeatingGroupT }
+     */
+    public void setRepeatingGroup(RepeatingGroupT value) {
+        this.repeatingGroup = value;
+    }
 
-	/**
-	 * Gets the value of the strategyEdit property.
-	 * <p>
-	 * <p>
-	 * This accessor method returns a reference to the live list,
-	 * not a snapshot. Therefore any modification you make to the
-	 * returned list will be present inside the JAXB object.
-	 * This is why there is not a <CODE>set</CODE> method for the strategyEdit property.
-	 * <p>
-	 * <p>
-	 * For example, to registerControlFlow a new item, do as follows:
-	 * <p>
-	 * 
-	 * <pre>
-	 * getStrategyEdit().registerControlFlow(newItem);
-	 * </pre>
-	 * <p>
-	 * <p>
-	 * <p>
-	 * Objects of the following type(s) are allowed in the list
-	 * {@link StrategyEditT }
-	 */
-	public List<StrategyEditT> getStrategyEdit() {
-		if (strategyEdit == null) {
-			strategyEdit = new ArrayList<StrategyEditT>();
-		}
-		return this.strategyEdit;
-	}
+    /**
+     * Gets the value of the strategyEdit property.
+     * <p>
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the strategyEdit property.
+     * <p>
+     * <p>
+     * For example, to registerControlFlow a new item, do as follows:
+     * <p>
+     * <p>
+     * <pre>
+     * getStrategyEdit().registerControlFlow(newItem);
+     * </pre>
+     * <p>
+     * <p>
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link StrategyEditT }
+     */
+    public List<StrategyEditT> getStrategyEdit() {
+        if (strategyEdit == null) {
+            strategyEdit = new ArrayList<StrategyEditT>();
+        }
+        return this.strategyEdit;
+    }
 
-	/**
-	 * Gets the value of the name property.
-	 *
-	 * @return possible object is
-	 *         {@link String }
-	 */
-	public String getName() {
-		return name;
-	}
+    /**
+     * Gets the value of the name property.
+     *
+     * @return possible object is
+     * {@link String }
+     */
+    public String getName() {
+        return name;
+    }
 
-	/**
-	 * Sets the value of the name property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link String }
-	 */
-	public void setName(String value) {
-		this.name = value;
-	}
+    /**
+     * Sets the value of the name property.
+     *
+     * @param value allowed object is
+     *              {@link String }
+     */
+    public void setName(String value) {
+        this.name = value;
+    }
 
-	/**
-	 * Gets the value of the uiRep property.
-	 *
-	 * @return possible object is
-	 *         {@link String }
-	 */
-	public String getUiRep() {
-		return uiRep;
-	}
+    /**
+     * Gets the value of the uiRep property.
+     *
+     * @return possible object is
+     * {@link String }
+     */
+    public String getUiRep() {
+        return uiRep;
+    }
 
-	/**
-	 * Sets the value of the uiRep property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link String }
-	 */
-	public void setUiRep(String value) {
-		this.uiRep = value;
-	}
+    /**
+     * Sets the value of the uiRep property.
+     *
+     * @param value allowed object is
+     *              {@link String }
+     */
+    public void setUiRep(String value) {
+        this.uiRep = value;
+    }
 
-	/**
-	 * Gets the value of the wireValue property.
-	 *
-	 * @return possible object is
-	 *         {@link String }
-	 */
-	public String getWireValue() {
-		return wireValue;
-	}
+    /**
+     * Gets the value of the wireValue property.
+     *
+     * @return possible object is
+     * {@link String }
+     */
+    public String getWireValue() {
+        return wireValue;
+    }
 
-	/**
-	 * Sets the value of the wireValue property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link String }
-	 */
-	public void setWireValue(String value) {
-		this.wireValue = value;
-	}
+    /**
+     * Sets the value of the wireValue property.
+     *
+     * @param value allowed object is
+     *              {@link String }
+     */
+    public void setWireValue(String value) {
+        this.wireValue = value;
+    }
 
-	/**
-	 * Gets the value of the version property.
-	 *
-	 * @return possible object is
-	 *         {@link String }
-	 */
-	public String getVersion() {
-		return version;
-	}
+    /**
+     * Gets the value of the version property.
+     *
+     * @return possible object is
+     * {@link String }
+     */
+    public String getVersion() {
+        return version;
+    }
 
-	/**
-	 * Sets the value of the version property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link String }
-	 */
-	public void setVersion(String value) {
-		this.version = value;
-	}
+    /**
+     * Sets the value of the version property.
+     *
+     * @param value allowed object is
+     *              {@link String }
+     */
+    public void setVersion(String value) {
+        this.version = value;
+    }
 
-	/**
-	 * Gets the value of the fixMsgType property.
-	 *
-	 * @return possible object is
-	 *         {@link String }
-	 */
-	public String getFixMsgType() {
-		return fixMsgType;
-	}
+    /**
+     * Gets the value of the fixMsgType property.
+     *
+     * @return possible object is
+     * {@link String }
+     */
+    public String getFixMsgType() {
+        return fixMsgType;
+    }
 
-	/**
-	 * Sets the value of the fixMsgType property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link String }
-	 */
-	public void setFixMsgType(String value) {
-		this.fixMsgType = value;
-	}
+    /**
+     * Sets the value of the fixMsgType property.
+     *
+     * @param value allowed object is
+     *              {@link String }
+     */
+    public void setFixMsgType(String value) {
+        this.fixMsgType = value;
+    }
 
-	/**
-	 * Gets the value of the disclosureDoc property.
-	 *
-	 * @return possible object is
-	 *         {@link String }
-	 */
-	public String getDisclosureDoc() {
-		return disclosureDoc;
-	}
+    /**
+     * Gets the value of the disclosureDoc property.
+     *
+     * @return possible object is
+     * {@link String }
+     */
+    public String getDisclosureDoc() {
+        return disclosureDoc;
+    }
 
-	/**
-	 * Sets the value of the disclosureDoc property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link String }
-	 */
-	public void setDisclosureDoc(String value) {
-		this.disclosureDoc = value;
-	}
+    /**
+     * Sets the value of the disclosureDoc property.
+     *
+     * @param value allowed object is
+     *              {@link String }
+     */
+    public void setDisclosureDoc(String value) {
+        this.disclosureDoc = value;
+    }
 
-	/**
-	 * Gets the value of the sentOrderLink property.
-	 *
-	 * @return possible object is
-	 *         {@link String }
-	 */
-	public String getSentOrderLink() {
-		return sentOrderLink;
-	}
+    /**
+     * Gets the value of the sentOrderLink property.
+     *
+     * @return possible object is
+     * {@link String }
+     */
+    public String getSentOrderLink() {
+        return sentOrderLink;
+    }
 
-	/**
-	 * Sets the value of the sentOrderLink property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link String }
-	 */
-	public void setSentOrderLink(String value) {
-		this.sentOrderLink = value;
-	}
+    /**
+     * Sets the value of the sentOrderLink property.
+     *
+     * @param value allowed object is
+     *              {@link String }
+     */
+    public void setSentOrderLink(String value) {
+        this.sentOrderLink = value;
+    }
 
-	/**
-	 * Gets the value of the providerID property.
-	 *
-	 * @return possible object is
-	 *         {@link String }
-	 */
-	public String getProviderID() {
-		return providerID;
-	}
+    /**
+     * Gets the value of the providerID property.
+     *
+     * @return possible object is
+     * {@link String }
+     */
+    public String getProviderID() {
+        return providerID;
+    }
 
-	/**
-	 * Sets the value of the providerID property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link String }
-	 */
-	public void setProviderID(String value) {
-		this.providerID = value;
-	}
+    /**
+     * Sets the value of the providerID property.
+     *
+     * @param value allowed object is
+     *              {@link String }
+     */
+    public void setProviderID(String value) {
+        this.providerID = value;
+    }
 
-	/**
-	 * Gets the value of the providerSubID property.
-	 *
-	 * @return possible object is
-	 *         {@link String }
-	 */
-	public String getProviderSubID() {
-		return providerSubID;
-	}
+    /**
+     * Gets the value of the providerSubID property.
+     *
+     * @return possible object is
+     * {@link String }
+     */
+    public String getProviderSubID() {
+        return providerSubID;
+    }
 
-	/**
-	 * Sets the value of the providerSubID property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link String }
-	 */
-	public void setProviderSubID(String value) {
-		this.providerSubID = value;
-	}
+    /**
+     * Sets the value of the providerSubID property.
+     *
+     * @param value allowed object is
+     *              {@link String }
+     */
+    public void setProviderSubID(String value) {
+        this.providerSubID = value;
+    }
 
-	/**
-	 * Gets the value of the imageLocation property.
-	 *
-	 * @return possible object is
-	 *         {@link String }
-	 */
-	public String getImageLocation() {
-		return imageLocation;
-	}
+    /**
+     * Gets the value of the imageLocation property.
+     *
+     * @return possible object is
+     * {@link String }
+     */
+    public String getImageLocation() {
+        return imageLocation;
+    }
 
-	/**
-	 * Sets the value of the imageLocation property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link String }
-	 */
-	public void setImageLocation(String value) {
-		this.imageLocation = value;
-	}
+    /**
+     * Sets the value of the imageLocation property.
+     *
+     * @param value allowed object is
+     *              {@link String }
+     */
+    public void setImageLocation(String value) {
+        this.imageLocation = value;
+    }
 
-	/**
-	 * Gets the value of the totalLegs property.
-	 *
-	 * @return possible object is
-	 *         {@link BigInteger }
-	 */
-	public BigInteger getTotalLegs() {
-		return totalLegs;
-	}
+    /**
+     * Gets the value of the totalLegs property.
+     *
+     * @return possible object is
+     * {@link BigInteger }
+     */
+    public BigInteger getTotalLegs() {
+        return totalLegs;
+    }
 
-	/**
-	 * Sets the value of the totalLegs property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link BigInteger }
-	 */
-	public void setTotalLegs(BigInteger value) {
-		this.totalLegs = value;
-	}
+    /**
+     * Sets the value of the totalLegs property.
+     *
+     * @param value allowed object is
+     *              {@link BigInteger }
+     */
+    public void setTotalLegs(BigInteger value) {
+        this.totalLegs = value;
+    }
 
-	/**
-	 * Gets the value of the totalOrders property.
-	 *
-	 * @return possible object is
-	 *         {@link BigInteger }
-	 */
-	public BigInteger getTotalOrders() {
-		return totalOrders;
-	}
+    /**
+     * Gets the value of the totalOrders property.
+     *
+     * @return possible object is
+     * {@link BigInteger }
+     */
+    public BigInteger getTotalOrders() {
+        return totalOrders;
+    }
 
-	/**
-	 * Sets the value of the totalOrders property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link BigInteger }
-	 */
-	public void setTotalOrders(BigInteger value) {
-		this.totalOrders = value;
-	}
+    /**
+     * Sets the value of the totalOrders property.
+     *
+     * @param value allowed object is
+     *              {@link BigInteger }
+     */
+    public void setTotalOrders(BigInteger value) {
+        this.totalOrders = value;
+    }
 
-	/**
-	 * Gets the value of the commonIDTag property.
-	 *
-	 * @return possible object is
-	 *         {@link BigInteger }
-	 */
-	public BigInteger getCommonIDTag() {
-		return commonIDTag;
-	}
+    /**
+     * Gets the value of the commonIDTag property.
+     *
+     * @return possible object is
+     * {@link BigInteger }
+     */
+    public BigInteger getCommonIDTag() {
+        return commonIDTag;
+    }
 
-	/**
-	 * Sets the value of the commonIDTag property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link BigInteger }
-	 */
-	public void setCommonIDTag(BigInteger value) {
-		this.commonIDTag = value;
-	}
+    /**
+     * Sets the value of the commonIDTag property.
+     *
+     * @param value allowed object is
+     *              {@link BigInteger }
+     */
+    public void setCommonIDTag(BigInteger value) {
+        this.commonIDTag = value;
+    }
 
-	/**
-	 * Gets the value of the totalOrdersTag property.
-	 *
-	 * @return possible object is
-	 *         {@link BigInteger }
-	 */
-	public BigInteger getTotalOrdersTag() {
-		return totalOrdersTag;
-	}
+    /**
+     * Gets the value of the totalOrdersTag property.
+     *
+     * @return possible object is
+     * {@link BigInteger }
+     */
+    public BigInteger getTotalOrdersTag() {
+        return totalOrdersTag;
+    }
 
-	/**
-	 * Sets the value of the totalOrdersTag property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link BigInteger }
-	 */
-	public void setTotalOrdersTag(BigInteger value) {
-		this.totalOrdersTag = value;
-	}
+    /**
+     * Sets the value of the totalOrdersTag property.
+     *
+     * @param value allowed object is
+     *              {@link BigInteger }
+     */
+    public void setTotalOrdersTag(BigInteger value) {
+        this.totalOrdersTag = value;
+    }
 
-	/**
-	 * Gets the value of the orderSequenceTag property.
-	 *
-	 * @return possible object is
-	 *         {@link BigInteger }
-	 */
-	public BigInteger getOrderSequenceTag() {
-		return orderSequenceTag;
-	}
+    /**
+     * Gets the value of the orderSequenceTag property.
+     *
+     * @return possible object is
+     * {@link BigInteger }
+     */
+    public BigInteger getOrderSequenceTag() {
+        return orderSequenceTag;
+    }
 
-	/**
-	 * Sets the value of the orderSequenceTag property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link BigInteger }
-	 */
-	public void setOrderSequenceTag(BigInteger value) {
-		this.orderSequenceTag = value;
-	}
+    /**
+     * Sets the value of the orderSequenceTag property.
+     *
+     * @param value allowed object is
+     *              {@link BigInteger }
+     */
+    public void setOrderSequenceTag(BigInteger value) {
+        this.orderSequenceTag = value;
+    }
 
 }

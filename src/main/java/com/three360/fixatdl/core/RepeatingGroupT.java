@@ -20,7 +20,7 @@ import java.util.List;
  * The following schema fragment specifies the expected content contained within this class.
  * <p>
  * <p>
- * 
+ * <p>
  * <pre>
  * &lt;complexType name="RepeatingGroup_t">
  *   &lt;complexContent>
@@ -40,159 +40,154 @@ import java.util.List;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "RepeatingGroup_t", propOrder = {
-		"description",
-		"parameter"
+        "description",
+        "parameter"
 })
 public class RepeatingGroupT {
 
-	@XmlElement(name = "Description")
-	protected String description;
-	@XmlElement(name = "Parameter", required = true)
-	protected List<ParameterT> parameter;
-	@XmlAttribute
-	protected String name;
-	@XmlAttribute
-	@XmlSchemaType(name = "positiveInteger")
-	protected BigInteger fixTag;
-	@XmlAttribute(required = true)
-	@XmlSchemaType(name = "nonNegativeInteger")
-	protected BigInteger minSize;
-	@XmlAttribute
-	@XmlSchemaType(name = "nonNegativeInteger")
-	protected BigInteger maxSize;
+    @XmlElement(name = "Description")
+    protected String description;
+    @XmlElement(name = "Parameter", required = true)
+    protected List<ParameterT> parameter;
+    @XmlAttribute
+    protected String name;
+    @XmlAttribute
+    @XmlSchemaType(name = "positiveInteger")
+    protected BigInteger fixTag;
+    @XmlAttribute(required = true)
+    @XmlSchemaType(name = "nonNegativeInteger")
+    protected BigInteger minSize;
+    @XmlAttribute
+    @XmlSchemaType(name = "nonNegativeInteger")
+    protected BigInteger maxSize;
 
-	/**
-	 * Description of the Repeating Group.
-	 *
-	 * @return possible object is
-	 *         {@link String }
-	 */
-	public String getDescription() {
-		return description;
-	}
+    /**
+     * Description of the Repeating Group.
+     *
+     * @return possible object is
+     * {@link String }
+     */
+    public String getDescription() {
+        return description;
+    }
 
-	/**
-	 * Sets the value of the description property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link String }
-	 */
-	public void setDescription(String value) {
-		this.description = value;
-	}
+    /**
+     * Sets the value of the description property.
+     *
+     * @param value allowed object is
+     *              {@link String }
+     */
+    public void setDescription(String value) {
+        this.description = value;
+    }
 
-	/**
-	 * Gets the value of the parameter property.
-	 * <p>
-	 * <p>
-	 * This accessor method returns a reference to the live list,
-	 * not a snapshot. Therefore any modification you make to the
-	 * returned list will be present inside the JAXB object.
-	 * This is why there is not a <CODE>set</CODE> method for the parameter property.
-	 * <p>
-	 * <p>
-	 * For example, to registerControlFlow a new item, do as follows:
-	 * <p>
-	 * 
-	 * <pre>
-	 * getParameters().registerControlFlow(newItem);
-	 * </pre>
-	 * <p>
-	 * <p>
-	 * <p>
-	 * Objects of the following type(s) are allowed in the list
-	 * {@link ParameterT }
-	 */
-	public List<ParameterT> getParameter() {
-		if (parameter == null) {
-			parameter = new ArrayList<ParameterT>();
-		}
-		return this.parameter;
-	}
+    /**
+     * Gets the value of the parameter property.
+     * <p>
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the parameter property.
+     * <p>
+     * <p>
+     * For example, to registerControlFlow a new item, do as follows:
+     * <p>
+     * <p>
+     * <pre>
+     * getParameters().registerControlFlow(newItem);
+     * </pre>
+     * <p>
+     * <p>
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link ParameterT }
+     */
+    public List<ParameterT> getParameter() {
+        if (parameter == null) {
+            parameter = new ArrayList<ParameterT>();
+        }
+        return this.parameter;
+    }
 
-	/**
-	 * Gets the value of the name property.
-	 *
-	 * @return possible object is
-	 *         {@link String }
-	 */
-	public String getName() {
-		return name;
-	}
+    /**
+     * Gets the value of the name property.
+     *
+     * @return possible object is
+     * {@link String }
+     */
+    public String getName() {
+        return name;
+    }
 
-	/**
-	 * Sets the value of the name property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link String }
-	 */
-	public void setName(String value) {
-		this.name = value;
-	}
+    /**
+     * Sets the value of the name property.
+     *
+     * @param value allowed object is
+     *              {@link String }
+     */
+    public void setName(String value) {
+        this.name = value;
+    }
 
-	/**
-	 * Gets the value of the fixTag property.
-	 *
-	 * @return possible object is
-	 *         {@link BigInteger }
-	 */
-	public BigInteger getFixTag() {
-		return fixTag;
-	}
+    /**
+     * Gets the value of the fixTag property.
+     *
+     * @return possible object is
+     * {@link BigInteger }
+     */
+    public BigInteger getFixTag() {
+        return fixTag;
+    }
 
-	/**
-	 * Sets the value of the fixTag property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link BigInteger }
-	 */
-	public void setFixTag(BigInteger value) {
-		this.fixTag = value;
-	}
+    /**
+     * Sets the value of the fixTag property.
+     *
+     * @param value allowed object is
+     *              {@link BigInteger }
+     */
+    public void setFixTag(BigInteger value) {
+        this.fixTag = value;
+    }
 
-	/**
-	 * Gets the value of the minSize property.
-	 *
-	 * @return possible object is
-	 *         {@link BigInteger }
-	 */
-	public BigInteger getMinSize() {
-		return minSize;
-	}
+    /**
+     * Gets the value of the minSize property.
+     *
+     * @return possible object is
+     * {@link BigInteger }
+     */
+    public BigInteger getMinSize() {
+        return minSize;
+    }
 
-	/**
-	 * Sets the value of the minSize property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link BigInteger }
-	 */
-	public void setMinSize(BigInteger value) {
-		this.minSize = value;
-	}
+    /**
+     * Sets the value of the minSize property.
+     *
+     * @param value allowed object is
+     *              {@link BigInteger }
+     */
+    public void setMinSize(BigInteger value) {
+        this.minSize = value;
+    }
 
-	/**
-	 * Gets the value of the maxSize property.
-	 *
-	 * @return possible object is
-	 *         {@link BigInteger }
-	 */
-	public BigInteger getMaxSize() {
-		return maxSize;
-	}
+    /**
+     * Gets the value of the maxSize property.
+     *
+     * @return possible object is
+     * {@link BigInteger }
+     */
+    public BigInteger getMaxSize() {
+        return maxSize;
+    }
 
-	/**
-	 * Sets the value of the maxSize property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link BigInteger }
-	 */
-	public void setMaxSize(BigInteger value) {
-		this.maxSize = value;
-	}
+    /**
+     * Sets the value of the maxSize property.
+     *
+     * @param value allowed object is
+     *              {@link BigInteger }
+     */
+    public void setMaxSize(BigInteger value) {
+        this.maxSize = value;
+    }
 
 }

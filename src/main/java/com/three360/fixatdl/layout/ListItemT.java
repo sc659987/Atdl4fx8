@@ -22,7 +22,7 @@ import java.util.List;
  * <p>
  * <p>
  * <p>
- * 
+ * <p>
  * <pre>
  * &lt;complexType name="ListItem_t">
  *   &lt;complexContent>
@@ -45,91 +45,89 @@ import java.util.List;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ListItem_t", propOrder = {
-		"stateRule"
+        "stateRule"
 })
 public class ListItemT {
 
-	@XmlElement(name = "StateRule", namespace = "http://www.fixprotocol.org/FIXatdl-1-1/Flow")
-	protected List<StateRuleT> stateRule;
-	@XmlAttribute
-	protected String enumID;
-	@XmlAttribute
-	protected String uiRep;
+    @XmlElement(name = "StateRule", namespace = "http://www.fixprotocol.org/FIXatdl-1-1/Flow")
+    protected List<StateRuleT> stateRule;
+    @XmlAttribute
+    protected String enumID;
+    @XmlAttribute
+    protected String uiRep;
 
-	/**
-	 * Gets the value of the stateRule property.
-	 * <p>
-	 * <p>
-	 * This accessor method returns a reference to the live list,
-	 * not a snapshot. Therefore any modification you make to the
-	 * returned list will be present inside the JAXB object.
-	 * This is why there is not a <CODE>set</CODE> method for the stateRule property.
-	 * <p>
-	 * <p>
-	 * For example, to registerControlFlow a new item, do as follows:
-	 * <p>
-	 * <p>
-	 * 
-	 * <pre>
-	 * getStateRule().registerControlFlow(newItem);
-	 * </pre>
-	 * <p>
-	 * <p>
-	 * <p>
-	 * Objects of the following type(s) are allowed in the list
-	 * {@link StateRuleT }
-	 */
-	public List<StateRuleT> getStateRule() {
-		if (stateRule == null) {
-			stateRule = new ArrayList<StateRuleT>();
-		}
-		return this.stateRule;
-	}
+    /**
+     * Gets the value of the stateRule property.
+     * <p>
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the stateRule property.
+     * <p>
+     * <p>
+     * For example, to registerControlFlow a new item, do as follows:
+     * <p>
+     * <p>
+     * <p>
+     * <pre>
+     * getStateRule().registerControlFlow(newItem);
+     * </pre>
+     * <p>
+     * <p>
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link StateRuleT }
+     */
+    public List<StateRuleT> getStateRule() {
+        if (stateRule == null) {
+            stateRule = new ArrayList<StateRuleT>();
+        }
+        return this.stateRule;
+    }
 
-	/**
-	 * Gets the value of the enumID property.
-	 *
-	 * @return possible object is
-	 *         {@link String }
-	 */
-	public String getEnumID() {
-		return enumID;
-	}
+    /**
+     * Gets the value of the enumID property.
+     *
+     * @return possible object is
+     * {@link String }
+     */
+    public String getEnumID() {
+        return enumID;
+    }
 
-	/**
-	 * Sets the value of the enumID property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link String }
-	 */
-	public void setEnumID(String value) {
-		this.enumID = value;
-	}
+    /**
+     * Sets the value of the enumID property.
+     *
+     * @param value allowed object is
+     *              {@link String }
+     */
+    public void setEnumID(String value) {
+        this.enumID = value;
+    }
 
-	/**
-	 * Gets the value of the uiRep property.
-	 *
-	 * @return possible object is
-	 *         {@link String }
-	 */
-	public String getUiRep() {
-		return uiRep;
-	}
+    /**
+     * Gets the value of the uiRep property.
+     *
+     * @return possible object is
+     * {@link String }
+     */
+    public String getUiRep() {
+        return uiRep;
+    }
 
-	/**
-	 * Sets the value of the uiRep property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link String }
-	 */
-	public void setUiRep(String value) {
-		this.uiRep = value;
-	}
+    /**
+     * Sets the value of the uiRep property.
+     *
+     * @param value allowed object is
+     *              {@link String }
+     */
+    public void setUiRep(String value) {
+        this.uiRep = value;
+    }
 
-	@Override
-	public String toString() {
-		return uiRep;
-	}
+    @Override
+    public String toString() {
+        return uiRep;
+    }
 }

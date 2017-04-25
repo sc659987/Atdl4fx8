@@ -2,6 +2,7 @@ package com.three360.ui.common.element;
 
 import com.three360.fixatdl.core.*;
 import com.three360.fixatdl.layout.ControlT;
+import com.three360.ui.Utils;
 import javafx.beans.property.ObjectProperty;
 
 import javax.xml.datatype.DatatypeConstants;
@@ -114,7 +115,7 @@ public interface IFixUiElement<T, K extends Comparable<?>> {
      * @param parameterT
      * @return
      */
-    default void setFieldValueToParameter(Object object, ParameterT parameterT) {
+    default void setFieldValueToParameter(final Object object, ParameterT parameterT) {
         if (parameterT == null)
             return;
         if (object == null) {
@@ -272,16 +273,15 @@ public interface IFixUiElement<T, K extends Comparable<?>> {
             }
         } else if (parameterT instanceof FloatT) {
             FloatT floatT = (FloatT) parameterT;
-            BigDecimal bigDecimal = null;
-            if (object instanceof String) {
-                bigDecimal = new BigDecimal((String) object);
+            if (parameterT.getEnumPair() != null && parameterT.getEnumPair().size() > 0) {
+                floatT.setConstValue(new BigDecimal(parameterT.getEnumPair().stream().filter(enumPairT -> enumPairT.getEnumID().equals(object)).findFirst().orElseGet(() -> null).getWireValue()));
+            } else if (object instanceof String) {
+                floatT.setConstValue(new BigDecimal((String) object));
             } else if (object instanceof Number) {
-                bigDecimal = new BigDecimal(((Number) object).doubleValue());
+                floatT.setConstValue(new BigDecimal(((Number) object).doubleValue()));
             } else {
                 return;
             }
-            floatT.setConstValue(bigDecimal);
-
         } else if (parameterT instanceof PriceT) {
             if (object instanceof String) {
                 try {

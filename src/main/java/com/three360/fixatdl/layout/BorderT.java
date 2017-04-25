@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.XmlType;
  * The following schema fragment specifies the expected content contained within this class.
  * <p>
  * <p>
- * 
+ * <p>
  * <pre>
  * &lt;simpleType name="Border_t">
  *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
@@ -33,25 +33,25 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum BorderT {
 
-	@XmlEnumValue("None") NONE("None"),
-	@XmlEnumValue("Line") LINE("Line");
-	private final String value;
+    @XmlEnumValue("None")NONE("None"),
+    @XmlEnumValue("Line")LINE("Line");
+    private final String value;
 
-	BorderT(String v) {
-		value = v;
-	}
+    BorderT(String v) {
+        value = v;
+    }
 
-	public String value() {
-		return value;
-	}
+    public String value() {
+        return value;
+    }
 
-	public static BorderT fromValue(String v) {
-		for (BorderT c : BorderT.values()) {
-			if (c.value.equals(v)) {
-				return c;
-			}
-		}
-		throw new IllegalArgumentException(v);
-	}
+    public static BorderT fromValue(String v) {
+        for (BorderT c : BorderT.values()) {
+            if (c.value.equals(v)) {
+                return c;
+            }
+        }
+        throw new IllegalArgumentException(v);
+    }
 
 }

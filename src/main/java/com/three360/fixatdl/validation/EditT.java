@@ -21,7 +21,7 @@ import java.util.List;
  * The following schema fragment specifies the expected content contained within this class.
  * <p>
  * <p>
- * 
+ * <p>
  * <pre>
  * &lt;complexType name="Edit_t">
  *   &lt;complexContent>
@@ -44,234 +44,227 @@ import java.util.List;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Edit_t", propOrder = {
-		"description",
-		"edit",
-		"editRef"
+        "description",
+        "edit",
+        "editRef"
 })
 public class EditT {
 
-	@XmlElement(name = "Description", namespace = "http://www.fixprotocol.org/FIXatdl-1-1/Core")
-	protected String description;
-	@XmlElement(name = "Edit")
-	protected List<EditT> edit;
-	@XmlElement(name = "EditRef")
-	protected List<EditRefT> editRef;
-	@XmlAttribute
-	protected String field;
-	@XmlAttribute
-	protected String field2;
-	@XmlAttribute
-	protected String value;
-	@XmlAttribute
-	protected OperatorT operator;
-	@XmlAttribute
-	protected LogicOperatorT logicOperator;
-	@XmlAttribute
-	protected String id;
+    @XmlElement(name = "Description", namespace = "http://www.fixprotocol.org/FIXatdl-1-1/Core")
+    protected String description;
+    @XmlElement(name = "Edit")
+    protected List<EditT> edit;
+    @XmlElement(name = "EditRef")
+    protected List<EditRefT> editRef;
+    @XmlAttribute
+    protected String field;
+    @XmlAttribute
+    protected String field2;
+    @XmlAttribute
+    protected String value;
+    @XmlAttribute
+    protected OperatorT operator;
+    @XmlAttribute
+    protected LogicOperatorT logicOperator;
+    @XmlAttribute
+    protected String id;
 
-	/**
-	 * Description of the Edit.
-	 *
-	 * @return possible object is
-	 *         {@link String }
-	 */
-	public String getDescription() {
-		return description;
-	}
+    /**
+     * Description of the Edit.
+     *
+     * @return possible object is
+     * {@link String }
+     */
+    public String getDescription() {
+        return description;
+    }
 
-	/**
-	 * Sets the value of the description property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link String }
-	 */
-	public void setDescription(String value) {
-		this.description = value;
-	}
+    /**
+     * Sets the value of the description property.
+     *
+     * @param value allowed object is
+     *              {@link String }
+     */
+    public void setDescription(String value) {
+        this.description = value;
+    }
 
-	/**
-	 * Gets the value of the edit property.
-	 * <p>
-	 * <p>
-	 * This accessor method returns a reference to the live list,
-	 * not a snapshot. Therefore any modification you make to the
-	 * returned list will be present inside the JAXB object.
-	 * This is why there is not a <CODE>set</CODE> method for the edit property.
-	 * <p>
-	 * <p>
-	 * For example, to registerControlFlow a new item, do as follows:
-	 * <p>
-	 * 
-	 * <pre>
-	 * getEdit().registerControlFlow(newItem);
-	 * </pre>
-	 * <p>
-	 * <p>
-	 * <p>
-	 * Objects of the following type(s) are allowed in the list
-	 * {@link EditT }
-	 */
-	public List<EditT> getEdit() {
-		if (edit == null) {
-			edit = new ArrayList<EditT>();
-		}
-		return this.edit;
-	}
+    /**
+     * Gets the value of the edit property.
+     * <p>
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the edit property.
+     * <p>
+     * <p>
+     * For example, to registerControlFlow a new item, do as follows:
+     * <p>
+     * <p>
+     * <pre>
+     * getEdit().registerControlFlow(newItem);
+     * </pre>
+     * <p>
+     * <p>
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link EditT }
+     */
+    public List<EditT> getEdit() {
+        if (edit == null) {
+            edit = new ArrayList<EditT>();
+        }
+        return this.edit;
+    }
 
-	/**
-	 * Gets the value of the editRef property.
-	 * <p>
-	 * <p>
-	 * This accessor method returns a reference to the live list,
-	 * not a snapshot. Therefore any modification you make to the
-	 * returned list will be present inside the JAXB object.
-	 * This is why there is not a <CODE>set</CODE> method for the editRef property.
-	 * <p>
-	 * <p>
-	 * For example, to registerControlFlow a new item, do as follows:
-	 * <p>
-	 * 
-	 * <pre>
-	 * getEditRef().registerControlFlow(newItem);
-	 * </pre>
-	 * <p>
-	 * <p>
-	 * <p>
-	 * Objects of the following type(s) are allowed in the list
-	 * {@link EditRefT }
-	 */
-	public List<EditRefT> getEditRef() {
-		if (editRef == null) {
-			editRef = new ArrayList<EditRefT>();
-		}
-		return this.editRef;
-	}
+    /**
+     * Gets the value of the editRef property.
+     * <p>
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the editRef property.
+     * <p>
+     * <p>
+     * For example, to registerControlFlow a new item, do as follows:
+     * <p>
+     * <p>
+     * <pre>
+     * getEditRef().registerControlFlow(newItem);
+     * </pre>
+     * <p>
+     * <p>
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link EditRefT }
+     */
+    public List<EditRefT> getEditRef() {
+        if (editRef == null) {
+            editRef = new ArrayList<EditRefT>();
+        }
+        return this.editRef;
+    }
 
-	/**
-	 * Gets the value of the field property.
-	 *
-	 * @return possible object is
-	 *         {@link String }
-	 */
-	public String getField() {
-		return field;
-	}
+    /**
+     * Gets the value of the field property.
+     *
+     * @return possible object is
+     * {@link String }
+     */
+    public String getField() {
+        return field;
+    }
 
-	/**
-	 * Sets the value of the field property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link String }
-	 */
-	public void setField(String value) {
-		this.field = value;
-	}
+    /**
+     * Sets the value of the field property.
+     *
+     * @param value allowed object is
+     *              {@link String }
+     */
+    public void setField(String value) {
+        this.field = value;
+    }
 
-	/**
-	 * Gets the value of the field2 property.
-	 *
-	 * @return possible object is
-	 *         {@link String }
-	 */
-	public String getField2() {
-		return field2;
-	}
+    /**
+     * Gets the value of the field2 property.
+     *
+     * @return possible object is
+     * {@link String }
+     */
+    public String getField2() {
+        return field2;
+    }
 
-	/**
-	 * Sets the value of the field2 property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link String }
-	 */
-	public void setField2(String value) {
-		this.field2 = value;
-	}
+    /**
+     * Sets the value of the field2 property.
+     *
+     * @param value allowed object is
+     *              {@link String }
+     */
+    public void setField2(String value) {
+        this.field2 = value;
+    }
 
-	/**
-	 * Gets the value of the value property.
-	 *
-	 * @return possible object is
-	 *         {@link String }
-	 */
-	public String getValue() {
-		return value;
-	}
+    /**
+     * Gets the value of the value property.
+     *
+     * @return possible object is
+     * {@link String }
+     */
+    public String getValue() {
+        return value;
+    }
 
-	/**
-	 * Sets the value of the value property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link String }
-	 */
-	public void setValue(String value) {
-		this.value = value;
-	}
+    /**
+     * Sets the value of the value property.
+     *
+     * @param value allowed object is
+     *              {@link String }
+     */
+    public void setValue(String value) {
+        this.value = value;
+    }
 
-	/**
-	 * Gets the value of the operator property.
-	 *
-	 * @return possible object is
-	 *         {@link OperatorT }
-	 */
-	public OperatorT getOperator() {
-		return operator;
-	}
+    /**
+     * Gets the value of the operator property.
+     *
+     * @return possible object is
+     * {@link OperatorT }
+     */
+    public OperatorT getOperator() {
+        return operator;
+    }
 
-	/**
-	 * Sets the value of the operator property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link OperatorT }
-	 */
-	public void setOperator(OperatorT value) {
-		this.operator = value;
-	}
+    /**
+     * Sets the value of the operator property.
+     *
+     * @param value allowed object is
+     *              {@link OperatorT }
+     */
+    public void setOperator(OperatorT value) {
+        this.operator = value;
+    }
 
-	/**
-	 * Gets the value of the logicOperator property.
-	 *
-	 * @return possible object is
-	 *         {@link LogicOperatorT }
-	 */
-	public LogicOperatorT getLogicOperator() {
-		return logicOperator;
-	}
+    /**
+     * Gets the value of the logicOperator property.
+     *
+     * @return possible object is
+     * {@link LogicOperatorT }
+     */
+    public LogicOperatorT getLogicOperator() {
+        return logicOperator;
+    }
 
-	/**
-	 * Sets the value of the logicOperator property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link LogicOperatorT }
-	 */
-	public void setLogicOperator(LogicOperatorT value) {
-		this.logicOperator = value;
-	}
+    /**
+     * Sets the value of the logicOperator property.
+     *
+     * @param value allowed object is
+     *              {@link LogicOperatorT }
+     */
+    public void setLogicOperator(LogicOperatorT value) {
+        this.logicOperator = value;
+    }
 
-	/**
-	 * Gets the value of the id property.
-	 *
-	 * @return possible object is
-	 *         {@link String }
-	 */
-	public String getId() {
-		return id;
-	}
+    /**
+     * Gets the value of the id property.
+     *
+     * @return possible object is
+     * {@link String }
+     */
+    public String getId() {
+        return id;
+    }
 
-	/**
-	 * Sets the value of the id property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link String }
-	 */
-	public void setId(String value) {
-		this.id = value;
-	}
+    /**
+     * Sets the value of the id property.
+     *
+     * @param value allowed object is
+     *              {@link String }
+     */
+    public void setId(String value) {
+        this.id = value;
+    }
 
 }

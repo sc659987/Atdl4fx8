@@ -23,7 +23,7 @@ import java.math.BigDecimal;
  * The following schema fragment specifies the expected content contained within this class.
  * <p>
  * <p>
- * 
+ * <p>
  * <pre>
  * &lt;complexType name="PriceOffset_t">
  *   &lt;complexContent>
@@ -39,85 +39,82 @@ import java.math.BigDecimal;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "PriceOffset_t")
 public class PriceOffsetT
-		extends NumericT {
+        extends NumericT {
 
-	@XmlAttribute
-	protected BigDecimal minValue;
-	@XmlAttribute
-	protected BigDecimal maxValue;
-	@XmlAttribute
-	protected BigDecimal constValue;
+    @XmlAttribute
+    protected BigDecimal minValue;
+    @XmlAttribute
+    protected BigDecimal maxValue;
+    @XmlAttribute
+    protected BigDecimal constValue;
 
-	/**
-	 * Gets the value of the minValue property.
-	 *
-	 * @return possible object is
-	 *         {@link BigDecimal }
-	 */
-	public BigDecimal getMinValue() {
-		if (minValue == null) {
-			return new BigDecimal("0");
-		} else {
-			return minValue;
-		}
-	}
+    /**
+     * Gets the value of the minValue property.
+     *
+     * @return possible object is
+     * {@link BigDecimal }
+     */
+    public BigDecimal getMinValue() {
+        if (minValue == null) {
+            return new BigDecimal("0");
+        } else {
+            return minValue;
+        }
+    }
 
-	/**
-	 * Sets the value of the minValue property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link BigDecimal }
-	 */
-	public void setMinValue(BigDecimal value) {
-		this.minValue = value;
-	}
+    /**
+     * Sets the value of the minValue property.
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
+     */
+    public void setMinValue(BigDecimal value) {
+        this.minValue = value;
+    }
 
-	/**
-	 * Gets the value of the maxValue property.
-	 *
-	 * @return possible object is
-	 *         {@link BigDecimal }
-	 */
-	public BigDecimal getMaxValue() {
-		return maxValue;
-	}
+    /**
+     * Gets the value of the maxValue property.
+     *
+     * @return possible object is
+     * {@link BigDecimal }
+     */
+    public BigDecimal getMaxValue() {
+        return maxValue;
+    }
 
-	/**
-	 * Sets the value of the maxValue property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link BigDecimal }
-	 */
-	public void setMaxValue(BigDecimal value) {
-		this.maxValue = value;
-	}
+    /**
+     * Sets the value of the maxValue property.
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
+     */
+    public void setMaxValue(BigDecimal value) {
+        this.maxValue = value;
+    }
 
-	/**
-	 * Gets the value of the constValue property.
-	 *
-	 * @return possible object is
-	 *         {@link BigDecimal }
-	 */
-	public BigDecimal getConstValue() {
-		return constValue;
-	}
+    /**
+     * Gets the value of the constValue property.
+     *
+     * @return possible object is
+     * {@link BigDecimal }
+     */
+    public BigDecimal getConstValue() {
+        return constValue;
+    }
 
-	/**
-	 * Sets the value of the constValue property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link BigDecimal }
-	 */
-	public void setConstValue(BigDecimal value) {
-		this.constValue = value;
-	}
+    /**
+     * Sets the value of the constValue property.
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
+     */
+    public void setConstValue(BigDecimal value) {
+        this.constValue = value;
+    }
 
-	@Override
-	public int getTag959() {
-		return 9;
-	}
+    @Override
+    public int getTag959() {
+        return 9;
+    }
 
 }

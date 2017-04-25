@@ -23,7 +23,7 @@ import java.math.BigInteger;
  * The following schema fragment specifies the expected content contained within this class.
  * <p>
  * <p>
- * 
+ * <p>
  * <pre>
  * &lt;complexType name="Data_t">
  *   &lt;complexContent>
@@ -39,80 +39,77 @@ import java.math.BigInteger;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Data_t")
 public class DataT
-		extends ParameterT {
+        extends ParameterT {
 
-	@XmlAttribute
-	protected BigInteger minLength;
-	@XmlAttribute
-	protected BigInteger maxLength;
-	@XmlAttribute
-	protected String constValue;
+    @XmlAttribute
+    protected BigInteger minLength;
+    @XmlAttribute
+    protected BigInteger maxLength;
+    @XmlAttribute
+    protected String constValue;
 
-	/**
-	 * Gets the value of the minLength property.
-	 *
-	 * @return possible object is
-	 *         {@link BigInteger }
-	 */
-	public BigInteger getMinLength() {
-		return minLength;
-	}
+    /**
+     * Gets the value of the minLength property.
+     *
+     * @return possible object is
+     * {@link BigInteger }
+     */
+    public BigInteger getMinLength() {
+        return minLength;
+    }
 
-	/**
-	 * Sets the value of the minLength property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link BigInteger }
-	 */
-	public void setMinLength(BigInteger value) {
-		this.minLength = value;
-	}
+    /**
+     * Sets the value of the minLength property.
+     *
+     * @param value allowed object is
+     *              {@link BigInteger }
+     */
+    public void setMinLength(BigInteger value) {
+        this.minLength = value;
+    }
 
-	/**
-	 * Gets the value of the maxLength property.
-	 *
-	 * @return possible object is
-	 *         {@link BigInteger }
-	 */
-	public BigInteger getMaxLength() {
-		return maxLength;
-	}
+    /**
+     * Gets the value of the maxLength property.
+     *
+     * @return possible object is
+     * {@link BigInteger }
+     */
+    public BigInteger getMaxLength() {
+        return maxLength;
+    }
 
-	/**
-	 * Sets the value of the maxLength property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link BigInteger }
-	 */
-	public void setMaxLength(BigInteger value) {
-		this.maxLength = value;
-	}
+    /**
+     * Sets the value of the maxLength property.
+     *
+     * @param value allowed object is
+     *              {@link BigInteger }
+     */
+    public void setMaxLength(BigInteger value) {
+        this.maxLength = value;
+    }
 
-	/**
-	 * Gets the value of the constValue property.
-	 *
-	 * @return possible object is
-	 *         {@link String }
-	 */
-	public String getConstValue() {
-		return constValue;
-	}
+    /**
+     * Gets the value of the constValue property.
+     *
+     * @return possible object is
+     * {@link String }
+     */
+    public String getConstValue() {
+        return constValue;
+    }
 
-	/**
-	 * Sets the value of the constValue property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link String }
-	 */
-	public void setConstValue(String value) {
-		this.constValue = value;
-	}
+    /**
+     * Sets the value of the constValue property.
+     *
+     * @param value allowed object is
+     *              {@link String }
+     */
+    public void setConstValue(String value) {
+        this.constValue = value;
+    }
 
-	@Override
-	public int getTag959() {
-		return 23;
-	}
+    @Override
+    public int getTag959() {
+        return 23;
+    }
 }

@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.*;
  * The following schema fragment specifies the expected content contained within this class.
  * <p>
  * <p>
- * 
+ * <p>
  * <pre>
  * &lt;complexType name="StrategyEdit_t">
  *   &lt;complexContent>
@@ -39,103 +39,99 @@ import javax.xml.bind.annotation.*;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "StrategyEdit_t", propOrder = {
-		"description",
-		"edit",
-		"editRef"
+        "description",
+        "edit",
+        "editRef"
 })
 public class StrategyEditT {
 
-	@XmlElement(name = "Description", namespace = "http://www.fixprotocol.org/FIXatdl-1-1/Core")
-	protected String description;
-	@XmlElement(name = "Edit")
-	protected EditT edit;
-	@XmlElement(name = "EditRef")
-	protected EditRefT editRef;
-	@XmlAttribute(required = true)
-	protected String errorMessage;
+    @XmlElement(name = "Description", namespace = "http://www.fixprotocol.org/FIXatdl-1-1/Core")
+    protected String description;
+    @XmlElement(name = "Edit")
+    protected EditT edit;
+    @XmlElement(name = "EditRef")
+    protected EditRefT editRef;
+    @XmlAttribute(required = true)
+    protected String errorMessage;
 
-	/**
-	 * Optional description of the Strategy Edit.
-	 *
-	 * @return possible object is
-	 *         {@link String }
-	 */
-	public String getDescription() {
-		return description;
-	}
+    /**
+     * Optional description of the Strategy Edit.
+     *
+     * @return possible object is
+     * {@link String }
+     */
+    public String getDescription() {
+        return description;
+    }
 
-	/**
-	 * Sets the value of the description property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link String }
-	 */
-	public void setDescription(String value) {
-		this.description = value;
-	}
+    /**
+     * Sets the value of the description property.
+     *
+     * @param value allowed object is
+     *              {@link String }
+     */
+    public void setDescription(String value) {
+        this.description = value;
+    }
 
-	/**
-	 * Gets the value of the edit property.
-	 *
-	 * @return possible object is
-	 *         {@link EditT }
-	 */
-	public EditT getEdit() {
-		return edit;
-	}
+    /**
+     * Gets the value of the edit property.
+     *
+     * @return possible object is
+     * {@link EditT }
+     */
+    public EditT getEdit() {
+        return edit;
+    }
 
-	/**
-	 * Sets the value of the edit property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link EditT }
-	 */
-	public void setEdit(EditT value) {
-		this.edit = value;
-	}
+    /**
+     * Sets the value of the edit property.
+     *
+     * @param value allowed object is
+     *              {@link EditT }
+     */
+    public void setEdit(EditT value) {
+        this.edit = value;
+    }
 
-	/**
-	 * Gets the value of the editRef property.
-	 *
-	 * @return possible object is
-	 *         {@link EditRefT }
-	 */
-	public EditRefT getEditRef() {
-		return editRef;
-	}
+    /**
+     * Gets the value of the editRef property.
+     *
+     * @return possible object is
+     * {@link EditRefT }
+     */
+    public EditRefT getEditRef() {
+        return editRef;
+    }
 
-	/**
-	 * Sets the value of the editRef property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link EditRefT }
-	 */
-	public void setEditRef(EditRefT value) {
-		this.editRef = value;
-	}
+    /**
+     * Sets the value of the editRef property.
+     *
+     * @param value allowed object is
+     *              {@link EditRefT }
+     */
+    public void setEditRef(EditRefT value) {
+        this.editRef = value;
+    }
 
-	/**
-	 * Gets the value of the errorMessage property.
-	 *
-	 * @return possible object is
-	 *         {@link String }
-	 */
-	public String getErrorMessage() {
-		return errorMessage;
-	}
+    /**
+     * Gets the value of the errorMessage property.
+     *
+     * @return possible object is
+     * {@link String }
+     */
+    public String getErrorMessage() {
+        return errorMessage;
+    }
 
-	/**
-	 * Sets the value of the errorMessage property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link String }
-	 */
-	public void setErrorMessage(String value) {
-		this.errorMessage = value;
-	}
+    /**
+     * Sets the value of the errorMessage property.
+     *
+     * @param value allowed object is
+     *              {@link String }
+     */
+    public void setErrorMessage(String value) {
+        this.errorMessage = value;
+    }
 
 }

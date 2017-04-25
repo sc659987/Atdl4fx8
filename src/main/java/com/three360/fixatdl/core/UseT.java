@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.XmlType;
  * The following schema fragment specifies the expected content contained within this class.
  * <p>
  * <p>
- * 
+ * <p>
  * <pre>
  * &lt;simpleType name="Use_t">
  *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
@@ -33,25 +33,25 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum UseT {
 
-	@XmlEnumValue("required") REQUIRED("required"),
-	@XmlEnumValue("optional") OPTIONAL("optional");
-	private final String value;
+    @XmlEnumValue("required")REQUIRED("required"),
+    @XmlEnumValue("optional")OPTIONAL("optional");
+    private final String value;
 
-	UseT(String v) {
-		value = v;
-	}
+    UseT(String v) {
+        value = v;
+    }
 
-	public String value() {
-		return value;
-	}
+    public String value() {
+        return value;
+    }
 
-	public static UseT fromValue(String v) {
-		for (UseT c : UseT.values()) {
-			if (c.value.equals(v)) {
-				return c;
-			}
-		}
-		throw new IllegalArgumentException(v);
-	}
+    public static UseT fromValue(String v) {
+        for (UseT c : UseT.values()) {
+            if (c.value.equals(v)) {
+                return c;
+            }
+        }
+        throw new IllegalArgumentException(v);
+    }
 
 }

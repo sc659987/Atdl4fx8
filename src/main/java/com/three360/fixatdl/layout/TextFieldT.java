@@ -20,7 +20,7 @@ import javax.xml.bind.annotation.XmlType;
  * The following schema fragment specifies the expected content contained within this class.
  * <p>
  * <p>
- * 
+ * <p>
  * <pre>
  * &lt;complexType name="TextField_t">
  *   &lt;complexContent>
@@ -34,30 +34,29 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "TextField_t")
 public class TextFieldT
-		extends ControlT {
+        extends ControlT {
 
-	@XmlAttribute
-	protected String initValue;
+    @XmlAttribute
+    protected String initValue;
 
-	/**
-	 * Gets the value of the initValue property.
-	 *
-	 * @return possible object is
-	 *         {@link String }
-	 */
-	public String getInitValue() {
-		return initValue;
-	}
+    /**
+     * Gets the value of the initValue property.
+     *
+     * @return possible object is
+     * {@link String }
+     */
+    public String getInitValue() {
+        return initValue;
+    }
 
-	/**
-	 * Sets the value of the initValue property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link String }
-	 */
-	public void setInitValue(String value) {
-		this.initValue = value;
-	}
+    /**
+     * Sets the value of the initValue property.
+     *
+     * @param value allowed object is
+     *              {@link String }
+     */
+    public void setInitValue(String value) {
+        this.initValue = value;
+    }
 
 }

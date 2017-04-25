@@ -1,8 +1,8 @@
 package com.three360.ui.fx8.validator;
 
 import com.three360.fixatdl.validation.EditT;
-import com.three360.ui.validator.IAtdlEditEvaluator;
 import com.three360.ui.validator.FieldToComparableMapperCache;
+import com.three360.ui.validator.IAtdlEditEvaluator;
 
 /***
  *
@@ -23,7 +23,7 @@ public class RecursiveAtdlEditEvaluator implements IAtdlEditEvaluator {
             switch (editT.getLogicOperator()) {
                 case AND:
                     // AND - behaves as short circuit
-                    return editT.getEdit().parallelStream().allMatch(this::validate);
+                    return editT.getEdit().stream().allMatch(this::validate);
                 case OR:
                     // OR - new interpretation
                     return editT.getEdit().parallelStream().anyMatch(this::validate);
@@ -65,6 +65,8 @@ public class RecursiveAtdlEditEvaluator implements IAtdlEditEvaluator {
     private Comparable tryToConvert(Comparable o1, Comparable o2) {
         if (Integer.class.isInstance(o1) && o2 instanceof String) {
             return Integer.parseInt((String) o2);
+        } else if (Boolean.class.isInstance(o1) && o2 instanceof String) {
+            return Boolean.parseBoolean((String) o2);
         }
         return o2;
     }

@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlType;
  * The following schema fragment specifies the expected content contained within this class.
  * <p>
  * <p>
- * 
+ * <p>
  * <pre>
  * &lt;complexType name="Boolean_t">
  *   &lt;complexContent>
@@ -38,80 +38,77 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Boolean_t")
 public class BooleanT
-		extends ParameterT {
+        extends ParameterT {
 
-	@XmlAttribute
-	protected String trueWireValue;
-	@XmlAttribute
-	protected String falseWireValue;
-	@XmlAttribute
-	protected String constValue;
+    @XmlAttribute
+    protected String trueWireValue;
+    @XmlAttribute
+    protected String falseWireValue;
+    @XmlAttribute
+    protected String constValue;
 
-	/**
-	 * Gets the value of the trueWireValue property.
-	 *
-	 * @return possible object is
-	 *         {@link String }
-	 */
-	public String getTrueWireValue() {
-		return trueWireValue;
-	}
+    /**
+     * Gets the value of the trueWireValue property.
+     *
+     * @return possible object is
+     * {@link String }
+     */
+    public String getTrueWireValue() {
+        return trueWireValue;
+    }
 
-	/**
-	 * Sets the value of the trueWireValue property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link String }
-	 */
-	public void setTrueWireValue(String value) {
-		this.trueWireValue = value;
-	}
+    /**
+     * Sets the value of the trueWireValue property.
+     *
+     * @param value allowed object is
+     *              {@link String }
+     */
+    public void setTrueWireValue(String value) {
+        this.trueWireValue = value;
+    }
 
-	/**
-	 * Gets the value of the falseWireValue property.
-	 *
-	 * @return possible object is
-	 *         {@link String }
-	 */
-	public String getFalseWireValue() {
-		return falseWireValue;
-	}
+    /**
+     * Gets the value of the falseWireValue property.
+     *
+     * @return possible object is
+     * {@link String }
+     */
+    public String getFalseWireValue() {
+        return falseWireValue;
+    }
 
-	/**
-	 * Sets the value of the falseWireValue property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link String }
-	 */
-	public void setFalseWireValue(String value) {
-		this.falseWireValue = value;
-	}
+    /**
+     * Sets the value of the falseWireValue property.
+     *
+     * @param value allowed object is
+     *              {@link String }
+     */
+    public void setFalseWireValue(String value) {
+        this.falseWireValue = value;
+    }
 
-	/**
-	 * Gets the value of the constValue property.
-	 *
-	 * @return possible object is
-	 *         {@link String }
-	 */
-	public String getConstValue() {
-		return constValue;
-	}
+    /**
+     * Gets the value of the constValue property.
+     *
+     * @return possible object is
+     * {@link String }
+     */
+    public String getConstValue() {
+        return constValue;
+    }
 
-	/**
-	 * Sets the value of the constValue property.
-	 *
-	 * @param value
-	 *            allowed object is
-	 *            {@link String }
-	 */
-	public void setConstValue(String value) {
-		this.constValue = value;
-	}
+    /**
+     * Sets the value of the constValue property.
+     *
+     * @param value allowed object is
+     *              {@link String }
+     */
+    public void setConstValue(String value) {
+        this.constValue = value;
+    }
 
-	@Override
-	public int getTag959() {
-		return 13;
-	}
+    @Override
+    public int getTag959() {
+        return 13;
+    }
 }

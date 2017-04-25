@@ -18,7 +18,7 @@ import javax.xml.bind.annotation.XmlType;
  * The following schema fragment specifies the expected content contained within this class.
  * <p>
  * <p>
- * 
+ * <p>
  * <pre>
  * &lt;simpleType name="operator_t">
  *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
@@ -38,21 +38,21 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum OperatorT {
 
-	EX,
-	NX,
-	EQ,
-	NE,
-	LE,
-	LT,
-	GE,
-	GT;
+    EX,
+    NX,
+    EQ,
+    NE,
+    LE,
+    LT,
+    GE,
+    GT;
 
-	public String value() {
-		return name();
-	}
+    public String value() {
+        return name();
+    }
 
-	public static OperatorT fromValue(String v) {
-		return valueOf(v);
-	}
+    public static OperatorT fromValue(String v) {
+        return valueOf(v);
+    }
 
 }
