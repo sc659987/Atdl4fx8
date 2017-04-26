@@ -119,7 +119,6 @@
   
 <!-- DoubleSlider Sample with incrementValue of Lot and Tick and precision -->
   <Strategy name="DoubleSpinnerSample2" uiRep="DoubleSpinner Sample 2" wireValue="6" providerID="ABC">
-
 		<Parameter name="p_PriceNoRange" xsi:type="Price_t" fixTag="9993" use="optional" precision="2"/>
 		<Parameter name="p_PriceRange_01_to_99_9999" xsi:type="Price_t" fixTag="9992" use="optional" minValue=".01" maxValue="99.9999" precision="4"/>
 	    <lay:StrategyLayout>

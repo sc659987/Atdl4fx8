@@ -6,11 +6,9 @@
 	xsi:schemaLocation="http://www.fixprotocol.org/FIXatdl-1-1/Core" strategyIdentifierTag="847" versionIdentifierTag="958" tag957Support="true">
 
 	<Strategy name="GatorFlex" uiRep="Gator Flex" wireValue="2005" providerID="">
-
 		<!-- Common parameters -->
 		<Parameter name="startTime" xsi:type="UTCTimestamp_t" use="optional" />
 		<Parameter name="endTime" xsi:type="UTCTimestamp_t" use="optional" />
-
 		<!-- GatorFlex parameters -->
 		<Parameter name="targetExecutionRate" xsi:type="Float_t" use="required">
 			<EnumPair enumID="e_Slow" wireValue="0.00" />
@@ -23,20 +21,15 @@
 			<EnumPair enumID="false" wireValue="N" />
 			<EnumPair enumID="true" wireValue="Y" />
 		</Parameter>
-
 		<lay:StrategyLayout>
-
-			<lay:StrategyPanel title="Strategy Parameters" collapsible="false" orientation="VERTICAL">
-
+			<lay:StrategyPanel title="Strategy Parameterbarcap s" collapsible="false" orientation="VERTICAL">
 				<lay:StrategyPanel collapsible="false" orientation="HORIZONTAL" border="None">
 					<lay:StrategyPanel title="Description" collapsible="false" orientation="VERTICAL">
 						<lay:Control ID="DescriptionL" xsi:type="lay:Label_t" label="&lt;html&gt;A market order that deduces target duration for a given pair, amount and time zone,&lt;br/&gt;using Barclays’ proprietary trade analytics. Check BARX pre-trade portal to see&lt;br/&gt;how long your Flex algo will take.&lt;/html&gt;" />
 					</lay:StrategyPanel>
 				</lay:StrategyPanel>
-
 				<lay:StrategyPanel collapsible="false" orientation="HORIZONTAL" border="None">
 					<lay:StrategyPanel collapsible="false" orientation="HORIZONTAL" border="None">
-
 						<lay:StrategyPanel title="Common Parameters" collapsible="false" orientation="VERTICAL">
 							<!-- Start time -->
 							<lay:StrategyPanel collapsible="false" orientation="HORIZONTAL" title="Start Time">
@@ -58,7 +51,6 @@
 									</lay:StrategyPanel>
 								</lay:StrategyPanel>
 							</lay:StrategyPanel>
-
 							<!-- End time -->
 							<lay:StrategyPanel collapsible="false" orientation="HORIZONTAL" title="End Time">
 								<lay:StrategyPanel collapsible="false" orientation="HORIZONTAL" border="None">
@@ -67,9 +59,7 @@
 									</lay:StrategyPanel>
 								</lay:StrategyPanel>
 							</lay:StrategyPanel>
-
 						</lay:StrategyPanel>
-
 						<lay:StrategyPanel title="Gator Flex Parameters" collapsible="false" orientation="VERTICAL">
 							<lay:Control ID="c_TargetExecutionRate" xsi:type="lay:DropDownList_t" initValue="e_MediumFast" label="Target Execution Rate" parameterRef="targetExecutionRate">
 								<lay:ListItem enumID="e_Slow" uiRep="Slow" />
@@ -78,7 +68,6 @@
 								<lay:ListItem enumID="e_Fast" uiRep="Fast" />
 								<lay:ListItem enumID="e_VeryFast" uiRep="Very Fast" />
 							</lay:Control>
-
 							<lay:Control ID="c_PassiveOnPrimaryMarketOnly" xsi:type="lay:CheckBox_t" initValue="false" label="Passive On Primary Market Only" parameterRef="passiveOnPrimaryMarketOnly"
 								tooltip="&lt;html&gt;If this is set to Yes, orders will only be placed on&lt;br/&gt;the primary market for that currency pair. This means&lt;br/&gt;that passive orders will not be placed on any other&lt;br/&gt;markets (although aggressive fills can still be obtained&lt;br/&gt;from other markets)&lt;/html&gt;" />
 						</lay:StrategyPanel>
@@ -86,7 +75,6 @@
 				</lay:StrategyPanel>
 			</lay:StrategyPanel>
 		</lay:StrategyLayout>
-
 		<!-- **************************** -->
 		<!-- Common parameter constraints -->
 		<!-- **************************** -->
@@ -100,6 +88,5 @@
 		<!-- ******************************** -->
 		<!-- Gator Flex parameter constraints -->
 		<!-- ******************************** -->
-
 	</Strategy>
 </Strategies>
