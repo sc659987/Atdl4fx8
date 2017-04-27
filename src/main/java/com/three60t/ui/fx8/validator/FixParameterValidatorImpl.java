@@ -17,7 +17,6 @@ public class FixParameterValidatorImpl implements FixParameterValidator {
         this.parameterTS = parameterTS;
     }
 
-    // TODO check negate logic and optimize that . use De Morgan’s Law
     @Override
     public List<String> validateParameter() {
         return this.parameterTS.parallelStream().map(parameterT -> {

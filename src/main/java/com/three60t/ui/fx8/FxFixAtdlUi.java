@@ -140,6 +140,7 @@ public class FxFixAtdlUi extends AbstractFixAtdlUi<Pane> {
             }).collect(Collectors.toList());
             DropDownListT dropDownListT = new DropDownListT();
             dropDownListT.getListItem().addAll(listItemTS);
+            dropDownListT.setID("selectID");
             element.setDropDownList(dropDownListT);
             element.listenChange().addListener((observable, oldValue, newValue) -> {
                 if (newValue != null) {

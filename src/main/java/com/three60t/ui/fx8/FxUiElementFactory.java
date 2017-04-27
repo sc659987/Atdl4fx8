@@ -74,7 +74,7 @@ public class FxUiElementFactory implements UiElementAbstractFactory {
     }
 
     @Override
-    public FixDoubleSpinnerUiElement<Pane, String> instantiateNewDoubleSpinner() {
+    public FixDoubleSpinnerUiElement<Pane, Double> instantiateNewDoubleSpinner() {
         return new FxFixDoubleSpinnerUiElement();
     }
 

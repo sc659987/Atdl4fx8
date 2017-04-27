@@ -52,7 +52,7 @@ public abstract class AbstractFixAtdlUi<T> implements FixAtdlUi<T> {
         return this.strategiesT != null ? this.strategiesT
                 .getStrategy()
                 .parallelStream()
-                .filter(strategyT -> strategyT.getUiRep().equals(s))
+                .filter(strategyT -> strategyT.getName().equals(s))
                 .findFirst()
                 .orElse(null) : null;
     }

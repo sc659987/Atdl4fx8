@@ -74,7 +74,11 @@ public class FxFixPanelUiElement implements FixPanelUiElement<Node, String> {
                         this.fxAtdlControlFlowRegister.registerControlFlow(element);
                         return element.create();
                     } else if (controlT instanceof DoubleSpinnerT) {
-                        // TODO complete the double spinner
+                        FixDoubleSpinnerUiElement<Pane, Double> element = factory.instantiateNewDoubleSpinner();
+                        element.setDoubleSpinner((DoubleSpinnerT) controlT);
+                        element.setParameters(findParameterByName(controlT.getParameterRef()));
+                        this.fxAtdlControlFlowRegister.registerControlFlow(element);
+                        return element.create();
                     } else if (controlT instanceof DropDownListT) {
                         FixDropDownListUiElement<HBox, String> element = factory.instantiateNewDropDownList();
                         element.setDropDownList((DropDownListT) controlT);

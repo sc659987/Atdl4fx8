@@ -19,7 +19,7 @@ public class RecursiveFixEditEvaluator implements FixEditEvaluator {
             switch (editT.getLogicOperator()) {
                 case AND:
                     // AND - behaves as short circuit
-                    return editT.getEdit().stream().allMatch(this::validate);
+                    return editT.getEdit().parallelStream().allMatch(this::validate);
                 case OR:
                     // OR - new interpretation
                     return editT.getEdit().parallelStream().anyMatch(this::validate);
@@ -57,7 +57,7 @@ public class RecursiveFixEditEvaluator implements FixEditEvaluator {
         }
     }
 
-    //TODO refactor it Make changer here
+    //TODO refactor it Make change here
     private Comparable tryToConvert(Comparable o1, Comparable o2) {
         if (Integer.class.isInstance(o1) && o2 instanceof String) {
             return Integer.parseInt((String) o2);

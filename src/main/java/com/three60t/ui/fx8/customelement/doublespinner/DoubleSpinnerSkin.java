@@ -1,7 +1,6 @@
 package com.three60t.ui.fx8.customelement.doublespinner;
 
 import com.sun.javafx.scene.control.skin.BehaviorSkinBase;
-import javafx.css.PseudoClass;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
 import javafx.scene.AccessibleAction;
@@ -232,14 +231,4 @@ public class DoubleSpinnerSkin extends BehaviorSkinBase<DoubleSpinner, DoubleSpi
     protected double computeBaselineOffset(double topInset, double rightInset, double bottomInset, double leftInset) {
         return textField.getLayoutBounds().getMinY() + textField.getLayoutY() + textField.getBaselineOffset();
     }
-
-
-    /***************************************************************************
-     *                                                                         *
-     * Stylesheet Handling                                                     *
-     *                                                                         *
-     **************************************************************************/
-
-    private static PseudoClass CONTAINS_FOCUS_PSEUDOCLASS_STATE = PseudoClass.getPseudoClass("contains-focus");
-
 }

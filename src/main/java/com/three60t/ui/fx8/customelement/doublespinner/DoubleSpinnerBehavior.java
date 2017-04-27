@@ -1,18 +1,11 @@
 package com.three60t.ui.fx8.customelement.doublespinner;
 
 import com.sun.javafx.scene.control.behavior.BehaviorBase;
-import com.sun.javafx.scene.control.behavior.KeyBinding;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.util.Duration;
-
-import java.util.Arrays;
-import java.util.List;
-
-import static javafx.scene.input.KeyCode.DOWN;
-import static javafx.scene.input.KeyCode.UP;
 
 /**
  * Created by sainik on 24/04/17.
