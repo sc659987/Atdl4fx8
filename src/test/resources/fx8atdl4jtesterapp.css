@@ -13,19 +13,19 @@
     -fx-padding: 8;
 }
 
-/*.titled-pane > .title {*/
-    /*-fx-pref-height: 15.0;*/
-/*}*/
+.titled-pane > .title {
+    -fx-background-color: -fx-outer-border, -fx-body-color;
+    -fx-border-width: 10;
+    -fx-background-size: 10,10,10,01;
+}
 
-/*.titled-pane {*/
-    /*-fx-text-fill: #006FD8;*/
-/*}*/
 
-/*.titled-pane > .title > .arrow-button .arrow {*/
-    /*-fx-background-color: blue;*/
 
-/*}*/
 
-/*.label {*/
-    /*-fx-text-fill: #f00*/
-/*}*/
+
+.titled-pane > .title > .arrow-button > .arrow,
+
+.titled-pane > .title:hover > .arrow-button > .arrow {
+    -fx-background-color: derive(-fx-hover-base, -10%);
+    -fx-background-insets: 0;
+}
