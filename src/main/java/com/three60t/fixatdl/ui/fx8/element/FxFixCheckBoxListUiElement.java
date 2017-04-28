@@ -37,13 +37,13 @@ public class FxFixCheckBoxListUiElement implements FixCheckBoxListUiElement<Pane
             // GUI label addition to grid
             if (!Utils.isEmpty(this.checkBoxListT.getLabel()))
                 this.gridPane.add(new Label(this.checkBoxListT.getLabel()),
-                        0, this.nextRow++, GridPane.REMAINING, 1);
+                        0, this.nextRow++, 1, 1);
 
             this.gridPane.setHgap(3);
             // creating checkbox in fx from checkboxListT
             this.checkBoxes = this.checkBoxListT
                     .getListItem()
-                    .stream()
+                    .parallelStream()
                     .map(listItemT -> {
                         CheckBox checkBox = new CheckBox();
                         checkBox.setId(listItemT.getEnumID());
@@ -53,7 +53,7 @@ public class FxFixCheckBoxListUiElement implements FixCheckBoxListUiElement<Pane
 
             // create a map
             enumIdAndCheckBoxMap = checkBoxes
-                    .stream()
+                    .parallelStream()
                     .collect(Collectors.toMap(CheckBox::getId, checkBox -> checkBox));
 
             // Initialize the check box selected or not on the basis of
@@ -82,7 +82,7 @@ public class FxFixCheckBoxListUiElement implements FixCheckBoxListUiElement<Pane
                 if (this.checkBoxListT.getOrientation() == PanelOrientationT.HORIZONTAL) {
                     this.gridPane.add(this.checkBoxes.get(index), 3 * index, this.nextRow, 1, 1);
                 } else {
-                    this.gridPane.add(this.checkBoxes.get(index), 0, this.nextRow++, GridPane.REMAINING, 1);
+                    this.gridPane.add(this.checkBoxes.get(index), 0, this.nextRow++, 1, 1);
                 }
             });
             return this.gridPane;
@@ -121,9 +121,7 @@ public class FxFixCheckBoxListUiElement implements FixCheckBoxListUiElement<Pane
 
     @Override
     public String getValue() {
-        return String.join(" ", checkBoxes
-                .stream()
-                .filter(CheckBox::isSelected)
+        return String.join(" ", checkBoxes.stream().filter(CheckBox::isSelected)
                 .map(CheckBox::getId)
                 .collect(Collectors.toList()));
     }

@@ -16,6 +16,7 @@ import javafx.scene.layout.Pane;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class FxFixRadioButtonListUiElement implements FixRadioButtonListUiElement<Pane, String> {
 
@@ -32,7 +33,7 @@ public class FxFixRadioButtonListUiElement implements FixRadioButtonListUiElemen
         if (this.radioButtonListT != null) {
             this.gridPane = new GridPane();
             this.toggleGroup = new ToggleGroup();
-            this.gridPane.add(new Label(this.radioButtonListT.getLabel()), 0, 0, GridPane.REMAINING, 1);
+            this.gridPane.add(new Label(this.radioButtonListT.getLabel()), 0, 0, 1, 1);
             this.gridPane.setHgap(3);
             this.radioButtonList = this.radioButtonListT.getListItem().stream().map(listItemT -> {
                 RadioButton radioButton = new RadioButton();
@@ -45,22 +46,19 @@ public class FxFixRadioButtonListUiElement implements FixRadioButtonListUiElemen
             if (Utils.isNonEmpty(this.radioButtonListT.getInitValue()))
                 setValue(this.radioButtonListT.getInitValue());
 
-            this.radioButtonList.forEach(radioButton -> {
+            this.radioButtonList.forEach(radioButton ->
+                    radioButton.setOnAction(event -> {
+                        setFieldValueToParameter(((RadioButton) event.getSource()).getId(), parameterT);
+                        this.controlIdEmitter.setValue(this.radioButtonListT.getID() + ":" + getValue());
+                    }));
 
-                radioButton.setOnAction(event -> {
-                    setFieldValueToParameter(((RadioButton) event.getSource()).getId(), parameterT);
-                    this.controlIdEmitter.setValue(this.radioButtonListT.getID() + ":" + getValue());
-                });
-
-            });
-
-            for (int i = 0; i < this.radioButtonList.size(); i++) {
+            IntStream.range(0, this.radioButtonList.size()).forEach(i -> {
                 if (this.radioButtonListT.getOrientation() == PanelOrientationT.HORIZONTAL) {
                     this.gridPane.add(this.radioButtonList.get(i), 3 * i, 1, 1, 1);
                 } else {
-                    this.gridPane.add(this.radioButtonList.get(i), 0, i + 1, GridPane.REMAINING, 1);
+                    this.gridPane.add(this.radioButtonList.get(i), 0, i + 1, 1, 1);
                 }
-            }
+            });
             return gridPane;
         }
         return null;
@@ -91,19 +89,17 @@ public class FxFixRadioButtonListUiElement implements FixRadioButtonListUiElemen
 
     @Override
     public String getValue() {
-        return radioButtonList
-                .stream()
+        return radioButtonList.stream()
                 .filter(RadioButton::isSelected)
-                .map(radioButton -> radioButton.getId())
+                .map(RadioButton::getId)
                 .findFirst()
                 .orElse("");
     }
 
     @Override
     public void setValue(String s) {
-        this.radioButtonList
-                .stream()
-                .filter(radioButton -> radioButton.getId().equals(s) ? true : false)
+        this.radioButtonList.stream()
+                .filter(radioButton -> radioButton.getId().equals(s))
                 .forEach(radioButton -> {
                     radioButton.setSelected(true);
                 });

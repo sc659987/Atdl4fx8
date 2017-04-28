@@ -105,11 +105,9 @@ public class FxFixSingleSpinnerUiElement implements FixSingleSpinnerUiElement<Pa
     }
 
     @Override
-    public void setValue(Double s) {
-        if (s == null)
-            s = limit.getKey();
-        this.singleSpinner.getValueFactory().setValue(s);
-        setFieldValueToParameter(singleSpinner.getValue(), parameterT);
+    public void setValue(Double value) {
+        this.singleSpinner.getValueFactory().setValue(value==null?limit.getKey():value);
+        setFieldValueToParameter(value, parameterT);
     }
 
     @Override

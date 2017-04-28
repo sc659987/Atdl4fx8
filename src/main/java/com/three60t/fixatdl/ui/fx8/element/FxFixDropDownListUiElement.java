@@ -89,11 +89,11 @@ public class FxFixDropDownListUiElement implements FixDropDownListUiElement<Pane
 
     @Override
     public void setValue(String enumId) {
-        dropDownListT.getListItem().stream()
+        this.dropDownListT.getListItem().stream()
                 .filter(listItemT -> listItemT.getEnumID().equals(enumId))
                 .findFirst()
                 .ifPresent(listItemT -> {
-                    comboBox.setValue(listItemT);
+                    this.comboBox.setValue(listItemT);
                     setFieldValueToParameter(getValue(), this.parameterT);
                 });
     }

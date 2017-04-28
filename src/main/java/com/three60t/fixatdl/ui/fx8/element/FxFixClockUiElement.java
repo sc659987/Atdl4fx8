@@ -1,6 +1,7 @@
 package com.three60t.fixatdl.ui.fx8.element;
 
 import com.three60t.fixatdl.model.core.ParameterT;
+import com.three60t.fixatdl.model.core.UTCTimestampT;
 import com.three60t.fixatdl.model.layout.ClockT;
 import com.three60t.fixatdl.ui.common.element.FixClockUiElement;
 import com.three60t.fixatdl.ui.fx8.customelement.DateSpinner;
@@ -12,9 +13,9 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
+import javax.xml.datatype.DatatypeConstants;
 import javax.xml.datatype.XMLGregorianCalendar;
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.SignStyle;
@@ -26,7 +27,6 @@ public class FxFixClockUiElement implements FixClockUiElement<Pane, String> {
 
     private TimeSpinner timeSpinner;
     private DateSpinner dateSpinner;
-
 
     private GridPane gridPane;
     private ClockT clockT;
@@ -45,10 +45,12 @@ public class FxFixClockUiElement implements FixClockUiElement<Pane, String> {
             this.timeSpinner = new TimeSpinner();
             this.timeSpinner.setOnMouseClicked(event -> setFieldValueToParameter(getValue(), parameterT));
 
-            this.dateSpinner = new DateSpinner(LocalDate.now());
 
-            if (clockT.getInitValue() != null && clockT.getLocalMktTz() != null) {
-                XMLGregorianCalendar xmlGregorianCalendar = clockT.getInitValue();
+            // LOGIC clockT.getInitValueMode() if 0 then use clockT.getInitValue() otherwise use current time
+            // if init value is supplied then have to use local Mkt Tz
+
+            if (this.clockT.getInitValue() != null && this.clockT.getLocalMktTz() != null) {
+                XMLGregorianCalendar xmlGregorianCalendar = this.clockT.getInitValue();
 
                 setValue(xmlGregorianCalendar.getHour() + ":"
                         + xmlGregorianCalendar.getMinute() + ":"
@@ -56,12 +58,42 @@ public class FxFixClockUiElement implements FixClockUiElement<Pane, String> {
             } else {
                 setValue(getValue());
             }
-            this.gridPane.add(this.dateSpinner, this.nextColumn++, 0);
+            createByParameter();
+            //this.dateSpinner = new DateSpinner(LocalDate.now());
             this.gridPane.add(this.timeSpinner, this.nextColumn, 0);
 
             return this.gridPane;
         }
         return null;
+    }
+
+    private void createByParameter() {
+        if (parameterT instanceof UTCTimestampT) {
+            this.dateSpinner = new DateSpinner(LocalDate
+                    .of(year(clockT.getInitValue()),
+                            month(clockT.getInitValue()),
+                            dayOfMonth(clockT.getInitValue())));
+            this.gridPane.add(this.dateSpinner, this.nextColumn++, 0);
+        }
+    }
+
+
+    private int year(XMLGregorianCalendar xmlGregorianCalendar) {
+        return xmlGregorianCalendar == null ||
+                xmlGregorianCalendar.getYear() == DatatypeConstants.FIELD_UNDEFINED ?
+                Year.now().getValue() : xmlGregorianCalendar.getYear();
+    }
+
+    private int month(XMLGregorianCalendar xmlGregorianCalendar) {
+        return xmlGregorianCalendar == null
+                || xmlGregorianCalendar.getMonth() == DatatypeConstants.FIELD_UNDEFINED ?
+                MonthDay.now().getMonth().getValue() : xmlGregorianCalendar.getMonth();
+    }
+
+    private int dayOfMonth(XMLGregorianCalendar xmlGregorianCalendar) {
+        return xmlGregorianCalendar == null
+                || xmlGregorianCalendar.getDay() == DatatypeConstants.FIELD_UNDEFINED ?
+                MonthDay.now().getDayOfMonth() : xmlGregorianCalendar.getDay();
     }
 
     @Override

@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import java.util.Collections;
 import java.util.List;
 
+//TODO check with specification
 public class FxFixLabelUiElement implements FixLabelUiElement<Label, String> {
 
     private Label label;
@@ -56,21 +57,22 @@ public class FxFixLabelUiElement implements FixLabelUiElement<Label, String> {
 
     @Override
     public String getValue() {
-        return null;
+        return this.label.getText();
     }
 
     @Override
     public void setValue(String s) {
-
+        this.label.setText(s);
     }
 
     @Override
     public void makeVisible(boolean visible) {
-
+        this.label.setVisible(visible);
     }
 
     @Override
     public void makeEnable(boolean enable) {
-
+        this.label.setDisable(!enable);
     }
+
 }

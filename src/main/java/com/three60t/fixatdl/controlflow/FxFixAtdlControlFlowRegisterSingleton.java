@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class FxFixAtdlControlFlowRegisterSingleton implements FixAtdlControlFlowRegister {
+public class FxFixAtdlControlFlowRegisterSingleton  {
 
     // controlId and Fx Ui element which are dependent on that Id for control flow
     private Map<String, Set<FixUiElement>> controlIdUiElementMap;
@@ -36,7 +36,6 @@ public class FxFixAtdlControlFlowRegisterSingleton implements FixAtdlControlFlow
         fxFixAtdlStateRuleResultActor = new FxFixAtdlStateRuleResultActor();
     }
 
-    @Override
     public void registerControlFlow(FixUiElement<?, ? extends Comparable<?>> fixUiElement) {
         allIFixUiElements.put(fixUiElement.getControl().getID(), fixUiElement);
         // get control from fixUiElement
@@ -59,7 +58,6 @@ public class FxFixAtdlControlFlowRegisterSingleton implements FixAtdlControlFlow
                                 fxFixAtdlStateRuleResultActor.doAct(atdlStateRuleResultTypeComparablePair, effectedIFixElement))));
     }
 
-    @Override
     public void executeControlFlowForAllControls() {
         controlIdUiElementMap.keySet().stream().forEach(this::executeControlFLowByControlId);
     }

@@ -2,6 +2,7 @@ package com.three60t.fixatdl.ui.common.element;
 
 import com.three60t.fixatdl.model.core.*;
 import com.three60t.fixatdl.model.layout.ControlT;
+import com.three60t.fixatdl.utils.Utils;
 import javafx.beans.property.ObjectProperty;
 
 import javax.xml.datatype.DatatypeConstants;
@@ -125,16 +126,6 @@ public interface FixUiElement<T, K extends Comparable<K>> {
         } else if (parameterT instanceof CountryT) {
             if (object instanceof String)
                 ((CountryT) parameterT).setConstValue((String) object);
-        } else if (parameterT instanceof LengthT) {
-            if (object instanceof String) {
-                try {
-                    BigInteger bigDecimal = new BigInteger((String) object);
-                    ((LengthT) parameterT).setConstValue(bigDecimal);
-                } catch (NumberFormatException e) {
-                }
-            } else if (object instanceof BigInteger) {
-                ((LengthT) parameterT).setConstValue((BigInteger) object);
-            }
         } else if (parameterT instanceof DataT) {
             if (object instanceof String)
                 ((DataT) parameterT).setConstValue((String) object);
@@ -154,13 +145,17 @@ public interface FixUiElement<T, K extends Comparable<K>> {
                 CurrencyT currencyT = (CurrencyT) parameterT;
                 currencyT.setConstValue((String) object);
             }
-        } else if (parameterT instanceof UTCTimeOnlyT) {
+        }
+        // Integer related data types
+        else if (parameterT instanceof IntT) {
+            IntT intT = (IntT) parameterT;
             if (object instanceof String) {
-                UTCTimeOnlyT utcTimeOnlyT = (UTCTimeOnlyT) parameterT;
                 try {
-                    utcTimeOnlyT.setConstValue(DatatypeFactory.newInstance().newXMLGregorianCalendar(getValue((String) object, hMmSsFormat)));
+                    intT.setConstValue(Integer.parseInt((String) object));
                 } catch (Exception e) {
                 }
+            } else if (object instanceof Double) {
+                intT.setConstValue(((Double) object).intValue());
             }
         } else if (parameterT instanceof SeqNumT) {
             if (object instanceof String) {
@@ -176,35 +171,22 @@ public interface FixUiElement<T, K extends Comparable<K>> {
                 } catch (NumberFormatException e) {
                 }
             }
-        } else if (parameterT instanceof TZTimestampT) {
-            // TODO read about the date type
+        } else if (parameterT instanceof LengthT) {
             if (object instanceof String) {
-                TZTimestampT tzTimestampT = (TZTimestampT) parameterT;
                 try {
-                    tzTimestampT.setConstValue(DatatypeFactory.newInstance()
-                            .newXMLGregorianCalendar(getValue((String) object, hMmSsFormat, hMmFormat)));
-                } catch (Exception e) {
+                    BigInteger bigDecimal = new BigInteger((String) object);
+                    ((LengthT) parameterT).setConstValue(bigDecimal);
+                } catch (NumberFormatException e) {
                 }
+            } else if (object instanceof BigInteger) {
+                ((LengthT) parameterT).setConstValue((BigInteger) object);
             }
-        } else if (parameterT instanceof LocalMktDateT) {
-            // TODO read about the date type
+        }
+        // end of Integer
+        else if (parameterT instanceof TenorT) {
             if (object instanceof String) {
-                LocalMktDateT localMktDateT = (LocalMktDateT) parameterT;
-                try {
-                    localMktDateT.setConstValue(DatatypeFactory.newInstance()
-                            .newXMLGregorianCalendar(getValue((String) object, hMmSsFormat, hMmFormat)));
-                } catch (Exception e) {
-                }
-            }
-        } else if (parameterT instanceof IntT) {
-            IntT intT = (IntT) parameterT;
-            if (object instanceof String) {
-                try {
-                    intT.setConstValue(Integer.parseInt((String) object));
-                } catch (Exception e) {
-                }
-            } else if (object instanceof Double) {
-                intT.setConstValue(((Double) object).intValue());
+                TenorT tenorT = (TenorT) parameterT;
+                tenorT.setConstValue((String) object);
             }
         } else if (parameterT instanceof MultipleStringValueT) {
             if (object instanceof String) {
@@ -215,48 +197,23 @@ public interface FixUiElement<T, K extends Comparable<K>> {
                 } catch (Exception e) {
                 }
             }
-        } else if (parameterT instanceof MonthYearT) {
-            if (object instanceof String) {
-                MonthYearT monthYearT = (MonthYearT) parameterT;
-                // TODO consumeWireString and debug test
-                monthYearT.setConstValue((String) object);
-            }
-        } else if (parameterT instanceof TenorT) {
-            if (object instanceof String) {
-                TenorT tenorT = (TenorT) parameterT;
-                tenorT.setConstValue((String) object);
-            }
         } else if (parameterT instanceof BooleanT) {
+            // DONE with Atdl4j
+            BooleanT booleanT = (BooleanT) parameterT;
             if (object instanceof String) {
-                ((BooleanT) parameterT).setConstValue((String) object);
-            }
-        } else if (parameterT instanceof TZTimeOnlyT) {
-            //
-            if (object instanceof String) {
-                TZTimeOnlyT tzTimeOnlyT = (TZTimeOnlyT) parameterT;
-                try {
-                    XMLGregorianCalendar xmlGregorianCalendar = DatatypeFactory.newInstance()
-                            .newXMLGregorianCalendar(getValue((String) object, hMmSsFormat, hMmFormat));
-                    xmlGregorianCalendar.setYear(DatatypeConstants.FIELD_UNDEFINED);
-                    xmlGregorianCalendar.setMonth(DatatypeConstants.FIELD_UNDEFINED);
-                    xmlGregorianCalendar.setDay(DatatypeConstants.FIELD_UNDEFINED);
-                    tzTimeOnlyT.setConstValue(xmlGregorianCalendar);
-                } catch (Exception e) {
-                }
-            }
-        } else if (parameterT instanceof UTCDateOnlyT) {
-            //
-            if (object instanceof String) {
-                UTCDateOnlyT utcDateOnlyT = (UTCDateOnlyT) parameterT;
-                try {
-                    XMLGregorianCalendar xmlGregorianCalendar = DatatypeFactory.newInstance()
-                            .newXMLGregorianCalendar(getValue((String) object, mmDdYyyyFormat));
-                    xmlGregorianCalendar.setHour(DatatypeConstants.FIELD_UNDEFINED);
-                    xmlGregorianCalendar.setMinute(DatatypeConstants.FIELD_UNDEFINED);
-                    xmlGregorianCalendar.setSecond(DatatypeConstants.FIELD_UNDEFINED);
-                    utcDateOnlyT.setConstValue(xmlGregorianCalendar);
-                } catch (Exception e) {
-                }
+                String str = (String) object;
+                booleanT.setConstValue(Utils.isEmpty(str)
+                        ? null : str.equalsIgnoreCase("true")
+                        || str.equals("1")
+                        || str.equals(BOOLEAN_TRUE) ? BOOLEAN_TRUE : BOOLEAN_FALSE);
+            } else if (object instanceof BigDecimal) {
+                BigDecimal num = (BigDecimal) object;
+                booleanT.setConstValue(num == null ? null : num.intValue() == 1 ?
+                        BOOLEAN_TRUE : BOOLEAN_FALSE);
+            } else if (object instanceof BigInteger) {
+                BigInteger num = (BigInteger) object;
+                booleanT.setConstValue(num == null ? null : num.intValue() == 1 ?
+                        BOOLEAN_TRUE : BOOLEAN_FALSE);
             }
         } else if (parameterT instanceof MultipleCharValueT) {
             if (object instanceof String) {
@@ -267,7 +224,9 @@ public interface FixUiElement<T, K extends Comparable<K>> {
                 } catch (Exception e) {
                 }
             }
-        } else if (parameterT instanceof FloatT) {
+        }
+        // float related
+        else if (parameterT instanceof FloatT) {
             FloatT floatT = (FloatT) parameterT;
             if (parameterT.getEnumPair() != null && parameterT.getEnumPair().size() > 0) {
                 floatT.setConstValue(new BigDecimal(parameterT.getEnumPair().stream().filter(enumPairT -> enumPairT.getEnumID().equals(object)).findFirst().orElseGet(() -> null).getWireValue()));
@@ -326,7 +285,12 @@ public interface FixUiElement<T, K extends Comparable<K>> {
                 } catch (Exception e) {
                 }
             }
-        } else if (parameterT instanceof UTCTimestampT) {
+        }
+
+        // date related
+
+
+        else if (parameterT instanceof UTCTimestampT) {
             if (object instanceof String)
                 try {
                     UTCTimestampT utcTimestampT = (UTCTimestampT) parameterT;
@@ -339,8 +303,74 @@ public interface FixUiElement<T, K extends Comparable<K>> {
                     utcTimestampT.setConstValue(xmlGregorianCalendar);
                 } catch (Exception e) {
                 }
+        } else if (parameterT instanceof TZTimeOnlyT) {
+            //
+            if (object instanceof String) {
+                TZTimeOnlyT tzTimeOnlyT = (TZTimeOnlyT) parameterT;
+                try {
+                    XMLGregorianCalendar xmlGregorianCalendar = DatatypeFactory.newInstance()
+                            .newXMLGregorianCalendar(getValue((String) object, hMmSsFormat, hMmFormat));
+                    xmlGregorianCalendar.setYear(DatatypeConstants.FIELD_UNDEFINED);
+                    xmlGregorianCalendar.setMonth(DatatypeConstants.FIELD_UNDEFINED);
+                    xmlGregorianCalendar.setDay(DatatypeConstants.FIELD_UNDEFINED);
+                    tzTimeOnlyT.setConstValue(xmlGregorianCalendar);
+                } catch (Exception e) {
+                }
+            }
+        } else if (parameterT instanceof UTCDateOnlyT) {
+            //
+            if (object instanceof String) {
+                UTCDateOnlyT utcDateOnlyT = (UTCDateOnlyT) parameterT;
+                try {
+                    XMLGregorianCalendar xmlGregorianCalendar = DatatypeFactory.newInstance()
+                            .newXMLGregorianCalendar(getValue((String) object, mmDdYyyyFormat));
+                    xmlGregorianCalendar.setHour(DatatypeConstants.FIELD_UNDEFINED);
+                    xmlGregorianCalendar.setMinute(DatatypeConstants.FIELD_UNDEFINED);
+                    xmlGregorianCalendar.setSecond(DatatypeConstants.FIELD_UNDEFINED);
+                    utcDateOnlyT.setConstValue(xmlGregorianCalendar);
+                } catch (Exception e) {
+                }
+            }
+        } else if (parameterT instanceof UTCTimeOnlyT) {
+            if (object instanceof String) {
+                UTCTimeOnlyT utcTimeOnlyT = (UTCTimeOnlyT) parameterT;
+                try {
+                    utcTimeOnlyT.setConstValue(DatatypeFactory.newInstance().newXMLGregorianCalendar(getValue((String) object, hMmSsFormat)));
+                } catch (Exception e) {
+                }
+            }
+        } else if (parameterT instanceof TZTimestampT) {
+            // TODO read about the date type
+            if (object instanceof String) {
+                TZTimestampT tzTimestampT = (TZTimestampT) parameterT;
+                try {
+                    tzTimestampT.setConstValue(DatatypeFactory.newInstance()
+                            .newXMLGregorianCalendar(getValue((String) object, hMmSsFormat, hMmFormat)));
+                } catch (Exception e) {
+                }
+            }
+        } else if (parameterT instanceof LocalMktDateT) {
+            // TODO read about the date type
+            if (object instanceof String) {
+                LocalMktDateT localMktDateT = (LocalMktDateT) parameterT;
+                try {
+                    localMktDateT.setConstValue(DatatypeFactory.newInstance()
+                            .newXMLGregorianCalendar(getValue((String) object, hMmSsFormat, hMmFormat)));
+                } catch (Exception e) {
+                }
+            }
+        } else if (parameterT instanceof MonthYearT) {
+            if (object instanceof String) {
+                MonthYearT monthYearT = (MonthYearT) parameterT;
+                // TODO consumeWireString and debug test
+                monthYearT.setConstValue((String) object);
+            }
         }
     }
+
+
+    String BOOLEAN_FALSE = "N";
+    String BOOLEAN_TRUE = "Y";
 
     SimpleDateFormat hMmSsFormat = new SimpleDateFormat("H:mm:ss");
     SimpleDateFormat hMmFormat = new SimpleDateFormat("H:mm");

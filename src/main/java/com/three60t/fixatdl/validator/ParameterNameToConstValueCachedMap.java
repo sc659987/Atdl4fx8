@@ -49,7 +49,7 @@ public class ParameterNameToConstValueCachedMap implements CachedMap {
 
     public ParameterNameToConstValueCachedMap(List<ParameterT> parameterTS) {
         stringParameterTMap = parameterTS
-                .stream()
+                .parallelStream()
                 .collect(Collectors.toMap(ParameterT::getName, parameterT -> parameterT));
     }
 
