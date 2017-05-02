@@ -1,5 +1,7 @@
 package com.three60t.fixatdl.ui.fx8.element;
 
+import com.three60t.fixatdl.converter.ControlTTypeConverter;
+import com.three60t.fixatdl.converter.TypeConverterFactory;
 import com.three60t.fixatdl.model.core.ParameterT;
 import com.three60t.fixatdl.model.layout.RadioButtonT;
 import com.three60t.fixatdl.ui.common.element.FixRadioButtonUiElement;
@@ -22,10 +24,15 @@ public class FxFixRadioButtonUiElement implements FixRadioButtonUiElement<RadioB
     private static final Map<String, ToggleGroup> TOGGLE_GROUPS = new HashMap<>();
     private ObjectProperty<String> controlIdEmitter = new SimpleObjectProperty<>();
 
+    private ControlTTypeConverter<?> controlTTypeConverter;
+
     @Override
     public RadioButton create() {
         if (this.radioButtonT != null) {
             this.radioButton = new RadioButton(this.radioButtonT.getLabel());
+
+            this.controlTTypeConverter = TypeConverterFactory.createControlTypeConverter(radioButtonT,parameterT);
+
             this.radioButton.setId(this.radioButtonT.getID());
             if (!Utils.isEmpty(this.radioButtonT.getRadioGroup())) {
                 ToggleGroup toggleGroup = TOGGLE_GROUPS.get(this.radioButtonT.getRadioGroup());
@@ -102,5 +109,10 @@ public class FxFixRadioButtonUiElement implements FixRadioButtonUiElement<RadioB
     @Override
     public void makeEnable(boolean enable) {
         radioButton.setDisable(!enable);
+    }
+
+    @Override
+    public ControlTTypeConverter<?> getControlTTypeConverter() {
+        return this.controlTTypeConverter;
     }
 }

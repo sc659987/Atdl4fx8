@@ -21,6 +21,7 @@ public class BooleanConverter implements
     public BooleanConverter(ParameterT parameterT) {
         this.parameterT = parameterT;
     }
+    // parameter related
 
     @Override
     public Boolean convertParameterConstToComparable() {

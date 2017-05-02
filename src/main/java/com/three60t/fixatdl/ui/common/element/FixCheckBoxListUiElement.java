@@ -7,5 +7,5 @@ public interface FixCheckBoxListUiElement<T, K extends Comparable<K>> extends Fi
     /**
      * @param checkBoxListT
      */
-    FixCheckBoxListUiElement<T, K> setCheckBoxListT(CheckBoxListT checkBoxListT);
+    void setCheckBoxListT(CheckBoxListT checkBoxListT);
 }

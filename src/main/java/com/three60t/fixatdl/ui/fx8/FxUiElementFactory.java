@@ -9,6 +9,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.layout.Pane;
+import org.joda.time.DateTime;
 
 public class FxUiElementFactory implements UiElementAbstractFactory {
 
@@ -68,7 +69,7 @@ public class FxUiElementFactory implements UiElementAbstractFactory {
     }
 
     @Override
-    public FixClockUiElement<Pane, String> instantiateNewClock() {
+    public FixClockUiElement<Pane, DateTime> instantiateNewClock() {
         return new FxFixClockUiElement();
     }
 

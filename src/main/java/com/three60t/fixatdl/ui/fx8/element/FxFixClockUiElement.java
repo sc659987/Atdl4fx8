@@ -1,5 +1,7 @@
 package com.three60t.fixatdl.ui.fx8.element;
 
+import com.three60t.fixatdl.converter.ControlTTypeConverter;
+import com.three60t.fixatdl.converter.TypeConverterFactory;
 import com.three60t.fixatdl.model.core.ParameterT;
 import com.three60t.fixatdl.model.core.UTCTimestampT;
 import com.three60t.fixatdl.model.layout.ClockT;
@@ -12,6 +14,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import org.joda.time.DateTime;
 
 import javax.xml.datatype.DatatypeConstants;
 import javax.xml.datatype.XMLGregorianCalendar;
@@ -23,7 +26,7 @@ import java.time.temporal.ChronoField;
 import java.util.Collections;
 import java.util.List;
 
-public class FxFixClockUiElement implements FixClockUiElement<Pane, String> {
+public class FxFixClockUiElement implements FixClockUiElement<Pane, DateTime> {
 
     private TimeSpinner timeSpinner;
     private DateSpinner dateSpinner;
@@ -34,10 +37,15 @@ public class FxFixClockUiElement implements FixClockUiElement<Pane, String> {
     private ObjectProperty<String> controlIdEmitter = new SimpleObjectProperty<>();
     private int nextColumn = 0;
 
+    private ControlTTypeConverter<?> controlTTypeConverter;
+
     @Override
     public Pane create() {
         if (this.clockT != null) {
             this.gridPane = new GridPane();
+
+            this.controlTTypeConverter = TypeConverterFactory.createControlTypeConverter(clockT, parameterT);
+
             if (!Utils.isEmpty(this.clockT.getLabel()))
                 this.gridPane.add(new Label(this.clockT.getLabel()), this.nextColumn++, 0);
 
@@ -52,9 +60,9 @@ public class FxFixClockUiElement implements FixClockUiElement<Pane, String> {
             if (this.clockT.getInitValue() != null && this.clockT.getLocalMktTz() != null) {
                 XMLGregorianCalendar xmlGregorianCalendar = this.clockT.getInitValue();
 
-                setValue(xmlGregorianCalendar.getHour() + ":"
-                        + xmlGregorianCalendar.getMinute() + ":"
-                        + xmlGregorianCalendar.getSecond());
+//                setValue(xmlGregorianCalendar.getHour() + ":"
+//                        + xmlGregorianCalendar.getMinute() + ":"
+//                        + xmlGregorianCalendar.getSecond());
             } else {
                 setValue(getValue());
             }
@@ -69,10 +77,10 @@ public class FxFixClockUiElement implements FixClockUiElement<Pane, String> {
 
     private void createByParameter() {
         if (parameterT instanceof UTCTimestampT) {
-            this.dateSpinner = new DateSpinner(LocalDate
-                    .of(year(clockT.getInitValue()),
-                            month(clockT.getInitValue()),
-                            dayOfMonth(clockT.getInitValue())));
+            this.dateSpinner = new DateSpinner(new DateTime()
+                    .withYear(year(clockT.getInitValue()))
+                    .withMonthOfYear(month(clockT.getInitValue()))
+                    .withDayOfMonth(dayOfMonth(clockT.getInitValue())));
             this.gridPane.add(this.dateSpinner, this.nextColumn++, 0);
         }
     }
@@ -125,15 +133,17 @@ public class FxFixClockUiElement implements FixClockUiElement<Pane, String> {
     }
 
     @Override
-    public String getValue() {
-        return this.timeSpinner.getValue().toString();
+    public DateTime getValue() {
+        return this.timeSpinner.getValue();
     }
 
     @Override
-    public void setValue(String s) {
-        if (Utils.isNonEmpty(s))
-            timeSpinner.setTime(s.equals(NULL_VALUE) ? LocalTime.now() : LocalTime.parse(s, ATDL_TIME_ONLY_FORMATTER));
-        //dateSpinner.setTime(LocalDate.now());
+    public void setValue(DateTime s) {
+        // TODO check parse DateTime
+        //if (Utils.isNonEmpty(s))
+//            timeSpinner.setTime(s.equals(NULL_VALUE) ? DateTime.now() : LocalTime.parse(s, ATDL_TIME_ONLY_FORMATTER));
+        timeSpinner.setTime(DateTime.now());
+
         setFieldValueToParameter(getValue(), parameterT);
     }
 
@@ -168,8 +178,8 @@ public class FxFixClockUiElement implements FixClockUiElement<Pane, String> {
     }
 
 
-    private void handleValue() {
-
+    @Override
+    public ControlTTypeConverter<?> getControlTTypeConverter() {
+        return this.controlTTypeConverter;
     }
-
 }

@@ -1,5 +1,7 @@
 package com.three60t.fixatdl.ui.fx8.element;
 
+import com.three60t.fixatdl.converter.ControlTTypeConverter;
+import com.three60t.fixatdl.converter.TypeConverterFactory;
 import com.three60t.fixatdl.model.core.ParameterT;
 import com.three60t.fixatdl.model.layout.ListItemT;
 import com.three60t.fixatdl.model.layout.MultiSelectListT;
@@ -30,10 +32,15 @@ public class FxFixMultiSelectListUiElement implements FixMultiSelectListUiElemen
 
     private GridPane gridPane;
 
+    private ControlTTypeConverter<?> controlTTypeConverter;
+
     @Override
     public Pane create() {
         if (this.multiSelectListT != null) {
             this.gridPane = new GridPane();
+
+            controlTTypeConverter = TypeConverterFactory.createControlTypeConverter(multiSelectListT, parameterT);
+
             if (!Utils.isEmpty(this.multiSelectListT.getLabel())) {
                 this.gridPane.getColumnConstraints().addAll(FxUtils.getOneColumnWidthForGridPane());
                 this.gridPane.add(new Label(this.multiSelectListT.getLabel()), 0,
@@ -107,7 +114,8 @@ public class FxFixMultiSelectListUiElement implements FixMultiSelectListUiElemen
                 .forEach(value -> {
                     multiSelectListView.getSelectionModel().select(value);
                 });
-        setFieldValueToParameter(getValue(), parameterT);
+
+        setFieldValueToParameter(controlTTypeConverter.convertControlValueToParameterValue(getValue()), parameterT);
     }
 
     @Override
@@ -118,5 +126,10 @@ public class FxFixMultiSelectListUiElement implements FixMultiSelectListUiElemen
     @Override
     public void makeEnable(boolean enable) {
         this.multiSelectListView.setDisable(!enable);
+    }
+
+    @Override
+    public ControlTTypeConverter<?> getControlTTypeConverter() {
+        return this.controlTTypeConverter;
     }
 }

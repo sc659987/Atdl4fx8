@@ -1,5 +1,7 @@
 package com.three60t.fixatdl.ui.fx8.element;
 
+import com.three60t.fixatdl.converter.ControlTTypeConverter;
+import com.three60t.fixatdl.converter.TypeConverterFactory;
 import com.three60t.fixatdl.model.core.ParameterT;
 import com.three60t.fixatdl.model.layout.CheckBoxT;
 import com.three60t.fixatdl.ui.common.element.FixCheckBoxUiElement;
@@ -10,7 +12,6 @@ import javafx.scene.control.CheckBox;
 import java.util.Collections;
 import java.util.List;
 
-// TODO check with checkbox group
 public class FxFixCheckBoxUiElement implements FixCheckBoxUiElement<CheckBox, Boolean> {
 
     private CheckBoxT checkBoxT;
@@ -19,10 +20,14 @@ public class FxFixCheckBoxUiElement implements FixCheckBoxUiElement<CheckBox, Bo
 
     private ObjectProperty<String> controlIdEmitter = new SimpleObjectProperty<>();
 
+    private ControlTTypeConverter<?> controlTTypeConverter;
+
     @Override
     public CheckBox create() {
         if (this.checkBoxT != null) {
             this.checkBox = new CheckBox(this.checkBoxT.getLabel());
+
+            this.controlTTypeConverter = TypeConverterFactory.createControlTypeConverter(checkBoxT, parameterT);
 
             if (this.checkBoxT.isInitValue() != null) {
                 this.checkBox.setSelected(this.checkBoxT.isInitValue());
@@ -76,10 +81,20 @@ public class FxFixCheckBoxUiElement implements FixCheckBoxUiElement<CheckBox, Bo
     @Override
     public void setValue(Boolean value) {
         this.checkBox.setSelected(value);
-        if (this.checkBoxT.getCheckedEnumRef() != null)
-            setFieldValueToParameter(this.checkBox.isSelected() ? this.checkBoxT.getCheckedEnumRef() : this.checkBoxT.getUncheckedEnumRef(),
+        if (this.checkBoxT.getCheckedEnumRef() != null
+                && this.checkBoxT.getUncheckedEnumRef() != null)
+            setFieldValueToParameter(getParameterValueFromWireValue(
+                    this.checkBox.isSelected() ? this.checkBoxT.getCheckedEnumRef()
+                            : this.checkBoxT.getUncheckedEnumRef()),
                     this.parameterT);
+    }
 
+    private String getParameterValueFromWireValue(String enumID) {
+        return this.parameterT.getEnumPair()
+                .stream()
+                .filter(enumPairT -> enumPairT.getEnumID().equals(enumID))
+                .findFirst().map(enumPairT -> enumPairT.getWireValue())
+                .orElse(null);
     }
 
     @Override
@@ -90,5 +105,10 @@ public class FxFixCheckBoxUiElement implements FixCheckBoxUiElement<CheckBox, Bo
     @Override
     public void makeEnable(boolean enable) {
         this.checkBox.setDisable(!enable);
+    }
+
+    @Override
+    public ControlTTypeConverter<?> getControlTTypeConverter() {
+        return this.controlTTypeConverter;
     }
 }

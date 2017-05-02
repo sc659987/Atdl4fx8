@@ -6,6 +6,8 @@ import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextFormatter;
 import javafx.util.StringConverter;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -17,12 +19,12 @@ import static java.time.temporal.ChronoField.*;
 /**
  * Created by sainik on 4/27/17.
  */
-public class DateSpinner extends Spinner<LocalDate> {
+public class DateSpinner extends Spinner<DateTime> {
 
     public enum Mode {
         DAY {
             @Override
-            LocalDate increment(LocalDate date, int steps) {
+            DateTime increment(DateTime date, int steps) {
                 return date.plusDays(steps);
             }
 
@@ -35,7 +37,7 @@ public class DateSpinner extends Spinner<LocalDate> {
         },
         MONTH {
             @Override
-            LocalDate increment(LocalDate date, int steps) {
+            DateTime increment(DateTime date, int steps) {
                 return date.plusMonths(steps);
             }
 
@@ -48,7 +50,7 @@ public class DateSpinner extends Spinner<LocalDate> {
         },
         YEAR {
             @Override
-            LocalDate increment(LocalDate date, int steps) {
+            DateTime increment(DateTime date, int steps) {
                 return date.plusYears(steps);
             }
 
@@ -60,39 +62,32 @@ public class DateSpinner extends Spinner<LocalDate> {
         };
 
 
-        abstract LocalDate increment(LocalDate date, int steps);
+        abstract DateTime increment(DateTime date, int steps);
 
         abstract void select(DateSpinner spinner);
 
-        LocalDate decrement(LocalDate date, int steps) {
+        DateTime decrement(DateTime date, int steps) {
             return increment(date, -steps);
         }
     }
 
 
-    DateTimeFormatter formatter = new DateTimeFormatterBuilder()
-            .appendValue(DAY_OF_MONTH, 2)
-            .appendLiteral('.')
-            .appendValue(MONTH_OF_YEAR, 2)
-            .appendLiteral('.')
-            .appendValue(YEAR, 4, 4, SignStyle.NEVER)
-
-            .toFormatter();
+    org.joda.time.format.DateTimeFormatter formatter = DateTimeFormat.forPattern("dd.MM.yyyy");
 
 
-    StringConverter<LocalDate> localDateConverter = new StringConverter<LocalDate>() {
+    StringConverter<DateTime> localDateConverter = new StringConverter<DateTime>() {
         @Override
-        public String toString(LocalDate date) {
-            return formatter.format(date);
+        public String toString(DateTime date) {
+            return formatter.print(date);
         }
 
         @Override
-        public LocalDate fromString(String string) {
+        public DateTime fromString(String string) {
             String[] tokens = string.split("\\.");
             int day = getIntField(tokens, 0);
             int month = getIntField(tokens, 1);
             int year = getIntField(tokens, 2);
-            return LocalDate.of(year, month, day);
+            return new DateTime().withYear(year).withMonthOfYear(month).withDayOfMonth(day);
 
         }
 
@@ -104,7 +99,7 @@ public class DateSpinner extends Spinner<LocalDate> {
         }
     };
 
-    TextFormatter<LocalDate> textFormatter = new TextFormatter<>(localDateConverter, LocalDate.now(), c -> {
+    TextFormatter<DateTime> textFormatter = new TextFormatter<>(localDateConverter, DateTime.now(), c -> {
         String newText = c.getControlNewText();
         if (newText.matches("[0-9]{0,2}.[0-9]{0,2}.[0-9]{4}")) {
             return c;
@@ -112,7 +107,7 @@ public class DateSpinner extends Spinner<LocalDate> {
         return null;
     });
 
-    SpinnerValueFactory<LocalDate> valueFactory = new SpinnerValueFactory<LocalDate>() {
+    SpinnerValueFactory<DateTime> valueFactory = new SpinnerValueFactory<DateTime>() {
 
         {
             setConverter(localDateConverter);
@@ -133,7 +128,7 @@ public class DateSpinner extends Spinner<LocalDate> {
 
     };
 
-    private LocalDate date;
+    private DateTime date;
 
     private final ObjectProperty<Mode> mode = new SimpleObjectProperty<Mode>(Mode.DAY);
 
@@ -149,13 +144,13 @@ public class DateSpinner extends Spinner<LocalDate> {
         modeProperty().set(mode);
     }
 
-    public void setTime(LocalDate date) {
+    public void setTime(DateTime date) {
         this.date = date;
         valueFactory.setValue(this.date);
     }
 
 
-    public DateSpinner(LocalDate date) {
+    public DateSpinner(DateTime date) {
         setEditable(true);
         this.date = date;
         this.valueFactory.setValue(this.date);

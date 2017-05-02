@@ -1,6 +1,7 @@
 package com.three60t.fixatdl.ui.fx8.element;
 
 import com.three60t.fixatdl.controlflow.FxFixAtdlControlFlowRegisterSingleton;
+import com.three60t.fixatdl.converter.ControlTTypeConverter;
 import com.three60t.fixatdl.model.core.ParameterT;
 import com.three60t.fixatdl.model.layout.ControlT;
 import com.three60t.fixatdl.model.layout.StrategyLayoutT;
@@ -88,5 +89,10 @@ public class FxFixLayoutUiElement implements FixLayoutUiElement<Node, String> {
     @Override
     public void makeEnable(boolean enable) {
 
+    }
+
+    @Override
+    public ControlTTypeConverter<?> getControlTTypeConverter() {
+        return null;
     }
 }

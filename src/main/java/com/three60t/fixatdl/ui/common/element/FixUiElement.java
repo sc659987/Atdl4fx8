@@ -18,7 +18,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public interface FixUiElement<T, K extends Comparable<K>> {
+public interface FixUiElement<T, K extends Comparable<?>> {
 
     String NULL_VALUE = "{NULL}";
 
@@ -80,9 +80,6 @@ public interface FixUiElement<T, K extends Comparable<K>> {
      */
     <C extends ControlT> C getControl();
 
-
-    ControlTTypeConverter<?> getControlTTypeConverter();
-
     /****
      *
      * @param names
@@ -100,11 +97,9 @@ public interface FixUiElement<T, K extends Comparable<K>> {
                 }).collect(Collectors.toList()) : null;
     }
 
-    /***
-     *
-     * @param parameterT
-     */
+
     default void voidSetNullInConstant(ParameterT parameterT) {
+        // TODO refactor it
         try {
             Field field = parameterT.getClass().getDeclaredField("constValue");
             field.setAccessible(true);
@@ -120,257 +115,16 @@ public interface FixUiElement<T, K extends Comparable<K>> {
      * @return
      */
     default void setFieldValueToParameter(final Object object, ParameterT parameterT) {
-        if (parameterT == null)
-            return;
-        if (object == null) {
-            voidSetNullInConstant(parameterT);
-            return;
-        }
-
-        if (parameterT instanceof LanguageT) {
-            if (object instanceof String)
-                ((LanguageT) parameterT).setConstValue((String) object);
-        } else if (parameterT instanceof CountryT) {
-            if (object instanceof String)
-                ((CountryT) parameterT).setConstValue((String) object);
-        } else if (parameterT instanceof DataT) {
-            if (object instanceof String)
-                ((DataT) parameterT).setConstValue((String) object);
-        } else if (parameterT instanceof StringT) {
-            if (object instanceof String)
-                ((StringT) parameterT).setConstValue((String) object);
-        } else if (parameterT instanceof ExchangeT) {
-            if (object instanceof String)
-                ((ExchangeT) parameterT).setConstValue((String) object);
-        } else if (parameterT instanceof CharT) {
-            if (object instanceof String) {
-                CharT charT = (CharT) parameterT;
-                charT.setConstValue((String) object);
-            }
-        } else if (parameterT instanceof CurrencyT) {
-            if (object instanceof String) {
-                CurrencyT currencyT = (CurrencyT) parameterT;
-                currencyT.setConstValue((String) object);
-            }
-        }
-        // Integer related data types
-        else if (parameterT instanceof IntT) {
-            IntT intT = (IntT) parameterT;
-            if (object instanceof String) {
+        if (getControlTTypeConverter() != null) {
+            Object parameterValueAfterConversion = getControlTTypeConverter().convertControlValueToParameterValue(object);
+            if (parameterT != null) {
                 try {
-                    intT.setConstValue(Integer.parseInt((String) object));
-                } catch (Exception e) {
-                }
-            } else if (object instanceof Double) {
-                intT.setConstValue(((Double) object).intValue());
-            }
-        } else if (parameterT instanceof SeqNumT) {
-            if (object instanceof String) {
-                try {
-                    ((SeqNumT) parameterT).setConstValue(BigInteger.valueOf(Long.parseLong((String) object)));
-                } catch (NumberFormatException e) {
-                }
-            }
-        } else if (parameterT instanceof TagNumT) {
-            if (object instanceof String) {
-                try {
-                    ((TagNumT) parameterT).setConstValue(BigInteger.valueOf(Long.parseLong((String) object)));
-                } catch (NumberFormatException e) {
-                }
-            }
-        } else if (parameterT instanceof LengthT) {
-            if (object instanceof String) {
-                try {
-                    BigInteger bigDecimal = new BigInteger((String) object);
-                    ((LengthT) parameterT).setConstValue(bigDecimal);
-                } catch (NumberFormatException e) {
-                }
-            } else if (object instanceof BigInteger) {
-                ((LengthT) parameterT).setConstValue((BigInteger) object);
-            }
-        }
-        // end of Integer
-        else if (parameterT instanceof TenorT) {
-            if (object instanceof String) {
-                TenorT tenorT = (TenorT) parameterT;
-                tenorT.setConstValue((String) object);
-            }
-        } else if (parameterT instanceof MultipleStringValueT) {
-            if (object instanceof String) {
-                MultipleStringValueT multipleStringValueT = (MultipleStringValueT) parameterT;
-                try {
-                    String multiValue = (String) object;
-                    multipleStringValueT.setConstValue(multiValue);
-                } catch (Exception e) {
-                }
-            }
-        } else if (parameterT instanceof BooleanT) {
-            // DONE with Atdl4j
-            BooleanT booleanT = (BooleanT) parameterT;
-            if (object instanceof String) {
-                String str = (String) object;
-                booleanT.setConstValue(Utils.isEmpty(str)
-                        ? null : str.equalsIgnoreCase("true")
-                        || str.equals("1")
-                        || str.equals(BOOLEAN_TRUE) ? BOOLEAN_TRUE : BOOLEAN_FALSE);
-            } else if (object instanceof BigDecimal) {
-                BigDecimal num = (BigDecimal) object;
-                booleanT.setConstValue(num == null ? null : num.intValue() == 1 ?
-                        BOOLEAN_TRUE : BOOLEAN_FALSE);
-            } else if (object instanceof BigInteger) {
-                BigInteger num = (BigInteger) object;
-                booleanT.setConstValue(num == null ? null : num.intValue() == 1 ?
-                        BOOLEAN_TRUE : BOOLEAN_FALSE);
-            }
-        } else if (parameterT instanceof MultipleCharValueT) {
-            if (object instanceof String) {
-                MultipleCharValueT charValueT = (MultipleCharValueT) parameterT;
-                try {
-                    String value = (String) object;
-                    charValueT.setConstValue(new String(value));
-                } catch (Exception e) {
-                }
-            }
-        }
-        // float related
-        else if (parameterT instanceof FloatT) {
-            FloatT floatT = (FloatT) parameterT;
-            if (parameterT.getEnumPair() != null && parameterT.getEnumPair().size() > 0) {
-                floatT.setConstValue(new BigDecimal(parameterT.getEnumPair().stream().filter(enumPairT -> enumPairT.getEnumID().equals(object)).findFirst().orElseGet(() -> null).getWireValue()));
-            } else if (object instanceof String) {
-                floatT.setConstValue(new BigDecimal((String) object));
-            } else if (object instanceof Number) {
-                floatT.setConstValue(new BigDecimal(((Number) object).doubleValue()));
-            } else {
-                return;
-            }
-        } else if (parameterT instanceof PriceT) {
-            if (object instanceof String) {
-                try {
-                    BigDecimal bigDecimal = new BigDecimal((String) object);
-                    PriceT t = (PriceT) parameterT;
-                    ((PriceT) parameterT).setConstValue(bigDecimal);
-                } catch (NumberFormatException e) {
-                }
-            }
-        } else if (parameterT instanceof AmtT) {
-            if (object instanceof String) {
-                try {
-                    BigDecimal bigDecimal = new BigDecimal((String) object);
-                    AmtT amtT = (AmtT) parameterT;
-                    amtT.setConstValue(bigDecimal);
+                    Field field = parameterT.getClass().getDeclaredField("constValue");
+                    field.setAccessible(true);
+                    field.set(parameterT, parameterValueAfterConversion);
                 } catch (Exception e) {
 
                 }
-            }
-        } else if (parameterT instanceof PercentageT) {
-            if (object instanceof String) {
-                try {
-                    BigDecimal bigDecimal = new BigDecimal((String) object);
-                    PercentageT percentageT = (PercentageT) parameterT;
-                    percentageT.setConstValue(bigDecimal);
-                } catch (Exception e) {
-
-                }
-            }
-        } else if (parameterT instanceof QtyT) {
-            if (object instanceof String) {
-                try {
-                    BigDecimal bigDecimal = new BigDecimal((String) object);
-                    QtyT qtyT = (QtyT) parameterT;
-                    qtyT.setConstValue(bigDecimal);
-                } catch (Exception e) {
-
-                }
-            }
-        } else if (parameterT instanceof PriceOffsetT) {
-            if (object instanceof String) {
-                try {
-                    BigDecimal bigDecimal = new BigDecimal((String) object);
-                    PriceOffsetT priceOffsetT = (PriceOffsetT) parameterT;
-                    priceOffsetT.setConstValue(bigDecimal);
-                } catch (Exception e) {
-                }
-            }
-        }
-
-        // date related
-
-
-        else if (parameterT instanceof UTCTimestampT) {
-            if (object instanceof String)
-                try {
-                    UTCTimestampT utcTimestampT = (UTCTimestampT) parameterT;
-                    XMLGregorianCalendar xmlGregorianCalendar = DatatypeFactory
-                            .newInstance()
-                            .newXMLGregorianCalendar(getValue((String) object, hMmSsFormat, hMmFormat));
-                    xmlGregorianCalendar.setYear(DatatypeConstants.FIELD_UNDEFINED);
-                    xmlGregorianCalendar.setMonth(DatatypeConstants.FIELD_UNDEFINED);
-                    xmlGregorianCalendar.setDay(DatatypeConstants.FIELD_UNDEFINED);
-                    utcTimestampT.setConstValue(xmlGregorianCalendar);
-                } catch (Exception e) {
-                }
-        } else if (parameterT instanceof TZTimeOnlyT) {
-            //
-            if (object instanceof String) {
-                TZTimeOnlyT tzTimeOnlyT = (TZTimeOnlyT) parameterT;
-                try {
-                    XMLGregorianCalendar xmlGregorianCalendar = DatatypeFactory.newInstance()
-                            .newXMLGregorianCalendar(getValue((String) object, hMmSsFormat, hMmFormat));
-                    xmlGregorianCalendar.setYear(DatatypeConstants.FIELD_UNDEFINED);
-                    xmlGregorianCalendar.setMonth(DatatypeConstants.FIELD_UNDEFINED);
-                    xmlGregorianCalendar.setDay(DatatypeConstants.FIELD_UNDEFINED);
-                    tzTimeOnlyT.setConstValue(xmlGregorianCalendar);
-                } catch (Exception e) {
-                }
-            }
-        } else if (parameterT instanceof UTCDateOnlyT) {
-            //
-            if (object instanceof String) {
-                UTCDateOnlyT utcDateOnlyT = (UTCDateOnlyT) parameterT;
-                try {
-                    XMLGregorianCalendar xmlGregorianCalendar = DatatypeFactory.newInstance()
-                            .newXMLGregorianCalendar(getValue((String) object, mmDdYyyyFormat));
-                    xmlGregorianCalendar.setHour(DatatypeConstants.FIELD_UNDEFINED);
-                    xmlGregorianCalendar.setMinute(DatatypeConstants.FIELD_UNDEFINED);
-                    xmlGregorianCalendar.setSecond(DatatypeConstants.FIELD_UNDEFINED);
-                    utcDateOnlyT.setConstValue(xmlGregorianCalendar);
-                } catch (Exception e) {
-                }
-            }
-        } else if (parameterT instanceof UTCTimeOnlyT) {
-            if (object instanceof String) {
-                UTCTimeOnlyT utcTimeOnlyT = (UTCTimeOnlyT) parameterT;
-                try {
-                    utcTimeOnlyT.setConstValue(DatatypeFactory.newInstance().newXMLGregorianCalendar(getValue((String) object, hMmSsFormat)));
-                } catch (Exception e) {
-                }
-            }
-        } else if (parameterT instanceof TZTimestampT) {
-            // TODO read about the date type
-            if (object instanceof String) {
-                TZTimestampT tzTimestampT = (TZTimestampT) parameterT;
-                try {
-                    tzTimestampT.setConstValue(DatatypeFactory.newInstance()
-                            .newXMLGregorianCalendar(getValue((String) object, hMmSsFormat, hMmFormat)));
-                } catch (Exception e) {
-                }
-            }
-        } else if (parameterT instanceof LocalMktDateT) {
-            // TODO read about the date type
-            if (object instanceof String) {
-                LocalMktDateT localMktDateT = (LocalMktDateT) parameterT;
-                try {
-                    localMktDateT.setConstValue(DatatypeFactory.newInstance()
-                            .newXMLGregorianCalendar(getValue((String) object, hMmSsFormat, hMmFormat)));
-                } catch (Exception e) {
-                }
-            }
-        } else if (parameterT instanceof MonthYearT) {
-            if (object instanceof String) {
-                MonthYearT monthYearT = (MonthYearT) parameterT;
-                // TODO consumeWireString and debug test
-                monthYearT.setConstValue((String) object);
             }
         }
     }
@@ -393,5 +147,7 @@ public interface FixUiElement<T, K extends Comparable<K>> {
             }
         return null;
     }
+
+    ControlTTypeConverter<?> getControlTTypeConverter();
 
 }

@@ -18,7 +18,7 @@ public class TypeConverterFactory {
     /*
      * Create adapter based on ParameterT
      */
-    public ParameterTTypeConverter<?, ?> createParameterTypeConverter(ParameterT parameter) {
+    public static ParameterTTypeConverter<?, ?> createParameterTypeConverter(ParameterT parameter) {
         if (parameter instanceof StringT || parameter instanceof CharT || parameter instanceof MultipleCharValueT
                 || parameter instanceof MultipleStringValueT || parameter instanceof CurrencyT || parameter instanceof ExchangeT
                 || parameter instanceof DataT) {
@@ -44,7 +44,11 @@ public class TypeConverterFactory {
     /*
      * Create adapter based on ControlT (native type for each control)
      */
-    public ControlTTypeConverter<?> createControlTypeConverter(ControlT control, ParameterT parameterT) {
+    public static ControlTTypeConverter<?> createControlTypeConverter(ControlT control, ParameterT parameterT) {
+
+        if (parameterT == null)
+            return null;
+
         if (control instanceof TextFieldT || control instanceof SingleSelectListT || control instanceof MultiSelectListT
                 || control instanceof CheckBoxListT || control instanceof DropDownListT || control instanceof EditableDropDownListT
                 || control instanceof RadioButtonListT || control instanceof HiddenFieldT || control instanceof LabelT) {
@@ -57,9 +61,8 @@ public class TypeConverterFactory {
             return new BooleanConverter(parameterT);
         } else if (control instanceof ClockT) {
             return new DateTimeConverter(parameterT);
-        } else {
-            throw new IllegalArgumentException("Unsupported ControlT type: " + control.getClass().getName());
         }
+        return null;
     }
 
     /*
@@ -67,7 +70,7 @@ public class TypeConverterFactory {
      * (eg String, BigDecimal, DateTime, etc)
      */
     // 3/12/2010 Scott Atwell added
-    public Class<?> getParameterDatatype(ParameterT aParameter) {
+    public static Class<?> getParameterDatatype(ParameterT aParameter) {
         if (aParameter instanceof StringT || aParameter instanceof CharT
                 || aParameter instanceof MultipleCharValueT
                 || aParameter instanceof MultipleStringValueT

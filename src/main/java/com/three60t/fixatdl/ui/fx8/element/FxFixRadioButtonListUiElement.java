@@ -1,5 +1,7 @@
 package com.three60t.fixatdl.ui.fx8.element;
 
+import com.three60t.fixatdl.converter.ControlTTypeConverter;
+import com.three60t.fixatdl.converter.TypeConverterFactory;
 import com.three60t.fixatdl.model.core.ParameterT;
 import com.three60t.fixatdl.model.layout.PanelOrientationT;
 import com.three60t.fixatdl.model.layout.RadioButtonListT;
@@ -28,10 +30,15 @@ public class FxFixRadioButtonListUiElement implements FixRadioButtonListUiElemen
 
     private ObjectProperty<String> controlIdEmitter = new SimpleObjectProperty<>();
 
+    private ControlTTypeConverter<?> controlTTypeConverter;
+
     @Override
     public Pane create() {
         if (this.radioButtonListT != null) {
             this.gridPane = new GridPane();
+
+            this.controlTTypeConverter = TypeConverterFactory.createControlTypeConverter(radioButtonListT, parameterT);
+
             this.toggleGroup = new ToggleGroup();
             this.gridPane.add(new Label(this.radioButtonListT.getLabel()), 0, 0, 1, 1);
             this.gridPane.setHgap(3);
@@ -122,5 +129,10 @@ public class FxFixRadioButtonListUiElement implements FixRadioButtonListUiElemen
         radioButtonList.forEach(radioButton -> {
             radioButton.setDisable(!enable);
         });
+    }
+
+    @Override
+    public ControlTTypeConverter<?> getControlTTypeConverter() {
+        return this.controlTTypeConverter;
     }
 }

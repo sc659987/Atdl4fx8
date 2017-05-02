@@ -1,5 +1,7 @@
 package com.three60t.fixatdl.ui.fx8.element;
 
+import com.three60t.fixatdl.converter.ControlTTypeConverter;
+import com.three60t.fixatdl.converter.TypeConverterFactory;
 import com.three60t.fixatdl.model.core.ParameterT;
 import com.three60t.fixatdl.model.layout.ListItemT;
 import com.three60t.fixatdl.model.layout.SingleSelectListT;
@@ -30,9 +32,14 @@ public class FxFixSingleSelectListUiElement
 
     private ObjectProperty<String> controlIdEmitter = new SimpleObjectProperty<>();
 
+    private ControlTTypeConverter<?> controlTTypeConverter;
+
     @Override
     public Pane create() {
         if (this.singleSelectListT != null) {
+
+            this.controlTTypeConverter = TypeConverterFactory.createControlTypeConverter(singleSelectListT, parameterT);
+
             this.gridPane = new GridPane();
             if (!Utils.isEmpty(this.singleSelectListT.getLabel())) {
                 this.gridPane.getColumnConstraints().addAll(FxUtils.getOneColumnWidthForGridPane());
@@ -123,5 +130,10 @@ public class FxFixSingleSelectListUiElement
     @Override
     public void makeEnable(boolean enable) {
         this.singleSelectListView.setDisable(!enable);
+    }
+
+    @Override
+    public ControlTTypeConverter<?> getControlTTypeConverter() {
+        return this.controlTTypeConverter;
     }
 }

@@ -1,5 +1,7 @@
 package com.three60t.fixatdl.ui.fx8.element;
 
+import com.three60t.fixatdl.converter.ControlTTypeConverter;
+import com.three60t.fixatdl.converter.TypeConverterFactory;
 import com.three60t.fixatdl.model.core.ParameterT;
 import com.three60t.fixatdl.model.layout.EditableDropDownListT;
 import com.three60t.fixatdl.model.layout.ListItemT;
@@ -26,12 +28,17 @@ public class FxFixEditableDropDownListUiElement
     private int nextColumn = 0;
     private ParameterT parameterT;
 
-    private ObjectProperty<String> checkedProperty = new SimpleObjectProperty<>();
+    private ObjectProperty<String> controlIdEmitter = new SimpleObjectProperty<>();
+
+    private ControlTTypeConverter<?> controlTTypeConverter;
 
     @Override
     public Pane create() {
         if (this.editableDropDownListT != null) {
             this.gridPane = new GridPane();
+
+            this.controlTTypeConverter = TypeConverterFactory.createControlTypeConverter(editableDropDownListT, parameterT);
+
             if (Utils.isNonEmpty(this.editableDropDownListT.getLabel()))
                 this.gridPane.add(new Label(this.editableDropDownListT.getLabel()),
                         this.nextColumn++, 0);
@@ -47,7 +54,7 @@ public class FxFixEditableDropDownListUiElement
                 setValue(this.editableDropDownListT.getInitValue());
 
             this.editableComboBox.setOnAction(event -> {
-                this.checkedProperty.set(editableDropDownListT.getID() + ":" + getValue());
+                this.controlIdEmitter.set(editableDropDownListT.getID() + ":" + getValue());
 
                 if (this.parameterT != null)
                     setFieldValueToParameter(editableComboBox.getValue(), this.parameterT);
@@ -79,7 +86,7 @@ public class FxFixEditableDropDownListUiElement
 
     @Override
     public ObjectProperty<String> listenChange() {
-        return this.checkedProperty;
+        return this.controlIdEmitter;
     }
 
     @Override
@@ -117,4 +124,8 @@ public class FxFixEditableDropDownListUiElement
         this.editableComboBox.setDisable(!enable);
     }
 
+    @Override
+    public ControlTTypeConverter<?> getControlTTypeConverter() {
+        return this.controlTTypeConverter;
+    }
 }

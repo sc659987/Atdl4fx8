@@ -83,7 +83,7 @@ public class DatatypeConverter {
      * @param aValue
      * @return
      */
-    public  static Boolean convertValueToBooleanDatatype(Object aValue) {
+    public static Boolean convertValueToBooleanDatatype(Object aValue) {
         if (aValue == null) {
             return null;
         } else if (aValue instanceof Boolean) {
@@ -139,6 +139,8 @@ public class DatatypeConverter {
                 return new BigDecimal(1);
             else
                 return new BigDecimal(0);
+        } else if (aValue instanceof Double) {
+            return new BigDecimal((Double) aValue);
         } else {
             throw new IllegalArgumentException("Unsupported convertValueToBigDecimalDatatype() datatype " + aValue.getClass() + " value: " + aValue);
         }

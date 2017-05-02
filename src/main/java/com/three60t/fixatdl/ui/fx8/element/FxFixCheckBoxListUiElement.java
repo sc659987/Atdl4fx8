@@ -1,6 +1,7 @@
 package com.three60t.fixatdl.ui.fx8.element;
 
 import com.three60t.fixatdl.converter.ControlTTypeConverter;
+import com.three60t.fixatdl.converter.TypeConverterFactory;
 import com.three60t.fixatdl.model.core.ParameterT;
 import com.three60t.fixatdl.model.layout.CheckBoxListT;
 import com.three60t.fixatdl.model.layout.PanelOrientationT;
@@ -36,6 +37,8 @@ public class FxFixCheckBoxListUiElement implements FixCheckBoxListUiElement<Pane
     public Pane create() {
         if (this.checkBoxListT != null) {
             this.gridPane = new GridPane();
+
+            this.controlTTypeConverter = TypeConverterFactory.createControlTypeConverter(checkBoxListT, parameterT);
 
             // GUI label addition to grid
             if (!Utils.isEmpty(this.checkBoxListT.getLabel()))
@@ -77,7 +80,7 @@ public class FxFixCheckBoxListUiElement implements FixCheckBoxListUiElement<Pane
                 // set the property to notify changes
                 controlIdEmitter.setValue(this.checkBoxListT.getID() + ":" + getValue());
                 // set the parameter when ever value is changed
-                setFieldValueToParameter(getValue(), parameterT);
+                setValue(getValue());
             }));
 
             // GUI arrangement of checkboxes
@@ -99,9 +102,8 @@ public class FxFixCheckBoxListUiElement implements FixCheckBoxListUiElement<Pane
     }
 
     @Override
-    public FxFixCheckBoxListUiElement setCheckBoxListT(CheckBoxListT checkBoxListT) {
+    public void setCheckBoxListT(CheckBoxListT checkBoxListT) {
         this.checkBoxListT = checkBoxListT;
-        return this;
     }
 
     @Override
@@ -134,8 +136,19 @@ public class FxFixCheckBoxListUiElement implements FixCheckBoxListUiElement<Pane
         Arrays.asList(strings.split(" ")).forEach(s -> {
             enumIdAndCheckBoxMap.get(s).setSelected(true);
         });
-        setFieldValueToParameter(getValue(), parameterT);
+        setFieldValueToParameter(controlTTypeConverter
+                .convertControlValueToParameterValue(getParameterValueFromWireValue(getValue())), parameterT);
     }
+
+    private String getParameterValueFromWireValue(String enumID) {
+        return this.parameterT.getEnumPair()
+                .stream()
+                .filter(enumPairT -> enumPairT.getEnumID().equals(enumID))
+                .findFirst()
+                .map(enumPairT -> enumPairT.getWireValue())
+                .orElse(null);
+    }
+
 
     @Override
     public void makeVisible(boolean visible) {
@@ -153,9 +166,8 @@ public class FxFixCheckBoxListUiElement implements FixCheckBoxListUiElement<Pane
         });
     }
 
-
     @Override
     public ControlTTypeConverter<?> getControlTTypeConverter() {
-        return null;
+        return this.controlTTypeConverter;
     }
 }

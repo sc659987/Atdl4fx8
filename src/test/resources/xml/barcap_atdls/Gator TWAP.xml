@@ -41,7 +41,7 @@ tag957Support="true"
 		<Parameter name="stopLevel" xsi:type="Price_t" use="optional" />
 		<Parameter name="atStopLevelBehaviour" xsi:type="String_t" use="optional">
 			<EnumPair enumID="e_NotSet" wireValue="{NULL}" />
-			<EnumPair enumID="e_Cancel" wireValue="Cancel" />
+			<EnumPair enumID="e_Cancel" wireValue="Cancel1" />
 			<EnumPair enumID="e_Fill" wireValue="Fill" />
 		</Parameter>
 

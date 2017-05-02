@@ -50,7 +50,6 @@
                         </lay:Control>
                     </lay:StrategyPanel>
                 </lay:StrategyPanel>
-
                 <lay:StrategyPanel title="End Time" orientation="VERTICAL" collapsible="false">
                     <lay:StrategyPanel orientation="HORIZONTAL" collapsible="false">
                         <lay:Control ID="c_EnableDuration" xsi:type="lay:RadioButton_t" label="Duration In Minutes"
@@ -62,7 +61,6 @@
                             </flow:StateRule>
                         </lay:Control>
                     </lay:StrategyPanel>
-
                     <lay:StrategyPanel collapsible="false" orientation="HORIZONTAL">
                         <lay:Control ID="c_EnableEndTime" xsi:type="lay:RadioButton_t" label="Time" initValue="true"
                                      radioGroup="EndTimeRB"/>

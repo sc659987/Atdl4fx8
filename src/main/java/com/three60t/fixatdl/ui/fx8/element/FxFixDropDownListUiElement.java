@@ -1,5 +1,8 @@
 package com.three60t.fixatdl.ui.fx8.element;
 
+import com.three60t.fixatdl.converter.ControlTTypeConverter;
+import com.three60t.fixatdl.converter.StringConverter;
+import com.three60t.fixatdl.converter.TypeConverterFactory;
 import com.three60t.fixatdl.model.core.ParameterT;
 import com.three60t.fixatdl.model.layout.DropDownListT;
 import com.three60t.fixatdl.model.layout.ListItemT;
@@ -25,6 +28,8 @@ public class FxFixDropDownListUiElement implements FixDropDownListUiElement<Pane
 
     private ObjectProperty<String> controlIdEmitter = new SimpleObjectProperty<>();
 
+    private ControlTTypeConverter<?> controlTTypeConverter;
+
     @Override
     public void setDropDownList(DropDownListT downList) {
         this.dropDownListT = downList;
@@ -33,27 +38,21 @@ public class FxFixDropDownListUiElement implements FixDropDownListUiElement<Pane
     @Override
     public Pane create() {
         if (this.dropDownListT != null) {
-
             this.gridPane = new GridPane();
-
-            if (!Utils.isEmpty(this.dropDownListT.getLabel())) {
+            this.controlTTypeConverter = TypeConverterFactory.createControlTypeConverter(dropDownListT, parameterT);
+            if (!Utils.isEmpty(this.dropDownListT.getLabel()))
                 this.gridPane.add(new Label(this.dropDownListT.getLabel()), this.nextColumn++, 0);
-            }
             this.gridPane.setHgap(3);
             this.comboBox.getItems().addAll(this.dropDownListT.getListItem());
-
             if (Utils.isEmpty(this.dropDownListT.getInitValue()))
                 this.comboBox.getSelectionModel().selectFirst();
             else
                 setValue(this.dropDownListT.getInitValue());
-
             this.comboBox.setOnAction(event -> {
-                setFieldValueToParameter(getValue(), this.parameterT);
+                setFieldValueToParameter(getParameterValueFromWireValue(getValue()), this.parameterT);
                 this.controlIdEmitter.setValue(dropDownListT.getID() + ":" + comboBox.getValue());
             });
-
             this.gridPane.add(this.comboBox, this.nextColumn, 0);
-
             return this.gridPane;
         }
         return null;
@@ -94,8 +93,17 @@ public class FxFixDropDownListUiElement implements FixDropDownListUiElement<Pane
                 .findFirst()
                 .ifPresent(listItemT -> {
                     this.comboBox.setValue(listItemT);
-                    setFieldValueToParameter(getValue(), this.parameterT);
+                    setFieldValueToParameter(getParameterValueFromWireValue(getValue()), this.parameterT);
                 });
+    }
+
+    private String getParameterValueFromWireValue(String enumID) {
+        return this.parameterT.getEnumPair()
+                .stream()
+                .filter(enumPairT -> enumPairT.getEnumID().equals(enumID))
+                .findFirst()
+                .map(enumPairT -> enumPairT.getWireValue())
+                .orElse(null);
     }
 
     @Override
@@ -106,5 +114,12 @@ public class FxFixDropDownListUiElement implements FixDropDownListUiElement<Pane
     @Override
     public void makeEnable(boolean enable) {
         this.comboBox.setDisable(!enable);
+        controlTTypeConverter.convertControlValueToParameterValue(getValue());
+        ((StringConverter) controlTTypeConverter).convertParameterConstToFixWireValue();
+    }
+
+    @Override
+    public ControlTTypeConverter<?> getControlTTypeConverter() {
+        return this.controlTTypeConverter;
     }
 }

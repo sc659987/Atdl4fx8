@@ -16,7 +16,6 @@ public class StringConverter implements ParameterTTypeConverter<String, Paramete
 
     private ParameterT parameterT;
 
-
     public StringConverter(ParameterT parameterT) {
         this.parameterT = parameterT;
     }
@@ -50,9 +49,7 @@ public class StringConverter implements ParameterTTypeConverter<String, Paramete
 
     @Override
     public Object convertFixWireValueToParameterConst(String aFixWireValue) {
-
         String str = convertStringToParameterValue(aFixWireValue);
-
         if (getParameter() instanceof MultipleCharValueT && ((MultipleCharValueT) getParameter()).isInvertOnWire()) {
             invertOnWire(str);
         } else if (getParameter() instanceof MultipleStringValueT && ((MultipleStringValueT) getParameter()).isInvertOnWire()) {
@@ -101,13 +98,10 @@ public class StringConverter implements ParameterTTypeConverter<String, Paramete
             } catch (NumberFormatException e) {
                 throw new NumberFormatException("Invalid Decimal Number Format: [" + aValue + "] for Parameter: " + parameterT.getName());
             }
-
             // -- Divide Control's value by 100 --
             tempBigDecimal = tempBigDecimal.scaleByPowerOfTen(-2);
-
             return tempBigDecimal;
         } else {
-            // -- aDatatypeIfNull=DatatypeConverter.DATATYPE_STRING --
             return DatatypeConverter.convertValueToDatatype(aValue, getParameterDatatype(String.class));
         }
     }
@@ -161,4 +155,7 @@ public class StringConverter implements ParameterTTypeConverter<String, Paramete
     public String convertStringToControlValue(String aString) {
         return convertControlValueToControlComparable(aString);
     }
+
+
+
 }

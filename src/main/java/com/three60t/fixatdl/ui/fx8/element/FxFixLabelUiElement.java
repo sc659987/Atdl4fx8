@@ -1,5 +1,7 @@
 package com.three60t.fixatdl.ui.fx8.element;
 
+import com.three60t.fixatdl.converter.ControlTTypeConverter;
+import com.three60t.fixatdl.converter.TypeConverterFactory;
 import com.three60t.fixatdl.model.core.ParameterT;
 import com.three60t.fixatdl.model.layout.LabelT;
 import com.three60t.fixatdl.ui.common.element.FixLabelUiElement;
@@ -9,7 +11,7 @@ import javafx.scene.control.Label;
 import java.util.Collections;
 import java.util.List;
 
-//TODO check with specification
+//TODO check with specification label text can be changed
 public class FxFixLabelUiElement implements FixLabelUiElement<Label, String> {
 
     private Label label;
@@ -17,9 +19,13 @@ public class FxFixLabelUiElement implements FixLabelUiElement<Label, String> {
 
     private ParameterT parameterT;
 
+    private ControlTTypeConverter<?> controlTTypeConverter;
+
     @Override
     public Label create() {
         if (this.labelT != null) {
+            controlTTypeConverter = TypeConverterFactory.createControlTypeConverter(labelT, parameterT);
+
             this.label = new Label();
             this.label.setText(this.labelT.getLabel());
             return this.label;
@@ -75,4 +81,8 @@ public class FxFixLabelUiElement implements FixLabelUiElement<Label, String> {
         this.label.setDisable(!enable);
     }
 
+    @Override
+    public ControlTTypeConverter<?> getControlTTypeConverter() {
+        return this.controlTTypeConverter;
+    }
 }

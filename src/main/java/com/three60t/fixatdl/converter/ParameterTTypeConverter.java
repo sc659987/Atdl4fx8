@@ -49,7 +49,14 @@ public interface ParameterTTypeConverter<E extends Comparable<?>, F extends Para
 
     default Class<?> getParameterDatatype(Class<?> classIfNull) {
         if (getParameter() != null) {
-            return getParameter().getClass();
+
+            ParameterT tempParameter = getParameter();
+
+            if (tempParameter != null) {
+                return TypeConverterFactory.getParameterDatatype(tempParameter);
+            } else {
+                return null;
+            }
         } else {
             return classIfNull;
         }

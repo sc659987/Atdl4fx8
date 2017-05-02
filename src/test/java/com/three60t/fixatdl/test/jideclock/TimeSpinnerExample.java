@@ -14,12 +14,12 @@ public class TimeSpinnerExample extends Application {
 
 		TimeSpinner spinner = new TimeSpinner();
 
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm:ss a");
-		spinner.valueProperty().addListener((obs, oldTime, newTime) -> System.out.println(formatter.format(newTime)));
-
-		StackPane root = new StackPane(spinner);
-		Scene scene = new Scene(root, 350, 120);
-		primaryStage.setScene(scene);
+//		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm:ss a");
+//		spinner.valueProperty().addListener((obs, oldTime, newTime) -> System.out.println(formatter.format(newTime)));
+//
+//		StackPane root = new StackPane(spinner);
+//		Scene scene = new Scene(root, 350, 120);
+//		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
 

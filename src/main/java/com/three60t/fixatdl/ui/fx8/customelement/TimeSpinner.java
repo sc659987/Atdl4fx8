@@ -7,24 +7,22 @@ import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.input.InputEvent;
 import javafx.util.StringConverter;
-
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
 
 /**
  * Created by sainik on 3/27/17.
  */
-// TODO clean the code
-public class TimeSpinner extends Spinner<LocalTime> {
+public class TimeSpinner extends Spinner<DateTime> {
+
+
     // Mode represents the unit that is currently being edited.
     // For convenience expose methods for incrementing and decrementing that
     // unit, and for selecting the appropriate portion in a spinner's editor
-
-
     public enum Mode {
         HOURS {
             @Override
-            LocalTime increment(LocalTime time, int steps) {
+            DateTime increment(DateTime time, int steps) {
                 return time.plusHours(steps);
             }
 
@@ -36,7 +34,7 @@ public class TimeSpinner extends Spinner<LocalTime> {
         },
         MINUTES {
             @Override
-            LocalTime increment(LocalTime time, int steps) {
+            DateTime increment(DateTime time, int steps) {
                 return time.plusMinutes(steps);
             }
 
@@ -49,7 +47,7 @@ public class TimeSpinner extends Spinner<LocalTime> {
         },
         SECONDS {
             @Override
-            LocalTime increment(LocalTime time, int steps) {
+            DateTime increment(DateTime time, int steps) {
                 return time.plusSeconds(steps);
             }
 
@@ -60,34 +58,37 @@ public class TimeSpinner extends Spinner<LocalTime> {
             }
         };
 
-        abstract LocalTime increment(LocalTime time, int steps);
+        abstract DateTime increment(DateTime time, int steps);
 
         abstract void select(TimeSpinner spinner);
 
-        LocalTime decrement(LocalTime time, int steps) {
+        DateTime decrement(DateTime time, int steps) {
             return increment(time, -steps);
         }
     }
 
     // Property containing the current editing mode:
 
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+    org.joda.time.format.DateTimeFormatter formatter = DateTimeFormat.forPattern("HH:mm:ss");
 
-    StringConverter<LocalTime> localTimeConverter = new StringConverter<LocalTime>() {
+    StringConverter<DateTime> localTimeConverter = new StringConverter<DateTime>() {
 
         @Override
-        public String toString(LocalTime time) {
-            return formatter.format(time);
+        public String toString(DateTime time) {
+            return formatter.print(time);
         }
 
         @Override
-        public LocalTime fromString(String string) {
+        public DateTime fromString(String string) {
             String[] tokens = string.split(":");
             int hours = getIntField(tokens, 0);
             int minutes = getIntField(tokens, 1);
             int seconds = getIntField(tokens, 2);
             int totalSeconds = (hours * 60 + minutes) * 60 + seconds;
-            return LocalTime.of((totalSeconds / 3600) % 24, (totalSeconds / 60) % 60, seconds % 60);
+            return new DateTime()
+                    .withHourOfDay((totalSeconds / 3600) % 24)
+                    .withMinuteOfHour((totalSeconds / 60) % 60)
+                    .withSecondOfMinute(seconds % 60);
         }
 
         private int getIntField(String[] tokens, int index) {
@@ -99,7 +100,7 @@ public class TimeSpinner extends Spinner<LocalTime> {
 
     };
 
-    TextFormatter<LocalTime> textFormatter = new TextFormatter<LocalTime>(localTimeConverter, LocalTime.now(), c -> {
+    TextFormatter<DateTime> textFormatter = new TextFormatter<>(localTimeConverter, DateTime.now(), c -> {
         String newText = c.getControlNewText();
         if (newText.matches("[0-9]{0,2}:[0-9]{0,2}:[0-9]{0,2}")) {
             return c;
@@ -107,8 +108,7 @@ public class TimeSpinner extends Spinner<LocalTime> {
         return null;
     });
 
-    SpinnerValueFactory<LocalTime> valueFactory = new SpinnerValueFactory<LocalTime>() {
-
+    SpinnerValueFactory<DateTime> valueFactory = new SpinnerValueFactory<DateTime>() {
         {
             setConverter(localTimeConverter);
             setValue(time);
@@ -142,9 +142,11 @@ public class TimeSpinner extends Spinner<LocalTime> {
         modeProperty().set(mode);
     }
 
-    private LocalTime time;
+    private DateTime time;
 
-    public TimeSpinner(LocalTime time) {
+    public TimeSpinner(DateTime time) {
+
+
         setEditable(true);
         this.time = time;
         this.valueFactory.setValue(this.time);
@@ -185,12 +187,11 @@ public class TimeSpinner extends Spinner<LocalTime> {
     }
 
 
-
     public TimeSpinner() {
-        this(LocalTime.now());
+        this(DateTime.now());
     }
 
-    public void setTime(LocalTime time) {
+    public void setTime(DateTime time) {
         this.time = time;
         valueFactory.setValue(this.time);
     }

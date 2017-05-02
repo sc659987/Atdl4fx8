@@ -1,5 +1,7 @@
 package com.three60t.fixatdl.ui.fx8.element;
 
+import com.three60t.fixatdl.converter.ControlTTypeConverter;
+import com.three60t.fixatdl.converter.TypeConverterFactory;
 import com.three60t.fixatdl.model.core.IntT;
 import com.three60t.fixatdl.model.core.ParameterT;
 import com.three60t.fixatdl.model.layout.DoubleSpinnerT;
@@ -31,6 +33,8 @@ public class FxFixDoubleSpinnerUiElement implements FixDoubleSpinnerUiElement<Pa
 
     private Pair<Double, Double> limit;
 
+    private ControlTTypeConverter<?> controlTTypeConverter;
+
     private Pair<Double, Double> extractRangeFromParameter() {
         return parameterT != null && (parameterT instanceof IntT)
                 ? new Pair<>((((IntT) parameterT).getMinValue() == null ? 0.0 : ((IntT) parameterT).getMinValue()),
@@ -42,6 +46,9 @@ public class FxFixDoubleSpinnerUiElement implements FixDoubleSpinnerUiElement<Pa
     public Pane create() {
         if (this.doubleSpinnerT != null) {
             this.gridPane = new GridPane();
+
+            controlTTypeConverter = TypeConverterFactory.createControlTypeConverter(doubleSpinnerT, parameterT);
+
             if (Utils.isNonEmpty(this.doubleSpinnerT.getLabel())) {
                 this.gridPane.add(new Label(this.doubleSpinnerT.getLabel()),
                         this.nextColumn++, 0);
@@ -109,5 +116,10 @@ public class FxFixDoubleSpinnerUiElement implements FixDoubleSpinnerUiElement<Pa
     @Override
     public void makeEnable(boolean enable) {
         this.gridPane.setDisable(!enable);
+    }
+
+    @Override
+    public ControlTTypeConverter<?> getControlTTypeConverter() {
+        return this.controlTTypeConverter;
     }
 }

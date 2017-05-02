@@ -1,5 +1,7 @@
 package com.three60t.fixatdl.ui.fx8.element;
 
+import com.three60t.fixatdl.converter.ControlTTypeConverter;
+import com.three60t.fixatdl.converter.TypeConverterFactory;
 import com.three60t.fixatdl.model.core.IntT;
 import com.three60t.fixatdl.model.core.ParameterT;
 import com.three60t.fixatdl.model.layout.SingleSpinnerT;
@@ -32,10 +34,15 @@ public class FxFixSingleSpinnerUiElement implements FixSingleSpinnerUiElement<Pa
 
     private Pair<Double, Double> limit;
 
+    private ControlTTypeConverter<?> controlTTypeConverter;
+
     @Override
     public Pane create() {
         if (this.singleSpinnerT != null) {
             this.gridPane = new GridPane();
+
+            this.controlTTypeConverter = TypeConverterFactory.createControlTypeConverter(singleSpinnerT,parameterT);
+
             if (Utils.isNonEmpty(this.singleSpinnerT.getLabel())) {
                 this.gridPane.add(new Label(this.singleSpinnerT.getLabel()),
                         this.nextColumn++, 0);
@@ -106,7 +113,7 @@ public class FxFixSingleSpinnerUiElement implements FixSingleSpinnerUiElement<Pa
 
     @Override
     public void setValue(Double value) {
-        this.singleSpinner.getValueFactory().setValue(value==null?limit.getKey():value);
+        this.singleSpinner.getValueFactory().setValue(value == null ? limit.getKey() : value);
         setFieldValueToParameter(value, parameterT);
     }
 
@@ -118,5 +125,10 @@ public class FxFixSingleSpinnerUiElement implements FixSingleSpinnerUiElement<Pa
     @Override
     public void makeEnable(boolean enable) {
         this.singleSpinner.setDisable(!enable);
+    }
+
+    @Override
+    public ControlTTypeConverter<?> getControlTTypeConverter() {
+        return this.controlTTypeConverter;
     }
 }
