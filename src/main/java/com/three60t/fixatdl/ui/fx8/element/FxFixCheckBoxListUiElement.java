@@ -1,5 +1,6 @@
 package com.three60t.fixatdl.ui.fx8.element;
 
+import com.three60t.fixatdl.converter.ControlTTypeConverter;
 import com.three60t.fixatdl.model.core.ParameterT;
 import com.three60t.fixatdl.model.layout.CheckBoxListT;
 import com.three60t.fixatdl.model.layout.PanelOrientationT;
@@ -28,6 +29,8 @@ public class FxFixCheckBoxListUiElement implements FixCheckBoxListUiElement<Pane
     private ParameterT parameterT;
     private int nextRow = 0;
     private ObjectProperty<String> controlIdEmitter = new SimpleObjectProperty<>();
+
+    private ControlTTypeConverter<?> controlTTypeConverter;
 
     @Override
     public Pane create() {
@@ -148,5 +151,11 @@ public class FxFixCheckBoxListUiElement implements FixCheckBoxListUiElement<Pane
         checkBoxes.forEach(checkBox -> {
             checkBox.setDisable(!enable);
         });
+    }
+
+
+    @Override
+    public ControlTTypeConverter<?> getControlTTypeConverter() {
+        return null;
     }
 }

@@ -1,5 +1,6 @@
 package com.three60t.fixatdl.ui.common.element;
 
+import com.three60t.fixatdl.converter.ControlTTypeConverter;
 import com.three60t.fixatdl.model.core.*;
 import com.three60t.fixatdl.model.layout.ControlT;
 import com.three60t.fixatdl.utils.Utils;
@@ -79,6 +80,9 @@ public interface FixUiElement<T, K extends Comparable<K>> {
      */
     <C extends ControlT> C getControl();
 
+
+    ControlTTypeConverter<?> getControlTTypeConverter();
+
     /****
      *
      * @param names
@@ -96,7 +100,10 @@ public interface FixUiElement<T, K extends Comparable<K>> {
                 }).collect(Collectors.toList()) : null;
     }
 
-
+    /***
+     *
+     * @param parameterT
+     */
     default void voidSetNullInConstant(ParameterT parameterT) {
         try {
             Field field = parameterT.getClass().getDeclaredField("constValue");

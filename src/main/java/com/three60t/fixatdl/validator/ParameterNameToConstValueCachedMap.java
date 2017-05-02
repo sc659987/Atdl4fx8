@@ -13,6 +13,7 @@ public class ParameterNameToConstValueCachedMap implements CachedMap {
 
     private Map<String, ParameterT> stringParameterTMap;
 
+
     @Override
     public Comparable get(String key) {
         if (key == null)
@@ -45,7 +46,6 @@ public class ParameterNameToConstValueCachedMap implements CachedMap {
             return calendar.compare(otherCalender.calendar);
         }
     }
-
 
     public ParameterNameToConstValueCachedMap(List<ParameterT> parameterTS) {
         stringParameterTMap = parameterTS
