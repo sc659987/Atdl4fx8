@@ -36,19 +36,19 @@ public class RecursiveFixEditEvaluator implements FixEditEvaluator {
 
             switch (editT.getOperator()) {
                 case EQ:
-                    return comparable1 != null && comparable1.compareTo(comparable2) == 0;
+                    return comparable1 != null && comparable2 != null && comparable1.compareTo(comparable2) == 0;
                 case EX:
                     return comparable1 != null;
                 case GE:
-                    return comparable1 != null && comparable1.compareTo(comparable2) >= 0;
+                    return comparable1 != null && comparable2 != null && comparable1.compareTo(comparable2) >= 0;
                 case GT:
-                    return comparable1 != null && comparable1.compareTo(comparable2) > 0;
+                    return comparable1 != null && comparable2 != null && comparable1.compareTo(comparable2) > 0;
                 case LE:
-                    return comparable1 != null && comparable1.compareTo(comparable2) <= 0;
+                    return comparable1 != null && comparable2 != null && comparable1.compareTo(comparable2) <= 0;
                 case LT:
-                    return comparable1 != null && comparable1.compareTo(comparable2) < 0;
+                    return comparable1 != null && comparable2 != null && comparable1.compareTo(comparable2) < 0;
                 case NE:
-                    return comparable1 != null && comparable1.compareTo(comparable2) != 0;
+                    return comparable1 != null && comparable2 != null && comparable1.compareTo(comparable2) != 0;
                 case NX:
                     return comparable1 == null;
                 default:

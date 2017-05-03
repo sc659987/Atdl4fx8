@@ -26,7 +26,6 @@ public abstract class AbstractFixAtdlUi<T> implements FixAtdlUi<T> {
         }
     }
 
-
     @Override
     public StrategiesT getStrategies() {
         return this.strategiesT;
