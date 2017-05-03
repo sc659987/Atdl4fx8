@@ -1,27 +1,38 @@
 package com.three60t.fixatdl.converter;
 
 import com.three60t.fixatdl.model.core.*;
-import com.three60t.fixatdl.model.layout.ControlT;
 import com.three60t.fixatdl.model.timezones.Timezone;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeConstants;
+import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
-/**
- * Created by sainik on 01/05/17.
- */
-public class DateTimeConverter implements ParameterTTypeConverter<DateTime, ParameterT>,
-        ControlTTypeConverter<DateTime> {
+
+public class DateTimeConverter implements TypeConverter<DateTime, ParameterT> {
 
     private ParameterT parameterT;
     private Timezone timezone = null;
 
     public DateTimeConverter(ParameterT parameterT) {
         this.parameterT = parameterT;
+        timezone = getLocalMktTz(parameterT);
     }
+
+
+    private Timezone getLocalMktTz(ParameterT parameter) {
+        if (parameter instanceof UTCTimestampT) {
+            return ((UTCTimestampT) parameter).getLocalMktTz();
+        } else if (parameter instanceof UTCTimeOnlyT) {
+            return ((UTCTimeOnlyT) parameter).getLocalMktTz();
+        }
+        return null;
+    }
+
 
     @Override
     public DateTime convertParameterConstToComparable() {
@@ -29,9 +40,7 @@ public class DateTimeConverter implements ParameterTTypeConverter<DateTime, Para
         if (aValue instanceof DateTime) {
             return (DateTime) aValue;
         } else if (aValue instanceof XMLGregorianCalendar) {
-            return convertXMLGregorianCalendarToDateTime(
-                    (XMLGregorianCalendar) aValue,
-                    getTimezone());
+            return convertXMLGregorianCalendarToDateTime((XMLGregorianCalendar) aValue, timezone);
         } else {
             return null;
         }
@@ -76,10 +85,6 @@ public class DateTimeConverter implements ParameterTTypeConverter<DateTime, Para
         // TODO Set to parameter
     }
 
-    public Timezone getTimezone() {
-        return this.timezone;
-    }
-
     private String getFormatString() {
         if (getParameter() != null) {
             if (getParameter() instanceof LocalMktDateT) {
@@ -107,6 +112,7 @@ public class DateTimeConverter implements ParameterTTypeConverter<DateTime, Para
     public static DateTime convertXMLGregorianCalendarToDateTime(XMLGregorianCalendar aXMLGregorianCalendar, Timezone aTimezone) {
         // -- DateTime(int year, int monthOfYear, int dayOfMonth, int hourOfDay, int minuteOfHour, int secondOfMinute, int millisOfSecond) --
         int tempSubsecond = 0;
+        makeValidCalender(aXMLGregorianCalendar, aTimezone);
         if (aXMLGregorianCalendar.getFractionalSecond() != null) {
             tempSubsecond = aXMLGregorianCalendar.getFractionalSecond().intValue();
         }
@@ -126,6 +132,36 @@ public class DateTimeConverter implements ParameterTTypeConverter<DateTime, Para
                 tempDateTimeZone);
     }
 
+    public static void makeValidCalender(final XMLGregorianCalendar aDailyValue, final Timezone aTimezone) {
+        // -- Note that the XMLGregorianCalendar does not default to current month, day, year --
+        if (aDailyValue != null) {
+            // -- Init calendar date portion equal to "current date" local/default --
+            DateTime tempDateTime = new DateTime();
+
+            if (aTimezone != null) {
+                DateTimeZone tempDateTimeZone = DateTimeZone.forID(aTimezone.value());
+                if (tempDateTimeZone != null) {
+                    int tempOffsetMillis = tempDateTimeZone.getOffset(System.currentTimeMillis());
+                    // -- convert milliseconds to minutes --
+                    aDailyValue.setTimezone(tempOffsetMillis / 60000);
+
+                    // -- Set calendar date portion equal to "current date" of the Timezone --
+                    // -- (eg Asian security trading in Japan during the morning of Feb 15 might be local of 9pm ET Feb 14.
+                    // -- Want to ensure we use Feb 15, not Feb 14 if localMktTz is for Japan) --
+                    tempDateTime = new DateTime(tempDateTimeZone);
+                }
+            }
+
+            if (aDailyValue.getDay() == DatatypeConstants.FIELD_UNDEFINED)
+                aDailyValue.setDay(tempDateTime.getDayOfMonth());
+            if (aDailyValue.getMonth() == DatatypeConstants.FIELD_UNDEFINED)
+                aDailyValue.setMonth(tempDateTime.getMonthOfYear());
+            if (aDailyValue.getYear() == DatatypeConstants.FIELD_UNDEFINED)
+                aDailyValue.setYear(tempDateTime.getYear());
+        }
+
+    }
+
 
     public static DateTimeZone convertTimezoneToDateTimeZone(Timezone aTimezone) {
         if (aTimezone != null) {
@@ -139,30 +175,42 @@ public class DateTimeConverter implements ParameterTTypeConverter<DateTime, Para
     @Override
     public Object convertControlValueToParameterValue(Object aValue) {
         if (aValue instanceof XMLGregorianCalendar) {
-            return convertXMLGregorianCalendarToDateTime((XMLGregorianCalendar) aValue, getTimezone());
-        } else {
-            return (DateTime) aValue;
+            return aValue;
+        } else if (aValue instanceof DateTime) {
+            return convertDateTimeToXMLGregorianCalendarToDateTime((DateTime) aValue);
         }
+        return null;
     }
 
-    @Override
-    public DateTime convertParameterValueToControlValue(Object aValue, ControlT aControl) {
-        Object tempValue = adjustParameterValueForEnumRefValue(aValue, getParameter(), aControl);
-        if (tempValue instanceof DateTime) {
-            return (DateTime) tempValue;
-        } else if (tempValue instanceof XMLGregorianCalendar) {
-            return convertXMLGregorianCalendarToDateTime((XMLGregorianCalendar) tempValue, getTimezone());
-        } else {
-            return null;
+
+    private XMLGregorianCalendar convertDateTimeToXMLGregorianCalendarToDateTime(DateTime dateTime) {
+        XMLGregorianCalendar xmlGregorianCalendar = null;
+        try {
+            DatatypeFactory dataTypeFactory = DatatypeFactory.newInstance();
+            xmlGregorianCalendar = dataTypeFactory.newXMLGregorianCalendar(dateTime.toGregorianCalendar());
+        } catch (DatatypeConfigurationException e) {
         }
+        return xmlGregorianCalendar;
     }
+
+//    @Override
+//    public DateTime convertParameterValueToControlValue(Object aValue, ControlT aControl) {
+//        Object tempValue = adjustParameterValueForEnumRefValue(aValue, getParameter(), aControl);
+//        if (tempValue instanceof DateTime) {
+//            return (DateTime) tempValue;
+//        } else if (tempValue instanceof XMLGregorianCalendar) {
+//            return convertXMLGregorianCalendarToDateTime((XMLGregorianCalendar) tempValue, timezone);
+//        } else {
+//            return null;
+//        }
+//    }
 
     @Override
     public DateTime convertControlValueToControlComparable(Object aValue) {
         if (aValue instanceof DateTime) {
             return (DateTime) aValue;
         } else if (aValue instanceof XMLGregorianCalendar) {
-            return convertXMLGregorianCalendarToDateTime((XMLGregorianCalendar) aValue, getTimezone());
+            return convertXMLGregorianCalendarToDateTime((XMLGregorianCalendar) aValue, timezone);
         } else if (aValue instanceof String) {
             String str = (String) aValue;
             String format = getFormatString();

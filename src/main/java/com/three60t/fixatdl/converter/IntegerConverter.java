@@ -1,15 +1,14 @@
 package com.three60t.fixatdl.converter;
 
+import com.three60t.fixatdl.model.core.IntT;
 import com.three60t.fixatdl.model.core.ParameterT;
-import com.three60t.fixatdl.model.layout.ControlT;
 
 import java.math.BigInteger;
 
 /**
  * Created by sainik on 01/05/17.
  */
-public class IntegerConverter implements ParameterTTypeConverter<BigInteger, ParameterT>,
-        ControlTTypeConverter<BigInteger> {
+public class IntegerConverter implements TypeConverter<BigInteger, ParameterT> {
 
     private ParameterT parameterT;
 
@@ -87,19 +86,24 @@ public class IntegerConverter implements ParameterTTypeConverter<BigInteger, Par
 
     @Override
     public Object convertControlValueToParameterValue(Object aValue) {
-        return DatatypeConverter
+        Object obj = DatatypeConverter
                 .convertValueToDatatype(aValue,
                         getParameterDatatype(BigInteger.class));
-
+        if (getParameter() != null) {
+            if (obj != null && parameterT instanceof IntT) {
+                return ((BigInteger) obj).intValue();
+            }
+        }
+        return obj;
     }
 
-    @Override
-    public BigInteger convertParameterValueToControlValue(Object aValue, ControlT aControl) {
-        Object tempValue = adjustParameterValueForEnumRefValue(aValue, getParameter(), aControl);
-
-
-        return DatatypeConverter.convertValueToBigIntegerDatatype(tempValue);
-    }
+//    @Override
+//    public BigInteger convertParameterValueToControlValue(Object aValue, ControlT aControl) {
+//        Object tempValue = adjustParameterValueForEnumRefValue(aValue, getParameter(), aControl);
+//
+//
+//        return DatatypeConverter.convertValueToBigIntegerDatatype(tempValue);
+//    }
 
     @Override
     public BigInteger convertControlValueToControlComparable(Object aValue) {
@@ -131,6 +135,8 @@ public class IntegerConverter implements ParameterTTypeConverter<BigInteger, Par
 
     @Override
     public BigInteger convertStringToControlValue(String aString) {
+
+
         return convertControlValueToControlComparable(aString);
     }
 }

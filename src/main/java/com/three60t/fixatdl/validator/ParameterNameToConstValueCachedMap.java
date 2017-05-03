@@ -13,7 +13,6 @@ public class ParameterNameToConstValueCachedMap implements CachedMap {
 
     private Map<String, ParameterT> stringParameterTMap;
 
-
     @Override
     public Comparable get(String key) {
         if (key == null)

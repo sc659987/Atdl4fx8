@@ -2,7 +2,6 @@ package com.three60t.fixatdl.converter;
 
 
 import com.three60t.fixatdl.model.core.ParameterT;
-import com.three60t.fixatdl.model.layout.ControlT;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -11,7 +10,7 @@ import java.math.BigInteger;
  * Created by sainik on 01/05/17.
  */
 public class BooleanConverter implements
-        ParameterTTypeConverter<Boolean, ParameterT>, ControlTTypeConverter<Boolean> {
+        TypeConverter<Boolean, ParameterT> {
 
     private final ParameterT parameterT;
 
@@ -95,13 +94,17 @@ public class BooleanConverter implements
 
     @Override
     public Object convertControlValueToParameterValue(Object aValue) {
-        return DatatypeConverter.convertValueToDatatype(aValue, getParameterDatatype(Boolean.class));
+        return (Boolean) convertControlValueToControlComparable(aValue)
+                ? BOOLEAN_TRUE : BOOLEAN_FALSE;
     }
 
-    @Override
-    public Boolean convertParameterValueToControlValue(Object aValue, ControlT aControl) {
-        return DatatypeConverter.convertValueToBooleanDatatype(aValue);
+
+    private String convertToBooleanParameterType(Object aValue) {
+
+        return null;
     }
+
+
 
     @Override
     public Boolean convertControlValueToControlComparable(Object aValue) {

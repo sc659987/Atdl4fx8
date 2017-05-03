@@ -1,17 +1,11 @@
 package com.three60t.fixatdl.ui.common.element;
 
-import com.three60t.fixatdl.converter.ControlTTypeConverter;
-import com.three60t.fixatdl.model.core.*;
+import com.three60t.fixatdl.converter.TypeConverter;
+import com.three60t.fixatdl.model.core.ParameterT;
 import com.three60t.fixatdl.model.layout.ControlT;
-import com.three60t.fixatdl.utils.Utils;
 import javafx.beans.property.ObjectProperty;
 
-import javax.xml.datatype.DatatypeConstants;
-import javax.xml.datatype.DatatypeFactory;
-import javax.xml.datatype.XMLGregorianCalendar;
 import java.lang.reflect.Field;
-import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
@@ -116,14 +110,15 @@ public interface FixUiElement<T, K extends Comparable<?>> {
      */
     default void setFieldValueToParameter(final Object object, ParameterT parameterT) {
         if (getControlTTypeConverter() != null) {
-            Object parameterValueAfterConversion = getControlTTypeConverter().convertControlValueToParameterValue(object);
+            Object parameterValueAfterConversion = getControlTTypeConverter()
+                    .convertControlValueToParameterValue(object);
             if (parameterT != null) {
                 try {
                     Field field = parameterT.getClass().getDeclaredField("constValue");
                     field.setAccessible(true);
                     field.set(parameterT, parameterValueAfterConversion);
                 } catch (Exception e) {
-
+                    System.out.println("error in setting const");
                 }
             }
         }
@@ -148,6 +143,6 @@ public interface FixUiElement<T, K extends Comparable<?>> {
         return null;
     }
 
-    ControlTTypeConverter<?> getControlTTypeConverter();
+    TypeConverter<?, ?> getControlTTypeConverter();
 
 }

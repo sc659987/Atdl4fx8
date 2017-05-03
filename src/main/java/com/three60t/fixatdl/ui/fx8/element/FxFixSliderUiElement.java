@@ -1,7 +1,7 @@
 package com.three60t.fixatdl.ui.fx8.element;
 
-import com.three60t.fixatdl.converter.ControlTTypeConverter;
-import com.three60t.fixatdl.converter.TypeConverterFactory;
+import com.three60t.fixatdl.converter.TypeConverter;
+import com.three60t.fixatdl.converter.TypeConverterRepo;
 import com.three60t.fixatdl.model.core.EnumPairT;
 import com.three60t.fixatdl.model.core.ParameterT;
 import com.three60t.fixatdl.model.layout.ListItemT;
@@ -33,14 +33,14 @@ public class FxFixSliderUiElement implements FixSliderUiElement<Pane, String> {
 
     private ObjectProperty<String> controlIdEmitter = new SimpleObjectProperty<>();
 
-    private ControlTTypeConverter<?> controlTTypeConverter;
+    private TypeConverter<?, ?> controlTTypeConverter;
 
     @Override
     public Pane create() {
         this.gridPane = new GridPane();
         this.gridPane.getColumnConstraints().addAll(FxUtils.getOneColumnWidthForGridPane());
 
-        this.controlTTypeConverter = TypeConverterFactory.createControlTypeConverter(sliderT, parameterT);
+        this.controlTTypeConverter = TypeConverterRepo.createParameterTypeConverter(parameterT);
 
         this.label = new Label(this.sliderT.getLabel());
 
@@ -147,7 +147,7 @@ public class FxFixSliderUiElement implements FixSliderUiElement<Pane, String> {
     }
 
     @Override
-    public ControlTTypeConverter<?> getControlTTypeConverter() {
+    public TypeConverter<?, ?> getControlTTypeConverter() {
         return this.controlTTypeConverter;
     }
 }

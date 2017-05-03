@@ -172,6 +172,8 @@ public class DatatypeConverter {
                 return new BigInteger("1");
             else
                 return new BigInteger("0");
+        } else if (aValue instanceof Double) {
+            return new BigInteger(((Double) aValue).intValue() + "");
         } else {
             throw new IllegalArgumentException("Unsupported convertValueToBigIntegerDatatype() datatype " + aValue.getClass() + " value: " + aValue);
         }

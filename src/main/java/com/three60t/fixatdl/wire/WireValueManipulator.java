@@ -1,5 +1,7 @@
 package com.three60t.fixatdl.wire;
 
+import com.three60t.fixatdl.converter.TypeConverter;
+import com.three60t.fixatdl.converter.TypeConverterRepo;
 import com.three60t.fixatdl.model.core.ParameterT;
 import com.three60t.fixatdl.model.core.StrategiesT;
 import com.three60t.fixatdl.model.core.StrategyT;
@@ -30,26 +32,15 @@ public class WireValueManipulator implements WireValueGenerator, WireValueInterp
         return _singleTon == null ? _singleTon = new WireValueManipulator() : _singleTon;
     }
 
-    public Object getConstantValueFromParameter(ParameterT parameterT) {
-        try {
-            Field field = parameterT.getClass().getDeclaredField("constValue");
-            field.setAccessible(true);
-            return field != null ? field.get(parameterT) : null;
-        } catch (Exception e) {
-        }
-        return null;
-    }
-
 
     public String generateWireValue(StrategiesT strategies, StrategyT selectedStrategy) {
         final StringBuilder wireBuilder = new StringBuilder();
         final CountIncrement repeatCount = new CountIncrement();
         selectedStrategy.getParameter().forEach(parameterT -> {
-            Object constValue = getConstantValueFromParameter(parameterT);
-            if (constValue != null && !constValue.toString().isEmpty()) {
+            TypeConverter<?, ?> typeConverter = TypeConverterRepo.get(parameterT);
+            if (typeConverter != null && typeConverter.convertParameterConstToFixWireValue()!=null) {
                 if (strategies.isTag957Support())
-                    wireBuilder
-                            .append(DELIMITER)
+                    wireBuilder.append(DELIMITER)
                             .append(TAG_STRATEGY_PARAMETER_NAME)
                             .append(EQUAL)
                             .append(parameterT.getName())
@@ -60,11 +51,11 @@ public class WireValueManipulator implements WireValueGenerator, WireValueInterp
                             .append(DELIMITER)
                             .append(TAG_STRATEGY_PARAMETER_VALUE)
                             .append(EQUAL)
-                            .append(constValue.toString());
+                            .append(typeConverter.convertParameterConstToFixWireValue());
                 else
                     wireBuilder.append(parameterT.getFixTag().intValue())
                             .append(EQUAL)
-                            .append(constValue.toString());
+                            .append(typeConverter.convertParameterConstToFixWireValue());
                 repeatCount.incrementByOne();
             }
         });

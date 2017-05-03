@@ -1,7 +1,7 @@
 package com.three60t.fixatdl.ui.fx8.element;
 
-import com.three60t.fixatdl.converter.ControlTTypeConverter;
-import com.three60t.fixatdl.converter.TypeConverterFactory;
+import com.three60t.fixatdl.converter.TypeConverter;
+import com.three60t.fixatdl.converter.TypeConverterRepo;
 import com.three60t.fixatdl.model.core.ParameterT;
 import com.three60t.fixatdl.model.layout.ListItemT;
 import com.three60t.fixatdl.model.layout.MultiSelectListT;
@@ -32,14 +32,14 @@ public class FxFixMultiSelectListUiElement implements FixMultiSelectListUiElemen
 
     private GridPane gridPane;
 
-    private ControlTTypeConverter<?> controlTTypeConverter;
+    private TypeConverter<?,?> controlTTypeConverter;
 
     @Override
     public Pane create() {
         if (this.multiSelectListT != null) {
             this.gridPane = new GridPane();
 
-            controlTTypeConverter = TypeConverterFactory.createControlTypeConverter(multiSelectListT, parameterT);
+            controlTTypeConverter = TypeConverterRepo.createParameterTypeConverter( parameterT);
 
             if (!Utils.isEmpty(this.multiSelectListT.getLabel())) {
                 this.gridPane.getColumnConstraints().addAll(FxUtils.getOneColumnWidthForGridPane());
@@ -129,7 +129,7 @@ public class FxFixMultiSelectListUiElement implements FixMultiSelectListUiElemen
     }
 
     @Override
-    public ControlTTypeConverter<?> getControlTTypeConverter() {
+    public TypeConverter<?,?> getControlTTypeConverter() {
         return this.controlTTypeConverter;
     }
 }

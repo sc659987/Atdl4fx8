@@ -1,7 +1,7 @@
 package com.three60t.fixatdl.ui.fx8.element;
 
-import com.three60t.fixatdl.converter.ControlTTypeConverter;
-import com.three60t.fixatdl.converter.TypeConverterFactory;
+import com.three60t.fixatdl.converter.TypeConverter;
+import com.three60t.fixatdl.converter.TypeConverterRepo;
 import com.three60t.fixatdl.model.core.ParameterT;
 import com.three60t.fixatdl.model.layout.CheckBoxListT;
 import com.three60t.fixatdl.model.layout.PanelOrientationT;
@@ -31,14 +31,14 @@ public class FxFixCheckBoxListUiElement implements FixCheckBoxListUiElement<Pane
     private int nextRow = 0;
     private ObjectProperty<String> controlIdEmitter = new SimpleObjectProperty<>();
 
-    private ControlTTypeConverter<?> controlTTypeConverter;
+    private TypeConverter<?,?> controlTTypeConverter;
 
     @Override
     public Pane create() {
         if (this.checkBoxListT != null) {
             this.gridPane = new GridPane();
 
-            this.controlTTypeConverter = TypeConverterFactory.createControlTypeConverter(checkBoxListT, parameterT);
+            this.controlTTypeConverter = TypeConverterRepo.createParameterTypeConverter(parameterT);
 
             // GUI label addition to grid
             if (!Utils.isEmpty(this.checkBoxListT.getLabel()))
@@ -167,7 +167,7 @@ public class FxFixCheckBoxListUiElement implements FixCheckBoxListUiElement<Pane
     }
 
     @Override
-    public ControlTTypeConverter<?> getControlTTypeConverter() {
+    public TypeConverter<?,?> getControlTTypeConverter() {
         return this.controlTTypeConverter;
     }
 }

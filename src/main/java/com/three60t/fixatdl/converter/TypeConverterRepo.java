@@ -1,11 +1,12 @@
 package com.three60t.fixatdl.converter;
 
 import com.three60t.fixatdl.model.core.*;
-import com.three60t.fixatdl.model.layout.*;
 
 import javax.xml.datatype.XMLGregorianCalendar;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Factory that creates the appropriate ParameterTypeConveter depending on the parameter
@@ -13,56 +14,46 @@ import java.math.BigInteger;
  * <p>
  * Note that all UI widgets in ATDL are strongly typed.
  */
-public class TypeConverterFactory {
+public class TypeConverterRepo {
+
+
+    private static final Map<String, TypeConverter<?, ?>> PARAMETER_NAME_TO_PARAMETER_T_TYPE_CONVERTER_MAP = new HashMap<>();
+
+
+    public static TypeConverter<?, ?> createParameterTypeConverter(ParameterT parameterT) {
+        TypeConverter<?, ?> typeConverter;
+        if (parameterT != null) {
+            typeConverter = PARAMETER_NAME_TO_PARAMETER_T_TYPE_CONVERTER_MAP.get(parameterT.getName());
+            if (typeConverter != null)
+                return typeConverter;
+            typeConverter = get(parameterT);
+            PARAMETER_NAME_TO_PARAMETER_T_TYPE_CONVERTER_MAP.put(parameterT.getName(), typeConverter);
+            return typeConverter;
+        }
+        return null;
+    }
+
+
 
     /*
      * Create adapter based on ParameterT
      */
-    public static ParameterTTypeConverter<?, ?> createParameterTypeConverter(ParameterT parameter) {
+    public static TypeConverter<?, ?> get(ParameterT parameter) {
+        TypeConverter<?, ?> typeConverter = null;
         if (parameter instanceof StringT || parameter instanceof CharT || parameter instanceof MultipleCharValueT
                 || parameter instanceof MultipleStringValueT || parameter instanceof CurrencyT || parameter instanceof ExchangeT
                 || parameter instanceof DataT) {
-            return new StringConverter(parameter);
+            typeConverter = new StringConverter(parameter);
         } else if (parameter instanceof NumericT) {
-            return new DecimalConverter(parameter); // Float field
-        } else if (parameter instanceof IntT
-                || parameter instanceof NumInGroupT
-                || parameter instanceof SeqNumT
-                || parameter instanceof TagNumT
-                || parameter instanceof LengthT) {
-            return new IntegerConverter(parameter); // Integer field
+            typeConverter = new DecimalConverter(parameter);
+        } else if (parameter instanceof IntT || parameter instanceof NumInGroupT || parameter instanceof SeqNumT || parameter instanceof TagNumT || parameter instanceof LengthT) {
+            typeConverter = new IntegerConverter(parameter);
         } else if (parameter instanceof BooleanT) {
-            return new BooleanConverter((BooleanT) parameter);
-        } else if (parameter instanceof MonthYearT || parameter instanceof UTCTimestampT || parameter instanceof UTCTimeOnlyT
-                || parameter instanceof LocalMktDateT || parameter instanceof UTCDateOnlyT) {
-            return new DateTimeConverter(parameter);
-        } else {
-            throw new IllegalArgumentException("Unsupported ParameterT type: " + parameter.getClass().getName());
+            typeConverter = new BooleanConverter(parameter);
+        } else if (parameter instanceof MonthYearT || parameter instanceof UTCTimestampT || parameter instanceof UTCTimeOnlyT || parameter instanceof LocalMktDateT || parameter instanceof UTCDateOnlyT) {
+            typeConverter = new DateTimeConverter(parameter);
         }
-    }
-
-    /*
-     * Create adapter based on ControlT (native type for each control)
-     */
-    public static ControlTTypeConverter<?> createControlTypeConverter(ControlT control, ParameterT parameterT) {
-
-        if (parameterT == null)
-            return null;
-
-        if (control instanceof TextFieldT || control instanceof SingleSelectListT || control instanceof MultiSelectListT
-                || control instanceof CheckBoxListT || control instanceof DropDownListT || control instanceof EditableDropDownListT
-                || control instanceof RadioButtonListT || control instanceof HiddenFieldT || control instanceof LabelT) {
-            return new StringConverter(parameterT);
-        } else if (control instanceof SliderT) {
-            return new StringConverter(parameterT);
-        } else if (control instanceof SingleSpinnerT || control instanceof DoubleSpinnerT) {
-            return new DecimalConverter(parameterT);
-        } else if (control instanceof CheckBoxT || control instanceof RadioButtonT) {
-            return new BooleanConverter(parameterT);
-        } else if (control instanceof ClockT) {
-            return new DateTimeConverter(parameterT);
-        }
-        return null;
+        return typeConverter;
     }
 
     /*

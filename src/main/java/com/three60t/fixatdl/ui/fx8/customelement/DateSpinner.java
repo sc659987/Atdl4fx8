@@ -9,13 +9,6 @@ import javafx.util.StringConverter;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
-import java.time.format.SignStyle;
-
-import static java.time.temporal.ChronoField.*;
-
 /**
  * Created by sainik on 4/27/17.
  */

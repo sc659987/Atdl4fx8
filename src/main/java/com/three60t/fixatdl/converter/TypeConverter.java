@@ -1,30 +1,51 @@
 package com.three60t.fixatdl.converter;
 
-
 import com.three60t.fixatdl.model.core.EnumPairT;
 import com.three60t.fixatdl.model.core.ParameterT;
 import com.three60t.fixatdl.model.layout.CheckBoxT;
 import com.three60t.fixatdl.model.layout.ControlT;
 
-/**
- * Created by sainik on 01/05/17.
- */
-public interface ControlTTypeConverter<E extends Comparable<?>> {
+import java.lang.reflect.Field;
 
-    /****
+/****
+ *
+ * @param <E>
+ * @param <F>
+ */
+public interface TypeConverter<E extends Comparable<?>, F extends ParameterT> {
+
+    /***
+     *
+     * @return
+     */
+    E convertParameterConstToComparable();
+
+    /***
+     *
+     * @return
+     */
+    F getParameter();
+
+    /***
+     *
+     * @return
+     */
+    String convertParameterConstToFixWireValue();
+
+    /***
+     *
+     * @param aFixWireValue
+     * @return
+     */
+    Object convertFixWireValueToParameterConst(String aFixWireValue);
+
+    /***
      *
      * @param value
      * @return
      */
     Object convertControlValueToParameterValue(Object value);
 
-    /***
-     *
-     * @param value
-     * @param aControl
-     * @return
-     */
-    E convertParameterValueToControlValue(Object value, ControlT aControl);
 
     /***
      *
@@ -74,4 +95,29 @@ public interface ControlTTypeConverter<E extends Comparable<?>> {
         return null;
     }
 
+
+    default Object getConstFieldOfParam() {
+        try {
+            Field field = getParameter().getClass().getDeclaredField("constValue");
+            field.setAccessible(true);
+            return field.get(getParameter());
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    default Class<?> getParameterDatatype(Class<?> classIfNull) {
+        if (getParameter() != null) {
+
+            ParameterT tempParameter = getParameter();
+
+            if (tempParameter != null) {
+                return TypeConverterRepo.getParameterDatatype(tempParameter);
+            } else {
+                return null;
+            }
+        } else {
+            return classIfNull;
+        }
+    }
 }

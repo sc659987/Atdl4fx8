@@ -1,8 +1,7 @@
 package com.three60t.fixatdl.ui.fx8.element;
 
-import com.three60t.fixatdl.converter.ControlTTypeConverter;
-import com.three60t.fixatdl.converter.StringConverter;
-import com.three60t.fixatdl.converter.TypeConverterFactory;
+import com.three60t.fixatdl.converter.TypeConverter;
+import com.three60t.fixatdl.converter.TypeConverterRepo;
 import com.three60t.fixatdl.model.core.ParameterT;
 import com.three60t.fixatdl.model.layout.DropDownListT;
 import com.three60t.fixatdl.model.layout.ListItemT;
@@ -28,7 +27,7 @@ public class FxFixDropDownListUiElement implements FixDropDownListUiElement<Pane
 
     private ObjectProperty<String> controlIdEmitter = new SimpleObjectProperty<>();
 
-    private ControlTTypeConverter<?> controlTTypeConverter;
+    private TypeConverter<?, ?> controlTTypeConverter;
 
     @Override
     public void setDropDownList(DropDownListT downList) {
@@ -39,7 +38,7 @@ public class FxFixDropDownListUiElement implements FixDropDownListUiElement<Pane
     public Pane create() {
         if (this.dropDownListT != null) {
             this.gridPane = new GridPane();
-            this.controlTTypeConverter = TypeConverterFactory.createControlTypeConverter(dropDownListT, parameterT);
+            this.controlTTypeConverter = TypeConverterRepo.createParameterTypeConverter(parameterT);
             if (!Utils.isEmpty(this.dropDownListT.getLabel()))
                 this.gridPane.add(new Label(this.dropDownListT.getLabel()), this.nextColumn++, 0);
             this.gridPane.setHgap(3);
@@ -114,12 +113,10 @@ public class FxFixDropDownListUiElement implements FixDropDownListUiElement<Pane
     @Override
     public void makeEnable(boolean enable) {
         this.comboBox.setDisable(!enable);
-        controlTTypeConverter.convertControlValueToParameterValue(getValue());
-        ((StringConverter) controlTTypeConverter).convertParameterConstToFixWireValue();
     }
 
     @Override
-    public ControlTTypeConverter<?> getControlTTypeConverter() {
+    public TypeConverter<?, ?> getControlTTypeConverter() {
         return this.controlTTypeConverter;
     }
 }

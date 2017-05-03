@@ -1,7 +1,8 @@
 package com.three60t.fixatdl.ui.fx8.element;
 
-import com.three60t.fixatdl.converter.ControlTTypeConverter;
-import com.three60t.fixatdl.converter.TypeConverterFactory;
+import com.three60t.fixatdl.converter.TypeConverter;
+import com.three60t.fixatdl.converter.TypeConverterRepo;
+import com.three60t.fixatdl.model.core.EnumPairT;
 import com.three60t.fixatdl.model.core.ParameterT;
 import com.three60t.fixatdl.model.layout.CheckBoxT;
 import com.three60t.fixatdl.ui.common.element.FixCheckBoxUiElement;
@@ -20,14 +21,14 @@ public class FxFixCheckBoxUiElement implements FixCheckBoxUiElement<CheckBox, Bo
 
     private ObjectProperty<String> controlIdEmitter = new SimpleObjectProperty<>();
 
-    private ControlTTypeConverter<?> controlTTypeConverter;
+    private TypeConverter<?, ?> controlTTypeConverter;
 
     @Override
     public CheckBox create() {
         if (this.checkBoxT != null) {
             this.checkBox = new CheckBox(this.checkBoxT.getLabel());
 
-            this.controlTTypeConverter = TypeConverterFactory.createControlTypeConverter(checkBoxT, parameterT);
+            this.controlTTypeConverter = TypeConverterRepo.createParameterTypeConverter(parameterT);
 
             if (this.checkBoxT.isInitValue() != null) {
                 this.checkBox.setSelected(this.checkBoxT.isInitValue());
@@ -36,7 +37,7 @@ public class FxFixCheckBoxUiElement implements FixCheckBoxUiElement<CheckBox, Bo
 
             this.checkBox.setOnAction(event -> {
                 this.controlIdEmitter.setValue(this.checkBoxT.getID() + ":" + getValue());
-                setFieldValueToParameter(this.checkBox.isSelected() ? this.checkBoxT.getCheckedEnumRef() : this.checkBoxT.getUncheckedEnumRef(),
+                setFieldValueToParameter(getCheckBoxParamValue(checkBox.isSelected()),
                         this.parameterT);
             });
 
@@ -44,6 +45,24 @@ public class FxFixCheckBoxUiElement implements FixCheckBoxUiElement<CheckBox, Bo
         }
         return null;
     }
+
+
+    private String getCheckBoxParamValue(Boolean isSelected) {
+        String toReturn = isSelected.toString();
+        EnumPairT foundEnumPairT = parameterT.getEnumPair()
+                .parallelStream()
+                .filter(enumPairT -> enumPairT.getEnumID().equals(isSelected.toString()))
+                .findFirst().get();
+
+
+        if (foundEnumPairT != null) {
+            toReturn = foundEnumPairT.getWireValue();
+        } else if (this.checkBoxT.getCheckedEnumRef() != null && this.checkBoxT.getUncheckedEnumRef() != null) {
+            toReturn = isSelected ? this.checkBoxT.getCheckedEnumRef() : this.checkBoxT.getUncheckedEnumRef();
+        }
+        return toReturn;
+    }
+
 
     @Override
     public void setCheckBoxT(CheckBoxT checkBoxT) {
@@ -108,7 +127,7 @@ public class FxFixCheckBoxUiElement implements FixCheckBoxUiElement<CheckBox, Bo
     }
 
     @Override
-    public ControlTTypeConverter<?> getControlTTypeConverter() {
+    public TypeConverter<?, ?> getControlTTypeConverter() {
         return this.controlTTypeConverter;
     }
 }

@@ -1,6 +1,5 @@
 package com.three60t.fixatdl.controlflow;
 
-import com.three60t.fixatdl.evaluator.FixEditEvaluator;
 import com.three60t.fixatdl.evaluator.RecursiveFixEditEvaluator;
 import com.three60t.fixatdl.model.flow.StateRuleT;
 import com.three60t.fixatdl.ui.common.element.FixUiElement;

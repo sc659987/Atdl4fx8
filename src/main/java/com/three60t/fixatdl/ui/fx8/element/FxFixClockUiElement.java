@@ -1,7 +1,8 @@
 package com.three60t.fixatdl.ui.fx8.element;
 
-import com.three60t.fixatdl.converter.ControlTTypeConverter;
-import com.three60t.fixatdl.converter.TypeConverterFactory;
+import com.three60t.fixatdl.converter.DateTimeConverter;
+import com.three60t.fixatdl.converter.TypeConverter;
+import com.three60t.fixatdl.converter.TypeConverterRepo;
 import com.three60t.fixatdl.model.core.ParameterT;
 import com.three60t.fixatdl.model.core.UTCTimestampT;
 import com.three60t.fixatdl.model.layout.ClockT;
@@ -15,14 +16,12 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 
 import javax.xml.datatype.DatatypeConstants;
 import javax.xml.datatype.XMLGregorianCalendar;
-import java.time.*;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
-import java.time.format.SignStyle;
-import java.time.temporal.ChronoField;
+import java.time.MonthDay;
+import java.time.Year;
 import java.util.Collections;
 import java.util.List;
 
@@ -37,14 +36,14 @@ public class FxFixClockUiElement implements FixClockUiElement<Pane, DateTime> {
     private ObjectProperty<String> controlIdEmitter = new SimpleObjectProperty<>();
     private int nextColumn = 0;
 
-    private ControlTTypeConverter<?> controlTTypeConverter;
+    private TypeConverter<?, ?> controlTTypeConverter;
 
     @Override
     public Pane create() {
         if (this.clockT != null) {
             this.gridPane = new GridPane();
 
-            this.controlTTypeConverter = TypeConverterFactory.createControlTypeConverter(clockT, parameterT);
+            this.controlTTypeConverter = TypeConverterRepo.createParameterTypeConverter(parameterT);
 
             if (!Utils.isEmpty(this.clockT.getLabel()))
                 this.gridPane.add(new Label(this.clockT.getLabel()), this.nextColumn++, 0);
@@ -55,14 +54,14 @@ public class FxFixClockUiElement implements FixClockUiElement<Pane, DateTime> {
 
 
             // LOGIC clockT.getInitValueMode() if 0 then use clockT.getInitValue() otherwise use current time
-            // if init value is supplied then have to use local Mkt Tz
+            // if init value is supplied then have to use localMktTz
 
-            if (this.clockT.getInitValue() != null && this.clockT.getLocalMktTz() != null) {
-                XMLGregorianCalendar xmlGregorianCalendar = this.clockT.getInitValue();
-
-//                setValue(xmlGregorianCalendar.getHour() + ":"
-//                        + xmlGregorianCalendar.getMinute() + ":"
-//                        + xmlGregorianCalendar.getSecond());
+            if (this.clockT.getInitValueMode() == 0 && this.clockT.getInitValue() != null && this.clockT.getLocalMktTz() != null) {
+                DateTime dateTime = DateTimeConverter
+                        .convertXMLGregorianCalendarToDateTime(this.clockT.getInitValue(),
+                                this.clockT.getLocalMktTz());
+                dateTime = dateTime.toDateTime(DateTimeZone.getDefault());
+                setValue(dateTime);
             } else {
                 setValue(getValue());
             }
@@ -81,6 +80,7 @@ public class FxFixClockUiElement implements FixClockUiElement<Pane, DateTime> {
                     .withYear(year(clockT.getInitValue()))
                     .withMonthOfYear(month(clockT.getInitValue()))
                     .withDayOfMonth(dayOfMonth(clockT.getInitValue())));
+
             this.gridPane.add(this.dateSpinner, this.nextColumn++, 0);
         }
     }
@@ -134,52 +134,45 @@ public class FxFixClockUiElement implements FixClockUiElement<Pane, DateTime> {
 
     @Override
     public DateTime getValue() {
-        return this.timeSpinner.getValue();
+        DateTime dateTime = this.timeSpinner.getValue();
+        if (dateTime == null)
+            dateTime = DateTime.now();
+        if (dateSpinner != null) {
+            DateTime dateTime1 = dateSpinner.getValue();
+            if (dateTime1 == null)
+                dateTime1 = DateTime.now();
+            dateTime.withDayOfMonth(dateTime1.getDayOfMonth());
+            dateTime.withMonthOfYear(dateTime1.getMonthOfYear());
+            dateTime.withYear(dateTime1.getYear());
+        }
+        return dateTime;
     }
 
     @Override
     public void setValue(DateTime s) {
-        // TODO check parse DateTime
-        //if (Utils.isNonEmpty(s))
-//            timeSpinner.setTime(s.equals(NULL_VALUE) ? DateTime.now() : LocalTime.parse(s, ATDL_TIME_ONLY_FORMATTER));
-        timeSpinner.setTime(DateTime.now());
-
-        setFieldValueToParameter(getValue(), parameterT);
+        timeSpinner.setTime(s);
+        if (dateSpinner != null)
+            dateSpinner.setTime(s);
+        setFieldValueToParameter(s, parameterT);
     }
-
-    // TODO clean the code on 13-04-2017 after 12 PM
-    private DateTimeFormatter ATDL_TIME_ONLY_FORMATTER = new DateTimeFormatterBuilder()
-            .appendValue(java.time.temporal.ChronoField.HOUR_OF_DAY, 1, 2, SignStyle.NEVER)
-            .appendLiteral(':')
-            .appendValue(java.time.temporal.ChronoField.MINUTE_OF_HOUR, 1, 2, SignStyle.NEVER)
-            .optionalStart()
-            .appendLiteral(':')
-            .appendValue(java.time.temporal.ChronoField.SECOND_OF_MINUTE, 1, 2, SignStyle.NEVER)
-            .optionalStart()
-            .appendFraction(java.time.temporal.ChronoField.NANO_OF_SECOND, 0, 9, true)
-            .toFormatter();
-
-    private DateTimeFormatter ATDL_DATE_ONLY_FORMATTER = new DateTimeFormatterBuilder()
-            .appendValue(ChronoField.DAY_OF_MONTH, 1, 2, SignStyle.NEVER)
-            .appendLiteral('.')
-            .appendValue(ChronoField.MONTH_OF_YEAR, 1, 2, SignStyle.NEVER)
-            .appendLiteral('.')
-            .appendValue(ChronoField.YEAR, 1, 2, SignStyle.NEVER)
-            .optionalStart().toFormatter();
 
     @Override
     public void makeVisible(boolean visible) {
         gridPane.setVisible(visible);
+        if (visible)
+            setValue(getValue());
     }
 
     @Override
     public void makeEnable(boolean enable) {
         gridPane.setDisable(!enable);
+        if (enable)
+            setValue(getValue());
     }
 
 
     @Override
-    public ControlTTypeConverter<?> getControlTTypeConverter() {
+    public TypeConverter<?, ?> getControlTTypeConverter() {
         return this.controlTTypeConverter;
     }
 }

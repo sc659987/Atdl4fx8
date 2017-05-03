@@ -1,18 +1,13 @@
 package com.three60t.fixatdl.converter;
 
-import com.three60t.fixatdl.model.core.MultipleCharValueT;
-import com.three60t.fixatdl.model.core.MultipleStringValueT;
-import com.three60t.fixatdl.model.core.ParameterT;
-import com.three60t.fixatdl.model.core.PercentageT;
-import com.three60t.fixatdl.model.layout.ControlT;
+import com.three60t.fixatdl.model.core.*;
 
 import java.math.BigDecimal;
 
 /**
  * Created by sainik on 01/05/17.
  */
-public class StringConverter implements ParameterTTypeConverter<String, ParameterT>,
-        ControlTTypeConverter<String> {
+public class StringConverter implements TypeConverter<String, ParameterT> {
 
     private ParameterT parameterT;
 
@@ -102,7 +97,10 @@ public class StringConverter implements ParameterTTypeConverter<String, Paramete
             tempBigDecimal = tempBigDecimal.scaleByPowerOfTen(-2);
             return tempBigDecimal;
         } else {
-            return DatatypeConverter.convertValueToDatatype(aValue, getParameterDatatype(String.class));
+            Object object = DatatypeConverter.convertValueToDatatype(aValue, getParameterDatatype(String.class));
+            if (object != null && getParameter() instanceof IntT)
+                return ((Number) object).intValue();
+            return object;
         }
     }
 
@@ -117,34 +115,34 @@ public class StringConverter implements ParameterTTypeConverter<String, Paramete
     }
 
 
-    @Override
-    public String convertParameterValueToControlValue(Object aValue, ControlT aControl) {
-        Object tempValue = adjustParameterValueForEnumRefValue(aValue, getParameter(), aControl);
-
-        if ((tempValue == null) || ("".equals(tempValue))) {
-            return null;
-        }
-        // -- handle PercentageT getParameter() coming through with BigDecial (eg from Load FIX Message) --
-        else if ((tempValue != null) && (isControlMultiplyBy100())) {
-            BigDecimal tempBigDecimal;
-            try {
-                if (tempValue instanceof BigDecimal) {
-                    tempBigDecimal = (BigDecimal) tempValue;
-                } else {
-                    tempBigDecimal = new BigDecimal((String) tempValue);
-                }
-            } catch (NumberFormatException e) {
-                throw new NumberFormatException("Invalid Decimal Number Format: [" + aValue + "] for Parameter: " + getParameter().getName());
-            }
-
-            // -- Multiply Control's value by 100 --
-            tempBigDecimal = tempBigDecimal.scaleByPowerOfTen(2);
-            return tempBigDecimal.toString();
-        } else {
-            return DatatypeConverter.convertValueToStringDatatype(tempValue);
-
-        }
-    }
+//    @Override
+//    public String convertParameterValueToControlValue(Object aValue, ControlT aControl) {
+//        Object tempValue = adjustParameterValueForEnumRefValue(aValue, getParameter(), aControl);
+//
+//        if ((tempValue == null) || ("".equals(tempValue))) {
+//            return null;
+//        }
+//        // -- handle PercentageT getParameter() coming through with BigDecial (eg from Load FIX Message) --
+//        else if ((tempValue != null) && (isControlMultiplyBy100())) {
+//            BigDecimal tempBigDecimal;
+//            try {
+//                if (tempValue instanceof BigDecimal) {
+//                    tempBigDecimal = (BigDecimal) tempValue;
+//                } else {
+//                    tempBigDecimal = new BigDecimal((String) tempValue);
+//                }
+//            } catch (NumberFormatException e) {
+//                throw new NumberFormatException("Invalid Decimal Number Format: [" + aValue + "] for Parameter: " + getParameter().getName());
+//            }
+//
+//            // -- Multiply Control's value by 100 --
+//            tempBigDecimal = tempBigDecimal.scaleByPowerOfTen(2);
+//            return tempBigDecimal.toString();
+//        } else {
+//            return DatatypeConverter.convertValueToStringDatatype(tempValue);
+//
+//        }
+//    }
 
     @Override
     public String convertControlValueToControlComparable(Object value) {
@@ -155,7 +153,6 @@ public class StringConverter implements ParameterTTypeConverter<String, Paramete
     public String convertStringToControlValue(String aString) {
         return convertControlValueToControlComparable(aString);
     }
-
 
 
 }

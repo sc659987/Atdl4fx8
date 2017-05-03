@@ -10,6 +10,4 @@ public class Utils {
         return s != null && !s.isEmpty() ? true : false;
     }
 
-    // todo put constValue reflection call here
-
 }

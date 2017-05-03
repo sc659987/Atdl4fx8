@@ -1,7 +1,7 @@
 package com.three60t.fixatdl.ui.fx8.element;
 
-import com.three60t.fixatdl.converter.ControlTTypeConverter;
-import com.three60t.fixatdl.converter.TypeConverterFactory;
+import com.three60t.fixatdl.converter.TypeConverter;
+import com.three60t.fixatdl.converter.TypeConverterRepo;
 import com.three60t.fixatdl.model.core.ParameterT;
 import com.three60t.fixatdl.model.layout.TextFieldT;
 import com.three60t.fixatdl.ui.common.element.FixTextFieldUiElement;
@@ -29,7 +29,7 @@ public class FxFixTextFieldUiElement implements FixTextFieldUiElement<Pane, Stri
 
     private ObjectProperty<String> controlIdEmitter = new SimpleObjectProperty<>();
 
-    private ControlTTypeConverter<?> controlTTypeConverter;
+    private TypeConverter<?,?> controlTTypeConverter;
 
 
 
@@ -38,7 +38,7 @@ public class FxFixTextFieldUiElement implements FixTextFieldUiElement<Pane, Stri
         if (this.textFieldT != null) {
             this.gridPane = new GridPane();
 
-            this.controlTTypeConverter = TypeConverterFactory.createControlTypeConverter(textFieldT, parameterT);
+            this.controlTTypeConverter = TypeConverterRepo.createParameterTypeConverter(parameterT);
 
             if (!Utils.isEmpty(this.textFieldT.getLabel())) {
                 this.gridPane.getColumnConstraints().addAll(FxUtils.getTwoColumnSameWidthForGridPane());
@@ -109,7 +109,7 @@ public class FxFixTextFieldUiElement implements FixTextFieldUiElement<Pane, Stri
     }
 
     @Override
-    public ControlTTypeConverter<?> getControlTTypeConverter() {
+    public TypeConverter<?,?> getControlTTypeConverter() {
         return this.controlTTypeConverter;
     }
 }

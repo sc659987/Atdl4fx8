@@ -1,10 +1,10 @@
 package com.three60t.fixatdl.converter;
 
 
+import com.three60t.fixatdl.model.core.IntT;
 import com.three60t.fixatdl.model.core.NumericT;
 import com.three60t.fixatdl.model.core.ParameterT;
 import com.three60t.fixatdl.model.core.PercentageT;
-import com.three60t.fixatdl.model.layout.ControlT;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -14,8 +14,7 @@ import java.text.NumberFormat;
 /**
  * Created by sainik on 01/05/17.
  */
-public class DecimalConverter implements ParameterTTypeConverter<BigDecimal, ParameterT>,
-        ControlTTypeConverter<BigDecimal> {
+public class DecimalConverter implements TypeConverter<BigDecimal, ParameterT> {
 
     private ParameterT parameterT;
 
@@ -25,7 +24,6 @@ public class DecimalConverter implements ParameterTTypeConverter<BigDecimal, Par
 
     @Override
     public BigDecimal convertParameterConstToComparable() {
-
         BigDecimal tempBigDecimal = null;
         Object aParameterValue = getConstFieldOfParam();
         if (aParameterValue instanceof BigDecimal) {
@@ -196,7 +194,14 @@ public class DecimalConverter implements ParameterTTypeConverter<BigDecimal, Par
             return tempBigDecimal.scaleByPowerOfTen(-2);
         } else {
             // -- aDatatypeIfNull=DATATYPE_BIG_DECIMAL --
-            return DatatypeConverter.convertValueToDatatype(tempBigDecimal, getParameterDatatype(BigDecimal.class));
+            Object obj = DatatypeConverter.convertValueToDatatype(tempBigDecimal, getParameterDatatype(BigDecimal.class));
+
+            if (getParameter() instanceof IntT) {
+                if (obj instanceof BigInteger)
+                    return ((BigInteger) obj).intValue();
+            }
+
+            return obj;
         }
     }
 
@@ -210,22 +215,22 @@ public class DecimalConverter implements ParameterTTypeConverter<BigDecimal, Par
         }
     }
 
-    @Override
-    public BigDecimal convertParameterValueToControlValue(Object aValue, ControlT aControl) {
-
-        Object tempValue = adjustParameterValueForEnumRefValue(aValue, getParameter(), aControl);
-
-        BigDecimal tempBigDecimal = DatatypeConverter.convertValueToBigDecimalDatatype(tempValue);
-
-        if ((tempBigDecimal != null) && (isControlMultiplyBy100())) {
-            // -- multiply Control's value by 100 --
-            return tempBigDecimal.scaleByPowerOfTen(2);
-        } else {
-            return tempBigDecimal;
-        }
-
-
-    }
+//    @Override
+//    public BigDecimal convertParameterValueToControlValue(Object aValue, ControlT aControl) {
+//
+//        Object tempValue = adjustParameterValueForEnumRefValue(aValue, getParameter(), aControl);
+//
+//        BigDecimal tempBigDecimal = DatatypeConverter.convertValueToBigDecimalDatatype(tempValue);
+//
+//        if ((tempBigDecimal != null) && (isControlMultiplyBy100())) {
+//            // -- multiply Control's value by 100 --
+//            return tempBigDecimal.scaleByPowerOfTen(2);
+//        } else {
+//            return tempBigDecimal;
+//        }
+//
+//
+//    }
 
     @Override
     public BigDecimal convertControlValueToControlComparable(Object aValue) {

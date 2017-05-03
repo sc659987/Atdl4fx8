@@ -1,7 +1,7 @@
 package com.three60t.fixatdl.ui.fx8.element;
 
 import com.three60t.fixatdl.controlflow.FxFixAtdlControlFlowRegisterSingleton;
-import com.three60t.fixatdl.converter.ControlTTypeConverter;
+import com.three60t.fixatdl.converter.TypeConverter;
 import com.three60t.fixatdl.model.core.ParameterT;
 import com.three60t.fixatdl.model.layout.*;
 import com.three60t.fixatdl.ui.common.UiElementAbstractFactory;
@@ -210,7 +210,7 @@ public class FxFixPanelUiElement implements FixPanelUiElement<Node, String> {
     }
 
     @Override
-    public ControlTTypeConverter<?> getControlTTypeConverter() {
+    public TypeConverter<?,?> getControlTTypeConverter() {
         return null;
     }
 }
