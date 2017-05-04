@@ -34,7 +34,7 @@ public class FxFixSingleSpinnerUiElement implements FixSingleSpinnerUiElement<Pa
 
     private Pair<Double, Double> limit;
 
-    private TypeConverter<?,?> controlTTypeConverter;
+    private TypeConverter<?, ?> controlTTypeConverter;
 
     @Override
     public Pane create() {
@@ -43,7 +43,7 @@ public class FxFixSingleSpinnerUiElement implements FixSingleSpinnerUiElement<Pa
 
             this.controlTTypeConverter = TypeConverterRepo.createParameterTypeConverter(parameterT);
 
-            if (Utils.isNonEmpty(this.singleSpinnerT.getLabel())) {
+            if (Utils.isNonEmptyString(this.singleSpinnerT.getLabel())) {
                 this.gridPane.add(new Label(this.singleSpinnerT.getLabel()),
                         this.nextColumn++, 0);
             }
@@ -59,16 +59,19 @@ public class FxFixSingleSpinnerUiElement implements FixSingleSpinnerUiElement<Pa
                 controlIdEmitter.setValue(singleSpinnerT.getID() + ":" + getValue());
             });
 
-
-            if (this.singleSpinnerT.getInitValue() != null) {
-                setValue(this.singleSpinnerT.getInitValue());
-            }
-
+            initializeControl();
 
             this.gridPane.add(this.singleSpinner, this.nextColumn, 0);
             return this.gridPane;
         }
         return null;
+    }
+
+    @Override
+    public void initializeControl() {
+        if (this.singleSpinnerT.getInitValue() != null) {
+            setValue(this.singleSpinnerT.getInitValue());
+        }
     }
 
     private Pair<Double, Double> extractRangeFromParameter() {
@@ -125,10 +128,12 @@ public class FxFixSingleSpinnerUiElement implements FixSingleSpinnerUiElement<Pa
     @Override
     public void makeEnable(boolean enable) {
         this.singleSpinner.setDisable(!enable);
+        if (enable)
+            initializeControl();
     }
 
     @Override
-    public TypeConverter<?,?> getControlTTypeConverter() {
+    public TypeConverter<?, ?> getControlTTypeConverter() {
         return this.controlTTypeConverter;
     }
 }

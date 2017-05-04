@@ -96,7 +96,7 @@ public class FxFixAtdlUi extends AbstractFixAtdlUi<Pane> {
         this.validateButton.setOnAction(event -> {
             List<String> errorMessage = Stream.concat(
                     fixStrategyEditValidator.validateStrategyEditRuleAndGetErrorMessage().stream(),
-                    fixParameterValidator.validateParameter().stream()).filter(Utils::isNonEmpty).collect(Collectors.toList());
+                    fixParameterValidator.validateParameter().stream()).filter(Utils::isNonEmptyString).collect(Collectors.toList());
 
             this.errorMessageAndValidateButtonBox.getChildren().clear();
             if (errorMessage != null && errorMessage.size() > 0) {

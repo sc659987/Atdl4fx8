@@ -2,6 +2,7 @@ package com.three60t.fixatdl.ui.fx8.element;
 
 import com.three60t.fixatdl.converter.TypeConverter;
 import com.three60t.fixatdl.converter.TypeConverterRepo;
+import com.three60t.fixatdl.model.core.EnumPairT;
 import com.three60t.fixatdl.model.core.ParameterT;
 import com.three60t.fixatdl.model.layout.ListItemT;
 import com.three60t.fixatdl.model.layout.SingleSelectListT;
@@ -32,47 +33,37 @@ public class FxFixSingleSelectListUiElement
 
     private ObjectProperty<String> controlIdEmitter = new SimpleObjectProperty<>();
 
-    private TypeConverter<?,?> controlTTypeConverter;
+    private TypeConverter<?, ?> controlTTypeConverter;
 
     @Override
     public Pane create() {
         if (this.singleSelectListT != null) {
-
-            this.controlTTypeConverter = TypeConverterRepo.createParameterTypeConverter( parameterT);
+            this.controlTTypeConverter = TypeConverterRepo.createParameterTypeConverter(parameterT);
 
             this.gridPane = new GridPane();
-            if (!Utils.isEmpty(this.singleSelectListT.getLabel())) {
+            if (!Utils.isEmptyString(this.singleSelectListT.getLabel())) {
                 this.gridPane.getColumnConstraints().addAll(FxUtils.getOneColumnWidthForGridPane());
                 this.gridPane.add(new Label(this.singleSelectListT.getLabel()), 0,
                         this.nextRow++);
             }
-
             this.singleSelectListView = new ListView<>(FXCollections.observableArrayList(
                     this.singleSelectListT.getListItem()));
-
-            // TODO check and test it
-            // this.singleSelectListView.setCellFactory(param -> new ListCell<ListItemT>() {
-            // @Override
-            // protected void updateItem(ListItemT item, boolean empty) {
-            // super.updateItem(item, empty);
-            // setText(item.getUiRep());
-            // }
-            // });
-
             this.singleSelectListView.getSelectionModel()
                     .setSelectionMode(SelectionMode.SINGLE);
-
             this.singleSelectListView.setOnMouseClicked(event -> {
                 setValue(this.singleSelectListView.getItems().get(
                         singleSelectListView.getSelectionModel().getSelectedIndices().get(0)).getEnumID());
                 controlIdEmitter.set(singleSelectListT.getID() + ":" + getValue());
             });
-
             this.gridPane.add(this.singleSelectListView, 0, this.nextRow);
-
             return this.gridPane;
         }
         return null;
+    }
+
+    @Override
+    public void initializeControl() {
+
     }
 
     @Override
@@ -118,8 +109,17 @@ public class FxFixSingleSelectListUiElement
         IntStream.range(0, singleSelectListT.getListItem().size())
                 .filter(value -> singleSelectListT.getListItem().get(value).getEnumID().equals(s)).findFirst().ifPresent(value -> {
             singleSelectListView.getSelectionModel().select(value);
-            setFieldValueToParameter(getValue(), this.parameterT);
+            setFieldValueToParameter(tryToConvertEnumIdToWireValue(getValue()), this.parameterT);
         });
+    }
+
+    private String tryToConvertEnumIdToWireValue(String str) {
+        return parameterT == null ? null : parameterT.getEnumPair()
+                .parallelStream()
+                .filter(enumPairT -> enumPairT.getEnumID().equals(str))
+                .findFirst()
+                .orElse(new EnumPairT())
+                .getWireValue();
     }
 
     @Override
@@ -133,7 +133,7 @@ public class FxFixSingleSelectListUiElement
     }
 
     @Override
-    public TypeConverter<?,?> getControlTTypeConverter() {
+    public TypeConverter<?, ?> getControlTTypeConverter() {
         return this.controlTTypeConverter;
     }
 }

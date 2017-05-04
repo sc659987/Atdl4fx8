@@ -39,11 +39,11 @@ public class FxFixDropDownListUiElement implements FixDropDownListUiElement<Pane
         if (this.dropDownListT != null) {
             this.gridPane = new GridPane();
             this.controlTTypeConverter = TypeConverterRepo.createParameterTypeConverter(parameterT);
-            if (!Utils.isEmpty(this.dropDownListT.getLabel()))
+            if (!Utils.isEmptyString(this.dropDownListT.getLabel()))
                 this.gridPane.add(new Label(this.dropDownListT.getLabel()), this.nextColumn++, 0);
             this.gridPane.setHgap(3);
             this.comboBox.getItems().addAll(this.dropDownListT.getListItem());
-            if (Utils.isEmpty(this.dropDownListT.getInitValue()))
+            if (Utils.isEmptyString(this.dropDownListT.getInitValue()))
                 this.comboBox.getSelectionModel().selectFirst();
             else
                 setValue(this.dropDownListT.getInitValue());
@@ -55,6 +55,11 @@ public class FxFixDropDownListUiElement implements FixDropDownListUiElement<Pane
             return this.gridPane;
         }
         return null;
+    }
+
+    @Override
+    public void initializeControl() {
+
     }
 
     @Override
@@ -97,8 +102,8 @@ public class FxFixDropDownListUiElement implements FixDropDownListUiElement<Pane
     }
 
     private String getParameterValueFromWireValue(String enumID) {
-        return this.parameterT.getEnumPair()
-                .stream()
+        return this.parameterT==null ? null : this.parameterT.getEnumPair()
+                .parallelStream()
                 .filter(enumPairT -> enumPairT.getEnumID().equals(enumID))
                 .findFirst()
                 .map(enumPairT -> enumPairT.getWireValue())

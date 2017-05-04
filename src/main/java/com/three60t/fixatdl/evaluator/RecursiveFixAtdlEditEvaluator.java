@@ -3,11 +3,11 @@ package com.three60t.fixatdl.evaluator;
 import com.three60t.fixatdl.model.validation.EditT;
 import com.three60t.fixatdl.utils.CachedMap;
 
-public class RecursiveFixEditEvaluator implements FixEditEvaluator {
+public class RecursiveFixAtdlEditEvaluator implements FixAtdlEditEvaluator {
 
     private CachedMap cachedMap;
 
-    public RecursiveFixEditEvaluator(CachedMap cachedMap) {
+    public RecursiveFixAtdlEditEvaluator(CachedMap cachedMap) {
         this.cachedMap = cachedMap;
     }
 
@@ -57,7 +57,7 @@ public class RecursiveFixEditEvaluator implements FixEditEvaluator {
         }
     }
 
-    //TODO refactor it Make change here
+    //TODO refactor it Make change here take value from converter **very important
     private Comparable tryToConvert(Comparable o1, Comparable o2) {
         if (Integer.class.isInstance(o1) && o2 instanceof String) {
             return Integer.parseInt((String) o2);

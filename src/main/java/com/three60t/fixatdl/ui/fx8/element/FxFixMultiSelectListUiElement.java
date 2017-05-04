@@ -2,6 +2,7 @@ package com.three60t.fixatdl.ui.fx8.element;
 
 import com.three60t.fixatdl.converter.TypeConverter;
 import com.three60t.fixatdl.converter.TypeConverterRepo;
+import com.three60t.fixatdl.model.core.EnumPairT;
 import com.three60t.fixatdl.model.core.ParameterT;
 import com.three60t.fixatdl.model.layout.ListItemT;
 import com.three60t.fixatdl.model.layout.MultiSelectListT;
@@ -17,6 +18,7 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -32,16 +34,16 @@ public class FxFixMultiSelectListUiElement implements FixMultiSelectListUiElemen
 
     private GridPane gridPane;
 
-    private TypeConverter<?,?> controlTTypeConverter;
+    private TypeConverter<?, ?> controlTTypeConverter;
 
     @Override
     public Pane create() {
         if (this.multiSelectListT != null) {
             this.gridPane = new GridPane();
 
-            controlTTypeConverter = TypeConverterRepo.createParameterTypeConverter( parameterT);
+            controlTTypeConverter = TypeConverterRepo.createParameterTypeConverter(parameterT);
 
-            if (!Utils.isEmpty(this.multiSelectListT.getLabel())) {
+            if (!Utils.isEmptyString(this.multiSelectListT.getLabel())) {
                 this.gridPane.getColumnConstraints().addAll(FxUtils.getOneColumnWidthForGridPane());
                 this.gridPane.add(new Label(this.multiSelectListT.getLabel()), 0,
                         this.nextRow++);
@@ -52,7 +54,7 @@ public class FxFixMultiSelectListUiElement implements FixMultiSelectListUiElemen
 
             this.multiSelectListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
-            if (Utils.isNonEmpty(multiSelectListT.getInitValue()))
+            if (Utils.isNonEmptyString(multiSelectListT.getInitValue()))
                 setValue(multiSelectListT.getInitValue());
 
             this.multiSelectListView.setOnMouseClicked(event -> {
@@ -67,6 +69,11 @@ public class FxFixMultiSelectListUiElement implements FixMultiSelectListUiElemen
             return this.gridPane;
         }
         return null;
+    }
+
+    @Override
+    public void initializeControl() {
+
     }
 
     @Override
@@ -108,15 +115,36 @@ public class FxFixMultiSelectListUiElement implements FixMultiSelectListUiElemen
     }
 
     @Override
-    public void setValue(String s) {
+    public void setValue(String concatenatedEnumId) {
         IntStream.range(0, multiSelectListT.getListItem().size())
-                .filter(operand -> s.contains(multiSelectListT.getListItem().get(operand).getEnumID()))
+                .filter(operand -> concatenatedEnumId.contains(multiSelectListT.getListItem().get(operand).getEnumID()))
                 .forEach(value -> {
                     multiSelectListView.getSelectionModel().select(value);
                 });
 
-        setFieldValueToParameter(controlTTypeConverter.convertControlValueToParameterValue(getValue()), parameterT);
+        setFieldValueToParameter(controlTTypeConverter
+                        .convertControlValueToParameterValue(tryToConvertEnumIdToWireValue(getValue())),
+                parameterT);
     }
+
+    private String tryToConvertEnumIdToWireValue(String value) {
+        return String.join(" ",
+                Arrays.asList(value.split(" "))
+                        .parallelStream()
+                        .map(this::findWireValue)
+                        .collect(Collectors.toList()));
+    }
+
+    private String findWireValue(String enumId) {
+        return parameterT == null ? null :
+                parameterT.getEnumPair()
+                        .parallelStream()
+                        .filter(enumPairT -> enumPairT.getEnumID().equals(enumId))
+                        .findFirst()
+                        .orElse(new EnumPairT())
+                        .getWireValue();
+    }
+
 
     @Override
     public void makeVisible(boolean visible) {
@@ -129,7 +157,7 @@ public class FxFixMultiSelectListUiElement implements FixMultiSelectListUiElemen
     }
 
     @Override
-    public TypeConverter<?,?> getControlTTypeConverter() {
+    public TypeConverter<?, ?> getControlTTypeConverter() {
         return this.controlTTypeConverter;
     }
 }

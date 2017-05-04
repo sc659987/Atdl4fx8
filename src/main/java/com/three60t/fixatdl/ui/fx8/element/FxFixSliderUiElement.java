@@ -89,6 +89,11 @@ public class FxFixSliderUiElement implements FixSliderUiElement<Pane, String> {
     }
 
     @Override
+    public void initializeControl() {
+
+    }
+
+    @Override
     public ObjectProperty<String> listenChange() {
         return this.controlIdEmitter;
     }

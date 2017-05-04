@@ -40,8 +40,10 @@ import javax.xml.bind.annotation.XmlType;
 public class BooleanT
         extends ParameterT {
 
+    // Sainik : this has been deprecated
     @XmlAttribute
     protected String trueWireValue;
+    // Sainik: this has been deprecated
     @XmlAttribute
     protected String falseWireValue;
     @XmlAttribute

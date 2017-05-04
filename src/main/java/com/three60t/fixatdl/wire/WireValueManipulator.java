@@ -2,11 +2,8 @@ package com.three60t.fixatdl.wire;
 
 import com.three60t.fixatdl.converter.TypeConverter;
 import com.three60t.fixatdl.converter.TypeConverterRepo;
-import com.three60t.fixatdl.model.core.ParameterT;
 import com.three60t.fixatdl.model.core.StrategiesT;
 import com.three60t.fixatdl.model.core.StrategyT;
-
-import java.lang.reflect.Field;
 
 public class WireValueManipulator implements WireValueGenerator, WireValueInterpreter {
 
@@ -38,7 +35,7 @@ public class WireValueManipulator implements WireValueGenerator, WireValueInterp
         final CountIncrement repeatCount = new CountIncrement();
         selectedStrategy.getParameter().forEach(parameterT -> {
             TypeConverter<?, ?> typeConverter = TypeConverterRepo.get(parameterT);
-            if (typeConverter != null && typeConverter.convertParameterConstToFixWireValue()!=null) {
+            if (typeConverter != null && typeConverter.convertParameterConstToFixWireValue() != null) {
                 if (strategies.isTag957Support())
                     wireBuilder.append(DELIMITER)
                             .append(TAG_STRATEGY_PARAMETER_NAME)

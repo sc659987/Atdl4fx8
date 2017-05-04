@@ -1,6 +1,6 @@
 package com.three60t.fixatdl.ui.fx8.element;
 
-import com.three60t.fixatdl.controlflow.FxFixAtdlControlFlowRegisterSingleton;
+import com.three60t.fixatdl.controlflow.FixAtdlControlFlowRegister;
 import com.three60t.fixatdl.converter.TypeConverter;
 import com.three60t.fixatdl.model.core.ParameterT;
 import com.three60t.fixatdl.model.layout.ControlT;
@@ -41,9 +41,14 @@ public class FxFixLayoutUiElement implements FixLayoutUiElement<Node, String> {
             element.setParameters(this.allParameterTList);
             return element.create();
         }).collect(Collectors.toList()));
-        FxFixAtdlControlFlowRegisterSingleton.getSingleTon().executeControlFlowForAllControls();
+        FixAtdlControlFlowRegister.getSingleTon().executeControlFlowForAllControls();
         scrollPane.setContent(vBox);
         return scrollPane;
+    }
+
+    @Override
+    public void initializeControl() {
+
     }
 
     @Override
@@ -92,7 +97,7 @@ public class FxFixLayoutUiElement implements FixLayoutUiElement<Node, String> {
     }
 
     @Override
-    public TypeConverter<?,?> getControlTTypeConverter() {
+    public TypeConverter<?, ?> getControlTTypeConverter() {
         return null;
     }
 }

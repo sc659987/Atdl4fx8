@@ -74,6 +74,11 @@ public interface FixUiElement<T, K extends Comparable<?>> {
      */
     <C extends ControlT> C getControl();
 
+    /***
+     *
+     */
+    void initializeControl();
+
     /****
      *
      * @param names

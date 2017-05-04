@@ -2,6 +2,7 @@ package com.three60t.fixatdl.ui.fx8.element;
 
 import com.three60t.fixatdl.converter.TypeConverter;
 import com.three60t.fixatdl.converter.TypeConverterRepo;
+import com.three60t.fixatdl.model.core.EnumPairT;
 import com.three60t.fixatdl.model.core.ParameterT;
 import com.three60t.fixatdl.model.layout.RadioButtonT;
 import com.three60t.fixatdl.ui.common.element.FixRadioButtonUiElement;
@@ -24,7 +25,7 @@ public class FxFixRadioButtonUiElement implements FixRadioButtonUiElement<RadioB
     private static final Map<String, ToggleGroup> TOGGLE_GROUPS = new HashMap<>();
     private ObjectProperty<String> controlIdEmitter = new SimpleObjectProperty<>();
 
-    private TypeConverter<?,?> controlTTypeConverter;
+    private TypeConverter<?, ?> controlTTypeConverter;
 
     @Override
     public RadioButton create() {
@@ -34,7 +35,7 @@ public class FxFixRadioButtonUiElement implements FixRadioButtonUiElement<RadioB
             this.controlTTypeConverter = TypeConverterRepo.createParameterTypeConverter(parameterT);
 
             this.radioButton.setId(this.radioButtonT.getID());
-            if (!Utils.isEmpty(this.radioButtonT.getRadioGroup())) {
+            if (!Utils.isEmptyString(this.radioButtonT.getRadioGroup())) {
                 ToggleGroup toggleGroup = TOGGLE_GROUPS.get(this.radioButtonT.getRadioGroup());
                 if (toggleGroup == null) {
                     TOGGLE_GROUPS.put(this.radioButtonT.getRadioGroup(), toggleGroup = new ToggleGroup());
@@ -52,13 +53,33 @@ public class FxFixRadioButtonUiElement implements FixRadioButtonUiElement<RadioB
             }
 
             this.radioButton.setOnAction(event -> {
-                setFieldValueToParameter(getValue(), this.parameterT);
+                setFieldValueToParameter(getRadioButtonParamValue(getValue()), this.parameterT);
                 // publish GUI change mainly for control flow
                 controlIdEmitter.setValue(radioButtonT.getID() + ":" + getValue());
             });
             return this.radioButton;
         }
         return null;
+    }
+
+    private String getRadioButtonParamValue(String enumId) {
+        String paramValue = enumId;
+        EnumPairT foundEnumPairT1 = parameterT
+                .getEnumPair()
+                .parallelStream()
+                .filter(enumPairT -> enumPairT.getEnumID().equals(enumId))
+                .findFirst()
+                .orElse(null);
+        if (foundEnumPairT1 != null) {
+            paramValue = foundEnumPairT1.getWireValue();
+        }
+        return null;
+    }
+
+
+    @Override
+    public void initializeControl() {
+
     }
 
     @Override
@@ -98,7 +119,7 @@ public class FxFixRadioButtonUiElement implements FixRadioButtonUiElement<RadioB
         //TODO wrong logic change it
         if (this.radioButtonT.getCheckedEnumRef() != null)
             this.radioButton.setSelected(this.radioButtonT.getCheckedEnumRef().equals(enumId));
-        setFieldValueToParameter(getValue(), this.parameterT);
+        setFieldValueToParameter(getRadioButtonParamValue(getValue()), this.parameterT);
     }
 
     @Override
@@ -112,7 +133,7 @@ public class FxFixRadioButtonUiElement implements FixRadioButtonUiElement<RadioB
     }
 
     @Override
-    public TypeConverter<?,?> getControlTTypeConverter() {
+    public TypeConverter<?, ?> getControlTTypeConverter() {
         return this.controlTTypeConverter;
     }
 }

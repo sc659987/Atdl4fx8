@@ -25,6 +25,9 @@ public class FixAtdlGeneratorManualTestApp extends Application {
     private Text selectedFilePath;
     private FixAtdlUi<Pane> paneFixAtdlUi = new FxFixAtdlUi();
 
+
+    private File lastOpenedDirectory = new File(".");
+
     private BorderPane borderPane;
 
     {
@@ -48,8 +51,10 @@ public class FixAtdlGeneratorManualTestApp extends Application {
         this.selectAltdButton = new Button();
         this.selectAltdButton.setText("Select ALDT file");
         this.selectAltdButton.setOnAction(event -> {
+            fileChooser.setInitialDirectory(this.lastOpenedDirectory);
             File file = fileChooser.showOpenDialog(stage);
             if (file != null) {
+                lastOpenedDirectory = file.getParentFile();
                 this.selectedFilePath.setText(file.getAbsolutePath());
                 this.paneFixAtdlUi.parseFixAtdlFile(file);
                 borderPane.setCenter(this.paneFixAtdlUi.createUi());

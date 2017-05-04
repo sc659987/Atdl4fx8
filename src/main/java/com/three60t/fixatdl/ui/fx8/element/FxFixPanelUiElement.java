@@ -1,6 +1,6 @@
 package com.three60t.fixatdl.ui.fx8.element;
 
-import com.three60t.fixatdl.controlflow.FxFixAtdlControlFlowRegisterSingleton;
+import com.three60t.fixatdl.controlflow.FixAtdlControlFlowRegister;
 import com.three60t.fixatdl.converter.TypeConverter;
 import com.three60t.fixatdl.model.core.ParameterT;
 import com.three60t.fixatdl.model.layout.*;
@@ -31,9 +31,9 @@ public class FxFixPanelUiElement implements FixPanelUiElement<Node, String> {
 
     private List<ParameterT> parameterTList;
 
-    private FxFixAtdlControlFlowRegisterSingleton fxAtdlControlFlowRegister;
+    private FixAtdlControlFlowRegister fxAtdlControlFlowRegister;
 
-    public FxFixPanelUiElement(FxFixAtdlControlFlowRegisterSingleton singleton) {
+    public FxFixPanelUiElement(FixAtdlControlFlowRegister singleton) {
         this.fxAtdlControlFlowRegister = singleton;
     }
 
@@ -43,7 +43,7 @@ public class FxFixPanelUiElement implements FixPanelUiElement<Node, String> {
             Pane parent = (this.strategyPanelT.getOrientation() == PanelOrientationT.HORIZONTAL)
                     ? new HBox() : new VBox(4);
             TitledPane titledPane = null;
-            if (Utils.isNonEmpty(this.strategyPanelT.getTitle())) {
+            if (Utils.isNonEmptyString(this.strategyPanelT.getTitle())) {
                 titledPane = new TitledPane();
                 titledPane.setCollapsible(this.strategyPanelT.isCollapsible());
                 titledPane.setExpanded(!this.strategyPanelT.isCollapsed());
@@ -164,6 +164,12 @@ public class FxFixPanelUiElement implements FixPanelUiElement<Node, String> {
         return null;
     }
 
+
+    @Override
+    public void initializeControl() {
+
+    }
+
     @Override
     public void setStrategyPanelT(StrategyPanelT strategyPanelT) {
         this.strategyPanelT = strategyPanelT;
@@ -210,7 +216,7 @@ public class FxFixPanelUiElement implements FixPanelUiElement<Node, String> {
     }
 
     @Override
-    public TypeConverter<?,?> getControlTTypeConverter() {
+    public TypeConverter<?, ?> getControlTTypeConverter() {
         return null;
     }
 }

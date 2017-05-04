@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class FxFixAtdlControlFlowRegisterSingleton  {
+public class FixAtdlControlFlowRegister {
 
     // controlId and Fx Ui element which are dependent on that Id for control flow
     private Map<String, Set<FixUiElement>> controlIdUiElementMap;
@@ -22,18 +22,18 @@ public class FxFixAtdlControlFlowRegisterSingleton  {
     private FixAtdlStateRuleResultActor fxFixAtdlStateRuleResultActor;
 
     //
-    private Map<String, FixUiElement<?,?>> allIFixUiElements = new HashMap<>();
+    private Map<String, FixUiElement<?, ?>> allIFixUiElements = new HashMap<>();
 
-    private static FxFixAtdlControlFlowRegisterSingleton _singleton;
+    private static FixAtdlControlFlowRegister _singleton;
 
-    public static synchronized FxFixAtdlControlFlowRegisterSingleton getSingleTon() {
-        return _singleton == null ? _singleton = new FxFixAtdlControlFlowRegisterSingleton() : _singleton;
+    public static synchronized FixAtdlControlFlowRegister getSingleTon() {
+        return _singleton == null ? _singleton = new FixAtdlControlFlowRegister() : _singleton;
     }
 
-    private FxFixAtdlControlFlowRegisterSingleton() {
+    private FixAtdlControlFlowRegister() {
         controlIdUiElementMap = new HashMap<>();
-        fixAtdlStateRuleEvaluator = new FxFixAtdlStateRuleEvaluator(this.allIFixUiElements);
-        fxFixAtdlStateRuleResultActor = new FxFixAtdlStateRuleResultActor();
+        fixAtdlStateRuleEvaluator = new FixAtdlStateRuleEvaluatorImpl(this.allIFixUiElements);
+        fxFixAtdlStateRuleResultActor = new FixAtdlStateRuleResultActorImpl();
     }
 
     public void registerControlFlow(FixUiElement<?, ? extends Comparable<?>> fixUiElement) {

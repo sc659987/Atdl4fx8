@@ -31,7 +31,7 @@ public class FxFixCheckBoxListUiElement implements FixCheckBoxListUiElement<Pane
     private int nextRow = 0;
     private ObjectProperty<String> controlIdEmitter = new SimpleObjectProperty<>();
 
-    private TypeConverter<?,?> controlTTypeConverter;
+    private TypeConverter<?, ?> controlTTypeConverter;
 
     @Override
     public Pane create() {
@@ -41,7 +41,7 @@ public class FxFixCheckBoxListUiElement implements FixCheckBoxListUiElement<Pane
             this.controlTTypeConverter = TypeConverterRepo.createParameterTypeConverter(parameterT);
 
             // GUI label addition to grid
-            if (!Utils.isEmpty(this.checkBoxListT.getLabel()))
+            if (!Utils.isEmptyString(this.checkBoxListT.getLabel()))
                 this.gridPane.add(new Label(this.checkBoxListT.getLabel()),
                         0, this.nextRow++, 1, 1);
 
@@ -94,6 +94,12 @@ public class FxFixCheckBoxListUiElement implements FixCheckBoxListUiElement<Pane
             return this.gridPane;
         }
         return null;
+    }
+
+
+    @Override
+    public void initializeControl() {
+
     }
 
     @Override
@@ -167,7 +173,7 @@ public class FxFixCheckBoxListUiElement implements FixCheckBoxListUiElement<Pane
     }
 
     @Override
-    public TypeConverter<?,?> getControlTTypeConverter() {
+    public TypeConverter<?, ?> getControlTTypeConverter() {
         return this.controlTTypeConverter;
     }
 }

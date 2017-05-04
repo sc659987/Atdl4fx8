@@ -2,6 +2,7 @@ package com.three60t.fixatdl.ui.fx8.element;
 
 import com.three60t.fixatdl.converter.TypeConverter;
 import com.three60t.fixatdl.converter.TypeConverterRepo;
+import com.three60t.fixatdl.model.core.EnumPairT;
 import com.three60t.fixatdl.model.core.ParameterT;
 import com.three60t.fixatdl.model.layout.PanelOrientationT;
 import com.three60t.fixatdl.model.layout.RadioButtonListT;
@@ -30,14 +31,14 @@ public class FxFixRadioButtonListUiElement implements FixRadioButtonListUiElemen
 
     private ObjectProperty<String> controlIdEmitter = new SimpleObjectProperty<>();
 
-    private TypeConverter<?,?> controlTTypeConverter;
+    private TypeConverter<?, ?> controlTTypeConverter;
 
     @Override
     public Pane create() {
         if (this.radioButtonListT != null) {
             this.gridPane = new GridPane();
 
-            this.controlTTypeConverter = TypeConverterRepo.createParameterTypeConverter( parameterT);
+            this.controlTTypeConverter = TypeConverterRepo.createParameterTypeConverter(parameterT);
 
             this.toggleGroup = new ToggleGroup();
             this.gridPane.add(new Label(this.radioButtonListT.getLabel()), 0, 0, 1, 1);
@@ -50,25 +51,39 @@ public class FxFixRadioButtonListUiElement implements FixRadioButtonListUiElemen
                 return radioButton;
             }).collect(Collectors.toList());
 
-            if (Utils.isNonEmpty(this.radioButtonListT.getInitValue()))
+            if (Utils.isNonEmptyString(this.radioButtonListT.getInitValue()))
                 setValue(this.radioButtonListT.getInitValue());
 
             this.radioButtonList.forEach(radioButton ->
                     radioButton.setOnAction(event -> {
-                        setFieldValueToParameter(((RadioButton) event.getSource()).getId(), parameterT);
+                        setFieldValueToParameter(convertEnumItToWireValue(((RadioButton) event.getSource()).getId()), parameterT);
                         this.controlIdEmitter.setValue(this.radioButtonListT.getID() + ":" + getValue());
                     }));
 
-            IntStream.range(0, this.radioButtonList.size()).forEach(i -> {
+            IntStream.range(0, this.radioButtonList.size()).forEach(index -> {
                 if (this.radioButtonListT.getOrientation() == PanelOrientationT.HORIZONTAL) {
-                    this.gridPane.add(this.radioButtonList.get(i), 3 * i, 1, 1, 1);
+                    this.gridPane.add(this.radioButtonList.get(index), 3 * index, 1, 1, 1);
                 } else {
-                    this.gridPane.add(this.radioButtonList.get(i), 0, i + 1, 1, 1);
+                    this.gridPane.add(this.radioButtonList.get(index), 0, index + 1, 1, 1);
                 }
             });
             return gridPane;
         }
         return null;
+    }
+
+    private String convertEnumItToWireValue(String enumId) {
+        return parameterT == null ? null : parameterT.getEnumPair()
+                .parallelStream()
+                .filter(enumPairT -> enumPairT.getEnumID().equals(enumId))
+                .findFirst()
+                .orElse(new EnumPairT())
+                .getWireValue();
+    }
+
+    @Override
+    public void initializeControl() {
+
     }
 
     @Override
@@ -109,7 +124,9 @@ public class FxFixRadioButtonListUiElement implements FixRadioButtonListUiElemen
                 .filter(radioButton -> radioButton.getId().equals(s))
                 .forEach(radioButton -> {
                     radioButton.setSelected(true);
+
                 });
+        setFieldValueToParameter(convertEnumItToWireValue(getValue()), parameterT);
     }
 
     @Override
@@ -132,7 +149,7 @@ public class FxFixRadioButtonListUiElement implements FixRadioButtonListUiElemen
     }
 
     @Override
-    public TypeConverter<?,?> getControlTTypeConverter() {
+    public TypeConverter<?, ?> getControlTTypeConverter() {
         return this.controlTTypeConverter;
     }
 }

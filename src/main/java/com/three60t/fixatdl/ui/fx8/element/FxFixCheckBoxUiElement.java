@@ -46,19 +46,24 @@ public class FxFixCheckBoxUiElement implements FixCheckBoxUiElement<CheckBox, Bo
         return null;
     }
 
+    @Override
+    public void initializeControl() {
+
+    }
 
     private String getCheckBoxParamValue(Boolean isSelected) {
         String toReturn = isSelected.toString();
-        EnumPairT foundEnumPairT = parameterT.getEnumPair()
-                .parallelStream()
-                .filter(enumPairT -> enumPairT.getEnumID().equals(isSelected.toString()))
-                .findFirst().get();
+        if (this.parameterT != null) {
+            EnumPairT foundEnumPairT = this.parameterT.getEnumPair()
+                    .parallelStream()
+                    .filter(enumPairT -> enumPairT.getEnumID().equals(isSelected.toString()))
+                    .findFirst().orElse(null);
 
-
-        if (foundEnumPairT != null) {
-            toReturn = foundEnumPairT.getWireValue();
-        } else if (this.checkBoxT.getCheckedEnumRef() != null && this.checkBoxT.getUncheckedEnumRef() != null) {
-            toReturn = isSelected ? this.checkBoxT.getCheckedEnumRef() : this.checkBoxT.getUncheckedEnumRef();
+            if (foundEnumPairT != null) {
+                toReturn = foundEnumPairT.getWireValue();
+            } else if (this.checkBoxT.getCheckedEnumRef() != null && this.checkBoxT.getUncheckedEnumRef() != null) {
+                toReturn = isSelected ? this.checkBoxT.getCheckedEnumRef() : this.checkBoxT.getUncheckedEnumRef();
+            }
         }
         return toReturn;
     }

@@ -45,27 +45,14 @@ public class FxFixClockUiElement implements FixClockUiElement<Pane, DateTime> {
 
             this.controlTTypeConverter = TypeConverterRepo.createParameterTypeConverter(parameterT);
 
-            if (!Utils.isEmpty(this.clockT.getLabel()))
+            if (!Utils.isEmptyString(this.clockT.getLabel()))
                 this.gridPane.add(new Label(this.clockT.getLabel()), this.nextColumn++, 0);
 
             this.gridPane.setHgap(3);
             this.timeSpinner = new TimeSpinner();
             this.timeSpinner.setOnMouseClicked(event -> setFieldValueToParameter(getValue(), parameterT));
-
-
-            // LOGIC clockT.getInitValueMode() if 0 then use clockT.getInitValue() otherwise use current time
-            // if init value is supplied then have to use localMktTz
-
-            if (this.clockT.getInitValueMode() == 0 && this.clockT.getInitValue() != null && this.clockT.getLocalMktTz() != null) {
-                DateTime dateTime = DateTimeConverter
-                        .convertXMLGregorianCalendarToDateTime(this.clockT.getInitValue(),
-                                this.clockT.getLocalMktTz());
-                dateTime = dateTime.toDateTime(DateTimeZone.getDefault());
-                setValue(dateTime);
-            } else {
-                setValue(getValue());
-            }
-            createByParameter();
+            initializeControl();
+            adjustClockByParameterType();
             //this.dateSpinner = new DateSpinner(LocalDate.now());
             this.gridPane.add(this.timeSpinner, this.nextColumn, 0);
 
@@ -74,7 +61,29 @@ public class FxFixClockUiElement implements FixClockUiElement<Pane, DateTime> {
         return null;
     }
 
-    private void createByParameter() {
+    @Override
+    public void initializeControl() {
+        // LOGIC clockT.getInitValueMode() if 0 then use clockT.getInitValue() otherwise use current time
+        // if init value is supplied then have to use localMktTz
+        if (this.clockT.getInitValue() != null && this.clockT.getLocalMktTz() != null) {
+            DateTime dateTime = DateTimeConverter
+                    .convertXMLGregorianCalendarToDateTime(this.clockT.getInitValue(),
+                            this.clockT.getLocalMktTz());
+
+            dateTime = dateTime.toDateTime(DateTimeZone.getDefault());
+            if (this.clockT.getInitValueMode() == 1) {
+                DateTime temp = new DateTime(DateTimeZone.forID(clockT.getLocalMktTz().value()));
+                if (temp.isAfter(dateTime)) {
+                    dateTime = temp;
+                }
+            }
+            setValue(dateTime);
+        } else {
+            setValue(new DateTime());
+        }
+    }
+
+    private void adjustClockByParameterType() {
         if (parameterT instanceof UTCTimestampT) {
             this.dateSpinner = new DateSpinner(new DateTime()
                     .withYear(year(clockT.getInitValue()))
@@ -84,7 +93,6 @@ public class FxFixClockUiElement implements FixClockUiElement<Pane, DateTime> {
             this.gridPane.add(this.dateSpinner, this.nextColumn++, 0);
         }
     }
-
 
     private int year(XMLGregorianCalendar xmlGregorianCalendar) {
         return xmlGregorianCalendar == null ||

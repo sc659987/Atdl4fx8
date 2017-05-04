@@ -19,18 +19,23 @@ public class FxFixLabelUiElement implements FixLabelUiElement<Label, String> {
 
     private ParameterT parameterT;
 
-    private TypeConverter<?,?> controlTTypeConverter;
+    private TypeConverter<?, ?> controlTTypeConverter;
 
     @Override
     public Label create() {
         if (this.labelT != null) {
-            controlTTypeConverter = TypeConverterRepo.createParameterTypeConverter( parameterT);
+            controlTTypeConverter = TypeConverterRepo.createParameterTypeConverter(parameterT);
 
             this.label = new Label();
             this.label.setText(this.labelT.getLabel());
             return this.label;
         }
         return null;
+    }
+
+    @Override
+    public void initializeControl() {
+
     }
 
     @Override
@@ -82,7 +87,7 @@ public class FxFixLabelUiElement implements FixLabelUiElement<Label, String> {
     }
 
     @Override
-    public TypeConverter<?,?> getControlTTypeConverter() {
+    public TypeConverter<?, ?> getControlTTypeConverter() {
         return this.controlTTypeConverter;
     }
 }

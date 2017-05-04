@@ -12,6 +12,7 @@ import java.lang.reflect.Field;
  * @param <E>
  * @param <F>
  */
+//TODO clean up when all bugs are fixed
 public interface TypeConverter<E extends Comparable<?>, F extends ParameterT> {
 
     /***

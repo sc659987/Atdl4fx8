@@ -30,16 +30,16 @@ public class FxFixEditableDropDownListUiElement
 
     private ObjectProperty<String> controlIdEmitter = new SimpleObjectProperty<>();
 
-    private TypeConverter<?,?> controlTTypeConverter;
+    private TypeConverter<?, ?> controlTTypeConverter;
 
     @Override
     public Pane create() {
         if (this.editableDropDownListT != null) {
             this.gridPane = new GridPane();
 
-            this.controlTTypeConverter = TypeConverterRepo.createParameterTypeConverter( parameterT);
+            this.controlTTypeConverter = TypeConverterRepo.createParameterTypeConverter(parameterT);
 
-            if (Utils.isNonEmpty(this.editableDropDownListT.getLabel()))
+            if (Utils.isNonEmptyString(this.editableDropDownListT.getLabel()))
                 this.gridPane.add(new Label(this.editableDropDownListT.getLabel()),
                         this.nextColumn++, 0);
             this.gridPane.setHgap(3);
@@ -50,7 +50,7 @@ public class FxFixEditableDropDownListUiElement
 
             this.editableComboBox.setEditable(true);
 
-            if (Utils.isNonEmpty(this.editableDropDownListT.getInitValue()))
+            if (Utils.isNonEmptyString(this.editableDropDownListT.getInitValue()))
                 setValue(this.editableDropDownListT.getInitValue());
 
             this.editableComboBox.setOnAction(event -> {
@@ -64,6 +64,11 @@ public class FxFixEditableDropDownListUiElement
             return this.gridPane;
         }
         return null;
+    }
+
+    @Override
+    public void initializeControl() {
+
     }
 
     @Override
@@ -125,7 +130,7 @@ public class FxFixEditableDropDownListUiElement
     }
 
     @Override
-    public TypeConverter<?,?> getControlTTypeConverter() {
+    public TypeConverter<?, ?> getControlTTypeConverter() {
         return this.controlTTypeConverter;
     }
 }

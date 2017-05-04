@@ -1,6 +1,6 @@
 package com.three60t.fixatdl.ui.fx8;
 
-import com.three60t.fixatdl.controlflow.FxFixAtdlControlFlowRegisterSingleton;
+import com.three60t.fixatdl.controlflow.FixAtdlControlFlowRegister;
 import com.three60t.fixatdl.ui.common.UiElementAbstractFactory;
 import com.three60t.fixatdl.ui.common.element.*;
 import com.three60t.fixatdl.ui.fx8.element.*;
@@ -45,7 +45,7 @@ public class FxUiElementFactory implements UiElementAbstractFactory {
 
     @Override
     public FixPanelUiElement<Node, String> instantiateNewPanel() {
-        return new FxFixPanelUiElement(FxFixAtdlControlFlowRegisterSingleton.getSingleTon());
+        return new FxFixPanelUiElement(FixAtdlControlFlowRegister.getSingleTon());
     }
 
     @Override

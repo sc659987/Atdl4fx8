@@ -9,8 +9,7 @@ import java.math.BigInteger;
 /**
  * Created by sainik on 01/05/17.
  */
-public class BooleanConverter implements
-        TypeConverter<Boolean, ParameterT> {
+public class BooleanConverter implements TypeConverter<Boolean, ParameterT> {
 
     private final ParameterT parameterT;
 
@@ -103,7 +102,6 @@ public class BooleanConverter implements
 
         return null;
     }
-
 
 
     @Override

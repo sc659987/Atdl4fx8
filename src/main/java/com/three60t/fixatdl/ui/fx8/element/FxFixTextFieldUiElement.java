@@ -29,9 +29,7 @@ public class FxFixTextFieldUiElement implements FixTextFieldUiElement<Pane, Stri
 
     private ObjectProperty<String> controlIdEmitter = new SimpleObjectProperty<>();
 
-    private TypeConverter<?,?> controlTTypeConverter;
-
-
+    private TypeConverter<?, ?> controlTTypeConverter;
 
     @Override
     public Pane create() {
@@ -40,7 +38,7 @@ public class FxFixTextFieldUiElement implements FixTextFieldUiElement<Pane, Stri
 
             this.controlTTypeConverter = TypeConverterRepo.createParameterTypeConverter(parameterT);
 
-            if (!Utils.isEmpty(this.textFieldT.getLabel())) {
+            if (!Utils.isEmptyString(this.textFieldT.getLabel())) {
                 this.gridPane.getColumnConstraints().addAll(FxUtils.getTwoColumnSameWidthForGridPane());
                 this.gridPane.add(new Label(this.textFieldT.getLabel()), this.nextColumn++, 0);
             }
@@ -50,12 +48,17 @@ public class FxFixTextFieldUiElement implements FixTextFieldUiElement<Pane, Stri
                 setFieldValueToParameter(getValue(), this.parameterT);
                 this.controlIdEmitter.setValue(textFieldT.getID() + ":" + getValue());
             });
-            if (Utils.isNonEmpty(this.textFieldT.getInitValue()))
+            if (Utils.isNonEmptyString(this.textFieldT.getInitValue()))
                 setValue(this.textFieldT.getInitValue());
             this.gridPane.add(this.textField, this.nextColumn, 0);
             return this.gridPane;
         }
         return null;
+    }
+
+    @Override
+    public void initializeControl() {
+
     }
 
     @Override
@@ -89,7 +92,7 @@ public class FxFixTextFieldUiElement implements FixTextFieldUiElement<Pane, Stri
     @Override
     public String getValue() {
         String str = this.textField.getCharacters().toString();
-        return Utils.isEmpty(str) ? null : str;
+        return Utils.isEmptyString(str) ? null : str;
     }
 
     @Override
@@ -109,7 +112,7 @@ public class FxFixTextFieldUiElement implements FixTextFieldUiElement<Pane, Stri
     }
 
     @Override
-    public TypeConverter<?,?> getControlTTypeConverter() {
+    public TypeConverter<?, ?> getControlTTypeConverter() {
         return this.controlTTypeConverter;
     }
 }

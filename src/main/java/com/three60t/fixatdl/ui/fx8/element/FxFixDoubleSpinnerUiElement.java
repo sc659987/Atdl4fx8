@@ -49,7 +49,7 @@ public class FxFixDoubleSpinnerUiElement implements FixDoubleSpinnerUiElement<Pa
 
             controlTTypeConverter = TypeConverterRepo.createParameterTypeConverter(parameterT);
 
-            if (Utils.isNonEmpty(this.doubleSpinnerT.getLabel())) {
+            if (Utils.isNonEmptyString(this.doubleSpinnerT.getLabel())) {
                 this.gridPane.add(new Label(this.doubleSpinnerT.getLabel()),
                         this.nextColumn++, 0);
             }
@@ -68,6 +68,11 @@ public class FxFixDoubleSpinnerUiElement implements FixDoubleSpinnerUiElement<Pa
             return this.gridPane;
         }
         return null;
+    }
+
+    @Override
+    public void initializeControl() {
+
     }
 
     @Override
