@@ -4,10 +4,7 @@ import com.three60t.fixatdl.model.layout.ControlT;
 import com.three60t.fixatdl.model.validation.EditT;
 import com.three60t.fixatdl.ui.common.element.FixUiElement;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class FixAtdlControlFlowRegister {
@@ -31,7 +28,7 @@ public class FixAtdlControlFlowRegister {
     }
 
     private FixAtdlControlFlowRegister() {
-        controlIdUiElementMap = new HashMap<>();
+        controlIdUiElementMap = new LinkedHashMap<>();
         fixAtdlStateRuleEvaluator = new FixAtdlStateRuleEvaluatorImpl(this.allIFixUiElements);
         fxFixAtdlStateRuleResultActor = new FixAtdlStateRuleResultActorImpl();
     }
@@ -42,7 +39,7 @@ public class FixAtdlControlFlowRegister {
         ControlT iFixUiElementControlT = fixUiElement.getControl();
         // for each StateRule map all control Id this UiElement depends on
         iFixUiElementControlT.getStateRule().forEach(stateRuleT -> getAllControlIdFromEdit(stateRuleT.getEdit()).forEach(controlId -> {
-            Set<FixUiElement> fixUiElements = controlIdUiElementMap.getOrDefault(controlId, new HashSet<>());
+            Set<FixUiElement> fixUiElements = controlIdUiElementMap.getOrDefault(controlId, new LinkedHashSet<>());
             fixUiElements.add(fixUiElement);
             controlIdUiElementMap.put(controlId, fixUiElements);
         }));
@@ -52,7 +49,7 @@ public class FixAtdlControlFlowRegister {
     }
 
     private void executeControlFLowByControlId(String controlId) {
-        controlIdUiElementMap.getOrDefault(controlId, new HashSet<>()).forEach(effectedIFixElement ->
+        controlIdUiElementMap.getOrDefault(controlId, new LinkedHashSet<>()).forEach(effectedIFixElement ->
                 effectedIFixElement.getControl().getStateRule().forEach(stateRuleT -> fixAtdlStateRuleEvaluator
                         .getResult(stateRuleT).forEach(atdlStateRuleResultTypeComparablePair ->
                                 fxFixAtdlStateRuleResultActor.doAct(atdlStateRuleResultTypeComparablePair, effectedIFixElement))));

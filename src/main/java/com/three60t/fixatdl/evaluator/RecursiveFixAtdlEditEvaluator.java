@@ -3,6 +3,8 @@ package com.three60t.fixatdl.evaluator;
 import com.three60t.fixatdl.model.validation.EditT;
 import com.three60t.fixatdl.utils.CachedMap;
 
+import java.math.BigDecimal;
+
 public class RecursiveFixAtdlEditEvaluator implements FixAtdlEditEvaluator {
 
     private CachedMap cachedMap;
@@ -14,7 +16,6 @@ public class RecursiveFixAtdlEditEvaluator implements FixAtdlEditEvaluator {
     @SuppressWarnings({"unchecked"})
     @Override
     public boolean validate(EditT editT) {
-
         if (isLogicalEdit(editT)) {
             switch (editT.getLogicOperator()) {
                 case AND:
@@ -58,12 +59,24 @@ public class RecursiveFixAtdlEditEvaluator implements FixAtdlEditEvaluator {
     }
 
     //TODO refactor it Make change here take value from converter **very important
+    // there is no converter for control type so don't use converter here.
+    // any control in Fix ATDL Javafx 8 implementation has at present has three types those are java.lang.String, java.lang.Double and joda.DateTime
     private Comparable tryToConvert(Comparable o1, Comparable o2) {
-        if (Integer.class.isInstance(o1) && o2 instanceof String) {
-            return Integer.parseInt((String) o2);
-        } else if (Boolean.class.isInstance(o1) && o2 instanceof String) {
+        // o2 is every time is string as StateRule.Edit.value is type of string.
+        // double , dateTime
+//        if (Integer.class.isInstance(o1) && o2 instanceof String) {
+//            return Integer.parseInt((String) o2);
+//        } else
+        if (Boolean.class.isInstance(o1) && o2 instanceof String) {
             return Boolean.parseBoolean((String) o2);
+        } else if (Double.class.isInstance(o1) && o2 instanceof String) {
+            return Double.parseDouble((String) o2);
+        } else if (BigDecimal.class.isInstance(o1) && o2 instanceof String) {
+            return new BigDecimal((String) o2);
         }
+        // TODO there is mo case found to specify dateTime as value of
+        // TODO Edit element of Fix Atdl example on prod or test fix atdl
+        // TODO files hence this case is not taken care of.
         return o2;
     }
 

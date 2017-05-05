@@ -34,7 +34,7 @@ public class FxUiElementFactory implements UiElementAbstractFactory {
 
     @Override
     public FixHiddenFieldUiElement instantiateNewHiddenField() {
-        // TODO registerControlFlow it
+        // TODO it would be used for default field
         return null;
     }
 
@@ -64,7 +64,7 @@ public class FxUiElementFactory implements UiElementAbstractFactory {
     }
 
     @Override
-    public FixCheckBoxUiElement<CheckBox, Boolean> instantiateNewCheckBox() {
+    public FixCheckBoxUiElement<CheckBox, String> instantiateNewCheckBox() {
         return new FxFixCheckBoxUiElement();
     }
 

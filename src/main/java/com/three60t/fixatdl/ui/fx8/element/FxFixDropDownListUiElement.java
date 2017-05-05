@@ -43,10 +43,10 @@ public class FxFixDropDownListUiElement implements FixDropDownListUiElement<Pane
                 this.gridPane.add(new Label(this.dropDownListT.getLabel()), this.nextColumn++, 0);
             this.gridPane.setHgap(3);
             this.comboBox.getItems().addAll(this.dropDownListT.getListItem());
-            if (Utils.isEmptyString(this.dropDownListT.getInitValue()))
-                this.comboBox.getSelectionModel().selectFirst();
-            else
-                setValue(this.dropDownListT.getInitValue());
+            // initialize the controls
+            initializeControl();
+            // set the value to parameter from control
+            setFieldValueToParameter(getParameterValueFromWireValue(this.comboBox.getValue().getEnumID()), this.parameterT);
             this.comboBox.setOnAction(event -> {
                 setFieldValueToParameter(getParameterValueFromWireValue(getValue()), this.parameterT);
                 this.controlIdEmitter.setValue(dropDownListT.getID() + ":" + comboBox.getValue());
@@ -59,7 +59,10 @@ public class FxFixDropDownListUiElement implements FixDropDownListUiElement<Pane
 
     @Override
     public void initializeControl() {
-
+        if (Utils.isEmptyString(this.dropDownListT.getInitValue()))
+            this.comboBox.getSelectionModel().selectFirst();
+        else
+            setValue(this.dropDownListT.getInitValue());
     }
 
     @Override
@@ -97,12 +100,12 @@ public class FxFixDropDownListUiElement implements FixDropDownListUiElement<Pane
                 .findFirst()
                 .ifPresent(listItemT -> {
                     this.comboBox.setValue(listItemT);
-                    setFieldValueToParameter(getParameterValueFromWireValue(getValue()), this.parameterT);
+                    setFieldValueToParameter(getParameterValueFromWireValue(listItemT.getEnumID()), this.parameterT);
                 });
     }
 
     private String getParameterValueFromWireValue(String enumID) {
-        return this.parameterT==null ? null : this.parameterT.getEnumPair()
+        return this.parameterT == null ? null : this.parameterT.getEnumPair()
                 .parallelStream()
                 .filter(enumPairT -> enumPairT.getEnumID().equals(enumID))
                 .findFirst()
@@ -118,6 +121,8 @@ public class FxFixDropDownListUiElement implements FixDropDownListUiElement<Pane
     @Override
     public void makeEnable(boolean enable) {
         this.comboBox.setDisable(!enable);
+        if (enable)
+            initializeControl();
     }
 
     @Override

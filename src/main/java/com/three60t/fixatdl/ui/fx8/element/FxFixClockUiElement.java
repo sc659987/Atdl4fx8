@@ -23,6 +23,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import java.time.MonthDay;
 import java.time.Year;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 public class FxFixClockUiElement implements FixClockUiElement<Pane, DateTime> {
@@ -49,12 +50,16 @@ public class FxFixClockUiElement implements FixClockUiElement<Pane, DateTime> {
                 this.gridPane.add(new Label(this.clockT.getLabel()), this.nextColumn++, 0);
 
             this.gridPane.setHgap(3);
-            this.timeSpinner = new TimeSpinner();
-            this.timeSpinner.setOnMouseClicked(event -> setFieldValueToParameter(getValue(), parameterT));
+
+            //this.timeSpinner = new TimeSpinner();
+            //this.timeSpinner.setOnMouseClicked(event -> setFieldValueToParameter(getValue(), parameterT));
+
+            //
+            createClockByParameterType();
             initializeControl();
-            adjustClockByParameterType();
+            setFieldValueToParameter(getValue(), parameterT);
             //this.dateSpinner = new DateSpinner(LocalDate.now());
-            this.gridPane.add(this.timeSpinner, this.nextColumn, 0);
+            //this.gridPane.add(this.timeSpinner, this.nextColumn, 0);
 
             return this.gridPane;
         }
@@ -66,24 +71,34 @@ public class FxFixClockUiElement implements FixClockUiElement<Pane, DateTime> {
         // LOGIC clockT.getInitValueMode() if 0 then use clockT.getInitValue() otherwise use current time
         // if init value is supplied then have to use localMktTz
         if (this.clockT.getInitValue() != null && this.clockT.getLocalMktTz() != null) {
-            DateTime dateTime = DateTimeConverter
+            // create joda Date time from xmlGregorianCalender with specified timezone
+            DateTime initDateTime = DateTimeConverter
                     .convertXMLGregorianCalendarToDateTime(this.clockT.getInitValue(),
                             this.clockT.getLocalMktTz());
-
-            dateTime = dateTime.toDateTime(DateTimeZone.getDefault());
+            // convert the specified date time to current time zone
+            initDateTime = initDateTime.toDateTime(DateTimeZone.getDefault());
+            // if init mode is 1 then adjust again
             if (this.clockT.getInitValueMode() == 1) {
-                DateTime temp = new DateTime(DateTimeZone.forID(clockT.getLocalMktTz().value()));
-                if (temp.isAfter(dateTime)) {
-                    dateTime = temp;
+                //if current time in current time zone is after initialized time converted to
+                //current time zone then use current time zone value
+                //DateTime currentTimeInSpecifiedTimeZone = new DateTime(DateTimeZone.forID(clockT.getLocalMktTz().value()));
+                DateTime currentTime = new DateTime(DateTimeZone.getDefault());
+                if (currentTime.isAfter(initDateTime)) {
+                    initDateTime = currentTime;
                 }
             }
-            setValue(dateTime);
+            setValue(initDateTime);
         } else {
             setValue(new DateTime());
         }
     }
 
-    private void adjustClockByParameterType() {
+    /***
+     *
+     */
+    private void createClockByParameterType() {
+        this.timeSpinner = new TimeSpinner();
+        this.timeSpinner.setOnMouseClicked(event -> setFieldValueToParameter(getValue(), parameterT));
         if (parameterT instanceof UTCTimestampT) {
             this.dateSpinner = new DateSpinner(new DateTime()
                     .withYear(year(clockT.getInitValue()))
@@ -92,6 +107,7 @@ public class FxFixClockUiElement implements FixClockUiElement<Pane, DateTime> {
 
             this.gridPane.add(this.dateSpinner, this.nextColumn++, 0);
         }
+        this.gridPane.add(this.timeSpinner, this.nextColumn, 0);
     }
 
     private int year(XMLGregorianCalendar xmlGregorianCalendar) {
@@ -167,15 +183,13 @@ public class FxFixClockUiElement implements FixClockUiElement<Pane, DateTime> {
     @Override
     public void makeVisible(boolean visible) {
         gridPane.setVisible(visible);
-        if (visible)
-            setValue(getValue());
     }
 
     @Override
     public void makeEnable(boolean enable) {
         gridPane.setDisable(!enable);
         if (enable)
-            setValue(getValue());
+            initializeControl();
     }
 
 

@@ -15,7 +15,7 @@ public class StringConverter implements TypeConverter<String, ParameterT> {
         this.parameterT = parameterT;
     }
 
-    @Override
+    //@Override
     public String convertParameterConstToComparable() {
         Object value = getConstFieldOfParam();
         return (value == null || "".equals(value)) ? null : value.toString();
@@ -42,17 +42,17 @@ public class StringConverter implements TypeConverter<String, ParameterT> {
         }
     }
 
-    @Override
-    public Object convertFixWireValueToParameterConst(String aFixWireValue) {
-        String str = convertStringToParameterValue(aFixWireValue);
-        if (getParameter() instanceof MultipleCharValueT && ((MultipleCharValueT) getParameter()).isInvertOnWire()) {
-            invertOnWire(str);
-        } else if (getParameter() instanceof MultipleStringValueT && ((MultipleStringValueT) getParameter()).isInvertOnWire()) {
-            invertOnWire(str);
-        }
-        return null;
-        // TODO set to parameter
-    }
+    //@Override
+//    public Object convertFixWireValueToParameterConst(String aFixWireValue) {
+//        String str = convertStringToParameterValue(aFixWireValue);
+//        if (getParameter() instanceof MultipleCharValueT && ((MultipleCharValueT) getParameter()).isInvertOnWire()) {
+//            invertOnWire(str);
+//        } else if (getParameter() instanceof MultipleStringValueT && ((MultipleStringValueT) getParameter()).isInvertOnWire()) {
+//            invertOnWire(str);
+//        }
+//        return null;
+//        // TODO set to parameter
+//    }
 
     protected String convertStringToParameterValue(String aValue) {
         if ((aValue != null) && (!"".equals(aValue))) {
@@ -144,7 +144,7 @@ public class StringConverter implements TypeConverter<String, ParameterT> {
 //        }
 //    }
 
-    @Override
+    //@Override
     public String convertControlValueToControlComparable(Object value) {
         return (value == null || "".equals(value)) ? null : value.toString();
     }

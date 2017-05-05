@@ -11,7 +11,6 @@ import javafx.scene.control.Label;
 import java.util.Collections;
 import java.util.List;
 
-//TODO check with specification label text can be changed
 public class FxFixLabelUiElement implements FixLabelUiElement<Label, String> {
 
     private Label label;
@@ -27,7 +26,7 @@ public class FxFixLabelUiElement implements FixLabelUiElement<Label, String> {
             controlTTypeConverter = TypeConverterRepo.createParameterTypeConverter(parameterT);
 
             this.label = new Label();
-            this.label.setText(this.labelT.getLabel());
+
             return this.label;
         }
         return null;
@@ -35,7 +34,7 @@ public class FxFixLabelUiElement implements FixLabelUiElement<Label, String> {
 
     @Override
     public void initializeControl() {
-
+        this.label.setText(this.labelT.getLabel());
     }
 
     @Override

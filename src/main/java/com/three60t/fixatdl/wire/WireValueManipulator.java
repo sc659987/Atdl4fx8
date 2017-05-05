@@ -50,7 +50,7 @@ public class WireValueManipulator implements WireValueGenerator, WireValueInterp
                             .append(EQUAL)
                             .append(typeConverter.convertParameterConstToFixWireValue());
                 else
-                    wireBuilder.append(parameterT.getFixTag().intValue())
+                    wireBuilder.append(DELIMITER).append(parameterT.getFixTag().intValue())
                             .append(EQUAL)
                             .append(typeConverter.convertParameterConstToFixWireValue());
                 repeatCount.incrementByOne();

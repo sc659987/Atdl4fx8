@@ -55,13 +55,15 @@ public class FxFixDoubleSpinnerUiElement implements FixDoubleSpinnerUiElement<Pa
             }
             this.gridPane.setHgap(3);
             this.limit = extractRangeFromParameter();
-            this.doubleSpinner = new DoubleSpinner(limit.getKey(),
-                    limit.getValue(),
-                    doubleSpinnerT.getInitValue() == null ? limit.getKey() : doubleSpinnerT.getInitValue(),
-                    doubleSpinnerT.getInnerIncrement(),
-                    doubleSpinnerT.getOuterIncrement() == null ? doubleSpinnerT.getInnerIncrement() : doubleSpinnerT.getOuterIncrement());
+            this.doubleSpinner = new DoubleSpinner(limit.getKey(), limit.getValue(), limit.getKey(),
+                    doubleSpinnerT.getInnerIncrement(), doubleSpinnerT.getOuterIncrement() == null ? doubleSpinnerT.getInnerIncrement() : doubleSpinnerT.getOuterIncrement());
+            // init field with value
+            initializeControl();
+            // set value to parameter
+            setFieldValueToParameter(doubleSpinner.getValue(), parameterT);
+            //listen to user interaction with double spinner and set the value to parameter
             this.doubleSpinner.setOnMouseClicked(event -> {
-                setValue(getValue());
+                setFieldValueToParameter(doubleSpinner.getValue(), parameterT);
                 controlIdEmitter.setValue(this.doubleSpinnerT.getID() + ":" + getValue());
             });
             this.gridPane.add(this.doubleSpinner, this.nextColumn, 0);
@@ -72,7 +74,8 @@ public class FxFixDoubleSpinnerUiElement implements FixDoubleSpinnerUiElement<Pa
 
     @Override
     public void initializeControl() {
-
+        if (this.doubleSpinnerT.getInitValue() != null)
+            this.doubleSpinner.setValue(this.doubleSpinnerT.getInitValue());
     }
 
     @Override
@@ -121,6 +124,8 @@ public class FxFixDoubleSpinnerUiElement implements FixDoubleSpinnerUiElement<Pa
     @Override
     public void makeEnable(boolean enable) {
         this.gridPane.setDisable(!enable);
+        if (enable)
+            initializeControl();
     }
 
     @Override

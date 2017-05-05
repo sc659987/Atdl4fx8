@@ -34,7 +34,7 @@ public class DateTimeConverter implements TypeConverter<DateTime, ParameterT> {
     }
 
 
-    @Override
+    //@Override
     public DateTime convertParameterConstToComparable() {
         Object aValue = getConstFieldOfParam();
         if (aValue instanceof DateTime) {
@@ -62,28 +62,28 @@ public class DateTimeConverter implements TypeConverter<DateTime, ParameterT> {
         }
     }
 
-    @Override
-    public Object convertFixWireValueToParameterConst(String aFixWireValue) {
-        if (aFixWireValue != null) {
-            String str = (String) aFixWireValue;
-            String format = getFormatString();
-            DateTimeFormatter fmt = DateTimeFormat.forPattern(format);
-            try {
-                if (getParameter() == null ||
-                        getParameter() instanceof UTCTimeOnlyT ||
-                        getParameter() instanceof UTCTimestampT) {
-                    DateTime tempDateTime = fmt.withZone(DateTimeZone.UTC).parseDateTime(str);
-                    return tempDateTime;
-                } else {
-                    return fmt.parseDateTime(str);
-                }
-            } catch (IllegalArgumentException e) {
-                throw new IllegalArgumentException("Unable to parse \"" + str + "\" with format \"" + format + "\"  Execption: " + e.getMessage());
-            }
-        }
-        return null;
-        // TODO Set to parameter
-    }
+//    //@Override
+//    public Object convertFixWireValueToParameterConst(String aFixWireValue) {
+//        if (aFixWireValue != null) {
+//            String str = (String) aFixWireValue;
+//            String format = getFormatString();
+//            DateTimeFormatter fmt = DateTimeFormat.forPattern(format);
+//            try {
+//                if (getParameter() == null ||
+//                        getParameter() instanceof UTCTimeOnlyT ||
+//                        getParameter() instanceof UTCTimestampT) {
+//                    DateTime tempDateTime = fmt.withZone(DateTimeZone.UTC).parseDateTime(str);
+//                    return tempDateTime;
+//                } else {
+//                    return fmt.parseDateTime(str);
+//                }
+//            } catch (IllegalArgumentException e) {
+//                throw new IllegalArgumentException("Unable to parse \"" + str + "\" with format \"" + format + "\"  Execption: " + e.getMessage());
+//            }
+//        }
+//        return null;
+//        // TODO Set to parameter
+//    }
 
     private String getFormatString() {
         if (getParameter() != null) {
@@ -205,7 +205,7 @@ public class DateTimeConverter implements TypeConverter<DateTime, ParameterT> {
 //        }
 //    }
 
-    @Override
+    //@Override
     public DateTime convertControlValueToControlComparable(Object aValue) {
         if (aValue instanceof DateTime) {
             return (DateTime) aValue;

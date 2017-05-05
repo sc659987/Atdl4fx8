@@ -31,7 +31,10 @@ public class FxFixCheckBoxListUiElement implements FixCheckBoxListUiElement<Pane
     private int nextRow = 0;
     private ObjectProperty<String> controlIdEmitter = new SimpleObjectProperty<>();
 
+    // NOTE: it's not important to use controlTypeConverter for checkboxList
+
     private TypeConverter<?, ?> controlTTypeConverter;
+
 
     @Override
     public Pane create() {
@@ -42,8 +45,7 @@ public class FxFixCheckBoxListUiElement implements FixCheckBoxListUiElement<Pane
 
             // GUI label addition to grid
             if (!Utils.isEmptyString(this.checkBoxListT.getLabel()))
-                this.gridPane.add(new Label(this.checkBoxListT.getLabel()),
-                        0, this.nextRow++, 1, 1);
+                this.gridPane.add(new Label(this.checkBoxListT.getLabel()), 0, this.nextRow++, 1, 1);
 
             this.gridPane.setHgap(3);
             // creating checkbox in fx from checkboxListT
@@ -58,19 +60,17 @@ public class FxFixCheckBoxListUiElement implements FixCheckBoxListUiElement<Pane
                     }).collect(Collectors.toList());
 
             // create a map
-            enumIdAndCheckBoxMap = checkBoxes
+            enumIdAndCheckBoxMap = this.checkBoxes
                     .parallelStream()
                     .collect(Collectors.toMap(CheckBox::getId, checkBox -> checkBox));
 
             // Initialize the check box selected or not on the basis of
-            this.checkBoxes.stream()
-                    .filter(checkBox -> checkBox.getId().equals(
-                            this.checkBoxListT.getInitValue()))
-                    .collect(Collectors.toList())
-                    .forEach(checkBox -> checkBox.setSelected(true));
+            initializeControl();
+            setFieldValueToParameter(controlTTypeConverter
+                    .convertControlValueToParameterValue(getParameterValue(getValue())), parameterT);
 
             // put the value for first time
-            setValue(getValue());
+            //setValue(getValue());
 
             this.gridPane.setHgap(2.0);
             this.gridPane.setVgap(2.0);
@@ -99,7 +99,16 @@ public class FxFixCheckBoxListUiElement implements FixCheckBoxListUiElement<Pane
 
     @Override
     public void initializeControl() {
-
+        if (this.checkBoxListT.getInitValue() != null)
+            this.checkBoxes.stream()
+                    .filter(checkBox -> this.checkBoxListT
+                            .getInitValue()
+                            .contains(checkBox.getId()))
+                    .forEach(checkBox -> checkBox
+                            .setSelected(true));
+        else if (this.parameterT != null) {
+            // TODO take value from parameter if init value is not available
+        }
     }
 
     @Override
@@ -143,7 +152,14 @@ public class FxFixCheckBoxListUiElement implements FixCheckBoxListUiElement<Pane
             enumIdAndCheckBoxMap.get(s).setSelected(true);
         });
         setFieldValueToParameter(controlTTypeConverter
-                .convertControlValueToParameterValue(getParameterValueFromWireValue(getValue())), parameterT);
+                .convertControlValueToParameterValue(getParameterValue(getValue())), parameterT);
+    }
+
+    private String getParameterValue(String multiStringValue) {
+        return String.join(" ", Arrays.asList(multiStringValue.split(" "))
+                .stream()
+                .map(this::getParameterValueFromWireValue)
+                .collect(Collectors.toList()));
     }
 
     private String getParameterValueFromWireValue(String enumID) {
@@ -158,18 +174,14 @@ public class FxFixCheckBoxListUiElement implements FixCheckBoxListUiElement<Pane
 
     @Override
     public void makeVisible(boolean visible) {
-        // TODO think to use gridPane to visible/invisible
-        checkBoxes.forEach(checkBox -> {
-            checkBox.setVisible(visible);
-        });
+        this.gridPane.setVisible(visible);
     }
 
     @Override
     public void makeEnable(boolean enable) {
-        // TODO think to use gridPane to enable/disable
-        checkBoxes.forEach(checkBox -> {
-            checkBox.setDisable(!enable);
-        });
+        this.gridPane.setDisable(!enable);
+        if (enable)
+            initializeControl();
     }
 
     @Override

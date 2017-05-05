@@ -13,7 +13,7 @@ import javafx.scene.control.CheckBox;
 import java.util.Collections;
 import java.util.List;
 
-public class FxFixCheckBoxUiElement implements FixCheckBoxUiElement<CheckBox, Boolean> {
+public class FxFixCheckBoxUiElement implements FixCheckBoxUiElement<CheckBox, String> {
 
     private CheckBoxT checkBoxT;
     private CheckBox checkBox;
@@ -26,21 +26,20 @@ public class FxFixCheckBoxUiElement implements FixCheckBoxUiElement<CheckBox, Bo
     @Override
     public CheckBox create() {
         if (this.checkBoxT != null) {
+            // create java fx control
             this.checkBox = new CheckBox(this.checkBoxT.getLabel());
-
+            // create converter on the basic of parameter type
             this.controlTTypeConverter = TypeConverterRepo.createParameterTypeConverter(parameterT);
-
-            if (this.checkBoxT.isInitValue() != null) {
-                this.checkBox.setSelected(this.checkBoxT.isInitValue());
-                setValue(getValue());
-            }
-
+            // checkbox is initialized
+            initializeControl();
+            // value is set in parameter
+            setFieldValueToParameter(getCheckBoxParamValue(checkBox.isSelected()), this.parameterT);
+            // listen to user interaction with checkbox
             this.checkBox.setOnAction(event -> {
                 this.controlIdEmitter.setValue(this.checkBoxT.getID() + ":" + getValue());
                 setFieldValueToParameter(getCheckBoxParamValue(checkBox.isSelected()),
                         this.parameterT);
             });
-
             return this.checkBox;
         }
         return null;
@@ -48,24 +47,34 @@ public class FxFixCheckBoxUiElement implements FixCheckBoxUiElement<CheckBox, Bo
 
     @Override
     public void initializeControl() {
-
+        if (this.checkBoxT.isInitValue() != null)
+            this.checkBox.setSelected(this.checkBoxT.isInitValue());
     }
 
-    private String getCheckBoxParamValue(Boolean isSelected) {
-        String toReturn = isSelected.toString();
-        if (this.parameterT != null) {
-            EnumPairT foundEnumPairT = this.parameterT.getEnumPair()
-                    .parallelStream()
-                    .filter(enumPairT -> enumPairT.getEnumID().equals(isSelected.toString()))
-                    .findFirst().orElse(null);
 
-            if (foundEnumPairT != null) {
-                toReturn = foundEnumPairT.getWireValue();
-            } else if (this.checkBoxT.getCheckedEnumRef() != null && this.checkBoxT.getUncheckedEnumRef() != null) {
-                toReturn = isSelected ? this.checkBoxT.getCheckedEnumRef() : this.checkBoxT.getUncheckedEnumRef();
-            }
-        }
-        return toReturn;
+    /***
+     *  If checkBoxT control has 'checkedEnumRef' and 'uncheckedEnumRef' them take enumId from those field
+     *  if those field are not present with checkbox then consider "true" and "false" as enumId and
+     *  find wire value from parameter's wire value but if no parameter is associated with checkbox then return
+     *  null as it does not matter as value will not be saved anywhere.
+     * @param isSelected status of checkbox javafx field
+     * @return try to find wire value
+     */
+    private String getCheckBoxParamValue(final Boolean isSelected) {
+        String enumId;
+        if (this.checkBoxT.getCheckedEnumRef() != null && this.checkBoxT.getUncheckedEnumRef() != null)
+            enumId = isSelected ? this.checkBoxT.getCheckedEnumRef() : this.checkBoxT.getUncheckedEnumRef();
+        else
+            enumId = isSelected.toString();
+        return parameterT == null ? null : this.parameterT.getEnumPair()
+                .stream()
+                .filter(enumPairT -> enumPairT.getEnumID().equals(enumId))
+                .findFirst()
+                .orElseGet(() -> {
+                    EnumPairT enumPairT = new EnumPairT();
+                    enumPairT.setWireValue(isSelected.toString());
+                    return enumPairT;
+                }).getWireValue();
     }
 
 
@@ -98,27 +107,44 @@ public class FxFixCheckBoxUiElement implements FixCheckBoxUiElement<CheckBox, Bo
     }
 
     @Override
-    public Boolean getValue() {
-        return this.checkBox.isSelected();
+    public String getValue() {
+        return getCheckBoxControlValue(this.checkBox.isSelected());
     }
 
     @Override
-    public void setValue(Boolean value) {
-        this.checkBox.setSelected(value);
-        if (this.checkBoxT.getCheckedEnumRef() != null
-                && this.checkBoxT.getUncheckedEnumRef() != null)
-            setFieldValueToParameter(getParameterValueFromWireValue(
-                    this.checkBox.isSelected() ? this.checkBoxT.getCheckedEnumRef()
-                            : this.checkBoxT.getUncheckedEnumRef()),
-                    this.parameterT);
+    public void setValue(String value) {
+        this.checkBox.setSelected(isSelectedFromControlValue(value));
+        setFieldValueToParameter(getCheckBoxParamValue(isSelectedFromControlValue(value)),
+                this.parameterT);
     }
 
-    private String getParameterValueFromWireValue(String enumID) {
-        return this.parameterT.getEnumPair()
-                .stream()
-                .filter(enumPairT -> enumPairT.getEnumID().equals(enumID))
-                .findFirst().map(enumPairT -> enumPairT.getWireValue())
-                .orElse(null);
+    /***
+     * Returns checkbox value as String either 'true' or 'false' if no
+     * checkedEnumRef or uncheckedEnumRef associated with control
+     * @param isSelected
+     * @return "true" or "false" or 'checkedEnumRef' value or 'uncheckedEnumRef' value
+     */
+    private String getCheckBoxControlValue(Boolean isSelected) {
+        if (this.checkBoxT.getCheckedEnumRef() != null
+                && this.checkBoxT.getUncheckedEnumRef() != null) {
+            return isSelected ? this.checkBoxT.getCheckedEnumRef() : this.checkBoxT.getUncheckedEnumRef();
+        }
+        return isSelected.toString();
+    }
+
+    /***
+     *  When someone tries to set value to checkbox then either it's 'true' or
+     * 'false' or enumId mentioned with checkBoxT's checkedEnumRef or uncheckedEnumRef
+     * so we have to convert that to boolean true or false.
+     * @param value 'true' , 'false' or checkedEnumRef or uncheckedEnumRef
+     * @return true or false
+     */
+    private boolean isSelectedFromControlValue(String value) {
+        if (this.checkBoxT.getCheckedEnumRef() != null
+                && this.checkBoxT.getUncheckedEnumRef() != null) {
+            return value.equals(this.checkBoxT.getCheckedEnumRef());
+        }
+        return Boolean.parseBoolean(value);
     }
 
     @Override
@@ -129,6 +155,8 @@ public class FxFixCheckBoxUiElement implements FixCheckBoxUiElement<CheckBox, Bo
     @Override
     public void makeEnable(boolean enable) {
         this.checkBox.setDisable(!enable);
+        if (enable)
+            initializeControl();
     }
 
     @Override

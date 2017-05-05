@@ -22,7 +22,7 @@ public class DecimalConverter implements TypeConverter<BigDecimal, ParameterT> {
         this.parameterT = parameterT;
     }
 
-    @Override
+    //@Override
     public BigDecimal convertParameterConstToComparable() {
         BigDecimal tempBigDecimal = null;
         Object aParameterValue = getConstFieldOfParam();
@@ -61,13 +61,13 @@ public class DecimalConverter implements TypeConverter<BigDecimal, ParameterT> {
 
         return toString(tempBigDecimal, getPrecision());
     }
-
-    @Override
-    public Object convertFixWireValueToParameterConst(String aFixWireValue) {
-
-
-        return null;
-    }
+//
+//    //@Override
+//    public Object convertFixWireValueToParameterConst(String aFixWireValue) {
+//
+//
+//        return null;
+//    }
 
 
     /**
@@ -232,7 +232,7 @@ public class DecimalConverter implements TypeConverter<BigDecimal, ParameterT> {
 //
 //    }
 
-    @Override
+    //@Override
     public BigDecimal convertControlValueToControlComparable(Object aValue) {
         BigDecimal tempBigDecimal = null;
 

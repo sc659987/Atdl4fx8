@@ -16,7 +16,7 @@ public class IntegerConverter implements TypeConverter<BigInteger, ParameterT> {
         this.parameterT = parameterT;
     }
 
-    @Override
+    //@Override
     public BigInteger convertParameterConstToComparable() {
         Object aParameterValue = getConstFieldOfParam();
 
@@ -58,30 +58,30 @@ public class IntegerConverter implements TypeConverter<BigInteger, ParameterT> {
         }
     }
 
-    @Override
-    public Object convertFixWireValueToParameterConst(String aFixWireValue) {
-        if (aFixWireValue != null) {
-            String str = (String) aFixWireValue;
-            if ((str == null) || (str.trim().length() == 0)) {
-
-
-                //return null;
-            } else {
-                try {
-                    // -- Trim leading and/or trailing spaces --
-                    str = str.trim();
-                    new BigInteger(str);
-                } catch (NumberFormatException e) {
-                    throw new NumberFormatException("Invalid Integer Number Format: [" + str + "] for Parameter: " + parameterT.getName());
-                }
-            }
-        } else {
-
-            //return null;
-        }
-        return null;
-        // TODO set the value later
-    }
+    //@Override
+//    public Object convertFixWireValueToParameterConst(String aFixWireValue) {
+//        if (aFixWireValue != null) {
+//            String str = (String) aFixWireValue;
+//            if ((str == null) || (str.trim().length() == 0)) {
+//
+//
+//                //return null;
+//            } else {
+//                try {
+//                    // -- Trim leading and/or trailing spaces --
+//                    str = str.trim();
+//                    new BigInteger(str);
+//                } catch (NumberFormatException e) {
+//                    throw new NumberFormatException("Invalid Integer Number Format: [" + str + "] for Parameter: " + parameterT.getName());
+//                }
+//            }
+//        } else {
+//
+//            //return null;
+//        }
+//        return null;
+//        // TODO set the value later
+//    }
 
 
     @Override
@@ -105,7 +105,7 @@ public class IntegerConverter implements TypeConverter<BigInteger, ParameterT> {
 //        return DatatypeConverter.convertValueToBigIntegerDatatype(tempValue);
 //    }
 
-    @Override
+    //@Override
     public BigInteger convertControlValueToControlComparable(Object aValue) {
         if (aValue instanceof BigInteger) {
             return (BigInteger) aValue;

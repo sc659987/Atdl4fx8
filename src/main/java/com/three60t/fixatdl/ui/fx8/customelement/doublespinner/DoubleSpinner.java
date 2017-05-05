@@ -60,7 +60,11 @@ public class DoubleSpinner extends Control {
     private ReadOnlyObjectWrapper<Double> value = new ReadOnlyObjectWrapper<>(this, "value");
 
     public final Double getValue() {
-        return value.get();
+        return this.value.get();
+    }
+
+    public final void setValue(Double value){
+        this.value.set(value);
     }
 
     public final ReadOnlyObjectProperty<Double> valueProperty() {

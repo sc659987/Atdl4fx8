@@ -2,6 +2,7 @@ package com.three60t.fixatdl.ui.fx8.element;
 
 import com.three60t.fixatdl.converter.TypeConverter;
 import com.three60t.fixatdl.converter.TypeConverterRepo;
+import com.three60t.fixatdl.model.core.EnumPairT;
 import com.three60t.fixatdl.model.core.ParameterT;
 import com.three60t.fixatdl.model.layout.EditableDropDownListT;
 import com.three60t.fixatdl.model.layout.ListItemT;
@@ -17,7 +18,7 @@ import javafx.scene.layout.Pane;
 import java.util.Collections;
 import java.util.List;
 
-// todo check if editable case is working fine up to wire value
+
 public class FxFixEditableDropDownListUiElement
         implements FixEditableDropDownListUiElement<Pane, String> {
 
@@ -50,14 +51,13 @@ public class FxFixEditableDropDownListUiElement
 
             this.editableComboBox.setEditable(true);
 
-            if (Utils.isNonEmptyString(this.editableDropDownListT.getInitValue()))
-                setValue(this.editableDropDownListT.getInitValue());
+            initializeControl();
 
             this.editableComboBox.setOnAction(event -> {
                 this.controlIdEmitter.set(editableDropDownListT.getID() + ":" + getValue());
 
                 if (this.parameterT != null)
-                    setFieldValueToParameter(editableComboBox.getValue(), this.parameterT);
+                    setFieldValueToParameter(getParameterValue(editableComboBox.getValue().getEnumID()), this.parameterT);
             });
 
             this.gridPane.add(this.editableComboBox, nextColumn, 0);
@@ -66,9 +66,23 @@ public class FxFixEditableDropDownListUiElement
         return null;
     }
 
+
+    private String getParameterValue(String enumId) {
+        return parameterT == null ? null : parameterT.getEnumPair()
+                .stream()
+                .filter(enumPairT -> enumPairT.getEnumID().equals(enumId))
+                .findFirst().orElseGet(() -> {
+                    EnumPairT enumPairT = new EnumPairT();
+                    enumPairT.setWireValue(enumId);
+                    return enumPairT;
+                }).getWireValue();
+    }
+
     @Override
     public void initializeControl() {
 
+        if (Utils.isNonEmptyString(this.editableDropDownListT.getInitValue()))
+            setValue(this.editableDropDownListT.getInitValue());
     }
 
     @Override
@@ -100,6 +114,7 @@ public class FxFixEditableDropDownListUiElement
     }
 
     // TODO test with example and debug
+    //TODO no test fix ATDL found hence minor modification required
     @Override
     public String getValue() {
         return this.editableComboBox.getValue().getEnumID();
@@ -116,7 +131,7 @@ public class FxFixEditableDropDownListUiElement
                     editableComboBox.setValue(listItemT);
 
                 });
-        setFieldValueToParameter(getValue(), this.parameterT);
+        setFieldValueToParameter(getParameterValue(enumId), this.parameterT);
     }
 
     @Override

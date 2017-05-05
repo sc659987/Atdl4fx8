@@ -6,9 +6,6 @@ import com.three60t.fixatdl.model.core.ParameterT;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
-/**
- * Created by sainik on 01/05/17.
- */
 public class BooleanConverter implements TypeConverter<Boolean, ParameterT> {
 
     private final ParameterT parameterT;
@@ -21,7 +18,7 @@ public class BooleanConverter implements TypeConverter<Boolean, ParameterT> {
     }
     // parameter related
 
-    @Override
+    //@Override
     public Boolean convertParameterConstToComparable() {
         Object aParameterValue = getConstFieldOfParam();
         if (aParameterValue == null)
@@ -66,10 +63,10 @@ public class BooleanConverter implements TypeConverter<Boolean, ParameterT> {
         } else return null;
     }
 
-    @Override
-    public Object convertFixWireValueToParameterConst(String aFixWireValue) {
-        return convertStringToParameterValue(aFixWireValue);
-    }
+//    @Override
+//    public Object convertFixWireValueToParameterConst(String aFixWireValue) {
+//        return convertStringToParameterValue(aFixWireValue);
+//    }
 
     protected Boolean convertStringToParameterValue(String aValue) {
         if (aValue != null) {
@@ -104,7 +101,7 @@ public class BooleanConverter implements TypeConverter<Boolean, ParameterT> {
     }
 
 
-    @Override
+    //@Override
     public Boolean convertControlValueToControlComparable(Object aValue) {
         if (aValue == null)
             return null;
