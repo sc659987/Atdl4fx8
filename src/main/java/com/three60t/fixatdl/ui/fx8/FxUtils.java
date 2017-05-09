@@ -1,6 +1,7 @@
 package com.three60t.fixatdl.ui.fx8;
 
 import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.Priority;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,8 @@ public class FxUtils {
         column1.setPercentWidth(50);
         final ColumnConstraints column2 = new ColumnConstraints();
         column2.setPercentWidth(50);
+        //column1.setMaxWidth(20);
+        //column2.setMaxWidth(20);
         final List<ColumnConstraints> columnConstraintsList = new ArrayList<>();
         columnConstraintsList.add(column1);
         columnConstraintsList.add(column2);

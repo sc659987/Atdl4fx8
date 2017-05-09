@@ -49,24 +49,18 @@ public class FxFixSliderUiElement implements FixSliderUiElement<Pane, String> {
         this.converter = new ListStringConverter(this.sliderT.getListItem().stream().map(ListItemT::getUiRep).collect(Collectors.toList()));
 
         this.slider = new Slider(0, this.sliderT.getListItem().size() - 1,
-                this.converter.fromString(this.sliderT.getInitValue()));
+                0);
 
         this.slider.setOnMouseClicked(event -> {
-            setFieldValueToParameter(this.parameterT.getEnumPair().stream()
-                            .filter(enumPairT -> enumPairT.getEnumID().equals(getValue()))
-                            .map(EnumPairT::getWireValue).findFirst().orElse("0"),
-                    this.parameterT);
+            setFieldValueToParameter(convertEnumIDToWireValue(getValue()), this.parameterT);
             this.controlIdEmitter.setValue(this.sliderT.getID() + ":" + getValue());
-            // TODO check it when dragged faster value change is not recognized and this is not called back
-//            System.out.println("Slider Value : " + getValue());
-//            System.out.println("Slider Enum value : "+this.parameterT.getEnumPair().stream()
-//                    .filter(enumPairT -> enumPairT.getEnumID().equals(getValue()))
-//                    .map(EnumPairT::getWireValue).findFirst().orElse("0"));
+            // TODO check it when dragged too faster value change is not recognized and this is not called back
         });
 
-
+        // initialize control
+        initializeControl();
         //Init of parameter
-        setValue(getValue());
+        setFieldValueToParameter(convertEnumIDToWireValue(getValue()), this.parameterT);
 
         this.gridPane.setPadding(new Insets(0, 30, 0, 30));
 
@@ -90,7 +84,15 @@ public class FxFixSliderUiElement implements FixSliderUiElement<Pane, String> {
 
     @Override
     public void initializeControl() {
-
+        if (this.sliderT.getInitValue() != null) {
+            this.slider.setValue(this.converter.fromString(
+                    this.sliderT
+                            .getListItem()
+                            .parallelStream()
+                            .filter(listItemT -> listItemT.getEnumID().equals(this.sliderT.getInitValue())).findFirst()
+                            .orElse(new ListItemT())
+                            .getUiRep()));
+        }
     }
 
     @Override
@@ -104,18 +106,28 @@ public class FxFixSliderUiElement implements FixSliderUiElement<Pane, String> {
     }
 
     @Override
-    public void setValue(String value) {
-        double valueD = this.converter.fromString(value);
-        this.slider.setValue(valueD);
-        setFieldValueToParameter(parameterT
+    public void setValue(String enumID) {
+        double convertedDoubleValue = this.converter.fromString(this.sliderT
+                .getListItem()
+                .parallelStream()
+                .filter(listItemT -> listItemT.getEnumID().equals(enumID)).findFirst()
+                .orElse(new ListItemT())
+                .getUiRep());
+        this.slider.setValue(convertedDoubleValue);
+        setFieldValueToParameter(convertEnumIDToWireValue(enumID), parameterT);
+        controlIdEmitter.setValue(sliderT.getID() + ":" + convertedDoubleValue);
+    }
+
+
+    private String convertEnumIDToWireValue(String enumID) {
+        return parameterT == null ? null : parameterT
                 .getEnumPair()
-                .stream()
+                .parallelStream()
                 .filter(enumPairT -> enumPairT.getEnumID()
-                        .equals(valueD))
-                .map(EnumPairT::getWireValue)
+                        .equals(enumID))
                 .findFirst()
-                .orElse("1"), parameterT);
-        controlIdEmitter.setValue(sliderT.getID() + ":" + valueD);
+                .orElse(new EnumPairT())
+                .getWireValue();
     }
 
     @Override
@@ -126,6 +138,8 @@ public class FxFixSliderUiElement implements FixSliderUiElement<Pane, String> {
     @Override
     public void makeEnable(boolean enable) {
         this.gridPane.setDisable(!enable);
+        if (enable)
+            initializeControl();
     }
 
     @Override

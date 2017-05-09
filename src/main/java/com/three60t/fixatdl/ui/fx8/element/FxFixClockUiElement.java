@@ -4,9 +4,11 @@ import com.three60t.fixatdl.converter.DateTimeConverter;
 import com.three60t.fixatdl.converter.TypeConverter;
 import com.three60t.fixatdl.converter.TypeConverterRepo;
 import com.three60t.fixatdl.model.core.ParameterT;
+import com.three60t.fixatdl.model.core.UTCDateOnlyT;
 import com.three60t.fixatdl.model.core.UTCTimestampT;
 import com.three60t.fixatdl.model.layout.ClockT;
 import com.three60t.fixatdl.ui.common.element.FixClockUiElement;
+import com.three60t.fixatdl.ui.fx8.FxUtils;
 import com.three60t.fixatdl.ui.fx8.customelement.DateSpinner;
 import com.three60t.fixatdl.ui.fx8.customelement.TimeSpinner;
 import com.three60t.fixatdl.utils.Utils;
@@ -39,6 +41,8 @@ public class FxFixClockUiElement implements FixClockUiElement<Pane, DateTime> {
 
     private TypeConverter<?, ?> controlTTypeConverter;
 
+    private boolean isInitializedOrHaveValue = false;
+
     @Override
     public Pane create() {
         if (this.clockT != null) {
@@ -46,13 +50,13 @@ public class FxFixClockUiElement implements FixClockUiElement<Pane, DateTime> {
 
             this.controlTTypeConverter = TypeConverterRepo.createParameterTypeConverter(parameterT);
 
-            if (!Utils.isEmptyString(this.clockT.getLabel()))
+            if (!Utils.isEmptyString(this.clockT.getLabel())) {
+                //this.gridPane.getColumnConstraints().addAll(FxUtils.getTwoColumnSameWidthForGridPane());
                 this.gridPane.add(new Label(this.clockT.getLabel()), this.nextColumn++, 0);
+            }
 
             this.gridPane.setHgap(3);
 
-            //this.timeSpinner = new TimeSpinner();
-            //this.timeSpinner.setOnMouseClicked(event -> setFieldValueToParameter(getValue(), parameterT));
 
             //
             createClockByParameterType();
@@ -90,6 +94,7 @@ public class FxFixClockUiElement implements FixClockUiElement<Pane, DateTime> {
             setValue(initDateTime);
         } else {
             setValue(new DateTime());
+            isInitializedOrHaveValue = false;
         }
     }
 
@@ -97,16 +102,19 @@ public class FxFixClockUiElement implements FixClockUiElement<Pane, DateTime> {
      *
      */
     private void createClockByParameterType() {
-        this.timeSpinner = new TimeSpinner();
-        this.timeSpinner.setOnMouseClicked(event -> setFieldValueToParameter(getValue(), parameterT));
-        if (parameterT instanceof UTCTimestampT) {
+        if (parameterT instanceof UTCTimestampT || parameterT instanceof UTCDateOnlyT) {
             this.dateSpinner = new DateSpinner(new DateTime()
                     .withYear(year(clockT.getInitValue()))
                     .withMonthOfYear(month(clockT.getInitValue()))
                     .withDayOfMonth(dayOfMonth(clockT.getInitValue())));
 
+            this.dateSpinner.setOnMouseClicked(event -> setFieldValueToParameter(getValue(), parameterT));
             this.gridPane.add(this.dateSpinner, this.nextColumn++, 0);
+            if (parameterT instanceof UTCDateOnlyT)
+                return;
         }
+        this.timeSpinner = new TimeSpinner();
+        this.timeSpinner.setOnMouseClicked(event -> setFieldValueToParameter(getValue(), parameterT));
         this.gridPane.add(this.timeSpinner, this.nextColumn, 0);
     }
 
@@ -156,28 +164,41 @@ public class FxFixClockUiElement implements FixClockUiElement<Pane, DateTime> {
         return this.clockT;
     }
 
+    /****
+     * if date part is absent then consider date as undefined
+     * if Time part is absent then set those field as undefined
+     * Rest of the setting must be handled at the time of Data
+     * type conversion
+     * @return
+     */
     @Override
     public DateTime getValue() {
-        DateTime dateTime = this.timeSpinner.getValue();
-        if (dateTime == null)
-            dateTime = DateTime.now();
-        if (dateSpinner != null) {
-            DateTime dateTime1 = dateSpinner.getValue();
-            if (dateTime1 == null)
-                dateTime1 = DateTime.now();
-            dateTime.withDayOfMonth(dateTime1.getDayOfMonth());
-            dateTime.withMonthOfYear(dateTime1.getMonthOfYear());
-            dateTime.withYear(dateTime1.getYear());
+        if (!isInitializedOrHaveValue)
+            return null;
+        DateTime dateTime = DateTime.now();
+        if (this.dateSpinner != null && this.dateSpinner.getValue() != null) {
+            DateTime dateSpinnerDateTime = this.dateSpinner.getValue();
+            dateTime = dateTime.withDayOfMonth(dateSpinnerDateTime.getDayOfMonth())
+                    .withMonthOfYear(dateSpinnerDateTime.getMonthOfYear())
+                    .withYear(dateSpinnerDateTime.getYear());
+        }
+        if (this.timeSpinner != null && this.timeSpinner.getValue() != null) {
+            DateTime timeSpinnerDateTime = this.timeSpinner.getValue();
+            dateTime = dateTime.withHourOfDay(timeSpinnerDateTime.getHourOfDay())
+                    .withMinuteOfHour(timeSpinnerDateTime.getMinuteOfHour())
+                    .withSecondOfMinute(timeSpinnerDateTime.getSecondOfMinute());
         }
         return dateTime;
     }
 
     @Override
     public void setValue(DateTime s) {
-        timeSpinner.setTime(s);
-        if (dateSpinner != null)
-            dateSpinner.setTime(s);
+        if (this.timeSpinner != null)
+            this.timeSpinner.setTime(s);
+        if (this.dateSpinner != null)
+            this.dateSpinner.setTime(s);
         setFieldValueToParameter(s, parameterT);
+        isInitializedOrHaveValue = true;
     }
 
     @Override

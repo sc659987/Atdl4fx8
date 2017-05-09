@@ -107,6 +107,7 @@ public class FxFixPanelUiElement implements FixPanelUiElement<Node, String> {
                         FixLabelUiElement<WebView, String> element = factory.instantiateNewLabel();
                         element.setLabel((LabelT) controlT);
                         element.setParameters(findParameterByName(controlT.getParameterRef()));
+                        this.fxAtdlControlFlowRegister.registerControlFlow(element);
                         return element.create();
                     } else if (controlT instanceof MultiSelectListT) {
                         FixMultiSelectListUiElement<Pane, String> element = factory.instantiateNewMultiSelectList();

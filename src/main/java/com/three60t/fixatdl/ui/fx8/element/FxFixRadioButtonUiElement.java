@@ -46,12 +46,13 @@ public class FxFixRadioButtonUiElement implements FixRadioButtonUiElement<RadioB
                 }
                 this.radioButton.setToggleGroup(toggleGroup);
             }
-
+            // initialize with init value and mark it as 'false' if no initial value supplied
             initializeControl();
+            // set value to parameter
             setFieldValueToParameter(getRadioButtonParamValue(radioButtonT.isInitValue() == null ? false : radioButtonT.isInitValue()), parameterT);
 
             this.radioButton.setOnAction(event -> {
-                setFieldValueToParameter(getRadioButtonParamValue(isSelectedFromControlValue(getValue())), this.parameterT);
+                setFieldValueToParameter(getRadioButtonParamValue(radioButton.isSelected()), this.parameterT);
                 // publish GUI change mainly for control flow
                 controlIdEmitter.setValue(radioButtonT.getID() + ":" + getValue());
             });
@@ -60,8 +61,19 @@ public class FxFixRadioButtonUiElement implements FixRadioButtonUiElement<RadioB
         return null;
     }
 
+    /**
+     * If Radio Button has paramRef then that param should have at least two
+     * EnumPair which matches the value of Radio button's value. so match
+     * the each value of the radio button with parameter's enumId and then
+     * map to corresponding to wire value
+     *
+     * @param isSelected
+     * @return
+     */
     private String getRadioButtonParamValue(final Boolean isSelected) {
-        if (this.radioButtonT.getCheckedEnumRef() != null && this.radioButtonT.getUncheckedEnumRef() != null) {
+        if (this.radioButtonT.getCheckedEnumRef() != null
+                && this.radioButtonT.getUncheckedEnumRef() != null
+                && this.parameterT != null) {
             String enumId = isSelected ? this.radioButtonT.getCheckedEnumRef() : this.radioButtonT.getUncheckedEnumRef();
             return this.parameterT.getEnumPair()
                     .stream()
@@ -76,6 +88,14 @@ public class FxFixRadioButtonUiElement implements FixRadioButtonUiElement<RadioB
         return isSelected.toString();
     }
 
+    /**
+     * Radio Button will have two values all ways either 'true' or 'false'.
+     * if checkedEnumRef and uncheckedEnumRef present with the control
+     * then use the value from there other wise use 'true' or 'false'
+     *
+     * @param isSelected boolean true or fals
+     * @return value of 'checkedEnumRef' or 'uncheckedEnumRef' or 'true' or 'false'
+     */
     private String getRadioButtonControlValue(Boolean isSelected) {
         if (this.radioButtonT.getCheckedEnumRef() != null
                 && this.radioButtonT.getUncheckedEnumRef() != null) {
@@ -84,12 +104,20 @@ public class FxFixRadioButtonUiElement implements FixRadioButtonUiElement<RadioB
         return isSelected.toString();
     }
 
-    private boolean isSelectedFromControlValue(String string) {
+    /***
+     * Radio button can have 'checkedEnumRef' and 'uncheckedEnumRef' or may not have as part of control element in Fix Atdl.
+     * In case it does not have any 'checkedEnumRef' and 'uncheckedEnumRef' then consider
+     * 'true' or 'false' as value of Radio Button otherwise use value of 'checkedEnumRef' or 'uncheckedEnumRef'.
+     *
+     * @param value
+     * @return
+     */
+    private boolean isSelectedFromControlValue(String value) {
         if (this.radioButtonT.getCheckedEnumRef() != null
                 && this.radioButtonT.getUncheckedEnumRef() != null) {
-            return string.equals(this.radioButtonT.getCheckedEnumRef());
+            return value.equals(this.radioButtonT.getCheckedEnumRef());
         }
-        return Boolean.parseBoolean(string);
+        return Boolean.parseBoolean(value);
     }
 
 
@@ -97,7 +125,8 @@ public class FxFixRadioButtonUiElement implements FixRadioButtonUiElement<RadioB
     public void initializeControl() {
         if (this.radioButtonT.isInitValue() != null)
             this.radioButton.setSelected(this.radioButtonT.isInitValue());
-
+        else
+            this.radioButton.setSelected(false);
     }
 
     @Override
@@ -145,7 +174,7 @@ public class FxFixRadioButtonUiElement implements FixRadioButtonUiElement<RadioB
     @Override
     public void makeEnable(boolean enable) {
         radioButton.setDisable(!enable);
-        if(enable)
+        if (enable)
             initializeControl();
     }
 

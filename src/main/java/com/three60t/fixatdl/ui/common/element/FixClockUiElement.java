@@ -8,4 +8,6 @@ import com.three60t.fixatdl.model.layout.ClockT;
 public interface FixClockUiElement<T, K extends Comparable<?>> extends FixUiElement<T, K> {
 
     void setClockT(ClockT clockT);
+
+
 }

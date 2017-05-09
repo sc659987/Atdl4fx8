@@ -6,6 +6,7 @@ import com.three60t.fixatdl.model.core.ParameterT;
 import com.three60t.fixatdl.model.layout.DropDownListT;
 import com.three60t.fixatdl.model.layout.ListItemT;
 import com.three60t.fixatdl.ui.common.element.FixDropDownListUiElement;
+import com.three60t.fixatdl.ui.fx8.FxUtils;
 import com.three60t.fixatdl.utils.Utils;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -39,8 +40,11 @@ public class FxFixDropDownListUiElement implements FixDropDownListUiElement<Pane
         if (this.dropDownListT != null) {
             this.gridPane = new GridPane();
             this.controlTTypeConverter = TypeConverterRepo.createParameterTypeConverter(parameterT);
-            if (!Utils.isEmptyString(this.dropDownListT.getLabel()))
+            if (!Utils.isEmptyString(this.dropDownListT.getLabel())) {
+                // TODO decide where to use it
+                //this.gridPane.getColumnConstraints().addAll(FxUtils.getTwoColumnSameWidthForGridPane());
                 this.gridPane.add(new Label(this.dropDownListT.getLabel()), this.nextColumn++, 0);
+            }
             this.gridPane.setHgap(3);
             this.comboBox.getItems().addAll(this.dropDownListT.getListItem());
             // initialize the controls
@@ -95,6 +99,9 @@ public class FxFixDropDownListUiElement implements FixDropDownListUiElement<Pane
 
     @Override
     public void setValue(String enumId) {
+        // NOTE: current java8 does not have functional method ifAbsent so if condition is written, later can be changed with ifAbsent
+        if (enumId == null)
+            setNullInConstant(parameterT);
         this.dropDownListT.getListItem().stream()
                 .filter(listItemT -> listItemT.getEnumID().equals(enumId))
                 .findFirst()

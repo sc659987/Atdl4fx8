@@ -108,7 +108,7 @@ public class FxFixCheckBoxUiElement implements FixCheckBoxUiElement<CheckBox, St
 
     @Override
     public String getValue() {
-        return getCheckBoxControlValue(this.checkBox.isSelected());
+        return String.valueOf(this.checkBox.isSelected());
     }
 
     @Override
@@ -119,6 +119,7 @@ public class FxFixCheckBoxUiElement implements FixCheckBoxUiElement<CheckBox, St
     }
 
     /***
+     * NOT IN USE
      * Returns checkbox value as String either 'true' or 'false' if no
      * checkedEnumRef or uncheckedEnumRef associated with control
      * @param isSelected

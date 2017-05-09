@@ -51,8 +51,8 @@ public class FxFixRadioButtonListUiElement implements FixRadioButtonListUiElemen
                 return radioButton;
             }).collect(Collectors.toList());
 
-            if (Utils.isNonEmptyString(this.radioButtonListT.getInitValue()))
-                setValue(this.radioButtonListT.getInitValue());
+            // this initializes the control and try to set the value to parameter.
+            initializeControl();
 
             this.radioButtonList.forEach(radioButton ->
                     radioButton.setOnAction(event -> {
@@ -83,7 +83,8 @@ public class FxFixRadioButtonListUiElement implements FixRadioButtonListUiElemen
 
     @Override
     public void initializeControl() {
-
+        if (Utils.isNonEmptyString(this.radioButtonListT.getInitValue()))
+            setValue(this.radioButtonListT.getInitValue());
     }
 
     @Override
@@ -115,13 +116,13 @@ public class FxFixRadioButtonListUiElement implements FixRadioButtonListUiElemen
                 .filter(RadioButton::isSelected)
                 .map(RadioButton::getId)
                 .findFirst()
-                .orElse("");
+                .orElse(null);
     }
 
     @Override
-    public void setValue(String s) {
+    public void setValue(String enumId) {
         this.radioButtonList.stream()
-                .filter(radioButton -> radioButton.getId().equals(s))
+                .filter(radioButton -> radioButton.getId().equals(enumId))
                 .forEach(radioButton -> {
                     radioButton.setSelected(true);
 
@@ -136,16 +137,16 @@ public class FxFixRadioButtonListUiElement implements FixRadioButtonListUiElemen
 
     @Override
     public void makeVisible(boolean visible) {
-        radioButtonList.forEach(radioButton -> {
-            radioButton.setVisible(visible);
-        });
+        this.gridPane.setVisible(visible);
+
+
     }
 
     @Override
     public void makeEnable(boolean enable) {
-        radioButtonList.forEach(radioButton -> {
-            radioButton.setDisable(!enable);
-        });
+        this.gridPane.setDisable(!enable);
+        if (enable)
+            initializeControl();
     }
 
     @Override

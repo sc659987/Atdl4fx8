@@ -43,13 +43,16 @@ public class FxFixSingleSelectListUiElement
             this.gridPane = new GridPane();
             if (!Utils.isEmptyString(this.singleSelectListT.getLabel())) {
                 this.gridPane.getColumnConstraints().addAll(FxUtils.getOneColumnWidthForGridPane());
-                this.gridPane.add(new Label(this.singleSelectListT.getLabel()), 0,
-                        this.nextRow++);
+                this.gridPane.add(new Label(this.singleSelectListT.getLabel()), 0, this.nextRow++);
             }
-            this.singleSelectListView = new ListView<>(FXCollections.observableArrayList(
-                    this.singleSelectListT.getListItem()));
+            this.singleSelectListView = new ListView<>(FXCollections
+                    .observableArrayList(this.singleSelectListT.getListItem()));
             this.singleSelectListView.getSelectionModel()
                     .setSelectionMode(SelectionMode.SINGLE);
+
+            // initialize the single select list with initialize value
+            initializeControl();
+
             this.singleSelectListView.setOnMouseClicked(event -> {
                 setValue(this.singleSelectListView.getItems().get(
                         singleSelectListView.getSelectionModel().getSelectedIndices().get(0)).getEnumID());
@@ -63,7 +66,8 @@ public class FxFixSingleSelectListUiElement
 
     @Override
     public void initializeControl() {
-
+        if (Utils.isNonEmptyString(this.singleSelectListT.getInitValue()))
+            setValue(this.singleSelectListT.getInitValue());
     }
 
     @Override
@@ -105,18 +109,23 @@ public class FxFixSingleSelectListUiElement
     }
 
     @Override
-    public void setValue(String s) {
+    public void setValue(String enumID) {
         IntStream.range(0, singleSelectListT.getListItem().size())
-                .filter(value -> singleSelectListT.getListItem().get(value).getEnumID().equals(s)).findFirst().ifPresent(value -> {
+                .filter(value -> singleSelectListT.getListItem().get(value).getEnumID().equals(enumID)).findFirst().ifPresent(value -> {
             singleSelectListView.getSelectionModel().select(value);
-            setFieldValueToParameter(tryToConvertEnumIdToWireValue(getValue()), this.parameterT);
+            setFieldValueToParameter(tryToConvertEnumIdToWireValue(enumID), this.parameterT);
         });
     }
 
-    private String tryToConvertEnumIdToWireValue(String str) {
+    /***
+     * converts the enumId to wire value using parameter if presents
+     * @param enumID
+     * @return
+     */
+    private String tryToConvertEnumIdToWireValue(String enumID) {
         return parameterT == null ? null : parameterT.getEnumPair()
                 .parallelStream()
-                .filter(enumPairT -> enumPairT.getEnumID().equals(str))
+                .filter(enumPairT -> enumPairT.getEnumID().equals(enumID))
                 .findFirst()
                 .orElse(new EnumPairT())
                 .getWireValue();
@@ -130,6 +139,8 @@ public class FxFixSingleSelectListUiElement
     @Override
     public void makeEnable(boolean enable) {
         this.singleSelectListView.setDisable(!enable);
+        if (enable)
+            initializeControl();
     }
 
     @Override

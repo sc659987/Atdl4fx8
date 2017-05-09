@@ -6,8 +6,7 @@
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             imageLocation="/images/banner.gif"
             strategyIdentifierTag="847"
-            versionIdentifierTag="9682"
-            tag957Support="true">
+            versionIdentifierTag="9682">
 
     <Strategy name="Whisper" uiRep="Whisper" wireValue="1008" providerID="BAML" version="BAML v9.7.6.3">
         <Description>&lt;html&gt;&lt;div style=&quot;width:350px;&quot;&gt;Executes quietly inside the bid/offer spread

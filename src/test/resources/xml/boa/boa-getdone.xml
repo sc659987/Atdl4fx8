@@ -6,8 +6,7 @@
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             imageLocation="/images/banner.gif"
             strategyIdentifierTag="847"
-            versionIdentifierTag="9682"
-            tag957Support="true">
+            versionIdentifierTag="9682">
 
     <Strategy name="GetDone" uiRep="GetDone" wireValue="1003" providerID="BAML" version="BAML v9.7.6.3">
         <Description>&lt;html&gt;&lt;div style=&quot;width:350px;&quot;&gt;Take liquidity on any pool with stealth when it becomes available, without exposing any interest. Ability to trade the underlying legs for crosses when the synthetic price is more favourable than the direct market.</Description>

@@ -2,10 +2,10 @@ package com.three60t.fixatdl.ui.fx8.element;
 
 import com.three60t.fixatdl.converter.TypeConverter;
 import com.three60t.fixatdl.converter.TypeConverterRepo;
-import com.three60t.fixatdl.model.core.IntT;
-import com.three60t.fixatdl.model.core.ParameterT;
+import com.three60t.fixatdl.model.core.*;
 import com.three60t.fixatdl.model.layout.SingleSpinnerT;
 import com.three60t.fixatdl.ui.common.element.FixSingleSpinnerUiElement;
+import com.three60t.fixatdl.ui.fx8.FxUtils;
 import com.three60t.fixatdl.utils.Utils;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -36,6 +36,9 @@ public class FxFixSingleSpinnerUiElement implements FixSingleSpinnerUiElement<Pa
 
     private TypeConverter<?, ?> controlTTypeConverter;
 
+    private boolean isInitialized = false;
+
+
     @Override
     public Pane create() {
         if (this.singleSpinnerT != null) {
@@ -44,6 +47,8 @@ public class FxFixSingleSpinnerUiElement implements FixSingleSpinnerUiElement<Pa
             this.controlTTypeConverter = TypeConverterRepo.createParameterTypeConverter(parameterT);
 
             if (Utils.isNonEmptyString(this.singleSpinnerT.getLabel())) {
+                // TODO check when it's required and when not
+                //this.gridPane.getColumnConstraints().addAll(FxUtils.getTwoColumnSameWidthForGridPane());
                 this.gridPane.add(new Label(this.singleSpinnerT.getLabel()),
                         this.nextColumn++, 0);
             }
@@ -51,8 +56,8 @@ public class FxFixSingleSpinnerUiElement implements FixSingleSpinnerUiElement<Pa
             this.limit = extractRangeFromParameter();
             this.singleSpinner = new Spinner<>(limit.getKey(),
                     limit.getValue(),
-                    singleSpinnerT.getInitValue() == null ? 0 : limit.getKey(),
-                    this.singleSpinnerT.getIncrement() == null ? ((limit.getKey() == 0.0) ? 0.1 : limit.getKey()) : this.singleSpinnerT.getIncrement());
+                    0,
+                    calculateIncrement());
 
             this.singleSpinner.setOnMouseClicked(event -> {
                 setValue(getValue());
@@ -67,10 +72,50 @@ public class FxFixSingleSpinnerUiElement implements FixSingleSpinnerUiElement<Pa
         return null;
     }
 
+
+    private double calculateIncrement() {
+        String incrementPolicy = this.singleSpinnerT.getIncrementPolicy();
+        if (incrementPolicy == null)
+            return singleSpinnerT.getIncrement() == null ? adjustWhenNoIncrementsInfoProvided() : singleSpinnerT.getIncrement();
+        Double increment = singleSpinnerT.getIncrement();
+        switch (incrementPolicy.toLowerCase()) {
+            case INCREMENT_POLICY_STATIC:
+                return increment != null ? increment : 1.0;
+            case INCREMENT_POLICY_LOT_SIZE:
+                return increment != null ? increment : defaultLotSizeIncrementValue;
+            case INCREMENT_POLICY_TICK:
+                return increment != null ? increment : defaultTickIncrementValue;
+            default:
+                return 0.0;
+        }
+
+    }
+
+    private double adjustWhenNoIncrementsInfoProvided() {
+        if (parameterT != null) {
+            if (parameterT instanceof IntT || parameterT instanceof LengthT || parameterT instanceof SeqNumT || parameterT instanceof TagNumT) {
+                return 1.0;
+            }
+        }
+        return 0.01;
+    }
+
+
+    private Double defaultLotSizeIncrementValue = 1.0;
+    private Double defaultTickIncrementValue = 0.0001;
+
+    public static final String INCREMENT_POLICY_STATIC = "static"; // -- use value from increment attribute --
+    public static final String INCREMENT_POLICY_LOT_SIZE = "lotsize"; // -- use the round lot size of symbol --
+    public static final String INCREMENT_POLICY_TICK = "tick"; // -- use symbol minimum tick size --
+
+
     @Override
     public void initializeControl() {
         if (this.singleSpinnerT.getInitValue() != null) {
             setValue(this.singleSpinnerT.getInitValue());
+            this.isInitialized = true;
+        } else {
+            this.isInitialized = false;
         }
     }
 
@@ -111,6 +156,8 @@ public class FxFixSingleSpinnerUiElement implements FixSingleSpinnerUiElement<Pa
 
     @Override
     public Double getValue() {
+        if (!isInitialized)
+            return null;
         return this.singleSpinner.getValue();
     }
 

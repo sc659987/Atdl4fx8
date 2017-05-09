@@ -1,4 +1,3 @@
-Atdl	<!-- Version: $Revision: 1.15 $  -->
 <Strategies
         xmlns="http://www.fixprotocol.org/FIXatdl-1-1/Core"
         xmlns:val="http://www.fixprotocol.org/FIXatdl-1-1/Validation"

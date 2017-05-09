@@ -117,52 +117,38 @@ public class DecimalConverter implements TypeConverter<BigDecimal, ParameterT> {
                 switch (aPrecision.intValue()) {
                     case 0:
                         return DECIMAL_FORMAT_0dp.format(aValue.doubleValue());
-
                     case 1:
                         return DECIMAL_FORMAT_1dp.format(aValue.doubleValue());
-
                     case 2:
                         return DECIMAL_FORMAT_2dp.format(aValue.doubleValue());
-
                     case 3:
                         return DECIMAL_FORMAT_3dp.format(aValue.doubleValue());
-
                     case 4:
                         return DECIMAL_FORMAT_4dp.format(aValue.doubleValue());
-
                     case 5:
                         return DECIMAL_FORMAT_5dp.format(aValue.doubleValue());
-
                     case 6:
                         return DECIMAL_FORMAT_6dp.format(aValue.doubleValue());
-
                     case 7:
                         return DECIMAL_FORMAT_7dp.format(aValue.doubleValue());
-
                     case 8:
                         return DECIMAL_FORMAT_8dp.format(aValue.doubleValue());
-
                     case 9:
                         return DECIMAL_FORMAT_9dp.format(aValue.doubleValue());
-
                     case 10:
                         return DECIMAL_FORMAT_10dp.format(aValue.doubleValue());
-
                     case 11:
                         return DECIMAL_FORMAT_11dp.format(aValue.doubleValue());
-
                     case 12:
                         return DECIMAL_FORMAT_12dp.format(aValue.doubleValue());
-
                     case 13:
                         return DECIMAL_FORMAT_13dp.format(aValue.doubleValue());
-
                     default:
                         return aValue.toPlainString();
                 }
             } else  // -- No precision expressed --
             {
-                return aValue.toPlainString();
+                return DECIMAL_FORMAT_2dp.format(aValue.doubleValue());
             }
         }
 

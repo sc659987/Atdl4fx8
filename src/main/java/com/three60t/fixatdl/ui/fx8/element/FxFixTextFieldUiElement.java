@@ -39,26 +39,39 @@ public class FxFixTextFieldUiElement implements FixTextFieldUiElement<Pane, Stri
             this.controlTTypeConverter = TypeConverterRepo.createParameterTypeConverter(parameterT);
 
             if (!Utils.isEmptyString(this.textFieldT.getLabel())) {
+                // TODO decide where to use it
                 this.gridPane.getColumnConstraints().addAll(FxUtils.getTwoColumnSameWidthForGridPane());
                 this.gridPane.add(new Label(this.textFieldT.getLabel()), this.nextColumn++, 0);
             }
-            this.gridPane.setHgap(3);
-            this.textField = new TextField(this.textFieldT.getInitValue());
+            //this.gridPane.setHgap(1);
+
+            this.textField = new TextField();
+
+            initializeControl();
+            setValue(this.textFieldT.getInitValue());
+
             this.textField.setOnKeyReleased(event -> {
                 setFieldValueToParameter(getValue(), this.parameterT);
                 this.controlIdEmitter.setValue(textFieldT.getID() + ":" + getValue());
             });
-            if (Utils.isNonEmptyString(this.textFieldT.getInitValue()))
-                setValue(this.textFieldT.getInitValue());
+
+
             this.gridPane.add(this.textField, this.nextColumn, 0);
             return this.gridPane;
         }
         return null;
     }
 
+
+    private void initializeTextFormatter() {
+        // TODO make it possible
+    }
+
+
     @Override
     public void initializeControl() {
-
+        if (Utils.isNonEmptyString(this.textFieldT.getInitValue()))
+            this.textField.setText(this.textFieldT.getInitValue());
     }
 
     @Override
@@ -109,6 +122,8 @@ public class FxFixTextFieldUiElement implements FixTextFieldUiElement<Pane, Stri
     @Override
     public void makeEnable(boolean enable) {
         this.textField.setDisable(!enable);
+        if (enable)
+            initializeControl();
     }
 
     @Override

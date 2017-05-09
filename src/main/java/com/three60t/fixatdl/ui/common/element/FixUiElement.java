@@ -97,8 +97,7 @@ public interface FixUiElement<T, K extends Comparable<?>> {
     }
 
 
-    default void voidSetNullInConstant(ParameterT parameterT) {
-        // TODO refactor it
+    default void setNullInConstant(ParameterT parameterT) {
         try {
             Field field = parameterT.getClass().getDeclaredField("constValue");
             field.setAccessible(true);

@@ -6,8 +6,7 @@
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             imageLocation="/images/banner.gif"
             strategyIdentifierTag="847"
-            versionIdentifierTag="9682"
-            tag957Support="true">
+            versionIdentifierTag="9682">
 
 
     <Strategy name="TakeProfit" uiRep="Take Profit" wireValue="1001" providerID="BAML" version="BAML v9.7.6.3">

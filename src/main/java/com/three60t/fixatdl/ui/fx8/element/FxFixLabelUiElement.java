@@ -5,7 +5,9 @@ import com.three60t.fixatdl.converter.TypeConverterRepo;
 import com.three60t.fixatdl.model.core.ParameterT;
 import com.three60t.fixatdl.model.layout.LabelT;
 import com.three60t.fixatdl.ui.common.element.FixLabelUiElement;
+import com.three60t.fixatdl.utils.Utils;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.control.Label;
 
 import java.util.Collections;
@@ -20,13 +22,15 @@ public class FxFixLabelUiElement implements FixLabelUiElement<Label, String> {
 
     private TypeConverter<?, ?> controlTTypeConverter;
 
+    private ObjectProperty<String> controlIdEmitter = new SimpleObjectProperty<>();
+
     @Override
     public Label create() {
         if (this.labelT != null) {
             controlTTypeConverter = TypeConverterRepo.createParameterTypeConverter(parameterT);
 
             this.label = new Label();
-
+            initializeControl();
             return this.label;
         }
         return null;
@@ -34,7 +38,10 @@ public class FxFixLabelUiElement implements FixLabelUiElement<Label, String> {
 
     @Override
     public void initializeControl() {
-        this.label.setText(this.labelT.getLabel());
+        if (Utils.isNonEmptyString(this.labelT.getInitValue()))
+            this.label.setText(this.labelT.getInitValue());
+        else
+            this.label.setText(this.labelT.getLabel());
     }
 
     @Override
@@ -57,7 +64,7 @@ public class FxFixLabelUiElement implements FixLabelUiElement<Label, String> {
 
     @Override
     public ObjectProperty<String> listenChange() {
-        return null;
+        return this.controlIdEmitter;
     }
 
     @Override

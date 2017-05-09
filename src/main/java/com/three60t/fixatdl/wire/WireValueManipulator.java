@@ -60,11 +60,14 @@ public class WireValueManipulator implements WireValueGenerator, WireValueInterp
         String preambleWire = strategies.getStrategyIdentifierTag().toString()
                 + EQUAL
                 + selectedStrategy.getWireValue()
-                + DELIMITER
-                + (strategies.isTag957Support() ? (TAG_NO_STRATEGY_PARAMETERS + EQUAL + repeatCount.count)
-                : "");
+                + (strategies.isTag957Support() ? (DELIMITER + TAG_NO_STRATEGY_PARAMETERS + EQUAL + repeatCount.count)
+                : strategies.getVersionIdentifierTag() != null ?
+                DELIMITER + strategies.getVersionIdentifierTag().toString() + EQUAL + selectedStrategy.getVersion().toString() :
+                "");
         return preambleWire + wireBuilder.toString();
     }
+
+
 
     @Override
     public void consumeWireString(String aa, StrategyT strategyT, StrategiesT strategiesT) {
