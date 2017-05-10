@@ -40,7 +40,7 @@ public class FxFixTextFieldUiElement implements FixTextFieldUiElement<Pane, Stri
 
             if (!Utils.isEmptyString(this.textFieldT.getLabel())) {
                 // TODO decide where to use it
-                this.gridPane.getColumnConstraints().addAll(FxUtils.getTwoColumnSameWidthForGridPane());
+                //this.gridPane.getColumnConstraints().addAll(FxUtils.getTwoColumnSameWidthForGridPane());
                 this.gridPane.add(new Label(this.textFieldT.getLabel()), this.nextColumn++, 0);
             }
             //this.gridPane.setHgap(1);
@@ -70,8 +70,10 @@ public class FxFixTextFieldUiElement implements FixTextFieldUiElement<Pane, Stri
 
     @Override
     public void initializeControl() {
-        if (Utils.isNonEmptyString(this.textFieldT.getInitValue()))
+        if (Utils.isNonEmptyString(this.textFieldT.getInitValue())) {
             this.textField.setText(this.textFieldT.getInitValue());
+            setFieldValueToParameter(this.textFieldT.getInitValue(), parameterT);
+        }
     }
 
     @Override

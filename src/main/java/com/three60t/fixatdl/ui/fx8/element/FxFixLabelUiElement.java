@@ -9,6 +9,7 @@ import com.three60t.fixatdl.utils.Utils;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.control.Label;
+import javafx.scene.control.OverrunStyle;
 
 import java.util.Collections;
 import java.util.List;
@@ -28,8 +29,9 @@ public class FxFixLabelUiElement implements FixLabelUiElement<Label, String> {
     public Label create() {
         if (this.labelT != null) {
             controlTTypeConverter = TypeConverterRepo.createParameterTypeConverter(parameterT);
-
             this.label = new Label();
+            this.label.setMaxWidth(300);
+            this.label.setWrapText(true);
             initializeControl();
             return this.label;
         }

@@ -64,10 +64,9 @@ public class RecursiveFixAtdlEditEvaluator implements FixAtdlEditEvaluator {
     private Comparable tryToConvert(Comparable o1, Comparable o2) {
         // o2 is every time is string as StateRule.Edit.value is type of string.
         // double , dateTime
-//        if (Integer.class.isInstance(o1) && o2 instanceof String) {
-//            return Integer.parseInt((String) o2);
-//        } else
-        if (Boolean.class.isInstance(o1) && o2 instanceof String) {
+        if (Integer.class.isInstance(o1) && o2 instanceof String) {
+            return Integer.parseInt((String) o2);
+        } else if (Boolean.class.isInstance(o1) && o2 instanceof String) {
             return Boolean.parseBoolean((String) o2);
         } else if (Double.class.isInstance(o1) && o2 instanceof String) {
             return Double.parseDouble((String) o2);

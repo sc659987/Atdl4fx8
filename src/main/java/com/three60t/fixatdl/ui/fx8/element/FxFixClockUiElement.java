@@ -108,13 +108,19 @@ public class FxFixClockUiElement implements FixClockUiElement<Pane, DateTime> {
                     .withMonthOfYear(month(clockT.getInitValue()))
                     .withDayOfMonth(dayOfMonth(clockT.getInitValue())));
 
-            this.dateSpinner.setOnMouseClicked(event -> setFieldValueToParameter(getValue(), parameterT));
+            this.dateSpinner.setOnMouseClicked(event -> {
+                isInitializedOrHaveValue = true;
+                setFieldValueToParameter(getValue(), parameterT);
+            });
             this.gridPane.add(this.dateSpinner, this.nextColumn++, 0);
             if (parameterT instanceof UTCDateOnlyT)
                 return;
         }
         this.timeSpinner = new TimeSpinner();
-        this.timeSpinner.setOnMouseClicked(event -> setFieldValueToParameter(getValue(), parameterT));
+        this.timeSpinner.setOnMouseClicked(event -> {
+            isInitializedOrHaveValue = true;
+            setFieldValueToParameter(getValue(), parameterT);
+        });
         this.gridPane.add(this.timeSpinner, this.nextColumn, 0);
     }
 

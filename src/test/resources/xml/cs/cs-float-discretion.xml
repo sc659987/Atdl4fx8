@@ -76,7 +76,7 @@
 			<lay:StrategyPanel collapsible="false" title="Credit Suisse - Advanced Execution Services FX" orientation="VERTICAL">
 				<lay:StrategyPanel collapsible="false" orientation="VERTICAL" border="None">
 				  <lay:StrategyPanel collapsible="false" orientation="HORIZONTAL" title="Description">
-            <lay:Control ID="Description" xsi:type="lay:Label_t" label="&lt;html&gt;A strategy to passively peg your order to the orderbook,&lt;br/&gt;while allowing for an aggressive component to be activated&lt;br/&gt;based on discretion parameters.&lt;/html&gt;" />
+            <lay:Control ID="Description" xsi:type="lay:Label_t" label="A strategy to passively peg your order to the orderbook, while allowing for an aggressive component to be activated based on discretion parameters." />
           </lay:StrategyPanel>
         </lay:StrategyPanel>
 				<!-- START BASIC PARAMETERS -->

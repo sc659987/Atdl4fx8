@@ -60,7 +60,7 @@ public class FxFixSingleSpinnerUiElement implements FixSingleSpinnerUiElement<Pa
                     calculateIncrement());
 
             this.singleSpinner.setOnMouseClicked(event -> {
-                setValue(getValue());
+                setValue( this.singleSpinner.getValue());
                 controlIdEmitter.setValue(singleSpinnerT.getID() + ":" + getValue());
             });
 

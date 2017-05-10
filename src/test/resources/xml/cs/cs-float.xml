@@ -84,9 +84,9 @@
 					<!-- START Execution Style -->
 					<lay:StrategyPanel collapsible="false" orientation="HORIZONTAL" title="Execution Style">
 						<lay:Control ID="ExecStyle" xsi:type="lay:Slider_t" initValue="Normal" parameterRef="ExecutionStyle">
-							<lay:ListItem uiRep="&lt;html&gt;&lt;center&gt;&lt;br/&gt;V. Patient&lt;/center&gt;&lt;/html&gt;" enumID="Very Patient" />
+							<lay:ListItem uiRep="V. Patient" enumID="Very Patient" />
 							<lay:ListItem uiRep="Patient" enumID="Patient" />
-							<lay:ListItem uiRep="&lt;html&gt;&lt;center&gt;&lt;br/&gt;Normal&lt;/center&gt;&lt;/html&gt;" enumID="Normal" />
+							<lay:ListItem uiRep="Normal" enumID="Normal" />
 							<lay:ListItem uiRep="Aggressive" enumID="Aggressive" />
 						</lay:Control>
 					</lay:StrategyPanel>

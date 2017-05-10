@@ -16,8 +16,7 @@ public class FxUtils {
         column1.setPercentWidth(50);
         final ColumnConstraints column2 = new ColumnConstraints();
         column2.setPercentWidth(50);
-        //column1.setMaxWidth(20);
-        //column2.setMaxWidth(20);
+        column2.setMaxWidth(100);
         final List<ColumnConstraints> columnConstraintsList = new ArrayList<>();
         columnConstraintsList.add(column1);
         columnConstraintsList.add(column2);

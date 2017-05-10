@@ -3,7 +3,7 @@
 <!-- ********************* -->
 
 <Strategies xmlns="http://www.fixprotocol.org/FIXatdl-1-1/Core" xmlns:val="http://www.fixprotocol.org/FIXatdl-1-1/Validation" xmlns:lay="http://www.fixprotocol.org/FIXatdl-1-1/Layout" xmlns:flow="http://www.fixprotocol.org/FIXatdl-1-1/Flow" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.fixprotocol.org/FIXatdl-1-1/Core" strategyIdentifierTag="847" versionIdentifierTag="958">
+	xsi:schemaLocation="http://www.fixprotocol.org/FIXatdl-1-1/Core" strategyIdentifierTag="847" versionIdentifierTag="958" tag957Support="true">
 
 	<Strategy name="GatorFlex" uiRep="Gator Flex" wireValue="2005" providerID="">
 
@@ -25,9 +25,7 @@
 		</Parameter>
 
 		<lay:StrategyLayout>
-
 			<lay:StrategyPanel title="Strategy Parameters" collapsible="false" orientation="VERTICAL">
-
 				<lay:StrategyPanel collapsible="false" orientation="HORIZONTAL" border="None">
 					<lay:StrategyPanel title="Description" collapsible="false" orientation="VERTICAL">
 						<lay:Control ID="DescriptionL" xsi:type="lay:Label_t" label="&lt;html&gt;A market order that deduces target duration for a given pair, amount and time zone,&lt;br/&gt;using Barclays’ proprietary trade analytics. Check BARX pre-trade portal to see&lt;br/&gt;how long your Flex algo will take.&lt;/html&gt;" />
@@ -36,7 +34,6 @@
 
 				<lay:StrategyPanel collapsible="false" orientation="HORIZONTAL" border="None">
 					<lay:StrategyPanel collapsible="false" orientation="HORIZONTAL" border="None">
-
 						<lay:StrategyPanel title="Common Parameters" collapsible="false" orientation="VERTICAL">
 							<!-- Start time -->
 							<lay:StrategyPanel collapsible="false" orientation="HORIZONTAL" title="Start Time">

@@ -63,10 +63,12 @@ public class FxFixDropDownListUiElement implements FixDropDownListUiElement<Pane
 
     @Override
     public void initializeControl() {
-        if (Utils.isEmptyString(this.dropDownListT.getInitValue()))
+        if (Utils.isEmptyString(this.dropDownListT.getInitValue())) {
             this.comboBox.getSelectionModel().selectFirst();
-        else
+            setValue(getValue());
+        } else {
             setValue(this.dropDownListT.getInitValue());
+        }
     }
 
     @Override
