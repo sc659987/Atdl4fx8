@@ -89,7 +89,7 @@ public interface FixUiElement<T, K extends Comparable<?>> {
                 .stream()
                 .filter(parameterT -> {
                     boolean matched = false;
-                    // array is faster with for loop so will be used contrary to list
+                    // array is faster with 'for' loop so will be used contrary to list
                     for (int i = 0; i < names.length; i++)
                         matched |= parameterT.getName().equals(names[i]);
                     return matched;

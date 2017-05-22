@@ -4,11 +4,11 @@
  */
 package com.three60t.fixatdl.converter;
 
-import org.joda.time.DateTime;
-
-import javax.xml.datatype.XMLGregorianCalendar;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.time.ZonedDateTime;
+
+import javax.xml.datatype.XMLGregorianCalendar;
 
 /**
  * Static method to convert from one datatype to another (eg ParameterConverter's type to ControlConverter's type and vice-versa)
@@ -44,9 +44,9 @@ public class DatatypeConverter {
             return convertValueToStringDatatype(aValue);
         } else if (klass == Boolean.class) {
             return convertValueToBooleanDatatype(aValue);
-        } else if (klass == DateTime.class) {
+        } else if (klass == ZonedDateTime.class) {
             if (aValue == null) {
-                return (DateTime) null;
+                return (ZonedDateTime) null;
             } else {
                 throw new IllegalArgumentException("DateTime datatype conversion is not supported (due to timezone offests).  [aValue: " + aValue + "]");
             }

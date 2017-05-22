@@ -22,16 +22,12 @@ public class DoubleSpinnerBehavior extends BehaviorBase<DoubleSpinner> {
     private static final double INITIAL_DURATION_MS = 750;
     private boolean isOuter = false;
 
-    final EventHandler<ActionEvent> spinningKeyFrameEventHandler = new EventHandler<ActionEvent>() {
-        @Override
-        public void handle(ActionEvent event) {
-            final DoubleSpinnerValueFactory valueFactory = getControl().getValueFactory();
-            if (valueFactory == null) {
-                return;
-            }
-            if (isIncrementing) increment();
-            else decrement();
-        }
+    final EventHandler<ActionEvent> spinningKeyFrameEventHandler = (event) -> {
+        final DoubleSpinnerValueFactory valueFactory = getControl().getValueFactory();
+        if (valueFactory == null)
+            return;
+        if (isIncrementing) increment();
+        else decrement();
     };
 
 

@@ -1,15 +1,17 @@
 package com.three60t.fixatdl.ui.fx8;
 
+import java.time.ZonedDateTime;
+
 import com.three60t.fixatdl.controlflow.FixAtdlControlFlowRegister;
 import com.three60t.fixatdl.ui.common.UiElementAbstractFactory;
 import com.three60t.fixatdl.ui.common.element.*;
 import com.three60t.fixatdl.ui.fx8.element.*;
+
 import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.layout.Pane;
-import org.joda.time.DateTime;
 
 public class FxUiElementFactory implements UiElementAbstractFactory {
 
@@ -69,7 +71,7 @@ public class FxUiElementFactory implements UiElementAbstractFactory {
     }
 
     @Override
-    public FixClockUiElement<Pane, DateTime> instantiateNewClock() {
+    public FixClockUiElement<Pane, ZonedDateTime> instantiateNewClock() {
         return new FxFixClockUiElement();
     }
 

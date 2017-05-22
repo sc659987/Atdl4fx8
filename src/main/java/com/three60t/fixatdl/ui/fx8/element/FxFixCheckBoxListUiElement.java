@@ -148,7 +148,7 @@ public class FxFixCheckBoxListUiElement implements FixCheckBoxListUiElement<Pane
 
     @Override
     public void setValue(String strings) {
-        Arrays.asList(strings.split(" ")).forEach(s -> {
+        Arrays.stream(strings.split(" ")).forEach(s -> {
             enumIdAndCheckBoxMap.get(s).setSelected(true);
         });
         setFieldValueToParameter(controlTTypeConverter
@@ -156,8 +156,7 @@ public class FxFixCheckBoxListUiElement implements FixCheckBoxListUiElement<Pane
     }
 
     private String getParameterValue(String multiStringValue) {
-        return String.join(" ", Arrays.asList(multiStringValue.split(" "))
-                .stream()
+        return String.join(" ", Arrays.stream(multiStringValue.split(" "))
                 .map(this::getParameterValueFromWireValue)
                 .collect(Collectors.toList()));
     }
